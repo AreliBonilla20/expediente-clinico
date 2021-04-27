@@ -13,9 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/pacientes', 'PacienteController@index');
-Route::post('/pacientes/crear', 'PacienteController@create');
-Route::get('/pacientes/{id}/ver', 'PacienteController@show');
-Route::get('/pacientes/{id}/editar', 'PacienteController@edit');
-Route::put('/pacientes/{id}/actualizar', 'PacienteController@update');
-Route::get('/pacientes/{id}/eliminar', 'PacienteController@delete');
+Route::get('/expedientes', 'PacienteController@index');
+Route::get('/expedientes/crear', 'PacienteController@create');
+Route::post('/expedientes/guardar', 'PacienteController@store');
+Route::get('/expedientes/{id}/ver', 'PacienteController@show');
+Route::get('/expedientes/{id}/editar', 'PacienteController@edit');
+Route::put('/expedientes/{id}/actualizar', 'PacienteController@update');
+Route::get('/expedientes/{id}/eliminar', 'PacienteController@delete');

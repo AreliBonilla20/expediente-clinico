@@ -7,14 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Paciente extends Model
 {
     
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'codigo';
 
 
-    protected $fillable = ['id', 'nombres_estudiante', 'apellidos_estudiante'];
+    protected $fillable = ['codigo', 'nombres_estudiante', 'apellidos_estudiante'];
 
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
+   
 
 }

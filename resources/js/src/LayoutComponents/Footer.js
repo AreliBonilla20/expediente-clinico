@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Footer() {
-    return (
+const Footer = () => {
+    return(
         <footer>
         <div className="footer clearfix mb-0 text-muted">
             <div className="float-start">
@@ -9,7 +9,7 @@ function Footer() {
             </div>
           
         </div>
-    </footer>
+        </footer>
     );
 }
 

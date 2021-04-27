@@ -1,10 +1,9 @@
 import React from 'react';
 
+import usuario from '../../../../public/assets/images/faces/1.jpg'; 
 
-import usuario from '../../../public/assets/images/faces/1.jpg'; 
-
-function Header() {
-    return (
+const Header = () => {
+    return(
         <header className='mb-3'>
         <nav className="navbar navbar-expand navbar-light ">
             <div className="container-fluid">
