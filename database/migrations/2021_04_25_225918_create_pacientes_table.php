@@ -28,10 +28,10 @@ class CreatePacientesTable extends Migration
             $table->string('nombre_contacto_emergencia', 150);
             $table->string('telefono_contacto_emergencia', 25);
 
-            $table->integer('id_genero')->unsigned()->foreign()->references('id_genero')->on('generos')->onDelete('cascade');
-            $table->integer('id_pais')->unsigned()->foreign()->references('id_pais')->on('generos')->onDelete('cascade');
-            $table->integer('id_municipio')->unsigned()->foreign()->references('id_municipio')->on('generos')->onDelete('cascade');
-            $table->integer('id_departamento')->unsigned()->foreign()->references('id_departamento')->on('generos')->onDelete('cascade');
+            $table->integer('id_genero')->unsigned()->foreign()->references('id')->on('generos')->onDelete('cascade');
+            $table->integer('id_pais')->unsigned()->foreign()->references('id')->on('pais')->onDelete('cascade');
+            $table->integer('id_municipio')->unsigned()->foreign()->references('id')->on('municipios')->onDelete('cascade');
+            $table->integer('id_departamento')->unsigned()->foreign()->references('id')->on('departamentos')->onDelete('cascade');
             
             $table->timestamps();
         });

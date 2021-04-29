@@ -19,6 +19,7 @@ const App = () => {
                 <Route path="/" component={Home} exact/>
                 <Route path="/expedientes" component={ConsultarExpediente} exact/>
                 <Route path="/expedientes/crear" component={AgregarExpediente} exact/>
+                <Route path="/expedientes/:id/editar" component={EditarExpediente} exact/>
    
            
             </Switch>

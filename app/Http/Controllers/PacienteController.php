@@ -32,6 +32,7 @@ class PacienteController extends Controller
         $generos = Genero::all();
         
         $data = [
+            "generos" => $generos,
             "paises" => $paises,
             "departamentos" => $departamentos,
             "municipios" => $municipios,

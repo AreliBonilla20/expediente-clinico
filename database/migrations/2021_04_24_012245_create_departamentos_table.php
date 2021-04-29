@@ -14,7 +14,7 @@ class CreateDepartamentosTable extends Migration
     public function up()
     {
         Schema::create('departamentos', function (Blueprint $table) {
-            $table->increments('id_departamento');
+            $table->increments('id');
             $table->string('nombre_departamento',150);
             $table->unsignedInteger('id_pais')->foreign()->references('id_pais')->on('pais')->onDelete('cascade');
         });
