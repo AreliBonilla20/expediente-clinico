@@ -17,13 +17,6 @@ class PacienteController extends Controller
        return PacienteResource::collection(Paciente::all());
     }
 
-    public function show($id)
-    {
-        $paciente = Paciente::findOrFail($id);
-
-        return response()->json($paciente);    
-    }
-
     public function create()
     {
         $paises = Pais::all();
@@ -35,7 +28,7 @@ class PacienteController extends Controller
             "generos" => $generos,
             "paises" => $paises,
             "departamentos" => $departamentos,
-            "municipios" => $municipios,
+            "municipios" => $municipios,   
         ];
 
         return response()->json($data);    
@@ -46,8 +39,11 @@ class PacienteController extends Controller
     {   
         $nombre = $request->nombres;
         $apellidos = $request->apellidos;
+        $codigo = $this->get_codigo($nombre, $apellidos);
+        
 
         $paciente = new Paciente();
+        $paciente->codigo = $codigo;
         $paciente->identificacion = $request->identificacion;
         $paciente->nombres = $request->nombres;
         $paciente->apellidos = $request->apellidos;
@@ -66,38 +62,25 @@ class PacienteController extends Controller
         $paciente->id_departamento = $request->id_departamento;
 
 
-        $codigo = $this->get_codigo($nombre, $apellidos);
-        $paciente->codigo = $codigo;
+        
         
         $paciente->save();
         
         return response()->json($request);    
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $paciente_editar = Paciente::findOrFail($id);
-
-        return response()->json($paciente_editar);    
+          
     }
 
     public function update(Request $request)
     {
-        $paciente_actualizar = new Paciente();
-        $paciente_actualizar->nombres_paciente = $request->nombres_paciente;
-        $paciente_actualizar->apellidos_paciente = $request->apellidos_paciente;
-        $paciente_actualizar->save();
-
-        return response()->json($paciente_actualizar);    
+         
     }
 
-    public function delete($id)
-    {
-        $paciente_eliminar = Paciente::findOrFail($id);
-        $paciente_eliminar->delete();
 
-        return response()->json($paciente_eliminar);    
-    }
+        
 
     public function get_codigo($nombre, $apellidos)
     {
@@ -135,3 +118,4 @@ class PacienteController extends Controller
         return $cod;
     }
 }
+

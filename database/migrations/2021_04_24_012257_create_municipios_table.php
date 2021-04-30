@@ -14,10 +14,12 @@ class CreateMunicipiosTable extends Migration
     public function up()
     {
         Schema::create('municipios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre_municipio',150);
-            $table->unsignedInteger('id_departamento')->foreign()->references('id_departamento')->on('departamento')->onDelete('cascade');
-       
+            $table->bigIncrements('id_municipio');
+            $table->string('nombre_municipio', 100);
+
+            $table->unsignedBigInteger('id_departamento');
+            $table->foreign('id_departamento')->references('id_departamento')->on('departamentos');
+            $table->timestamps();
         });
     }
 

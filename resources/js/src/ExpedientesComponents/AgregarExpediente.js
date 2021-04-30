@@ -5,6 +5,8 @@ import {
     Link
 } from 'react-router-dom';
 
+import ReactDOM from 'react-dom'; 
+
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
@@ -13,11 +15,11 @@ import API from '../api';
 
 const AgregarExpediente = () => {
 
+    const [generos, setGeneros] =useState([]);
     const [paises, setPaises] =useState([]);
     const [municipios, setMunicipios] =useState([]);
     const [departamentos, setDepartamentos] =useState([]);
-    const [generos, setGeneros] =useState([]);
-
+    
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [identificacion, setIdentificacion] = useState('');
@@ -38,10 +40,11 @@ const AgregarExpediente = () => {
     useEffect(() => {
         API.getDataAgregarPaciente().then(res => {
            const result = res.data;
+           setGeneros(result.generos);
            setPaises(result.paises);
            setDepartamentos(result.departamentos);
            setMunicipios(result.municipios);
-           setGeneros(result.generos);
+           
        })
      }, []);
 
@@ -184,9 +187,8 @@ const AgregarExpediente = () => {
                                                             onChange={e => setId_genero(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
-                                                                <option value={genero.id}>{genero.genero}</option>
+                                                                <option value={genero.id_genero}>{genero.genero}</option>
                                                                 ))}
-                                                                
                                                             </select>
                                                         </div>
                                                     </div>
@@ -274,7 +276,7 @@ const AgregarExpediente = () => {
                                                             onChange={e => setId_pais(e.target.value)}>
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
-                                                                <option value={pais.id}>{pais.nombre_pais}</option>
+                                                                <option value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}
                                                                 
                                                             </select>
@@ -288,7 +290,7 @@ const AgregarExpediente = () => {
                                                             onChange={e => setId_departamento(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {departamentos.map((departamento) => (
-                                                                <option value={departamento.id}>{departamento.nombre_departamento}</option>
+                                                                <option value={departamento.id_departamento}>{departamento.nombre_departamento}</option>
                                                                 ))}
                                                             </select>
                                                         </div>
@@ -301,7 +303,7 @@ const AgregarExpediente = () => {
                                                             onChange={e => setId_municipio(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {municipios.map((municipio) => (
-                                                                <option value={municipio.id}>{municipio.nombre_municipio}</option>
+                                                                <option value={municipio.id_municipio}>{municipio.nombre_municipio}</option>
                                                                 ))}
                                                             </select>
                                                         </div>

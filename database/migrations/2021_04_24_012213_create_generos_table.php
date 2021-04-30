@@ -14,9 +14,10 @@ class CreateGenerosTable extends Migration
     public function up()
     {
         Schema::create('generos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('genero',150);
-         
+            $table->bigIncrements('id_genero');
+            $table->string('genero',25);
+            $table->timestamps();
+
         });
     }
 
@@ -30,3 +31,4 @@ class CreateGenerosTable extends Migration
         Schema::dropIfExists('generos');
     }
 }
+
