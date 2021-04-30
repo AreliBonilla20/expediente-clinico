@@ -15,10 +15,11 @@ class CreateDepartamentosTable extends Migration
     {
         Schema::create('departamentos', function (Blueprint $table) {
             $table->bigIncrements('id_departamento');
-            $table->string('nombre_departamento', 100);
 
             $table->unsignedBigInteger('id_pais');
-            $table->foreign('id_pais')->references('id_pais')->on('pais');
+            $table->foreign('id_pais')->references('id_pais')->on('paises');
+            
+            $table->string('nombre_departamento', 100);
 
             $table->timestamps();
         });
@@ -34,3 +35,4 @@ class CreateDepartamentosTable extends Migration
         Schema::dropIfExists('departamentos');
     }
 }
+

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGenerosTable extends Migration
+class CreateDiagnosticosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateGenerosTable extends Migration
      */
     public function up()
     {
-        Schema::create('generos', function (Blueprint $table) {
-            $table->bigIncrements('id_genero');
-            $table->string('genero',25);
+        Schema::create('diagnosticos', function (Blueprint $table) {
+            $table->string('codigo_diagnostico', 25)->unique()->primary();
+            
+            $table->string('nombre_diagnostico', 150);
+            $table->string('descripcion_diagnostico', 500);
             $table->timestamps();
-
         });
     }
 
@@ -28,6 +29,6 @@ class CreateGenerosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generos');
+        Schema::dropIfExists('diagnosticos');
     }
 }

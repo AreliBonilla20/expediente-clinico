@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAntecedentePacientesTable extends Migration
+class CreateAntecendentesPacientesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateAntecedentePacientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('antecedente_pacientes', function (Blueprint $table) {
+        Schema::create('antecendentes_pacientes', function (Blueprint $table) {
             $table->increments('id_antecedentes_paciente');
+            
+            $table->string('codigo_paciente');
+            $table->foreign('codigo_paciente')->references('codigo')->on('pacientes');
+            
             $table->string('historial_enfermedades', 500);
             $table->string('nombre_padre', 150)->nullable();
             $table->string('apellidos_padre', 150)->nullable();
@@ -30,7 +34,7 @@ class CreateAntecedentePacientesTable extends Migration
 
             $table->string('padecimientos_familiares', 250)->nullable();
 
-            $table->integer('codigo_paciente')->unsigned()->foreign()->references('codigo')->on('pacientes')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -41,6 +45,6 @@ class CreateAntecedentePacientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('antecedente_pacientes');
+        Schema::dropIfExists('antecendentes_pacientes');
     }
 }

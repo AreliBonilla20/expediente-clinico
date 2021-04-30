@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGenerosTable extends Migration
+class CreateCirugiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateGenerosTable extends Migration
      */
     public function up()
     {
-        Schema::create('generos', function (Blueprint $table) {
-            $table->bigIncrements('id_genero');
-            $table->string('genero',25);
+        Schema::create('cirugias', function (Blueprint $table) {
+            $table->string('codigo_cirugia', 10)->unique()->primary();
+            
+            $table->string('nombre_cirugia', 250);
+            $table->string('descripcion_cirugia', 500);
+            $table->float('costo_cirugia');
             $table->timestamps();
-
         });
     }
 
@@ -28,6 +30,6 @@ class CreateGenerosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generos');
+        Schema::dropIfExists('cirugias');
     }
 }
