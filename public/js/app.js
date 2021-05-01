@@ -70930,23 +70930,28 @@ var AgregarExpediente = function AgregarExpediente() {
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState34 = _slicedToArray(_useState33, 2),
-      id_genero = _useState34[0],
-      setId_genero = _useState34[1];
+      estado_paciente = _useState34[0],
+      setEstado_paciente = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState36 = _slicedToArray(_useState35, 2),
-      id_pais = _useState36[0],
-      setId_pais = _useState36[1];
+      id_genero = _useState36[0],
+      setId_genero = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      id_municipio = _useState38[0],
-      setId_municipio = _useState38[1];
+      id_pais = _useState38[0],
+      setId_pais = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState40 = _slicedToArray(_useState39, 2),
-      id_departamento = _useState40[0],
-      setId_departamento = _useState40[1];
+      id_municipio = _useState40[0],
+      setId_municipio = _useState40[1];
+
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState42 = _slicedToArray(_useState41, 2),
+      id_departamento = _useState42[0],
+      setId_departamento = _useState42[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     _api__WEBPACK_IMPORTED_MODULE_7__["default"].getDataAgregarPaciente().then(function (res) {
@@ -70975,6 +70980,7 @@ var AgregarExpediente = function AgregarExpediente() {
                 direccion: direccion,
                 telefono: telefono,
                 correo: correo,
+                estado_paciente: estado_paciente,
                 estado_civil: estado_civil,
                 nombre_conyugue: nombre_conyugue,
                 apellido_conyugue: apellido_conyugue,
@@ -71088,7 +71094,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: identificacion,
     onChange: function onChange(e) {
       return setIdentificacion(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71109,7 +71116,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: nombres,
     onChange: function onChange(e) {
       return setNombres(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71130,7 +71138,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: apellidos,
     onChange: function onChange(e) {
       return setApellidos(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71151,11 +71160,34 @@ var AgregarExpediente = function AgregarExpediente() {
     value: fecha_nacimiento,
     onChange: function onChange(e) {
       return setFecha_nacimiento(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-calendar"
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "estado_paciente"
+  }, "Estado del paciente (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    placeholder: "Estado del paciente",
+    id: "estado_paciente",
+    value: estado_paciente,
+    onChange: function onChange(e) {
+      return setEstado_paciente(e.target.value);
+    },
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -71168,7 +71200,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_genero,
     onChange: function onChange(e) {
       return setId_genero(e.target.value);
-    }
+    },
+    required: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), generos.map(function (genero) {
@@ -71187,7 +71220,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: estado_civil,
     onChange: function onChange(e) {
       return setEstado_civil(e.target.value);
-    }
+    },
+    required: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
@@ -71250,7 +71284,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: telefono,
     onChange: function onChange(e) {
       return setTelefono(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71288,7 +71323,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_pais,
     onChange: function onChange(e) {
       return setId_pais(e.target.value);
-    }
+    },
+    required: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), paises.map(function (pais) {
@@ -71307,7 +71343,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_departamento,
     onChange: function onChange(e) {
       return setId_departamento(e.target.value);
-    }
+    },
+    required: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), departamentos.map(function (departamento) {
@@ -71326,7 +71363,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_municipio,
     onChange: function onChange(e) {
       return setId_municipio(e.target.value);
-    }
+    },
+    required: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), municipios.map(function (municipio) {
@@ -71349,7 +71387,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: direccion,
     onChange: function onChange(e) {
       return setDireccion(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71370,7 +71409,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: nombre_contacto_emergencia,
     onChange: function onChange(e) {
       return setNombre_contacto_emergencia(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71391,7 +71431,8 @@ var AgregarExpediente = function AgregarExpediente() {
     value: telefono_contacto_emergencia,
     onChange: function onChange(e) {
       return setTelefono_contacto_emergencia(e.target.value);
-    }
+    },
+    required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -71716,30 +71757,19 @@ var App = function App() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-md-6 order-md-1 order-last"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "DataTable"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "text-subtitle text-muted"
-  }, "For user to check they list")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-6 order-md-2 order-first"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     "aria-label": "breadcrumb",
     className: "breadcrumb-header float-start float-lg-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
     className: "breadcrumb"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "breadcrumb-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "index.html"
-  }, "Dashboard")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "breadcrumb-item active",
-    "aria-current": "page"
-  }, "DataTable")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-header"
-  }, "Simple Datatable"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };

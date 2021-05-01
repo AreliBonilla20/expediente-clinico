@@ -32,6 +32,7 @@ const AgregarExpediente = () => {
     const [apellido_conyugue, setApellido_conyugue] = useState('');
     const [nombre_contacto_emergencia, setNombre_contacto_emergencia] = useState('');
     const [telefono_contacto_emergencia, setTelefono_contacto_emergencia] = useState('');
+    const [estado_paciente, setEstado_paciente] = useState('');
     const [id_genero, setId_genero] = useState('');
     const [id_pais, setId_pais] = useState('');
     const [id_municipio, setId_municipio] = useState('');
@@ -52,7 +53,7 @@ const AgregarExpediente = () => {
     const onSubmitForm = async e => {
         e.preventDefault();
         try {
-          const body = { nombres, apellidos, fecha_nacimiento, identificacion, direccion, telefono, correo,
+          const body = { nombres, apellidos, fecha_nacimiento, identificacion, direccion, telefono, correo, estado_paciente,
             estado_civil, nombre_conyugue, apellido_conyugue, nombre_contacto_emergencia,
             telefono_contacto_emergencia, id_genero, id_pais, id_municipio, id_departamento
          };
@@ -123,7 +124,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Identificación del paciente"
                                                                     id="identificacion"
                                                                     value={identificacion}
-                                                                    onChange={e => setIdentificacion(e.target.value)} />
+                                                                    onChange={e => setIdentificacion(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -139,7 +140,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Nombres del paciente"
                                                                     id="first-name-icon"
                                                                     value={nombres}
-                                                                    onChange={e => setNombres(e.target.value)} />
+                                                                    onChange={e => setNombres(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -154,7 +155,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Apellidos del paciente"
                                                                     id="first-name-icon"
                                                                     value={apellidos}
-                                                                    onChange={e => setApellidos(e.target.value)} />
+                                                                    onChange={e => setApellidos(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -172,9 +173,25 @@ const AgregarExpediente = () => {
                                                                     placeholder="Fecha de nacimiento del paciente"
                                                                     id="fecha_nacimiento"
                                                                     value={fecha_nacimiento}
-                                                                    onChange={e => setFecha_nacimiento(e.target.value)} />
+                                                                    onChange={e => setFecha_nacimiento(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-calendar"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="estado_paciente">Estado del paciente (*)</label>
+                                                            <div className="position-relative">
+                                                                <input type="text" className="form-control"
+                                                                    placeholder="Estado del paciente"
+                                                                    id="estado_paciente"
+                                                                    value={estado_paciente}
+                                                                    onChange={e => setEstado_paciente(e.target.value)} required/>
+                                                                <div className="form-control-icon">
+                                                                    <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -184,7 +201,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="genero">Género (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="genero" value={id_genero}
-                                                            onChange={e => setId_genero(e.target.value)} >
+                                                            onChange={e => setId_genero(e.target.value)} required>
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
                                                                 <option value={genero.id_genero}>{genero.genero}</option>
@@ -197,7 +214,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="estado_civil">Estado civil (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="estado_civil" value={estado_civil}
-                                                            onChange={e => setEstado_civil(e.target.value)} >
+                                                            onChange={e => setEstado_civil(e.target.value)} required>
                                                             
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 <option value="Casado/a">Casado/a</option>
@@ -242,7 +259,7 @@ const AgregarExpediente = () => {
                                                                 <input type="text" className="form-control"
                                                                     placeholder="Número teléfonico del paciente" id="mobile-id-icon" 
                                                                     value={telefono}
-                                                                    onChange={e => setTelefono(e.target.value)} />
+                                                                    onChange={e => setTelefono(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -273,7 +290,7 @@ const AgregarExpediente = () => {
                                                   
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="pais" value={id_pais}
-                                                            onChange={e => setId_pais(e.target.value)}>
+                                                            onChange={e => setId_pais(e.target.value)} required>
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
                                                                 <option value={pais.id_pais}>{pais.nombre_pais}</option>
@@ -287,7 +304,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="departamento" value={id_departamento}
-                                                            onChange={e => setId_departamento(e.target.value)} >
+                                                            onChange={e => setId_departamento(e.target.value)} required>
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {departamentos.map((departamento) => (
                                                                 <option value={departamento.id_departamento}>{departamento.nombre_departamento}</option>
@@ -300,7 +317,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="municipio">Municipio/Ciudad (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="municipio" value={id_municipio}
-                                                            onChange={e => setId_municipio(e.target.value)} >
+                                                            onChange={e => setId_municipio(e.target.value)} required>
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {municipios.map((municipio) => (
                                                                 <option value={municipio.id_municipio}>{municipio.nombre_municipio}</option>
@@ -316,7 +333,7 @@ const AgregarExpediente = () => {
                                                                 <input type="text" className="form-control"
                                                                     placeholder="Dirección del paciente" id="direccion"
                                                                     value={direccion}
-                                                                    onChange={e => setDireccion(e.target.value)} />
+                                                                    onChange={e => setDireccion(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
@@ -336,7 +353,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Nombres del contacto de emergencia"
                                                                     id="contacto_emergencia"
                                                                     value={nombre_contacto_emergencia}
-                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} />
+                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -351,7 +368,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Teléfono del contacto de emergencia"
                                                                     id="telefono_emergencia"
                                                                     value={telefono_contacto_emergencia}
-                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} />
+                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} required/>
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>

@@ -28,6 +28,7 @@ class Paciente extends JsonResource
         'apellido_conyugue'=> $this->apellido_conyugue,
         'nombre_contacto_emergencia'=> $this->nombre_contacto_emergencia,
         'telefono_contacto_emergencia'=> $this->telefono_contacto_emergencia,
+        'estado_paciente'=> $this->estado_paciente,
         'id_genero'=> $this->id_genero,
         'id_pais'=> $this->id_pais,
         'id_municipio'=> $this->id_municipio,

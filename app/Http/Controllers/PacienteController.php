@@ -10,6 +10,8 @@ use App\Genero;
 use App\Http\Resources\Paciente as PacienteResource;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 class PacienteController extends Controller
 {
     public function index()
@@ -19,10 +21,10 @@ class PacienteController extends Controller
 
     public function create()
     {
-        $paises = Pais::all();
-        $departamentos = Departamento::all();
-        $municipios = Municipio::all();
-        $generos = Genero::all();
+        $paises = DB::select('select * from paises order by nombre_pais asc');
+        $departamentos = DB::select('select * from departamentos order by nombre_departamento asc');
+        $municipios = DB::select('select * from municipios order by nombre_municipio asc');
+        $generos = DB::select('select * from generos order by genero asc');
         
         $data = [
             "generos" => $generos,
@@ -55,6 +57,7 @@ class PacienteController extends Controller
         $paciente->nombre_conyugue = $request->nombre_conyugue;
         $paciente->apellido_conyugue = $request->apellido_conyugue;
         $paciente->nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
+        $paciente->estado_paciente = $request->estado_paciente;
         $paciente->telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
         $paciente->id_genero = $request->id_genero;
         $paciente->id_pais = $request->id_pais;
