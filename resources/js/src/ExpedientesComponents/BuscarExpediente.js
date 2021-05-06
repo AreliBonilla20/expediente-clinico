@@ -4,26 +4,29 @@ import {
     Link
 } from 'react-router-dom';
 
+import {useParams} from 'react-router-dom';
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import API from '../api';
+import { isEmpty } from 'lodash';
 
-const ConsultarExpediente = () => {
+const BuscarPaciente = () => {
     
-    
+    const { param_busqueda } = useParams();
     const [pacientes, setPacientes] =useState([]);
-    const [param_busqueda, setParam_busqueda] = useState('');
-   
-
+    const [mensaje_busqueda, setMensaje_busqueda] = useState('');
 
     useEffect(() => {
-         API.pacientes().then(res => {
-            const result = res.data;
-            setPacientes(result.data);
-        })
-      }, []);
+        API.paciente_buscar(param_busqueda).then(res => {
+           const result = res.data;
+           setPacientes(result.data);
+           
+       })
+     }, []);
+
+     
 
 
     return(
@@ -38,8 +41,8 @@ const ConsultarExpediente = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Expedientes</h3>
-                                
-                                <p className="text-subtitle text-muted">Consulta de expedientes</p>
+                               
+                                <p className="text-subtitle text-muted">Búsqueda</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -58,72 +61,47 @@ const ConsultarExpediente = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/expedientes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                                <Link to="/expedientes" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
                             </div>
                             
                             <br />
                             <div className="card-body">
-                            <h4>Buscar expediente</h4>
-                            <p>Ingrese cualquiera de los parámetros solicitados</p>
-                           
-                    
-                            <form className="form">
-                                <div className="row">
+                            <h4>Resultados </h4>
+                            <p>Expedientes encontrados</p>
+                            
 
-                                <div className="col-md-10 col-12">
-                                        <div className="form-group">
-                                           
-                                            <input type="text" id="last-name-column" className="form-control"
-                                                placeholder="Código, identificacion, nombres o apellidos del paciente" name="lname-column" 
-                                                id="codigo_busqueda"
-                                                value={param_busqueda}
-                                                onChange={e => setParam_busqueda(e.target.value)} />
-                                        </div>
-                                    </div>
-                                   
-                                   
-                                    
-                                    <div className="col-2">
-                                        <div className="form-group">
-                                            <label htmlFor=""></label>
-                                            <Link to={`expedientes/${param_busqueda}/buscar`} className="btn btn-secondary"><i className="bi bi-search"></i> Buscar</Link>
- 
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                            </form>
-                            <br /><br />
-                                <table className="table table-striped" id="table1">
+                                <table className="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Fecha nacimiento</th>
-                                            <th>Estado paciente</th>
+                                            <th>Fecha de nacimiento [Año-Med-Día]</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
                                         
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
                                     {pacientes.map((paciente) => 
                                           <tr>
                                             <td>{paciente.codigo}</td>
                                             <td>{paciente.nombres}</td>
                                             <td>{paciente.apellidos}</td>
                                             <td>{paciente.fecha_nacimiento}</td>
-                                            <td>{paciente.estado_paciente}</td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to="editar"className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to="ver" className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>
+
+                                    
                                     )}
+                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -138,4 +116,4 @@ const ConsultarExpediente = () => {
     );
 }
 
-export default ConsultarExpediente;
+export default BuscarPaciente;

@@ -13,10 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+//Rutas para expedientes
 Route::get('/expedientes', 'PacienteController@index');
 Route::get('/expedientes/crear', 'PacienteController@create');
 Route::post('/expedientes/guardar', 'PacienteController@store');
-Route::get('/expedientes/{id}/ver', 'PacienteController@show');
-Route::get('/expedientes/{id}/editar', 'PacienteController@edit');
-Route::put('/expedientes/{id}/actualizar', 'PacienteController@update');
-Route::get('/expedientes/{id}/eliminar', 'PacienteController@delete');
+Route::get('/expedientes/{codigo}/ver', 'PacienteController@show');
+Route::get('/expedientes/{codigo}/editar', 'PacienteController@edit');
+Route::put('/expedientes/{codigo}/actualizar', 'PacienteController@update');
+Route::get('/expedientes/{param_busqueda}/buscar', 'PacienteController@buscar');
+

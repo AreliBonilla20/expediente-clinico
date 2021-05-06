@@ -9,6 +9,7 @@ use App\Municipio;
 use App\Genero;
 use App\Http\Resources\Paciente as PacienteResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\PacienteRequest;
 
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +17,10 @@ class PacienteController extends Controller
 {
     public function index()
     {  
-       return PacienteResource::collection(Paciente::all());
+       return PacienteResource::collection(Paciente::orderBy('created_at', 'desc')->paginate(15));
+      
     }
+
 
     public function create()
     {
@@ -35,6 +38,7 @@ class PacienteController extends Controller
 
         return response()->json($data);    
     }
+
 
 
     public function store(Request $request)
@@ -64,26 +68,58 @@ class PacienteController extends Controller
         $paciente->id_municipio = $request->id_municipio;
         $paciente->id_departamento = $request->id_departamento;
 
-
-        
-        
         $paciente->save();
         
         return response()->json($request);    
     }
 
-    public function edit()
+
+    public function edit($codigo)
     {
-          
+        $paciente_editar = DB::select('select * from pacientes where codigo = ?', [$codigo]); 
+
+        return response()->json($paciente_editar[0]);    
     }
 
-    public function update(Request $request)
+
+    public function update($codigo, Request $request)
     {
-         
+        $paciente_editar = Paciente::findOrFail($codigo);
+
+        $paciente_editar->codigo = $codigo;
+        $paciente_editar->identificacion = $request->identificacion;
+        $paciente_editar->nombres = $request->nombres;
+        $paciente_editar->apellidos = $request->apellidos;
+        $paciente_editar->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente_editar->direccion = $request->direccion;
+        $paciente_editar->telefono = $request->telefono;
+        $paciente_editar->correo = $request->correo;
+        $paciente_editar->estado_civil = $request->estado_civil;
+        $paciente_editar->nombre_conyugue = $request->nombre_conyugue;
+        $paciente_editar->apellido_conyugue = $request->apellido_conyugue;
+        $paciente_editar->nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
+        $paciente_editar->estado_paciente = $request->estado_paciente;
+        $paciente_editar->telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
+        $paciente_editar->id_genero = $request->id_genero;
+        $paciente_editar->id_pais = $request->id_pais;
+        $paciente_editar->id_municipio = $request->id_municipio;
+        $paciente_editar->id_departamento = $request->id_departamento;
+
+        $paciente_editar->save();
+
+        return response()->json('Paciente actualizado!');    
     }
 
-
+    public function buscar($param_busqueda)
+    {
         
+        $pacientes = DB::select("select * from pacientes where lower(codigo) = ? or lower(identificacion) = ? or lower(nombres) LIKE ? or lower(apellidos) LIKE ?", 
+        [strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda)]);
+        
+        return PacienteResource::collection($pacientes);
+
+    }
+
 
     public function get_codigo($nombre, $apellidos)
     {

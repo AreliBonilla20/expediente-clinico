@@ -39,7 +39,7 @@ const AgregarExpediente = () => {
     const [id_departamento, setId_departamento] = useState('');
 
     useEffect(() => {
-        API.getDataAgregarPaciente().then(res => {
+        API.datos_formulario_paciente().then(res => {
            const result = res.data;
            setGeneros(result.generos);
            setPaises(result.paises);
@@ -64,7 +64,7 @@ const AgregarExpediente = () => {
             
           });
           
-          window.location = "/";
+          window.location = "/expedientes";
         } catch (err) {
           console.error(err.message);
         }
@@ -114,7 +114,6 @@ const AgregarExpediente = () => {
                                                 <div className="row">
                                                 
                                                 <h5>Datos generales</h5>
-                                                
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
@@ -124,7 +123,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Identificación del paciente"
                                                                     id="identificacion"
                                                                     value={identificacion}
-                                                                    onChange={e => setIdentificacion(e.target.value)} required/>
+                                                                    onChange={e => setIdentificacion(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -140,7 +139,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Nombres del paciente"
                                                                     id="first-name-icon"
                                                                     value={nombres}
-                                                                    onChange={e => setNombres(e.target.value)} required/>
+                                                                    onChange={e => setNombres(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -155,7 +154,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Apellidos del paciente"
                                                                     id="first-name-icon"
                                                                     value={apellidos}
-                                                                    onChange={e => setApellidos(e.target.value)} required/>
+                                                                    onChange={e => setApellidos(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -173,7 +172,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Fecha de nacimiento del paciente"
                                                                     id="fecha_nacimiento"
                                                                     value={fecha_nacimiento}
-                                                                    onChange={e => setFecha_nacimiento(e.target.value)} required/>
+                                                                    onChange={e => setFecha_nacimiento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-calendar"></i>
                                                                 </div>
@@ -189,7 +188,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Estado del paciente"
                                                                     id="estado_paciente"
                                                                     value={estado_paciente}
-                                                                    onChange={e => setEstado_paciente(e.target.value)} required/>
+                                                                    onChange={e => setEstado_paciente(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -198,31 +197,48 @@ const AgregarExpediente = () => {
                                                     </div>
 
                                                     <div className="col-md-12 mb-4">
-                                                    <label htmlFor="genero">Género (*)</label>
+                                                    <label>Género (*)</label>
+                            
                                                         <div className="form-group">
-                                                            <select className="choices form-select" id="genero" value={id_genero}
-                                                            onChange={e => setId_genero(e.target.value)} required>
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {generos.map((genero) => (
-                                                                <option value={genero.id_genero}>{genero.genero}</option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-12 mb-4">
-                                                    <label htmlFor="estado_civil">Estado civil (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="choices form-select" id="estado_civil" value={estado_civil}
-                                                            onChange={e => setEstado_civil(e.target.value)} required>
+                                                        {generos.map((genero) => (
+                                                            <div>
+                                                            <input className="form-check-input" type="radio" 
+                                                                id="id_genero"
+                                                                name="id_genero"
+                                                                value={genero.id_genero}
+                                                                onChange={e => setId_genero(e.target.value)} />
+                                                                
+                                                            <label className="form-check-label" >
+                                                                {genero.genero}</label>
+                                                            </div>
                                                             
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                <option value="Casado/a">Casado/a</option>
-                                                                <option value="Soltero/a">Soltero/a</option>
-                                                            </select>
+                                                        ))}  
                                                         </div>
-                                                    </div>
+                                               
+                                                     </div>
 
+                                                     <div className="col-md-12 mb-4">
+                                                        <label>Estado civil (*)</label>
+                                                        <div className="form-group">
+                                                            <div>
+                                                            <input className="form-check-input" type="radio" 
+                                                                id="estado_civil"
+                                                                name="estado_civil"
+                                                                value="Casado/a"
+                                                                onChange={e => setestado_civil(e.target.value)} />   
+                                                            <label className="form-check-label" >Casado/a</label>
+                                                            </div>
+                                                        
+                                                            <div>
+                                                            <input className="form-check-input" type="radio" 
+                                                                id="estado_civil"
+                                                                name="estado_civil"
+                                                                value="Soltero/a"
+                                                                onChange={e => setEstado_civil(e.target.value)} />   
+                                                            <label className="form-check-label" >Soltero/a</label>
+                                                            </div>
+                                                        </div>
+                                                     </div>
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_conyugue">Nombre conyugue</label>
@@ -259,7 +275,7 @@ const AgregarExpediente = () => {
                                                                 <input type="text" className="form-control"
                                                                     placeholder="Número teléfonico del paciente" id="mobile-id-icon" 
                                                                     value={telefono}
-                                                                    onChange={e => setTelefono(e.target.value)} required/>
+                                                                    onChange={e => setTelefono(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -290,7 +306,7 @@ const AgregarExpediente = () => {
                                                   
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="pais" value={id_pais}
-                                                            onChange={e => setId_pais(e.target.value)} required>
+                                                            onChange={e => setId_pais(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
                                                                 <option value={pais.id_pais}>{pais.nombre_pais}</option>
@@ -304,7 +320,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="departamento" value={id_departamento}
-                                                            onChange={e => setId_departamento(e.target.value)} required>
+                                                            onChange={e => setId_departamento(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {departamentos.map((departamento) => (
                                                                 <option value={departamento.id_departamento}>{departamento.nombre_departamento}</option>
@@ -317,7 +333,7 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="municipio">Municipio/Ciudad (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="municipio" value={id_municipio}
-                                                            onChange={e => setId_municipio(e.target.value)} required>
+                                                            onChange={e => setId_municipio(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
                                                                 {municipios.map((municipio) => (
                                                                 <option value={municipio.id_municipio}>{municipio.nombre_municipio}</option>
@@ -333,7 +349,7 @@ const AgregarExpediente = () => {
                                                                 <input type="text" className="form-control"
                                                                     placeholder="Dirección del paciente" id="direccion"
                                                                     value={direccion}
-                                                                    onChange={e => setDireccion(e.target.value)} required/>
+                                                                    onChange={e => setDireccion(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
@@ -353,7 +369,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Nombres del contacto de emergencia"
                                                                     id="contacto_emergencia"
                                                                     value={nombre_contacto_emergencia}
-                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} required/>
+                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -368,7 +384,7 @@ const AgregarExpediente = () => {
                                                                     placeholder="Teléfono del contacto de emergencia"
                                                                     id="telefono_emergencia"
                                                                     value={telefono_contacto_emergencia}
-                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} required/>
+                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
