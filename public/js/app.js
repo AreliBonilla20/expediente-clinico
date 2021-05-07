@@ -70884,90 +70884,100 @@ var AgregarExpediente = function AgregarExpediente() {
       departamentos = _useState8[0],
       setDepartamentos = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      nombres = _useState10[0],
-      setNombres = _useState10[1];
+      opcion_pais = _useState10[0],
+      setOpcion_pais = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState12 = _slicedToArray(_useState11, 2),
-      apellidos = _useState12[0],
-      setApellidos = _useState12[1];
+      opcion_depto = _useState12[0],
+      setOpcion_depto = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      identificacion = _useState14[0],
-      setIdentificacion = _useState14[1];
+      nombres = _useState14[0],
+      setNombres = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      fecha_nacimiento = _useState16[0],
-      setFecha_nacimiento = _useState16[1];
+      apellidos = _useState16[0],
+      setApellidos = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      direccion = _useState18[0],
-      setDireccion = _useState18[1];
+      identificacion = _useState18[0],
+      setIdentificacion = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      telefono = _useState20[0],
-      setTelefono = _useState20[1];
+      fecha_nacimiento = _useState20[0],
+      setFecha_nacimiento = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState22 = _slicedToArray(_useState21, 2),
-      correo = _useState22[0],
-      setCorreo = _useState22[1];
+      direccion = _useState22[0],
+      setDireccion = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState24 = _slicedToArray(_useState23, 2),
-      estado_civil = _useState24[0],
-      setEstado_civil = _useState24[1];
+      telefono = _useState24[0],
+      setTelefono = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState26 = _slicedToArray(_useState25, 2),
-      nombre_conyugue = _useState26[0],
-      setNombre_conyugue = _useState26[1];
+      correo = _useState26[0],
+      setCorreo = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState28 = _slicedToArray(_useState27, 2),
-      apellido_conyugue = _useState28[0],
-      setApellido_conyugue = _useState28[1];
+      estado_civil = _useState28[0],
+      setEstado_civil = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState30 = _slicedToArray(_useState29, 2),
-      nombre_contacto_emergencia = _useState30[0],
-      setNombre_contacto_emergencia = _useState30[1];
+      nombre_conyugue = _useState30[0],
+      setNombre_conyugue = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState32 = _slicedToArray(_useState31, 2),
-      telefono_contacto_emergencia = _useState32[0],
-      setTelefono_contacto_emergencia = _useState32[1];
+      apellido_conyugue = _useState32[0],
+      setApellido_conyugue = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState34 = _slicedToArray(_useState33, 2),
-      estado_paciente = _useState34[0],
-      setEstado_paciente = _useState34[1];
+      nombre_contacto_emergencia = _useState34[0],
+      setNombre_contacto_emergencia = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState36 = _slicedToArray(_useState35, 2),
-      id_genero = _useState36[0],
-      setId_genero = _useState36[1];
+      telefono_contacto_emergencia = _useState36[0],
+      setTelefono_contacto_emergencia = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      id_pais = _useState38[0],
-      setId_pais = _useState38[1];
+      estado_paciente = _useState38[0],
+      setEstado_paciente = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState40 = _slicedToArray(_useState39, 2),
-      id_municipio = _useState40[0],
-      setId_municipio = _useState40[1];
+      id_genero = _useState40[0],
+      setId_genero = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState42 = _slicedToArray(_useState41, 2),
-      id_departamento = _useState42[0],
-      setId_departamento = _useState42[1];
+      id_pais = _useState42[0],
+      setId_pais = _useState42[1];
+
+  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState44 = _slicedToArray(_useState43, 2),
+      id_municipio = _useState44[0],
+      setId_municipio = _useState44[1];
+
+  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState46 = _slicedToArray(_useState45, 2),
+      id_departamento = _useState46[0],
+      setId_departamento = _useState46[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     _api__WEBPACK_IMPORTED_MODULE_7__["default"].datos_formulario_paciente().then(function (res) {
@@ -71204,7 +71214,9 @@ var AgregarExpediente = function AgregarExpediente() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "G\xE9nero (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
   }, generos.map(function (genero) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      key: genero.id_genero
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
       className: "form-check-input",
       type: "radio",
       id: "id_genero",
@@ -71336,11 +71348,15 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_pais,
     onChange: function onChange(e) {
       return setId_pais(e.target.value);
+    },
+    onClick: function onClick(e) {
+      return setOpcion_pais(e.target.value);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: ""
+    value: -1
   }, "--Seleccione una opci\xF3n--"), paises.map(function (pais) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: pais.id_pais,
       value: pais.id_pais
     }, pais.nombre_pais);
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -71355,13 +71371,19 @@ var AgregarExpediente = function AgregarExpediente() {
     value: id_departamento,
     onChange: function onChange(e) {
       return setId_departamento(e.target.value);
+    },
+    onClick: function onClick(e) {
+      return setOpcion_depto(e.target.value);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), departamentos.map(function (departamento) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-      value: departamento.id_departamento
-    }, departamento.nombre_departamento);
+    if (departamento.id_pais == opcion_pais) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        key: departamento.id_departamento,
+        value: departamento.id_departamento
+      }, departamento.nombre_departamento);
+    }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-4 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -71378,9 +71400,12 @@ var AgregarExpediente = function AgregarExpediente() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), municipios.map(function (municipio) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-      value: municipio.id_municipio
-    }, municipio.nombre_municipio);
+    if (municipio.id_departamento == opcion_depto) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+        key: municipio.id_municipio,
+        value: municipio.id_municipio
+      }, municipio.nombre_municipio);
+    }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

@@ -19,6 +19,9 @@ const AgregarExpediente = () => {
     const [paises, setPaises] =useState([]);
     const [municipios, setMunicipios] =useState([]);
     const [departamentos, setDepartamentos] =useState([]);
+
+    const [opcion_pais, setOpcion_pais] = useState();
+    const [opcion_depto, setOpcion_depto] = useState();
     
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -201,7 +204,7 @@ const AgregarExpediente = () => {
                             
                                                         <div className="form-group">
                                                         {generos.map((genero) => (
-                                                            <div>
+                                                            <div key={genero.id_genero}> 
                                                             <input className="form-check-input" type="radio" 
                                                                 id="id_genero"
                                                                 name="id_genero"
@@ -306,10 +309,11 @@ const AgregarExpediente = () => {
                                                   
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="pais" value={id_pais}
-                                                            onChange={e => setId_pais(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
+                                                            onChange={e => setId_pais(e.target.value)} 
+                                                            onClick={e => setOpcion_pais(e.target.value)} >
+                                                                <option value={-1}>--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
-                                                                <option value={pais.id_pais}>{pais.nombre_pais}</option>
+                                                                <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}
                                                                 
                                                             </select>
@@ -320,11 +324,21 @@ const AgregarExpediente = () => {
                                                     <label htmlFor="departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="departamento" value={id_departamento}
-                                                            onChange={e => setId_departamento(e.target.value)} >
+                                                            onChange={e => setId_departamento(e.target.value)} 
+                                                            onClick={e => setOpcion_depto(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
-                                                                {departamentos.map((departamento) => (
-                                                                <option value={departamento.id_departamento}>{departamento.nombre_departamento}</option>
-                                                                ))}
+
+                                                                {departamentos.map((departamento) => {
+                                                                    if(departamento.id_pais == opcion_pais){
+                                                                        return (
+                                                                        <option key={departamento.id_departamento} 
+                                                                        value={departamento.id_departamento}>{departamento.nombre_departamento}
+                                                                        </option>
+                                                                        )
+                                                                    }
+                                                                })}
+                                                            
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -335,9 +349,16 @@ const AgregarExpediente = () => {
                                                             <select className="choices form-select" id="municipio" value={id_municipio}
                                                             onChange={e => setId_municipio(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
-                                                                {municipios.map((municipio) => (
-                                                                <option value={municipio.id_municipio}>{municipio.nombre_municipio}</option>
-                                                                ))}
+                                                                {municipios.map((municipio) => {
+                                                                    if(municipio.id_departamento == opcion_depto){
+                                                                        return (
+                                                                        <option key={municipio.id_municipio} 
+                                                                        value={municipio.id_municipio}>{municipio.nombre_municipio}
+                                                                        </option>
+                                                                        )
+                                                                    }
+                                                                })}
+                                                            
                                                             </select>
                                                         </div>
                                                     </div>
