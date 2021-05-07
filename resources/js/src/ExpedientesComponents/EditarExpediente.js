@@ -24,6 +24,9 @@ const EditarExpediente = () => {
     const [municipios, setMunicipios] =useState([]);
     const [departamentos, setDepartamentos] =useState([]);
 
+    const [opcion_pais, setOpcion_pais] = useState();
+    const [opcion_depto, setOpcion_depto] = useState();
+
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [identificacion, setIdentificacion] = useState('');
@@ -63,6 +66,9 @@ const EditarExpediente = () => {
            setId_pais(paciente.id_pais);
            setId_municipio(paciente.id_municipio);
            setId_departamento(paciente.id_departamento);
+
+           setOpcion_pais(paciente.id_pais);
+           setOpcion_depto(paciente.id_departamento);
        })
 
        API.datos_formulario_paciente().then(res => {
@@ -116,7 +122,10 @@ const EditarExpediente = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/expedientes/crear">Editar expediente</Link>
+                                        <Link to="/expedientes">Consultar expedientes </Link>
+                                        </li>
+                                        <li className="breadcrumb-item active" aria-current="page">
+                                        <Link to="editar">Editar expediente</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -134,22 +143,20 @@ const EditarExpediente = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={onSubmitForm}>
+                                    <form className="form form-vertical" onSubmit={onSubmitForm}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
                                                 <h5>Datos generales</h5>
-                                     
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="identificacion">Identificación</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Identificación del paciente"
                                                                     id="identificacion"
                                                                     value={identificacion}
-                                                                    onChange={e => setIdentificacion(e.target.value)} required/>
+                                                                    onChange={e => setIdentificacion(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -162,10 +169,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="first-name-icon">Nombre (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Nombres del paciente"
                                                                     id="first-name-icon"
                                                                     value={nombres}
-                                                                    onChange={e => setNombres(e.target.value)} required/>
+                                                                    onChange={e => setNombres(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -176,11 +182,10 @@ const EditarExpediente = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="first-name-icon">Apellidos (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
-                                                                    placeholder="Apellidos del paciente"
+                                                                <input type="text" className="form-control"                    
                                                                     id="first-name-icon"
                                                                     value={apellidos}
-                                                                    onChange={e => setApellidos(e.target.value)} required/>
+                                                                    onChange={e => setApellidos(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -195,10 +200,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="fecha_nacimiento">Fecha de nacimiento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="date" className="form-control"
-                                                                    placeholder="Fecha de nacimiento del paciente"
                                                                     id="fecha_nacimiento"
                                                                     value={fecha_nacimiento}
-                                                                    onChange={e => setFecha_nacimiento(e.target.value)} required/>
+                                                                    onChange={e => setFecha_nacimiento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-calendar"></i>
                                                                 </div>
@@ -211,10 +215,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="estado_paciente">Estado del paciente (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Estado del paciente"
                                                                     id="estado_paciente"
                                                                     value={estado_paciente}
-                                                                    onChange={e => setEstado_paciente(e.target.value)} required/>
+                                                                    onChange={e => setEstado_paciente(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -223,58 +226,38 @@ const EditarExpediente = () => {
                                                     </div>
 
                                                     <div className="col-md-12 mb-4">
-                                                    <label>Género (*)</label>
-                            
+                                                    <label htmlFor="genero">Género (*)</label>
                                                         <div className="form-group">
-                                                        {generos.map((genero) => (
-                                                            <div>
-                                                            <input className="form-check-input" type="radio" 
-                                                                id="id_genero"
-                                                                name="id_genero"
-                                                                value={genero.id_genero}
-                                                                checked={genero.id_genero === id_genero}
-                                                                onChange={e => setId_genero(e.target.value)} />
-                                                                
-                                                            <label className="form-check-label" >
-                                                                {genero.genero}</label>
-                                                            </div>
+                                                            <select className="choices form-select" id="genero" value={id_genero}
+                                                            onChange={e => setId_genero(e.target.value)} required>
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {generos.map((genero) => (
+                                                                <option value={genero.id_genero}>{genero.genero}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="col-6-12 mb-4">
+                                                    <label htmlFor="estado_civil">Estado civil (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="choices form-select" id="estado_civil" value={estado_civil}
+                                                            onChange={e => setEstado_civil(e.target.value)} >
                                                             
-                                                        ))}  
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                <option value="Casado/a">Casado/a</option>
+                                                                <option value="Soltero/a">Soltero/a</option>
+                                                            </select>
                                                         </div>
-                                               
-                                                     </div>
-
-
-                                                     <div className="col-md-12 mb-4">
-                                                        <label>Estado civil (*)</label>
-                                                        <div className="form-group">
-                                                            <div>
-                                                            <input className="form-check-input" type="radio" 
-                                                                id="estado_civil"
-                                                                name="estado_civil"
-                                                                value="Casado/a"
-                                                                checked={"Casado/a" === estado_civil}
-                                                                onChange={e => setestado_civil(e.target.value)} />   
-                                                            <label className="form-check-label" >Casado/a</label>
-                                                            </div>
-                                                        
-                                                            <div>
-                                                            <input className="form-check-input" type="radio" 
-                                                                id="estado_civil"
-                                                                name="estado_civil"
-                                                                checked={"Soltero/a" === estado_civil}
-                                                                onChange={e => setEstado_civil(e.target.value)} />   
-                                                            <label className="form-check-label" >Soltero/a</label>
-                                                            </div>
-                                                        </div>
-                                                     </div>
+                                                    </div>
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_conyugue">Nombre conyugue</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Nombres del conyugue"
+                                                                    
                                                                     value={nombre_conyugue}
                                                                     onChange={e => setNombre_conyugue(e.target.value)} />
                                                                 <div className="form-control-icon">
@@ -288,7 +271,7 @@ const EditarExpediente = () => {
                                                             <label htmlFor="apellidos_conyugue">Apellidos conyugue</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Apellidos del conyugue"
+                                                                 
                                                                     value={apellido_conyugue}
                                                                     onChange={e => setApellido_conyugue(e.target.value)} />
                                                                 <div className="form-control-icon">
@@ -303,9 +286,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="mobile-id-icon">Teléfono (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Número teléfonico del paciente" id="mobile-id-icon" 
+                                                                   id="mobile-id-icon" 
                                                                     value={telefono}
-                                                                    onChange={e => setTelefono(e.target.value)} required/>
+                                                                    onChange={e => setTelefono(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -319,7 +302,7 @@ const EditarExpediente = () => {
                                                         <label htmlFor="email-id-icon">Correo electrónico </label>
                                                         <div className="position-relative">
                                                             <input type="text" className="form-control"
-                                                                placeholder="Correo electrónico del paciente" id="email-id-icon"
+                                                                id="email-id-icon"
                                                                 value={correo}
                                                                 onChange={e => setCorreo(e.target.value)} />
                                                             <div className="form-control-icon">
@@ -333,13 +316,13 @@ const EditarExpediente = () => {
                                                     <div className="col-md-4 mb-4">
                                                    
                                                     <label htmlFor="pais">País (*)</label>
-                                                  
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="pais" value={id_pais}
-                                                            onChange={e => setId_pais(e.target.value)} required>
-                                                                <option value="">--Seleccione una opción--</option>
+                                                            onChange={e => setId_pais(e.target.value)} 
+                                                            onClick={e => setOpcion_pais(e.target.value)} >
+                                                                <option value={-1}>--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
-                                                                <option value={pais.id_pais}>{pais.nombre_pais}</option>
+                                                                <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}
                                                                 
                                                             </select>
@@ -350,11 +333,20 @@ const EditarExpediente = () => {
                                                     <label htmlFor="departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="departamento" value={id_departamento}
-                                                            onChange={e => setId_departamento(e.target.value)} required>
+                                                            onChange={e => setId_departamento(e.target.value)} 
+                                                            onClick={e => setOpcion_depto(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
-                                                                {departamentos.map((departamento) => (
-                                                                <option value={departamento.id_departamento}>{departamento.nombre_departamento}</option>
-                                                                ))}
+                                                                {departamentos.map((departamento) => {
+                                                                    if(departamento.id_pais == opcion_pais){
+                                                                        return (
+                                                                        <option key={departamento.id_departamento} 
+                                                                        value={departamento.id_departamento}>{departamento.nombre_departamento}
+                                                                        </option>
+                                                                        )
+                                                                    }
+                                                                })}
+                                                            
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -363,11 +355,18 @@ const EditarExpediente = () => {
                                                     <label htmlFor="municipio">Municipio/Ciudad (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select" id="municipio" value={id_municipio}
-                                                            onChange={e => setId_municipio(e.target.value)} required>
+                                                            onChange={e => setId_municipio(e.target.value)} >
                                                             <option value="">--Seleccione una opción--</option>
-                                                                {municipios.map((municipio) => (
-                                                                <option value={municipio.id_municipio}>{municipio.nombre_municipio}</option>
-                                                                ))}
+                                                                {municipios.map((municipio) => {
+                                                                    if(municipio.id_departamento == opcion_depto){
+                                                                        return (
+                                                                        <option key={municipio.id_municipio} 
+                                                                        value={municipio.id_municipio}>{municipio.nombre_municipio}
+                                                                        </option>
+                                                                        )
+                                                                    }
+                                                                })}
+                                                            
                                                             </select>
                                                         </div>
                                                     </div>
@@ -377,9 +376,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="direccion">Dirección (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Dirección del paciente" id="direccion"
+                                                                   id="direccion"
                                                                     value={direccion}
-                                                                    onChange={e => setDireccion(e.target.value)} required/>
+                                                                    onChange={e => setDireccion(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
@@ -396,10 +395,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="contacto_emergencia">Contacto en caso de emergencia (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Nombres del contacto de emergencia"
                                                                     id="contacto_emergencia"
                                                                     value={nombre_contacto_emergencia}
-                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} required/>
+                                                                    onChange={e => setNombre_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -411,10 +409,9 @@ const EditarExpediente = () => {
                                                             <label htmlFor="telefono_emergencia">Télefono en caso de emergencia (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    placeholder="Teléfono del contacto de emergencia"
                                                                     id="telefono_emergencia"
                                                                     value={telefono_contacto_emergencia}
-                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} required/>
+                                                                    onChange={e => setTelefono_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -423,9 +420,7 @@ const EditarExpediente = () => {
                                                     </div>
                                                    
                                                     <div className="col-12 d-flex justify-content-end">
-                                                    <button className="btn btn-secondary">Guardar</button>
-                                                    <button type="reset"
-                                                            className="btn btn-light-secondary me-1 mb-1">Limpiar</button>
+                                                        <button className="btn btn-secondary">Actualizar</button>
                                                     </div>
 
                                                     

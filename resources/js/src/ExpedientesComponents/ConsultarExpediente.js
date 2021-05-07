@@ -46,7 +46,7 @@ const ConsultarExpediente = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/">Consulta expedientes</Link>
+                                        <Link to="/expedientes">Consulta expedientes</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -70,24 +70,16 @@ const ConsultarExpediente = () => {
                             <form className="form">
                                 <div className="row">
 
-                                <div className="col-md-10 col-12">
-                                        <div className="form-group">
-                                           
-                                            <input type="text" id="last-name-column" className="form-control"
-                                                placeholder="Código, identificacion, nombres o apellidos del paciente" name="lname-column" 
-                                                id="codigo_busqueda"
-                                                value={param_busqueda}
-                                                onChange={e => setParam_busqueda(e.target.value)} />
-                                        </div>
-                                    </div>
-                                   
-                                   
-                                    
-                                    <div className="col-2">
-                                        <div className="form-group">
-                                            <label htmlFor=""></label>
-                                            <Link to={`expedientes/${param_busqueda}/buscar`} className="btn btn-secondary"><i className="bi bi-search"></i> Buscar</Link>
- 
+                                    <div className="col-md-12 mb-1">
+                                        <div className="input-group mb-3">
+                                            <span className="input-group-text" id="basic-addon1"><i
+                                                    className="bi bi-search"></i></span>
+                                        <input type="text" id="last-name-column" className="form-control"
+                                                    placeholder="Código, identificacion, nombres o apellidos del paciente" name="lname-column" 
+                                                    id="codigo_busqueda"
+                                                    value={param_busqueda}
+                                                    onChange={e => setParam_busqueda(e.target.value)} />
+                                            <Link to={`expedientes/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
                                         </div>
                                     </div>
                                 </div>
