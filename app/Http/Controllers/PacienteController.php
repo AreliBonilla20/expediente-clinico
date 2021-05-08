@@ -45,32 +45,50 @@ class PacienteController extends Controller
     {   
         $nombre = $request->nombres;
         $apellidos = $request->apellidos;
-        $codigo = $this->get_codigo($nombre, $apellidos);
+        $codigo_calculado = $this->get_codigo($nombre, $apellidos);
         
+        $codigo = $codigo_calculado;
+        $identificacion = $request->identificacion;
+        $nombres = $request->nombres;
+        $apellidos = $request->apellidos;
+        $fecha_nacimiento = $request->fecha_nacimiento;
+        $estado_paciente = $request->estado_paciente;
+        $direccion = $request->direccion;
+        $telefono = $request->telefono;
+        $correo = $request->correo;
+        $estado_civil = $request->estado_civil;
+        $nombre_conyugue = $request->nombre_conyugue;
+        $apellido_conyugue = $request->apellido_conyugue;
+        $nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
+        $telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
+        $id_genero = $request->id_genero;
+        $id_pais = $request->id_pais;
+        $id_departamento = $request->id_departamento;
+        $id_municipio = $request->id_municipio;
 
-        $paciente = new Paciente();
-        $paciente->codigo = $codigo;
-        $paciente->identificacion = $request->identificacion;
-        $paciente->nombres = $request->nombres;
-        $paciente->apellidos = $request->apellidos;
-        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
-        $paciente->direccion = $request->direccion;
-        $paciente->telefono = $request->telefono;
-        $paciente->correo = $request->correo;
-        $paciente->estado_civil = $request->estado_civil;
-        $paciente->nombre_conyugue = $request->nombre_conyugue;
-        $paciente->apellido_conyugue = $request->apellido_conyugue;
-        $paciente->nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
-        $paciente->estado_paciente = $request->estado_paciente;
-        $paciente->telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
-        $paciente->id_genero = $request->id_genero;
-        $paciente->id_pais = $request->id_pais;
-        $paciente->id_municipio = $request->id_municipio;
-        $paciente->id_departamento = $request->id_departamento;
-
-        $paciente->save();
+        DB::table('pacientes')->insert(
+            ['codigo' => $codigo,
+             'identificacion' => $identificacion,
+             'nombres' => $nombres,
+             'apellidos' => $apellidos,
+             'fecha_nacimiento' => $fecha_nacimiento,
+             'estado_paciente' => $estado_paciente,
+             'direccion' => $direccion,
+             'telefono' => $telefono,
+             'correo' => $correo,
+             'estado_civil' => $estado_civil,
+             'nombre_conyugue' => $nombre_conyugue,
+             'apellido_conyugue' => $apellido_conyugue,
+             'nombre_contacto_emergencia' => $nombre_contacto_emergencia,
+             'telefono_contacto_emergencia' => $telefono_contacto_emergencia,
+             'id_genero' => $id_genero,
+             'id_pais' => $id_pais,
+             'id_departamento' => $id_departamento,
+             'id_municipio' => $id_municipio
+             ]
+        );
         
-        return response()->json($request);    
+        return response()->json('Expediente creado!');    
     }
 
 
@@ -84,28 +102,46 @@ class PacienteController extends Controller
 
     public function update($codigo, Request $request)
     {
-        $paciente_editar = Paciente::findOrFail($codigo);
+        $codigo = $codigo;
+        $identificacion = $request->identificacion;
+        $nombres = $request->nombres;
+        $apellidos = $request->apellidos;
+        $fecha_nacimiento = $request->fecha_nacimiento;
+        $estado_paciente = $request->estado_paciente;
+        $direccion = $request->direccion;
+        $telefono = $request->telefono;
+        $correo = $request->correo;
+        $estado_civil = $request->estado_civil;
+        $nombre_conyugue = $request->nombre_conyugue;
+        $apellido_conyugue = $request->apellido_conyugue;
+        $nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
+        $telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
+        $id_genero = $request->id_genero;
+        $id_pais = $request->id_pais;
+        $id_departamento = $request->id_departamento;
+        $id_municipio = $request->id_municipio;
 
-        $paciente_editar->codigo = $codigo;
-        $paciente_editar->identificacion = $request->identificacion;
-        $paciente_editar->nombres = $request->nombres;
-        $paciente_editar->apellidos = $request->apellidos;
-        $paciente_editar->fecha_nacimiento = $request->fecha_nacimiento;
-        $paciente_editar->direccion = $request->direccion;
-        $paciente_editar->telefono = $request->telefono;
-        $paciente_editar->correo = $request->correo;
-        $paciente_editar->estado_civil = $request->estado_civil;
-        $paciente_editar->nombre_conyugue = $request->nombre_conyugue;
-        $paciente_editar->apellido_conyugue = $request->apellido_conyugue;
-        $paciente_editar->nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
-        $paciente_editar->estado_paciente = $request->estado_paciente;
-        $paciente_editar->telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
-        $paciente_editar->id_genero = $request->id_genero;
-        $paciente_editar->id_pais = $request->id_pais;
-        $paciente_editar->id_municipio = $request->id_municipio;
-        $paciente_editar->id_departamento = $request->id_departamento;
-
-        $paciente_editar->save();
+        DB::table('pacientes')->where('codigo', $codigo)->update(array
+            (
+             'identificacion' => $identificacion,
+             'nombres' => $nombres,
+             'apellidos' => $apellidos,
+             'fecha_nacimiento' => $fecha_nacimiento,
+             'estado_paciente' => $estado_paciente,
+             'direccion' => $direccion,
+             'telefono' => $telefono,
+             'correo' => $correo,
+             'estado_civil' => $estado_civil,
+             'nombre_conyugue' => $nombre_conyugue,
+             'apellido_conyugue' => $apellido_conyugue,
+             'nombre_contacto_emergencia' => $nombre_contacto_emergencia,
+             'telefono_contacto_emergencia' => $telefono_contacto_emergencia,
+             'id_genero' => $id_genero,
+             'id_pais' => $id_pais,
+             'id_departamento' => $id_departamento,
+             'id_municipio' => $id_municipio
+            )
+        );
 
         return response()->json('Paciente actualizado!');    
     }
