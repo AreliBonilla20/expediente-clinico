@@ -9,8 +9,6 @@ use App\Municipio;
 use App\Genero;
 use App\Http\Resources\Paciente as PacienteResource;
 use Illuminate\Http\Request;
-use App\Http\Requests\PacienteRequest;
-
 use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
@@ -46,45 +44,27 @@ class PacienteController extends Controller
         $nombre = $request->nombres;
         $apellidos = $request->apellidos;
         $codigo_calculado = $this->get_codigo($nombre, $apellidos);
-        
-        $codigo = $codigo_calculado;
-        $identificacion = $request->identificacion;
-        $nombres = $request->nombres;
-        $apellidos = $request->apellidos;
-        $fecha_nacimiento = $request->fecha_nacimiento;
-        $estado_paciente = $request->estado_paciente;
-        $direccion = $request->direccion;
-        $telefono = $request->telefono;
-        $correo = $request->correo;
-        $estado_civil = $request->estado_civil;
-        $nombre_conyugue = $request->nombre_conyugue;
-        $apellido_conyugue = $request->apellido_conyugue;
-        $nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
-        $telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
-        $id_genero = $request->id_genero;
-        $id_pais = $request->id_pais;
-        $id_departamento = $request->id_departamento;
-        $id_municipio = $request->id_municipio;
 
         DB::table('pacientes')->insert(
-            ['codigo' => $codigo,
-             'identificacion' => $identificacion,
-             'nombres' => $nombres,
-             'apellidos' => $apellidos,
-             'fecha_nacimiento' => $fecha_nacimiento,
-             'estado_paciente' => $estado_paciente,
-             'direccion' => $direccion,
-             'telefono' => $telefono,
-             'correo' => $correo,
-             'estado_civil' => $estado_civil,
-             'nombre_conyugue' => $nombre_conyugue,
-             'apellido_conyugue' => $apellido_conyugue,
-             'nombre_contacto_emergencia' => $nombre_contacto_emergencia,
-             'telefono_contacto_emergencia' => $telefono_contacto_emergencia,
-             'id_genero' => $id_genero,
-             'id_pais' => $id_pais,
-             'id_departamento' => $id_departamento,
-             'id_municipio' => $id_municipio
+            [
+             'codigo' => $codigo_calculado,
+             'identificacion' => $request->identificacion,
+             'nombres' => $request->nombres,
+             'apellidos' => $request->apellidos,
+             'fecha_nacimiento' => $request->fecha_nacimiento,
+             'estado_paciente' => $request->estado_paciente,
+             'direccion' => $request->direccion,
+             'telefono' => $request->telefono,
+             'correo' => $request->correo,
+             'estado_civil' => $request->estado_civil,
+             'nombre_conyugue' => $request->nombre_conyugue,
+             'apellido_conyugue' => $request->apellido_conyugue,
+             'nombre_contacto_emergencia' => $request->nombre_contacto_emergencia,
+             'telefono_contacto_emergencia' => $request->telefono_contacto_emergencia,
+             'id_genero' => $request->id_genero,
+             'id_pais' => $request->id_pais,
+             'id_departamento' => $request->id_departamento,
+             'id_municipio' => $request->id_municipio
              ]
         );
         
@@ -102,44 +82,25 @@ class PacienteController extends Controller
 
     public function update($codigo, Request $request)
     {
-        $codigo = $codigo;
-        $identificacion = $request->identificacion;
-        $nombres = $request->nombres;
-        $apellidos = $request->apellidos;
-        $fecha_nacimiento = $request->fecha_nacimiento;
-        $estado_paciente = $request->estado_paciente;
-        $direccion = $request->direccion;
-        $telefono = $request->telefono;
-        $correo = $request->correo;
-        $estado_civil = $request->estado_civil;
-        $nombre_conyugue = $request->nombre_conyugue;
-        $apellido_conyugue = $request->apellido_conyugue;
-        $nombre_contacto_emergencia = $request->nombre_contacto_emergencia;
-        $telefono_contacto_emergencia = $request->telefono_contacto_emergencia;
-        $id_genero = $request->id_genero;
-        $id_pais = $request->id_pais;
-        $id_departamento = $request->id_departamento;
-        $id_municipio = $request->id_municipio;
-
         DB::table('pacientes')->where('codigo', $codigo)->update(array
             (
-             'identificacion' => $identificacion,
-             'nombres' => $nombres,
-             'apellidos' => $apellidos,
-             'fecha_nacimiento' => $fecha_nacimiento,
-             'estado_paciente' => $estado_paciente,
-             'direccion' => $direccion,
-             'telefono' => $telefono,
-             'correo' => $correo,
-             'estado_civil' => $estado_civil,
-             'nombre_conyugue' => $nombre_conyugue,
-             'apellido_conyugue' => $apellido_conyugue,
-             'nombre_contacto_emergencia' => $nombre_contacto_emergencia,
-             'telefono_contacto_emergencia' => $telefono_contacto_emergencia,
-             'id_genero' => $id_genero,
-             'id_pais' => $id_pais,
-             'id_departamento' => $id_departamento,
-             'id_municipio' => $id_municipio
+             'identificacion' => $request->identificacion,
+             'nombres' => $request->nombres,
+             'apellidos' => $request->apellidos,
+             'fecha_nacimiento' => $request->fecha_nacimiento,
+             'estado_paciente' => $request->estado_paciente,
+             'direccion' => $request->direccion,
+             'telefono' => $request->telefono,
+             'correo' => $request->correo,
+             'estado_civil' => $request->estado_civil,
+             'nombre_conyugue' => $request->nombre_conyugue,
+             'apellido_conyugue' => $request->apellido_conyugue,
+             'nombre_contacto_emergencia' => $request->nombre_contacto_emergencia,
+             'telefono_contacto_emergencia' => $request->telefono_contacto_emergencia,
+             'id_genero' => $request->id_genero,
+             'id_pais' => $request->id_pais,
+             'id_departamento' => $request->id_departamento,
+             'id_municipio' => $request->id_municipio
             )
         );
 
@@ -148,7 +109,6 @@ class PacienteController extends Controller
 
     public function buscar($param_busqueda)
     {
-        
         $pacientes = DB::select("select * from pacientes where lower(codigo) = ? or lower(identificacion) = ? or lower(nombres) LIKE ? or lower(apellidos) LIKE ?", 
         [strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda)]);
         

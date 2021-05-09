@@ -24,8 +24,7 @@ const Menu = () => {
             <div className="sidebar-menu">
                 <ul className="menu">
                     <li className="sidebar-title">Menu</li>
-
-
+                    
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                             <i className="bi bi-grid-1x2-fill"></i>
@@ -36,11 +35,27 @@ const Menu = () => {
                                 <Link to="/expedientes">Consultar</Link>
                             </li>
                             <li className="submenu-item ">
-                                <Link to="/expedientes/crear">Agregar Pacientes</Link>
+                                <Link to="/expedientes/crear">Agregar expediente</Link>
                             </li>
                         </ul>
                     </li>
 
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                            <i className="bi bi-grid-1x2-fill"></i>
+                            <span>Diagnósticos</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/diagnosticos">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/diagnosticos/crear">Agregar diagnóstico</Link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    
                     <li className="sidebar-title">Forms &amp; Tables</li>
 
                     

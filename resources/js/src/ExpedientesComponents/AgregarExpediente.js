@@ -12,6 +12,8 @@ import API from '../api';
 
 const AgregarExpediente = () => {
 
+    const API_URL = API.API_URL;
+
     const [generos, setGeneros] =useState([]);
     const [paises, setPaises] =useState([]);
     const [municipios, setMunicipios] =useState([]);
@@ -62,7 +64,7 @@ const AgregarExpediente = () => {
             estado_civil, nombre_conyugue, apellido_conyugue, nombre_contacto_emergencia,
             telefono_contacto_emergencia, id_genero, id_pais, id_municipio, id_departamento
          };
-          const response = await fetch("http://localhost:8000/api/expedientes/guardar", {
+          const response = await fetch(`${API_URL}/expedientes/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

@@ -4,8 +4,7 @@ const API_URL = 'http://localhost:8000/api';
 
 export default {
 
-    
-
+    //Expedientes
     pacientes: () =>
     axios.get(`${API_URL}/expedientes`),
 
@@ -17,6 +16,19 @@ export default {
 
     paciente_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/expedientes/${param_busqueda}/buscar`),
+
+    //Diagnósticos
+    diagnosticos: () =>
+    axios.get(`${API_URL}/diagnosticos`),
+
+    datos_formulario_diagnostico: () =>
+    axios.get(`${API_URL}/diagnosticos/crear`),
+
+    diagnostico_editar: (codigo) =>
+    axios.get(`${API_URL}/diagnosticos/${codigo}/editar`),
+
+    diagnostico_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/diagnosticos/${param_busqueda}/buscar`),
 
     API_URL,
 

@@ -10,21 +10,17 @@ import Footer from '../LayoutComponents/Footer';
 
 import API from '../api';
 
-const ConsultarExpediente = () => {
-    
-    
-    const [pacientes, setPacientes] =useState([]);
+const ConsultarDiagnostico = () => {
+
+    const [diagnosticos, setDiagnosticos] =useState([]);
     const [param_busqueda, setParam_busqueda] = useState('');
    
-
-
     useEffect(() => {
-         API.pacientes().then(res => {
+         API.diagnosticos().then(res => {
             const result = res.data;
-            setPacientes(result.data);
+            setDiagnosticos(result.data);
         })
       }, []);
-
 
     return(
         <div id="app">
@@ -37,16 +33,16 @@ const ConsultarExpediente = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Expedientes</h3>
+                                <h3>Diagnósticos</h3>
                                 
-                                <p className="text-subtitle text-muted">Consulta de expedientes</p>
+                                <p className="text-subtitle text-muted">Consulta de diagnósticos</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/expedientes">Consulta expedientes</Link>
+                                        <Link to="/diagnosticos">Consulta diagnósticos</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -58,12 +54,12 @@ const ConsultarExpediente = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/expedientes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                                <Link to="/diagnosticos/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
                             </div>
                             
                             <br />
                             <div className="card-body">
-                            <h4>Buscar expediente</h4>
+                            <h4>Buscar diagnóstico</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
                            
                     
@@ -75,43 +71,37 @@ const ConsultarExpediente = () => {
                                             <span className="input-group-text" id="basic-addon1"><i
                                                     className="bi bi-search"></i></span>
                                         <input type="text" id="last-name-column" className="form-control"
-                                                    placeholder="Código,nombre del diagnóstico" name="lname-column" 
+                                                    placeholder="Código, identificacion, nombres o apellidos del paciente" name="lname-column" 
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />
-                                            <Link to={`expedientes/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
+                                            <Link to={`diagnosticos/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
                                         </div>
                                     </div>
                                 </div>
-                               
                             </form>
+
                             <br /><br />
                                 <table className="table table-striped" id="table1">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Fecha nacimiento</th>
-                                            <th>Estado paciente</th>
+                                            <th>Diagnóstico</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
-                                        
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {pacientes.map((paciente) => 
+                                    {diagnosticos.map((diagnostico) => 
                                           <tr>
-                                            <td>{paciente.codigo}</td>
-                                            <td>{paciente.nombres}</td>
-                                            <td>{paciente.apellidos}</td>
-                                            <td>{paciente.fecha_nacimiento}</td>
-                                            <td>{paciente.estado_paciente}</td>
+                                            <td>{diagnostico.codigo_diagnostico}</td>
+                                            <td>{diagnostico.nombre_diagnostico}</td>
+                                           
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>
@@ -130,4 +120,4 @@ const ConsultarExpediente = () => {
     );
 }
 
-export default ConsultarExpediente;
+export default ConsultarDiagnostico;

@@ -12,16 +12,15 @@ import Footer from '../LayoutComponents/Footer';
 import API from '../api';
 
 
-const BuscarPaciente = () => {
+const BuscarDiagnostico = () => {
     
     const { param_busqueda } = useParams();
-    const [pacientes, setPacientes] =useState([]);
+    const [diagnosticos, setDiagnosticos] =useState([]);
 
     useEffect(() => {
-        API.paciente_buscar(param_busqueda).then(res => {
+        API.diagnostico_buscar(param_busqueda).then(res => {
            const result = res.data;
-           setPacientes(result.data);
-           
+           setDiagnosticos(result.data);  
        })
      }, []);
 
@@ -36,7 +35,7 @@ const BuscarPaciente = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Expedientes</h3>
+                                <h3>Diagnósticos</h3>
                                
                                 <p className="text-subtitle text-muted">Búsqueda</p>
                             </div>
@@ -45,7 +44,7 @@ const BuscarPaciente = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/">Consulta expedientes</Link>
+                                        <Link to="/diagnosticos">Consulta diagnósticos</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -57,47 +56,39 @@ const BuscarPaciente = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/expedientes" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
+                                <Link to="/diagnosticos" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
                             </div>
                             
                             <br />
                             <div className="card-body">
                             <h4>Resultados </h4>
-                            <p>Expedientes encontrados</p>
+                            <p>Diagnósticos encontrados</p>
                             
 
-                                <table className="table table-striped">
+                            <table className="table table-striped" id="table1">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Fecha de nacimiento [Año-Med-Día]</th>
+                                            <th>Diagnóstico</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
-                                        
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                    {pacientes.map((paciente) => 
+                                    {diagnosticos.map((diagnostico) => 
                                           <tr>
-                                            <td>{paciente.codigo}</td>
-                                            <td>{paciente.nombres}</td>
-                                            <td>{paciente.apellidos}</td>
-                                            <td>{paciente.fecha_nacimiento}</td>
+                                            <td>{diagnostico.codigo_diagnostico}</td>
+                                            <td>{diagnostico.nombre_diagnostico}</td>
+                                           
                                             <td>
-                                            <Link to="editar"className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
                                             <Link to="ver" className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>
-
-                                    
                                     )}
-                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -112,4 +103,4 @@ const BuscarPaciente = () => {
     );
 }
 
-export default BuscarPaciente;
+export default BuscarDiagnostico;

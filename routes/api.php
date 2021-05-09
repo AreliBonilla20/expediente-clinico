@@ -22,3 +22,13 @@ Route::get('/expedientes/{codigo}/editar', 'PacienteController@edit');
 Route::put('/expedientes/{codigo}/actualizar', 'PacienteController@update');
 Route::get('/expedientes/{param_busqueda}/buscar', 'PacienteController@buscar');
 
+
+//Rutas para diagnosticos
+Route::get('/diagnosticos', 'DiagnosticoController@index');
+Route::get('/diagnosticos/crear', 'DiagnosticoController@create');
+Route::post('/diagnosticos/guardar', 'DiagnosticoController@store');
+Route::get('/diagnosticos/{codigo}/ver', 'DiagnosticoController@show');
+Route::get('/diagnosticos/{codigo}/editar', 'DiagnosticoController@edit');
+Route::put('/diagnosticos/{codigo}/actualizar', 'DiagnosticoController@update');
+Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@buscar');
+
