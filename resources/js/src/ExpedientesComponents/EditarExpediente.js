@@ -21,6 +21,7 @@ const EditarExpediente = () => {
 
     const { codigo } = useParams();
     const API_URL = API.API_URL;
+    const labels = document.getElementsByTagName('label');
 
     const [generos, setGeneros] =useState([]);
     const [paises, setPaises] =useState([]);
@@ -29,7 +30,6 @@ const EditarExpediente = () => {
 
     const [opcion_pais, setOpcion_pais] = useState();
     const [opcion_depto, setOpcion_depto] = useState();
-
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [identificacion, setIdentificacion] = useState('');
@@ -43,7 +43,7 @@ const EditarExpediente = () => {
     const [nombre_contacto_emergencia, setNombre_contacto_emergencia] = useState('');
     const [telefono_contacto_emergencia, setTelefono_contacto_emergencia] = useState('');
     const [estado_paciente, setEstado_paciente] = useState('');
-    const [id_genero, setId_genero] = useState('');
+    const [id_genero, setId_genero] = useState('0');
     const [id_pais, setId_pais] = useState('');
     const [id_municipio, setId_municipio] = useState('');
     const [id_departamento, setId_departamento] = useState('');
@@ -74,6 +74,12 @@ const EditarExpediente = () => {
            setOpcion_pais(paciente.id_pais);
            setOpcion_depto(paciente.id_departamento);
 
+           for(let i=0; i<labels.length; i++){
+            labels[i].click();
+            }
+
+            labels[0].click();
+
        })
 
        API.datos_formulario_paciente().then(res => {
@@ -82,16 +88,21 @@ const EditarExpediente = () => {
             setPaises(result.paises);
             setDepartamentos(result.departamentos);
             setMunicipios(result.municipios);
-        })
-     }, []);
 
-     
+            for(let i=0; i<labels.length; i++){
+                labels[i].click();
+            }
+
+            labels[0].click();
+        })
+
+     }, []);
 
       const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
       });
 
-      
+     
      const editarPaciente = async (data) => {
        
         try {
@@ -112,8 +123,6 @@ const EditarExpediente = () => {
         }
       };
     
-
-
     return(
          <div id="app">
         <Menu />
@@ -127,7 +136,6 @@ const EditarExpediente = () => {
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Editar expediente {codigo}</h3>
                                 <h5>Paciente: {nombres} {apellidos}</h5>
-                             
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -176,7 +184,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.identificacion?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.identificacion?.message} </small>
+                                                           
                                                         </div>
                                                     </div>
                                            
@@ -194,7 +204,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            
                                                             <small className="text-danger"> {errors.nombres?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div className="col-6">
@@ -211,7 +223,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.apellidos?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.apellidos?.message} </small>
+                                                           
                                                         </div>
                                                     </div>
 
@@ -229,7 +243,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-calendar"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.fecha_nacimiento?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.fecha_nacimiento?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -248,7 +264,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.estado_paciente?.message} </small>
+                                                         
+                                                                 <small className="text-danger"> {errors.estado_paciente?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -257,18 +275,21 @@ const EditarExpediente = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_genero">Género (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="choices form-select" 
                                                                 name="id_genero" 
                                                                 id="id_genero" 
                                                                 {...register('id_genero')}
                                                                 value={id_genero}
-                                                                onChange={e => setId_genero(e.target.value)} >
+                                                                onChange={e => setId_genero(e.target.value)}>
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
                                                                 <option key={genero.id_genero} value={genero.id_genero}>{genero.genero}</option>
                                                                 ))}
                                                             </select>
-                                                            <small className="text-danger"> {errors.id_genero?.message} </small>
+                                                            {!id_genero &&
+                                                                <small className="text-danger"> {errors.id_genero?.message} </small>
+                                                            }
+ 
                                                         </div>
                                                     </div>
 
@@ -287,7 +308,9 @@ const EditarExpediente = () => {
                                                                 <option value="Casado/a">Casado/a</option>
                                                                 <option value="Soltero/a">Soltero/a</option>
                                                             </select>
-                                                            <small className="text-danger"> {errors.estado_civil?.message} </small>
+                                                            
+                                                                 <small className="text-danger"> {errors.estado_civil?.message} </small>
+                                                            
                                                         </div>
                                                        
                                                     </div>
@@ -306,7 +329,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.nombre_conyugue?.message} </small>
+                                                            
+                                                                 <small className="text-danger"> {errors.nombre_conyugue?.message} </small>
+                                                          
                                                         </div>      
                                                     </div>
 
@@ -324,7 +349,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.apellido_conyugue?.message} </small>
+                                                            
+                                                                 <small className="text-danger"> {errors.apellido_conyugue?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -342,7 +369,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.telefono?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.telefono?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -361,7 +390,9 @@ const EditarExpediente = () => {
                                                                 <i className="bi bi-envelope"></i>
                                                             </div>
                                                         </div>
-                                                        <small className="text-danger"> {errors.correo?.message} </small>
+                                                       
+                                                                 <small className="text-danger"> {errors.correo?.message} </small>
+                                                        
                                                     </div>
                                                     </div>
 
@@ -381,7 +412,9 @@ const EditarExpediente = () => {
                                                                 <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}
                                                             </select>
-                                                            <small className="text-danger"> {errors.id_pais?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.id_pais?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -406,7 +439,9 @@ const EditarExpediente = () => {
                                                                         }
                                                                     })}
                                                                 </select>
-                                                                <small className="text-danger"> {errors.id_departamento?.message} </small>
+                                                                
+                                                                 <small className="text-danger"> {errors.id_departamento?.message} </small>
+                                                                
                                                         </div>
                                                     </div>
 
@@ -431,7 +466,9 @@ const EditarExpediente = () => {
                                                                     })}
                                                                 
                                                                 </select>
-                                                                <small className="text-danger"> {errors.id_municipio?.message} </small>
+                                                            
+                                                                 <small className="text-danger"> {errors.id_municipio?.message} </small>
+                                                                
                                                         </div>
                                                     </div>
 
@@ -449,7 +486,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.direccion?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.direccion?.message} </small>
+                                                                
                                                         </div>
                                                     </div>
                                                   
@@ -471,7 +510,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.nombre_contacto_emergencia?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.nombre_contacto_emergencia?.message} </small>
+                                                                
                                                         </div>
                                                     </div>
 
@@ -489,7 +530,9 @@ const EditarExpediente = () => {
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.telefono_contacto_emergencia?.message} </small>
+                                                           
+                                                                 <small className="text-danger"> {errors.telefono_contacto_emergencia?.message} </small>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div className="col-12 d-flex justify-content-end">

@@ -16,7 +16,6 @@ class PacienteController extends Controller
     public function index()
     {  
        return PacienteResource::collection(Paciente::orderBy('created_at', 'desc')->paginate(15));
-      
     }
 
 
@@ -121,9 +120,15 @@ class PacienteController extends Controller
     }
 
     public function buscar($param_busqueda)
-    {
-        $pacientes = DB::select("select * from pacientes where lower(codigo) = ? or lower(identificacion) = ? or lower(nombres) LIKE ? or lower(apellidos) LIKE ?", 
-        [strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda), strtolower($param_busqueda)]);
+    {   
+        $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
+        $codigo = '%'.$param_busqueda.'%';
+        $identificacion = '%'.$param_busqueda.'%';
+        $nombres = '%'.$param_busqueda.'%';
+        $apellidos = '%'.$param_busqueda.'%';
+
+        $pacientes = DB::select('select * from pacientes where UNACCENT(lower(codigo)) LIKE ? or UNACCENT(lower(identificacion)) LIKE ? or UNACCENT(lower(nombres)) LIKE ? or UNACCENT(lower(apellidos)) LIKE ?', 
+        [strtolower($codigo), strtolower($identificacion), strtolower($nombres), strtolower($apellidos)]);
         
         return PacienteResource::collection($pacientes);
 

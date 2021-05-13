@@ -5,7 +5,7 @@ const schema = yup.object().shape({
     identificacion: yup
     .string()
     .max(30, "El máximo de caracteres es 30")
-    .notRequired(),
+    .nullable(),
 
     nombres: yup
     .string()
@@ -41,6 +41,7 @@ const schema = yup.object().shape({
 
     correo: yup
     .string()
+    .nullable()
     .email("La dirección de correo debe ser válida")
     .max(150, "El máximo de caracteres es 150"),
     
@@ -51,11 +52,13 @@ const schema = yup.object().shape({
 
     nombre_conyugue: yup
     .string()
-    .max(150, "El máximo de caracteres es 150"),
+    .max(150, "El máximo de caracteres es 150")
+    .nullable(),
     
     apellido_conyugue: yup
     .string()
-    .max(150, "El máximo de caracteres es 150"),
+    .max(150, "El máximo de caracteres es 150")
+    .nullable(),
     
     nombre_contacto_emergencia: yup
     .string()
@@ -66,8 +69,7 @@ const schema = yup.object().shape({
     telefono_contacto_emergencia: yup
     .string()
     .required("El campo teléfono del contacto de emergencia es obligatorio")
-    .max(25, "El máximo de caracteres es 25")
-    .required("El campo teléfono contacto de emergencia es obligatorio"),
+    .max(25, "El máximo de caracteres es 25"),
 
     id_genero: yup
     .string()

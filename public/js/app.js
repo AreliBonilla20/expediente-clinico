@@ -82675,7 +82675,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
                 descripcion_diagnostico: descripcion_diagnostico
               };
               _context.next = 5;
-              return fetch("".concat(API_URL, "/diagnosticos/crear"), {
+              return fetch("".concat(API_URL, "/diagnosticos/guardar"), {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
@@ -84526,6 +84526,7 @@ var EditarExpediente = function EditarExpediente() {
       codigo = _useParams.codigo;
 
   var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -84622,7 +84623,7 @@ var EditarExpediente = function EditarExpediente() {
       estado_paciente = _useState38[0],
       setEstado_paciente = _useState38[1];
 
-  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('0'),
       _useState40 = _slicedToArray(_useState39, 2),
       id_genero = _useState40[0],
       setId_genero = _useState40[1];
@@ -84664,6 +84665,12 @@ var EditarExpediente = function EditarExpediente() {
       setId_departamento(paciente.id_departamento);
       setOpcion_pais(paciente.id_pais);
       setOpcion_depto(paciente.id_departamento);
+
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].click();
+      }
+
+      labels[0].click();
     });
     _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_paciente().then(function (res) {
       var result = res.data;
@@ -84671,6 +84678,12 @@ var EditarExpediente = function EditarExpediente() {
       setPaises(result.paises);
       setDepartamentos(result.departamentos);
       setMunicipios(result.municipios);
+
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].click();
+      }
+
+      labels[0].click();
     });
   }, []);
 
@@ -84940,7 +84953,7 @@ var EditarExpediente = function EditarExpediente() {
       key: genero.id_genero,
       value: genero.id_genero
     }, genero.genero);
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+  })), !id_genero && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$id_genero = errors.id_genero) === null || _errors$id_genero === void 0 ? void 0 : _errors$id_genero.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6-12 mb-4"
@@ -85969,19 +85982,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
 
 var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
-  identificacion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(30, "El máximo de caracteres es 30").notRequired(),
+  identificacion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(30, "El máximo de caracteres es 30").nullable(),
   nombres: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombres solo debe contener letras'),
   apellidos: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo apellidos es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo apellidos solo debe contener letras'),
   fecha_nacimiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo fecha de nacimiento es obligatorio"),
   estado_paciente: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo estado paciente es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo estado paciente solo debe contener letras'),
   direccion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250").required("El campo direccion es obligatorio"),
   telefono: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(25, "El máximo de caracteres es 25").required("El campo telefono es obligatorio"),
-  correo: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150"),
+  correo: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().nullable().email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150"),
   estado_civil: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(30, "El máximo de caracteres es 30").required("El campo estado civil es obligatorio"),
-  nombre_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150"),
-  apellido_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150"),
+  nombre_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150").nullable(),
+  apellido_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150").nullable(),
   nombre_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo contacto de emergencia es obligatorio").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombre contacto de emergencia solo debe contener letras').max(150, "El máximo de caracteres es 150"),
-  telefono_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo teléfono del contacto de emergencia es obligatorio").max(25, "El máximo de caracteres es 25").required("El campo teléfono contacto de emergencia es obligatorio"),
+  telefono_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo teléfono del contacto de emergencia es obligatorio").max(25, "El máximo de caracteres es 25"),
   id_genero: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo genéro es obligatorio"),
   id_pais: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo país es obligatorio"),
   id_departamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo departamento/estado es obligatorio"),

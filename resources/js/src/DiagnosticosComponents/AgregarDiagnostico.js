@@ -41,7 +41,7 @@ const AgregarDiagnostico = () => {
         e.preventDefault();
         try {
           const body = { codigo_diagnostico, nombre_diagnostico, id_tipo_diagnostico, descripcion_diagnostico};
-          const response = await fetch(`${API_URL}/diagnosticos/crear`, {
+          const response = await fetch(`${API_URL}/diagnosticos/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
