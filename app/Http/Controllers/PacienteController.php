@@ -71,6 +71,19 @@ class PacienteController extends Controller
         return response()->json('Expediente creado!');    
     }
 
+    public function show($codigo)
+    {   
+    
+        $paciente = DB::select("select * from pacientes 
+                                inner join generos on generos.id_genero=pacientes.id_genero
+                                inner join paises on paises.id_pais=pacientes.id_pais 
+                                inner join departamentos on departamentos.id_departamento=pacientes.id_departamento
+                                inner join municipios on municipios.id_municipio=pacientes.id_municipio 
+                                where codigo= ?", [$codigo]);
+
+        return response()->json($paciente[0]);    
+    }
+
 
     public function edit($codigo)
     {

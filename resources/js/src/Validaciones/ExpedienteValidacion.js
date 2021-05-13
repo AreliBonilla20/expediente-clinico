@@ -1,85 +1,91 @@
 import * as yup from "yup";
 
-const schemaAgregarExpediente = yup.object().shape({
+const schema = yup.object().shape({
 
     identificacion: yup
-    .string("El campo identificación debe ser una cadena de texto")
-    .max(30, "El máximo de caracteres es 30"),
+    .string()
+    .max(30, "El máximo de caracteres es 30")
+    .notRequired(),
 
     nombres: yup
-    .string("El campo nombres debe ser una cadena de texto")
+    .string()
+    .required("El campo nombre es obligatorio")
     .max(150, "El máximo de caracteres es 150")
-    .required("El campo nombre es obligatorio"),
-
+    .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombres solo debe contener letras'),
+    
     apellidos: yup
-    .string("El campo apellidos debe ser una cadena de texto")
+    .string()
+    .required("El campo apellidos es obligatorio")
     .max(150, "El máximo de caracteres es 150")
-    .required("El campo apellidos es obligatorio"),
-
+    .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo apellidos solo debe contener letras'),
+    
     fecha_nacimiento: yup
-    .date("El campo fecha de nacimiento debe ser una fecha")
+    .string()
     .required("El campo fecha de nacimiento es obligatorio"),
 
     estado_paciente: yup
-    .string("El campo estado paciente debe ser una cadena de texto")
+    .string()
+    .required("El campo estado paciente es obligatorio")
     .max(150, "El máximo de caracteres es 150")
-    .required("El campo estado paciente es obligatorio"),
-
+    .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo estado paciente solo debe contener letras'),
+    
     direccion: yup
-    .string("El campo direccion debe ser una cadena de texto")
+    .string()
     .max(250, "El máximo de caracteres es 250")
     .required("El campo direccion es obligatorio"),
 
     telefono: yup
-    .string("El campo telefono debe ser una cadena de texto")
+    .string()
     .max(25, "El máximo de caracteres es 25")
     .required("El campo telefono es obligatorio"),
 
     correo: yup
-    .string("El campo correo debe ser una cadena de texto")
+    .string()
     .email("La dirección de correo debe ser válida")
     .max(150, "El máximo de caracteres es 150"),
     
     estado_civil: yup
-    .string("El campo estado civil debe ser una cadena de texto")
+    .string()
     .max(30, "El máximo de caracteres es 30")
     .required("El campo estado civil es obligatorio"),
 
     nombre_conyugue: yup
-    .string("El campo nombre conyugue debe ser una cadena de texto")
+    .string()
     .max(150, "El máximo de caracteres es 150"),
-
+    
     apellido_conyugue: yup
-    .string("El campo apellido conyugue debe ser una cadena de texto")
+    .string()
     .max(150, "El máximo de caracteres es 150"),
-
+    
     nombre_contacto_emergencia: yup
-    .string("El campo nombre contacto de emergencia debe ser una cadena de texto")
-    .max(150, "El máximo de caracteres es 150")
-    .required("El campo contacto de emergencia es obligatorio"),
-
+    .string()
+    .required("El campo contacto de emergencia es obligatorio")
+    .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombre contacto de emergencia solo debe contener letras')
+    .max(150, "El máximo de caracteres es 150"),
+    
     telefono_contacto_emergencia: yup
-    .string("El campo teléfono contacto de emergencia debe ser una cadena de texto")
+    .string()
+    .required("El campo teléfono del contacto de emergencia es obligatorio")
     .max(25, "El máximo de caracteres es 25")
     .required("El campo teléfono contacto de emergencia es obligatorio"),
 
     id_genero: yup
-    .number()
-    .required("El campo género es obligatorio"),
+    .string()
+    .required("El campo genéro es obligatorio"),
 
     id_pais: yup
-    .number()
-    .required("El campo pais es obligatorio"),
+    .string()
+    .required("El campo país es obligatorio"),
 
     id_departamento: yup
-    .number()
+    .string()
     .required("El campo departamento/estado es obligatorio"),
 
     id_municipio: yup
-    .number()
-    .required("El campo municipio/estado es obligatorio"),
+    .string()
+    .required("El campo municipio/ciudad es obligatorio"),
     
   });
 
 
-export default schemaAgregarExpediente;
+export default schema;

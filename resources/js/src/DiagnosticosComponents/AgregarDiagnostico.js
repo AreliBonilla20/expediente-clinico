@@ -7,10 +7,11 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
-
 import API from '../api';
 
 const AgregarDiagnostico = () => {
+    
+    const API_URL = API.API_URL;
 
     //Datos para el formulario
     const [tipos_diagnosticos, setTipos_diagnosticos] = useState([]);
@@ -31,7 +32,7 @@ const AgregarDiagnostico = () => {
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+       // resolver: yupResolver(schema),
       });
 
 
@@ -109,7 +110,7 @@ const AgregarDiagnostico = () => {
                                                                     onChange={e => setCodigo_diagnostico(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i class="bi bi-clipboard-check"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_diagnostico?.message} </small>
@@ -127,7 +128,7 @@ const AgregarDiagnostico = () => {
                                                                     value={nombre_diagnostico}
                                                                     onChange={e => setNombre_diagnostico(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i class="bi bi-clipboard-check"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.nombre_diagnostico?.message} </small>
@@ -146,7 +147,7 @@ const AgregarDiagnostico = () => {
                                                                 onChange={e => setId_tipo_diagnostico(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {tipos_diagnosticos.map((tipo_diagnostico) => (
-                                                                <option value={tipo_diagnostico.id_tipo_diagnostico}>{tipo_diagnostico.tipo_diagnostico}</option>
+                                                                <option  value={tipo_diagnostico.id_tipo_diagnostico}>{tipo_diagnostico.tipo_diagnostico}</option>
                                                                 ))}
                                                             </select>
                                                             <small className="text-danger"> {errors.id_tipo_diagnostico?.message} </small>
@@ -165,7 +166,7 @@ const AgregarDiagnostico = () => {
                                                                     value={descripcion_diagnostico}
                                                                     onChange={e => setDescripcion_diagnostico(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i class="bi bi-clipboard-check"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -4,82 +4,74 @@ namespace App\Http\Controllers;
 
 use App\AntecedentePaciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AntecedentePacienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+   
+    public function store(Request $request, $codigo)
     {
-        //
+        DB::table('antecendentes_pacientes')->insert(
+            [
+             'codigo_paciente' => $codigo,
+             'historial_enfermedades' => $request->historial_enfermedades,
+             'nombre_padre' => $request->nombre_padre,
+             'apellidos_padre' => $request->apellidos_padre,
+             'fecha_nacimiento_padre' => $request->fecha_nacimiento_padre,
+             'direccion_padre' => $request->direccion_padre,
+             'padecimientos_padre' => $request->padecimientos_padre,
+             'nombre_madre' => $request->nombre_madre,
+             'apellidos_madre' => $request->apellidos_madre,
+             'fecha_nacimiento_madre' => $request->fecha_nacimiento_madre,
+             'direccion_madre' => $request->direccion_madre,
+             'padecimientos_madre' => $request->padecimientos_madre,
+             'padecimientos_familiares' => $request->padecimientos_familiares
+             ]
+        );
+        
+        return response()->json('Antecedentes creados!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   
+    public function show($codigo)
     {
-        //
+        $antecedente_paciente = DB::select('select * from antecendentes_pacientes where codigo_paciente = ?', [$codigo]);
+
+        return response()->json($antecedente_paciente[0]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($codigo)
     {
-        //
+        $antecedente_paciente = DB::select('select * from antecendentes_pacientes where codigo_paciente = ?', [$codigo]);
+
+        return response()->json($antecedente_paciente[0]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\AntecedentePaciente  $antecedentePaciente
-     * @return \Illuminate\Http\Response
-     */
-    public function show(AntecedentePaciente $antecedentePaciente)
+   
+    public function update(Request $request, $codigo)
     {
-        //
+        DB::table('antecendentes_pacientes')->where('codigo_paciente', $codigo)->update(array
+        (
+             'historial_enfermedades' => $request->historial_enfermedades,
+             'nombre_padre' => $request->nombre_padre,
+             'apellidos_padre' => $request->apellidos_padre,
+             'fecha_nacimiento_padre' => $request->fecha_nacimiento_padre,
+             'direccion_padre' => $request->direccion_padre,
+             'padecimientos_padre' => $request->padecimientos_padre,
+             'nombre_madre' => $request->nombre_madre,
+             'apellidos_madre' => $request->apellidos_madre,
+             'fecha_nacimiento_madre' => $request->fecha_nacimiento_madre,
+             'direccion_madre' => $request->direccion_madre,
+             'padecimientos_madre' => $request->padecimientos_madre,
+             'padecimientos_familiares' => $request->padecimientos_familiares
+        )
+       );
+
+       return response()->json('Antecedentes actualizados!');    
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\AntecedentePaciente  $antecedentePaciente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(AntecedentePaciente $antecedentePaciente)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AntecedentePaciente  $antecedentePaciente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, AntecedentePaciente $antecedentePaciente)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\AntecedentePaciente  $antecedentePaciente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(AntecedentePaciente $antecedentePaciente)
-    {
-        //
-    }
+    
+    
 }

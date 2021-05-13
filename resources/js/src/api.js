@@ -14,8 +14,20 @@ export default {
     paciente_editar: (codigo) =>
     axios.get(`${API_URL}/expedientes/${codigo}/editar`),
 
+    paciente_ver: (codigo) =>
+    axios.get(`${API_URL}/expedientes/${codigo}/ver`),
+
     paciente_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/expedientes/${param_busqueda}/buscar`),
+
+    //Antecedentes
+
+    antecedente_editar: (codigo) =>
+    axios.get(`${API_URL}/antecedentes/${codigo}/editar`),
+
+    antecedente_ver: (codigo) =>
+    axios.get(`${API_URL}/antecedentes/${codigo}/ver`),
+
 
     //Diagnósticos
     diagnosticos: () =>

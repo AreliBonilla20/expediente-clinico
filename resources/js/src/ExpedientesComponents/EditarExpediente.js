@@ -5,11 +5,14 @@ import {
     Link
 } from 'react-router-dom';
 
-import ReactDOM from 'react-dom'; 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
+
+import schema from '../Validaciones/ExpedienteValidacion';
 
 import API from '../api';
 
@@ -46,6 +49,7 @@ const EditarExpediente = () => {
     const [id_departamento, setId_departamento] = useState('');
 
     useEffect(() => {
+        
         API.paciente_editar(codigo).then(res => {
            const paciente = res.data;
 
@@ -69,6 +73,7 @@ const EditarExpediente = () => {
 
            setOpcion_pais(paciente.id_pais);
            setOpcion_depto(paciente.id_departamento);
+
        })
 
        API.datos_formulario_paciente().then(res => {
@@ -80,8 +85,15 @@ const EditarExpediente = () => {
         })
      }, []);
 
-     const onSubmitForm = async e => {
-        e.preventDefault();
+     
+
+      const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+      });
+
+      
+     const editarPaciente = async (data) => {
+       
         try {
           const body = { nombres, apellidos, fecha_nacimiento, identificacion, direccion, telefono, correo, estado_paciente,
             estado_civil, nombre_conyugue, apellido_conyugue, nombre_contacto_emergencia,
@@ -143,7 +155,7 @@ const EditarExpediente = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                    <form className="form form-vertical" onSubmit={onSubmitForm}>
+                                    <form className="form form-vertical" onSubmit={handleSubmit(editarPaciente)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -154,87 +166,109 @@ const EditarExpediente = () => {
                                                             <label htmlFor="identificacion">Identificación</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
+                                                                    name="identificacion"
                                                                     id="identificacion"
+                                                                    {...register('identificacion')}
                                                                     value={identificacion}
-                                                                    onChange={e => setIdentificacion(e.target.value)} />
+                                                                    onChange={e => setIdentificacion(e.target.value)} 
+                                                                     />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.identificacion?.message} </small>
                                                         </div>
                                                     </div>
                                            
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="first-name-icon">Nombre (*)</label>
+                                                            <label htmlFor="nombres">Nombres (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    id="first-name-icon"
+                                                                    name="nombres"
+                                                                    id="nombres"
+                                                                    {...register('nombres')}
                                                                     value={nombres}
                                                                     onChange={e => setNombres(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.nombres?.message} </small>
                                                         </div>
                                                     </div>
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="first-name-icon">Apellidos (*)</label>
+                                                            <label htmlFor="apellidos">Apellidos (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"                    
-                                                                    id="first-name-icon"
+                                                                <input type="text" className="form-control" 
+                                                                    name="apellidos"                   
+                                                                    id="apellidos"
+                                                                    {...register('apellidos')}
                                                                     value={apellidos}
                                                                     onChange={e => setApellidos(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.apellidos?.message} </small>
                                                         </div>
                                                     </div>
-
-                                                    
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="fecha_nacimiento">Fecha de nacimiento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="date" className="form-control"
+                                                                    name="fecha_nacimiento"
                                                                     id="fecha_nacimiento"
+                                                                    {...register('fecha_nacimiento')}
                                                                     value={fecha_nacimiento}
                                                                     onChange={e => setFecha_nacimiento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-calendar"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.fecha_nacimiento?.message} </small>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="estado_paciente">Estado del paciente (*)</label>
+                                                            <label htmlFor="estado_paciente">Estado paciente</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
+                                                                    name="estado_paciente"
                                                                     id="estado_paciente"
+                                                                    {...register('estado_paciente')}
                                                                     value={estado_paciente}
-                                                                    onChange={e => setEstado_paciente(e.target.value)} />
+                                                                    onChange={e => setEstado_paciente(e.target.value)} 
+                                                                     />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.estado_paciente?.message} </small>
                                                         </div>
                                                     </div>
 
+
+                                                
                                                     <div className="col-md-12 mb-4">
-                                                    <label htmlFor="genero">Género (*)</label>
+                                                    <label htmlFor="id_genero">Género (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" id="genero" value={id_genero}
-                                                            onChange={e => setId_genero(e.target.value)} required>
+                                                            <select className="choices form-select"
+                                                                name="id_genero" 
+                                                                id="id_genero" 
+                                                                {...register('id_genero')}
+                                                                value={id_genero}
+                                                                onChange={e => setId_genero(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
-                                                                <option value={genero.id_genero}>{genero.genero}</option>
+                                                                <option key={genero.id_genero} value={genero.id_genero}>{genero.genero}</option>
                                                                 ))}
                                                             </select>
+                                                            <small className="text-danger"> {errors.id_genero?.message} </small>
                                                         </div>
                                                     </div>
 
@@ -242,14 +276,20 @@ const EditarExpediente = () => {
                                                     <div className="col-6-12 mb-4">
                                                     <label htmlFor="estado_civil">Estado civil (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" id="estado_civil" value={estado_civil}
-                                                            onChange={e => setEstado_civil(e.target.value)} >
+                                                                <select className="choices form-select" 
+                                                                name="estado_civil" 
+                                                                id="estado_civil" 
+                                                                {...register('estado_civil')}
+                                                                value={estado_civil}
+                                                                onChange={e => setEstado_civil(e.target.value)} >
                                                             
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 <option value="Casado/a">Casado/a</option>
                                                                 <option value="Soltero/a">Soltero/a</option>
                                                             </select>
+                                                            <small className="text-danger"> {errors.estado_civil?.message} </small>
                                                         </div>
+                                                       
                                                     </div>
 
                                                     <div className="col-12">
@@ -257,117 +297,141 @@ const EditarExpediente = () => {
                                                             <label htmlFor="nombre_conyugue">Nombre conyugue</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    
+                                                                    name="nombre_conyugue" 
+                                                                    id="nombre_conyugue" 
+                                                                    {...register('nombre_conyugue')}
                                                                     value={nombre_conyugue}
                                                                     onChange={e => setNombre_conyugue(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                            <small className="text-danger"> {errors.nombre_conyugue?.message} </small>
+                                                        </div>      
                                                     </div>
+
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="apellidos_conyugue">Apellidos conyugue</label>
+                                                            <label htmlFor="apellido_conyugue">Apellidos conyugue</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                 
+                                                                    name="apellido_conyugue" 
+                                                                    id="apellido_conyugue" 
+                                                                    {...register('apellido_conyugue')}
                                                                     value={apellido_conyugue}
                                                                     onChange={e => setApellido_conyugue(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.apellido_conyugue?.message} </small>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="mobile-id-icon">Teléfono (*)</label>
+                                                            <label htmlFor="telefono">Teléfono (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                   id="mobile-id-icon" 
+                                                                    name="telefono" 
+                                                                    id="telefono" 
+                                                                    {...register('telefono')}
                                                                     value={telefono}
                                                                     onChange={e => setTelefono(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.telefono?.message} </small>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-12">
 
                                                     <div className="form-group has-icon-left">
-                                                        <label htmlFor="email-id-icon">Correo electrónico </label>
+                                                        <label htmlFor="correo">Correo electrónico </label>
                                                         <div className="position-relative">
                                                             <input type="text" className="form-control"
-                                                                id="email-id-icon"
+                                                                name="correo" 
+                                                                id="correo" 
+                                                                {...register('correo')}
                                                                 value={correo}
                                                                 onChange={e => setCorreo(e.target.value)} />
                                                             <div className="form-control-icon">
                                                                 <i className="bi bi-envelope"></i>
                                                             </div>
                                                         </div>
+                                                        <small className="text-danger"> {errors.correo?.message} </small>
                                                     </div>
                                                     </div>
-
 
                                                     <div className="col-md-4 mb-4">
                                                    
-                                                    <label htmlFor="pais">País (*)</label>
+                                                    <label htmlFor="id_pais">País (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" id="pais" value={id_pais}
-                                                            onChange={e => setId_pais(e.target.value)} 
-                                                            onClick={e => setOpcion_pais(e.target.value)} >
-                                                                <option value={-1}>--Seleccione una opción--</option>
+                                                            <select className="choices form-select" 
+                                                                name="id_pais" 
+                                                                id="id_pais" 
+                                                                {...register('id_pais')}
+                                                                value={id_pais}
+                                                                onChange={e => setId_pais(e.target.value)} 
+                                                                onClick={e => setOpcion_pais(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
                                                                 <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_pais?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-4 mb-4">
+                                                    <label htmlFor="id_departamento">Departamento/Estado (*)</label>
+                                                        <div className="form-group">
+                                                                <select className="choices form-select" 
+                                                                name="id_departamento" 
+                                                                id="id_departamento" 
+                                                                value={id_departamento}
+                                                                {...register('id_departamento')}
+                                                                onChange={e => setId_departamento(e.target.value)} 
+                                                                onClick={e => setOpcion_depto(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                    {departamentos.map((departamento) => {
+                                                                        if(departamento.id_pais == opcion_pais){
+                                                                            return (
+                                                                            <option key={departamento.id_departamento} 
+                                                                            value={departamento.id_departamento}>{departamento.nombre_departamento}
+                                                                            </option>
+                                                                            )
+                                                                        }
+                                                                    })}
+                                                                </select>
+                                                                <small className="text-danger"> {errors.id_departamento?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-4 mb-4">
+                                                    <label htmlFor="id_municipio">Municipio/Ciudad (*)</label>
+                                                        <div className="form-group">
+                                                                <select className="choices form-select" 
+                                                                name="id_municipio" 
+                                                                id="id_municipio"
+                                                                {...register('id_municipio')}
+                                                                value={id_municipio}
+                                                                onChange={e => setId_municipio(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                    {municipios.map((municipio) => {
+                                                                        if(municipio.id_departamento == opcion_depto){
+                                                                            return (
+                                                                            <option key={municipio.id_municipio} 
+                                                                            value={municipio.id_municipio}>{municipio.nombre_municipio}
+                                                                            </option>
+                                                                            )
+                                                                        }
+                                                                    })}
                                                                 
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-4 mb-4">
-                                                    <label htmlFor="departamento">Departamento/Estado (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="choices form-select" id="departamento" value={id_departamento}
-                                                            onChange={e => setId_departamento(e.target.value)} 
-                                                            onClick={e => setOpcion_depto(e.target.value)} >
-                                                            <option value="">--Seleccione una opción--</option>
-                                                                {departamentos.map((departamento) => {
-                                                                    if(departamento.id_pais == opcion_pais){
-                                                                        return (
-                                                                        <option key={departamento.id_departamento} 
-                                                                        value={departamento.id_departamento}>{departamento.nombre_departamento}
-                                                                        </option>
-                                                                        )
-                                                                    }
-                                                                })}
-                                                            
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-4 mb-4">
-                                                    <label htmlFor="municipio">Municipio/Ciudad (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="choices form-select" id="municipio" value={id_municipio}
-                                                            onChange={e => setId_municipio(e.target.value)} >
-                                                            <option value="">--Seleccione una opción--</option>
-                                                                {municipios.map((municipio) => {
-                                                                    if(municipio.id_departamento == opcion_depto){
-                                                                        return (
-                                                                        <option key={municipio.id_municipio} 
-                                                                        value={municipio.id_municipio}>{municipio.nombre_municipio}
-                                                                        </option>
-                                                                        )
-                                                                    }
-                                                                })}
-                                                            
-                                                            </select>
+                                                                </select>
+                                                                <small className="text-danger"> {errors.id_municipio?.message} </small>
                                                         </div>
                                                     </div>
 
@@ -376,13 +440,16 @@ const EditarExpediente = () => {
                                                             <label htmlFor="direccion">Dirección (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
+                                                                   name="direccion" 
                                                                    id="direccion"
-                                                                    value={direccion}
-                                                                    onChange={e => setDireccion(e.target.value)} />
+                                                                   {...register('direccion')}
+                                                                   value={direccion}
+                                                                   onChange={e => setDireccion(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.direccion?.message} </small>
                                                         </div>
                                                     </div>
                                                   
@@ -392,35 +459,41 @@ const EditarExpediente = () => {
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
                                                          
-                                                            <label htmlFor="contacto_emergencia">Contacto en caso de emergencia (*)</label>
+                                                            <label htmlFor="nombre_contacto_emergencia">Contacto en caso de emergencia (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    id="contacto_emergencia"
+                                                                    name="nombre_contacto_emergencia" 
+                                                                    id="nombre_contacto_emergencia"
+                                                                    {...register('nombre_contacto_emergencia')}
                                                                     value={nombre_contacto_emergencia}
                                                                     onChange={e => setNombre_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.nombre_contacto_emergencia?.message} </small>
                                                         </div>
                                                     </div>
+
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="telefono_emergencia">Télefono en caso de emergencia (*)</label>
+                                                            <label htmlFor="telefono_contacto_emergencia">Télefono en caso de emergencia (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    id="telefono_emergencia"
+                                                                    name="telefono_contacto_emergencia" 
+                                                                    id="telefono_contacto_emergencia"
+                                                                    {...register('telefono_contacto_emergencia')}
                                                                     value={telefono_contacto_emergencia}
                                                                     onChange={e => setTelefono_contacto_emergencia(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.telefono_contacto_emergencia?.message} </small>
                                                         </div>
                                                     </div>
-                                                   
                                                     <div className="col-12 d-flex justify-content-end">
-                                                        <button className="btn btn-secondary">Actualizar</button>
+                                                        <button className="btn btn-secondary">Guardar</button>
                                                     </div>
 
                                                     

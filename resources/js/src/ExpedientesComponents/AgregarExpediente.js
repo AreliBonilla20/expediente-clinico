@@ -6,7 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
-import schemaAgregarExpediente from '../Validaciones/ExpedienteValidacion';
+
+import schema from '../Validaciones/ExpedienteValidacion';
 
 import API from '../api';
 
@@ -46,19 +47,18 @@ const AgregarExpediente = () => {
            setGeneros(result.generos);
            setPaises(result.paises);
            setDepartamentos(result.departamentos);
-           setMunicipios(result.municipios);
-           
+           setMunicipios(result.municipios);     
        })
      }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
-    const agregarPaciente = async e => {
-        e.preventDefault();
+    const agregarPaciente = async (data) => {
+    
         try {
           const body = { nombres, apellidos, fecha_nacimiento, identificacion, direccion, telefono, correo, estado_paciente,
             estado_civil, nombre_conyugue, apellido_conyugue, nombre_contacto_emergencia,
@@ -115,7 +115,7 @@ const AgregarExpediente = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={agregarPaciente}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(agregarPaciente)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -142,7 +142,7 @@ const AgregarExpediente = () => {
                                            
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="nombres">Nombre (*)</label>
+                                                            <label htmlFor="nombres">Nombres (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="nombres"
@@ -225,7 +225,7 @@ const AgregarExpediente = () => {
                                                                 onChange={e => setId_genero(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
-                                                                <option value={genero.id_genero}>{genero.genero}</option>
+                                                                <option key={genero.id_genero} value={genero.id_genero}>{genero.genero}</option>
                                                                 ))}
                                                             </select>
                                                             <small className="text-danger"> {errors.id_genero?.message} </small>
@@ -266,8 +266,8 @@ const AgregarExpediente = () => {
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <small className="text-danger"> {errors.nombre_conyugue?.message} </small>
+                                                            <small className="text-danger"> {errors.nombre_conyugue?.message} </small>
+                                                        </div>      
                                                     </div>
 
                                                     <div className="col-12">
@@ -336,7 +336,7 @@ const AgregarExpediente = () => {
                                                                 value={id_pais}
                                                                 onChange={e => setId_pais(e.target.value)} 
                                                                 onClick={e => setOpcion_pais(e.target.value)} >
-                                                                <option value={-1}>--Seleccione una opción--</option>
+                                                                <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
                                                                 <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
                                                                 ))}

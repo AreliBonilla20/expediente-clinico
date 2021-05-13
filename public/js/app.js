@@ -81043,6 +81043,1416 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/src/AntecedentesComponents/AgregarAntecedente.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/src/AntecedentesComponents/AgregarAntecedente.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _Validaciones_ExpedienteValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExpedienteValidacion */ "./resources/js/src/Validaciones/ExpedienteValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+var AgregarAntecedente = function AgregarAntecedente() {
+  var _errors$padecimientos, _errors$nombre_padre, _errors$apellidos_pad, _errors$fecha_nacimie, _errors$direccion_pad, _errors$padecimientos2, _errors$nombre_madre, _errors$apellidos_mad, _errors$fecha_nacimie2, _errors$direccion_mad, _errors$padecimientos3, _errors$historial_enf;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      historial_enfermedades = _useState2[0],
+      setHistorial_enfermedades = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      nombre_padre = _useState4[0],
+      setNombre_padre = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      apellidos_padre = _useState6[0],
+      setApellidos_padre = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      fecha_nacimiento_padre = _useState8[0],
+      setFecha_nacimiento_padre = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      direccion_padre = _useState10[0],
+      setDireccion_padre = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      padecimientos_padre = _useState12[0],
+      setPadecimientos_padre = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      nombre_madre = _useState14[0],
+      setNombre_madre = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      apellidos_madre = _useState16[0],
+      setApellidos_madre = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      fecha_nacimiento_madre = _useState18[0],
+      setFecha_nacimiento_madre = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      direccion_madre = _useState20[0],
+      setDireccion_madre = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      padecimientos_madre = _useState22[0],
+      setPadecimientos_madre = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      padecimientos_familiares = _useState24[0],
+      setPadecimientos_familiares = _useState24[1];
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  var agregarAntecedente = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.prev = 1;
+              body = {
+                historial_enfermedades: historial_enfermedades,
+                nombre_padre: nombre_padre,
+                apellidos_padre: apellidos_padre,
+                fecha_nacimiento_padre: fecha_nacimiento_padre,
+                direccion_padre: direccion_padre,
+                padecimientos_padre: padecimientos_padre,
+                nombre_madre: nombre_madre,
+                apellidos_madre: apellidos_madre,
+                fecha_nacimiento_madre: fecha_nacimiento_madre,
+                direccion_madre: direccion_madre,
+                padecimientos_madre: padecimientos_madre,
+                padecimientos_familiares: padecimientos_familiares
+              };
+              _context.next = 5;
+              return fetch("".concat(API_URL, "/antecedentes/").concat(codigo, "/guardar"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 5:
+              response = _context.sent;
+              window.location = "/expedientes";
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+              console.error(_context.t0.message);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function agregarAntecedente(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Antecedentes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Expediente ", codigo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar antecedente")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/expedientes"
+  }, "Consultar expedientes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "ver"
+  }, "Ver expediente")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/expedientes/antecedentes/crear"
+  }, "Agregar antecedentes"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: agregarAntecedente
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_familiares"
+  }, "Padecimientos de familiares"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_familiares",
+    id: "padecimientos_familiares"
+  }, register('padecimientos_familiares'), {
+    value: padecimientos_familiares,
+    onChange: function onChange(e) {
+      return setPadecimientos_familiares(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos = errors.padecimientos_familiares) === null || _errors$padecimientos === void 0 ? void 0 : _errors$padecimientos.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_padre"
+  }, "Nombre del padre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_padre",
+    id: "nombre_padre"
+  }, register('nombre_padre'), {
+    value: nombre_padre,
+    onChange: function onChange(e) {
+      return setNombre_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_padre = errors.nombre_padre) === null || _errors$nombre_padre === void 0 ? void 0 : _errors$nombre_padre.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "apellidos_padre"
+  }, "Apellidos del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "apellidos_padre",
+    id: "apellidos_padre"
+  }, register('apellidos_padre'), {
+    value: apellidos_padre,
+    onChange: function onChange(e) {
+      return setApellidos_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellidos_pad = errors.apellidos_padre) === null || _errors$apellidos_pad === void 0 ? void 0 : _errors$apellidos_pad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fecha_nacimiento_padre"
+  }, "Fecha de nacimiento del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "date",
+    className: "form-control",
+    name: "fecha_nacimiento_padre",
+    id: "fecha_nacimiento_padre"
+  }, register('fecha_nacimiento_padre'), {
+    value: fecha_nacimiento_padre,
+    onChange: function onChange(e) {
+      return setFecha_nacimiento_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-calendar"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$fecha_nacimie = errors.fecha_nacimiento_padre) === null || _errors$fecha_nacimie === void 0 ? void 0 : _errors$fecha_nacimie.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "direccion_padre"
+  }, "Direcci\xF3n del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "direccion_padre",
+    id: "direccion_padre"
+  }, register('direccion_padre'), {
+    value: direccion_padre,
+    onChange: function onChange(e) {
+      return setDireccion_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-house"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$direccion_pad = errors.direccion_padre) === null || _errors$direccion_pad === void 0 ? void 0 : _errors$direccion_pad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_padre"
+  }, "Padecimientos del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_padre",
+    id: "padecimientos_padre"
+  }, register('padecimientos_padre'), {
+    value: padecimientos_padre,
+    onChange: function onChange(e) {
+      return setPadecimientos_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos2 = errors.padecimientos_padre) === null || _errors$padecimientos2 === void 0 ? void 0 : _errors$padecimientos2.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades de la madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_madre"
+  }, "Nombres de la madre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_madre",
+    id: "nombre_madre"
+  }, register('nombre_madre'), {
+    value: nombre_madre,
+    onChange: function onChange(e) {
+      return setNombre_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_madre = errors.nombre_madre) === null || _errors$nombre_madre === void 0 ? void 0 : _errors$nombre_madre.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "apellidos_madre"
+  }, "Apellidos de la madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "apellidos_madre",
+    id: "apellidos_madre"
+  }, register('apellidos_madre'), {
+    value: apellidos_madre,
+    onChange: function onChange(e) {
+      return setApellidos_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellidos_mad = errors.apellidos_madre) === null || _errors$apellidos_mad === void 0 ? void 0 : _errors$apellidos_mad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fecha_nacimiento_madre"
+  }, "Fecha de nacimiento del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "date",
+    className: "form-control",
+    name: "fecha_nacimiento_madre",
+    id: "fecha_nacimiento_madre"
+  }, register('fecha_nacimiento_madre'), {
+    value: fecha_nacimiento_madre,
+    onChange: function onChange(e) {
+      return setFecha_nacimiento_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-calendar"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$fecha_nacimie2 = errors.fecha_nacimiento_madre) === null || _errors$fecha_nacimie2 === void 0 ? void 0 : _errors$fecha_nacimie2.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "direccion_madre"
+  }, "Direcci\xF3n del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "direccion_madre",
+    id: "direccion_madre"
+  }, register('direccion_madre'), {
+    value: direccion_madre,
+    onChange: function onChange(e) {
+      return setDireccion_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-house"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$direccion_mad = errors.direccion_madre) === null || _errors$direccion_mad === void 0 ? void 0 : _errors$direccion_mad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_madre"
+  }, "Padecimientos del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_madre",
+    id: "padecimientos_madre"
+  }, register('padecimientos_madre'), {
+    value: padecimientos_madre,
+    onChange: function onChange(e) {
+      return setPadecimientos_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos3 = errors.padecimientos_madre) === null || _errors$padecimientos3 === void 0 ? void 0 : _errors$padecimientos3.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades del paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "historial_enfermedades"
+  }, "Historial de enfermedades (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "historial_enfermedades",
+    id: "historial_enfermedades"
+  }, register('historial_enfermedades'), {
+    value: historial_enfermedades,
+    onChange: function onChange(e) {
+      return setHistorial_enfermedades(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$historial_enf = errors.historial_enfermedades) === null || _errors$historial_enf === void 0 ? void 0 : _errors$historial_enf.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarAntecedente);
+
+/***/ }),
+
+/***/ "./resources/js/src/AntecedentesComponents/EditarAntecedente.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/src/AntecedentesComponents/EditarAntecedente.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _Validaciones_ExpedienteValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExpedienteValidacion */ "./resources/js/src/Validaciones/ExpedienteValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+var AgregarAntecedente = function AgregarAntecedente() {
+  var _errors$padecimientos, _errors$nombre_padre, _errors$apellidos_pad, _errors$fecha_nacimie, _errors$direccion_pad, _errors$padecimientos2, _errors$nombre_madre, _errors$apellidos_mad, _errors$fecha_nacimie2, _errors$direccion_mad, _errors$padecimientos3, _errors$historial_enf;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      historial_enfermedades = _useState2[0],
+      setHistorial_enfermedades = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      nombre_padre = _useState4[0],
+      setNombre_padre = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      apellidos_padre = _useState6[0],
+      setApellidos_padre = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      fecha_nacimiento_padre = _useState8[0],
+      setFecha_nacimiento_padre = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      direccion_padre = _useState10[0],
+      setDireccion_padre = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      padecimientos_padre = _useState12[0],
+      setPadecimientos_padre = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      nombre_madre = _useState14[0],
+      setNombre_madre = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      apellidos_madre = _useState16[0],
+      setApellidos_madre = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      fecha_nacimiento_madre = _useState18[0],
+      setFecha_nacimiento_madre = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      direccion_madre = _useState20[0],
+      setDireccion_madre = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      padecimientos_madre = _useState22[0],
+      setPadecimientos_madre = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      padecimientos_familiares = _useState24[0],
+      setPadecimientos_familiares = _useState24[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].antecedente_editar(codigo).then(function (res) {
+      var antecedente = res.data;
+      setHistorial_enfermedades(antecedente.historial_enfermedades);
+      setPadecimientos_familiares(antecedente.padecimientos_familiares);
+      setNombre_padre(antecedente.nombre_padre);
+      setApellidos_padre(antecedente.apellidos_padre);
+      setFecha_nacimiento_padre(antecedente.fecha_nacimiento_padre);
+      setDireccion_padre(antecedente.direccion_padre);
+      setPadecimientos_padre(antecedente.padecimientos_padre);
+      setNombre_madre(antecedente.nombre_madre);
+      setApellidos_madre(antecedente.apellidos_madre);
+      setFecha_nacimiento_madre(antecedente.fecha_nacimiento_madre);
+      setDireccion_madre(antecedente.direccion_madre);
+      setPadecimientos_madre(antecedente.padecimientos_madre);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  var editarAntecedente = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.prev = 1;
+              body = {
+                historial_enfermedades: historial_enfermedades,
+                nombre_padre: nombre_padre,
+                apellidos_padre: apellidos_padre,
+                fecha_nacimiento_padre: fecha_nacimiento_padre,
+                direccion_padre: direccion_padre,
+                padecimientos_padre: padecimientos_padre,
+                nombre_madre: nombre_madre,
+                apellidos_madre: apellidos_madre,
+                fecha_nacimiento_madre: fecha_nacimiento_madre,
+                direccion_madre: direccion_madre,
+                padecimientos_madre: padecimientos_madre,
+                padecimientos_familiares: padecimientos_familiares
+              };
+              _context.next = 5;
+              return fetch("".concat(API_URL, "/antecedentes/").concat(codigo, "/actualizar"), {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 5:
+              response = _context.sent;
+              window.location = "/expedientes/".concat(codigo, "/ver");
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+              console.error(_context.t0.message);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function editarAntecedente(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Antecedentes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Expediente ", codigo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar antecedente")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/expedientes"
+  }, "Consultar expedientes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "ver"
+  }, "Ver expediente")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/expedientes/antecedentes/crear"
+  }, "Agregar antecedentes"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: editarAntecedente
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_familiares"
+  }, "Padecimientos de familiares"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_familiares",
+    id: "padecimientos_familiares"
+  }, register('padecimientos_familiares'), {
+    value: padecimientos_familiares,
+    onChange: function onChange(e) {
+      return setPadecimientos_familiares(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos = errors.padecimientos_familiares) === null || _errors$padecimientos === void 0 ? void 0 : _errors$padecimientos.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_padre"
+  }, "Nombre del padre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_padre",
+    id: "nombre_padre"
+  }, register('nombre_padre'), {
+    value: nombre_padre,
+    onChange: function onChange(e) {
+      return setNombre_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_padre = errors.nombre_padre) === null || _errors$nombre_padre === void 0 ? void 0 : _errors$nombre_padre.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "apellidos_padre"
+  }, "Apellidos del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "apellidos_padre",
+    id: "apellidos_padre"
+  }, register('apellidos_padre'), {
+    value: apellidos_padre,
+    onChange: function onChange(e) {
+      return setApellidos_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellidos_pad = errors.apellidos_padre) === null || _errors$apellidos_pad === void 0 ? void 0 : _errors$apellidos_pad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fecha_nacimiento_padre"
+  }, "Fecha de nacimiento del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "date",
+    className: "form-control",
+    name: "fecha_nacimiento_padre",
+    id: "fecha_nacimiento_padre"
+  }, register('fecha_nacimiento_padre'), {
+    value: fecha_nacimiento_padre,
+    onChange: function onChange(e) {
+      return setFecha_nacimiento_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-calendar"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$fecha_nacimie = errors.fecha_nacimiento_padre) === null || _errors$fecha_nacimie === void 0 ? void 0 : _errors$fecha_nacimie.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "direccion_padre"
+  }, "Direcci\xF3n del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "direccion_padre",
+    id: "direccion_padre"
+  }, register('direccion_padre'), {
+    value: direccion_padre,
+    onChange: function onChange(e) {
+      return setDireccion_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-house"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$direccion_pad = errors.direccion_padre) === null || _errors$direccion_pad === void 0 ? void 0 : _errors$direccion_pad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_padre"
+  }, "Padecimientos del padre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_padre",
+    id: "padecimientos_padre"
+  }, register('padecimientos_padre'), {
+    value: padecimientos_padre,
+    onChange: function onChange(e) {
+      return setPadecimientos_padre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos2 = errors.padecimientos_padre) === null || _errors$padecimientos2 === void 0 ? void 0 : _errors$padecimientos2.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades de la madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_madre"
+  }, "Nombres de la madre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_madre",
+    id: "nombre_madre"
+  }, register('nombre_madre'), {
+    value: nombre_madre,
+    onChange: function onChange(e) {
+      return setNombre_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_madre = errors.nombre_madre) === null || _errors$nombre_madre === void 0 ? void 0 : _errors$nombre_madre.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "apellidos_madre"
+  }, "Apellidos de la madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "apellidos_madre",
+    id: "apellidos_madre"
+  }, register('apellidos_madre'), {
+    value: apellidos_madre,
+    onChange: function onChange(e) {
+      return setApellidos_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-person"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellidos_mad = errors.apellidos_madre) === null || _errors$apellidos_mad === void 0 ? void 0 : _errors$apellidos_mad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "fecha_nacimiento_madre"
+  }, "Fecha de nacimiento del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "date",
+    className: "form-control",
+    name: "fecha_nacimiento_madre",
+    id: "fecha_nacimiento_madre"
+  }, register('fecha_nacimiento_madre'), {
+    value: fecha_nacimiento_madre,
+    onChange: function onChange(e) {
+      return setFecha_nacimiento_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-calendar"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$fecha_nacimie2 = errors.fecha_nacimiento_madre) === null || _errors$fecha_nacimie2 === void 0 ? void 0 : _errors$fecha_nacimie2.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "direccion_madre"
+  }, "Direcci\xF3n del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "direccion_madre",
+    id: "direccion_madre"
+  }, register('direccion_madre'), {
+    value: direccion_madre,
+    onChange: function onChange(e) {
+      return setDireccion_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-house"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$direccion_mad = errors.direccion_madre) === null || _errors$direccion_mad === void 0 ? void 0 : _errors$direccion_mad.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "padecimientos_madre"
+  }, "Padecimientos del madre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "padecimientos_madre",
+    id: "padecimientos_madre"
+  }, register('padecimientos_madre'), {
+    value: padecimientos_madre,
+    onChange: function onChange(e) {
+      return setPadecimientos_madre(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$padecimientos3 = errors.padecimientos_madre) === null || _errors$padecimientos3 === void 0 ? void 0 : _errors$padecimientos3.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Historial de enfermedades del paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "historial_enfermedades"
+  }, "Historial de enfermedades (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    rows: "4",
+    name: "historial_enfermedades",
+    id: "historial_enfermedades"
+  }, register('historial_enfermedades'), {
+    value: historial_enfermedades,
+    onChange: function onChange(e) {
+      return setHistorial_enfermedades(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$historial_enf = errors.historial_enfermedades) === null || _errors$historial_enf === void 0 ? void 0 : _errors$historial_enf.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarAntecedente);
+
+/***/ }),
+
+/***/ "./resources/js/src/AntecedentesComponents/VerAntecedente.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/AntecedentesComponents/VerAntecedente.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var VerExpediente = function VerExpediente() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_5__["default"].API_URL;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      antecedente = _useState2[0],
+      setAntecedente = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      historial_enfermedades = _useState4[0],
+      setHistorial_enfermedades = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      padecimientos_familiares = _useState6[0],
+      setPadecimientos_familiares = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      nombre_padre = _useState8[0],
+      setNombre_padre = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      apellidos_padre = _useState10[0],
+      setApellidos_padre = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      fecha_nacimiento_padre = _useState12[0],
+      setFecha_nacimiento_padre = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      direccion_padre = _useState14[0],
+      setDireccion_padre = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      padecimientos_padre = _useState16[0],
+      setPadecimientos_padre = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      nombre_madre = _useState18[0],
+      setNombre_madre = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      apellidos_madre = _useState20[0],
+      setApellidos_madre = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      fecha_nacimiento_madre = _useState22[0],
+      setFecha_nacimiento_madre = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      direccion_madre = _useState24[0],
+      setDireccion_madre = _useState24[1];
+
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState26 = _slicedToArray(_useState25, 2),
+      padecimientos_madre = _useState26[0],
+      setPadecimientos_madre = _useState26[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].antecedente_ver(codigo).then(function (res) {
+      var antecedente = res.data;
+      setAntecedente(antecedente);
+      setHistorial_enfermedades(antecedente.historial_enfermedades);
+      setPadecimientos_familiares(antecedente.padecimientos_familiares);
+      setNombre_padre(antecedente.nombre_padre);
+      setApellidos_padre(antecedente.apellidos_padre);
+      setFecha_nacimiento_padre(antecedente.fecha_nacimiento_padre);
+      setDireccion_padre(antecedente.direccion_padre);
+      setPadecimientos_padre(antecedente.padecimientos_padre);
+      setNombre_madre(antecedente.nombre_madre);
+      setApellidos_madre(antecedente.apellidos_madre);
+      setFecha_nacimiento_madre(antecedente.fecha_nacimiento_madre);
+      setDireccion_madre(antecedente.direccion_madre);
+      setPadecimientos_madre(antecedente.padecimientos_madre);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Antecedentes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, nombre_padre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Antecedentes del padre"), nombre_padre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Nombre del padre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", nombre_padre, " ", apellidos_padre)))), fecha_nacimiento_padre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fecha de nacimiento del padre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", fecha_nacimiento_padre)))), direccion_padre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Direcci\xF3n del padre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", direccion_padre)))), padecimientos_padre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Padecimientos del padre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", padecimientos_padre))))), nombre_madre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Antecedentes de la madre"), nombre_madre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Nombre de la madre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", nombre_madre, " ", apellidos_madre)))), fecha_nacimiento_madre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fecha de nacimiento de la madre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", fecha_nacimiento_madre)))), direccion_madre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Direcci\xF3n de la madre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", direccion_madre)))), padecimientos_madre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Padecimientos de la madre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", padecimientos_madre)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), padecimientos_familiares && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Padecimientos familiares"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Padecimientos familiares"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-9"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", padecimientos_familiares)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), historial_enfermedades && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Antecedentes del paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Historial de enfermedades"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-9"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", historial_enfermedades)))), !antecedente == '' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "antecedentes/editar",
+    className: "btn btn-primary"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-pencil"
+  }), " Editar")), antecedente.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "antecedentes/crear",
+    className: "btn btn-success"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-plus"
+  }), " Agregar antecedentes")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (VerExpediente);
+
+/***/ }),
+
 /***/ "./resources/js/src/App.js":
 /*!*********************************!*\
   !*** ./resources/js/src/App.js ***!
@@ -81063,13 +82473,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExpedientesComponents_EditarExpediente__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ExpedientesComponents/EditarExpediente */ "./resources/js/src/ExpedientesComponents/EditarExpediente.js");
 /* harmony import */ var _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ExpedientesComponents/BuscarExpediente */ "./resources/js/src/ExpedientesComponents/BuscarExpediente.js");
 /* harmony import */ var _ExpedientesComponents_VerExpediente__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ExpedientesComponents/VerExpediente */ "./resources/js/src/ExpedientesComponents/VerExpediente.js");
-/* harmony import */ var _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagnosticosComponents/ConsultarDiagnostico */ "./resources/js/src/DiagnosticosComponents/ConsultarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagnosticosComponents/AgregarDiagnostico */ "./resources/js/src/DiagnosticosComponents/AgregarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagnosticosComponents/EditarDiagnostico */ "./resources/js/src/DiagnosticosComponents/EditarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagnosticosComponents/BuscarDiagnostico */ "./resources/js/src/DiagnosticosComponents/BuscarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagnosticosComponents/VerDiagnostico */ "./resources/js/src/DiagnosticosComponents/VerDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+/* harmony import */ var _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AntecedentesComponents/AgregarAntecedente */ "./resources/js/src/AntecedentesComponents/AgregarAntecedente.js");
+/* harmony import */ var _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AntecedentesComponents/EditarAntecedente */ "./resources/js/src/AntecedentesComponents/EditarAntecedente.js");
+/* harmony import */ var _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagnosticosComponents/ConsultarDiagnostico */ "./resources/js/src/DiagnosticosComponents/ConsultarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagnosticosComponents/AgregarDiagnostico */ "./resources/js/src/DiagnosticosComponents/AgregarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagnosticosComponents/EditarDiagnostico */ "./resources/js/src/DiagnosticosComponents/EditarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DiagnosticosComponents/BuscarDiagnostico */ "./resources/js/src/DiagnosticosComponents/BuscarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DiagnosticosComponents/VerDiagnostico */ "./resources/js/src/DiagnosticosComponents/VerDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+
+
 
 
 
@@ -81115,26 +82529,34 @@ var App = function App() {
     component: _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
+    path: "/expedientes/:codigo/antecedentes/crear",
+    component: _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/expedientes/:codigo/antecedentes/editar",
+    component: _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
     path: "/diagnosticos",
-    component: _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/crear",
-    component: _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:codigo/editar",
-    component: _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:codigo/ver",
-    component: _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13___default.a
+    component: _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_15___default.a
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:param_busqueda/buscar",
-    component: _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_16__["default"]
   })));
 };
 
@@ -81194,7 +82616,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AgregarDiagnostico = function AgregarDiagnostico() {
   var _errors$codigo_diagno, _errors$nombre_diagno, _errors$id_tipo_diagn, _errors$descripcion_d;
 
-  //Datos para el formulario
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL; //Datos para el formulario
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       tipos_diagnosticos = _useState2[0],
@@ -81229,7 +82652,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
     });
   }, []);
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schemaAgregarExpediente),
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({// resolver: yupResolver(schema),
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
@@ -81359,7 +82782,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-clipboard-check"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$codigo_diagno = errors.codigo_diagnostico) === null || _errors$codigo_diagno === void 0 ? void 0 : _errors$codigo_diagno.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -81383,7 +82806,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-clipboard-check"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$nombre_diagno = errors.nombre_diagnostico) === null || _errors$nombre_diagno === void 0 ? void 0 : _errors$nombre_diagno.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -81430,7 +82853,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-clipboard-check"
+    className: "bi bi-clipboard-check"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$descripcion_d = errors.descripcion_diagnostico) === null || _errors$descripcion_d === void 0 ? void 0 : _errors$descripcion_d.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -81686,7 +83109,7 @@ var ConsultarDiagnostico = function ConsultarDiagnostico() {
     type: "text",
     id: "last-name-column",
     className: "form-control",
-    placeholder: "C\xF3digo, identificacion, nombres o apellidos del paciente",
+    placeholder: "C\xF3digo,nombre del diagn\xF3stico",
     name: "lname-column"
   }, _defineProperty(_React$createElement, "id", "codigo_busqueda"), _defineProperty(_React$createElement, "value", param_busqueda), _defineProperty(_React$createElement, "onChange", function onChange(e) {
     return setParam_busqueda(e.target.value);
@@ -82233,14 +83656,13 @@ var AgregarExpediente = function AgregarExpediente() {
       errors = _useForm.formState.errors;
 
   var agregarPaciente = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 nombres: nombres,
                 apellidos: apellidos,
@@ -82260,7 +83682,7 @@ var AgregarExpediente = function AgregarExpediente() {
                 id_municipio: id_municipio,
                 id_departamento: id_departamento
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/expedientes/guardar"), {
                 method: "POST",
                 headers: {
@@ -82269,23 +83691,23 @@ var AgregarExpediente = function AgregarExpediente() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
               window.location = "/expedientes";
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function agregarPaciente(_x) {
@@ -82342,7 +83764,7 @@ var AgregarExpediente = function AgregarExpediente() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: agregarPaciente
+    onSubmit: handleSubmit(agregarPaciente)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -82377,7 +83799,7 @@ var AgregarExpediente = function AgregarExpediente() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "nombres"
-  }, "Nombre (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Nombres (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -82486,6 +83908,7 @@ var AgregarExpediente = function AgregarExpediente() {
     value: ""
   }, "--Seleccione una opci\xF3n--"), generos.map(function (genero) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: genero.id_genero,
       value: genero.id_genero
     }, genero.genero);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
@@ -82535,9 +83958,9 @@ var AgregarExpediente = function AgregarExpediente() {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$nombre_conyug = errors.nombre_conyugue) === null || _errors$nombre_conyug === void 0 ? void 0 : _errors$nombre_conyug.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$nombre_conyug = errors.nombre_conyugue) === null || _errors$nombre_conyug === void 0 ? void 0 : _errors$nombre_conyug.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -82628,7 +84051,7 @@ var AgregarExpediente = function AgregarExpediente() {
       return setOpcion_pais(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: -1
+    value: ""
   }, "--Seleccione una opci\xF3n--"), paises.map(function (pais) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
       key: pais.id_pais,
@@ -83015,7 +84438,7 @@ var ConsultarExpediente = function ConsultarExpediente() {
     type: "text",
     id: "last-name-column",
     className: "form-control",
-    placeholder: "C\xF3digo,nombre del diagn\xF3stico",
+    placeholder: "C\xF3digo, identificacion, nombres o apellidos del paciente",
     name: "lname-column"
   }, _defineProperty(_React$createElement, "id", "codigo_busqueda"), _defineProperty(_React$createElement, "value", param_busqueda), _defineProperty(_React$createElement, "onChange", function onChange(e) {
     return setParam_busqueda(e.target.value);
@@ -83058,12 +84481,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
-/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
-/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _Validaciones_ExpedienteValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExpedienteValidacion */ "./resources/js/src/Validaciones/ExpedienteValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -83091,11 +84517,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var EditarExpediente = function EditarExpediente() {
+  var _errors$identificacio, _errors$nombres, _errors$apellidos, _errors$fecha_nacimie, _errors$estado_pacien, _errors$id_genero, _errors$estado_civil, _errors$nombre_conyug, _errors$apellido_cony, _errors$telefono, _errors$correo, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion, _errors$nombre_contac, _errors$telefono_cont;
+
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_7__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -83213,7 +84643,7 @@ var EditarExpediente = function EditarExpediente() {
       setId_departamento = _useState46[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_7__["default"].paciente_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].paciente_editar(codigo).then(function (res) {
       var paciente = res.data;
       setNombres(paciente.nombres);
       setApellidos(paciente.apellidos);
@@ -83235,7 +84665,7 @@ var EditarExpediente = function EditarExpediente() {
       setOpcion_pais(paciente.id_pais);
       setOpcion_depto(paciente.id_departamento);
     });
-    _api__WEBPACK_IMPORTED_MODULE_7__["default"].datos_formulario_paciente().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_paciente().then(function (res) {
       var result = res.data;
       setGeneros(result.generos);
       setPaises(result.paises);
@@ -83244,15 +84674,21 @@ var EditarExpediente = function EditarExpediente() {
     });
   }, []);
 
-  var onSubmitForm = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_ExpedienteValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  var editarPaciente = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 nombres: nombres,
                 apellidos: apellidos,
@@ -83272,7 +84708,7 @@ var EditarExpediente = function EditarExpediente() {
                 id_municipio: id_municipio,
                 id_departamento: id_departamento
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/expedientes/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
@@ -83281,36 +84717,36 @@ var EditarExpediente = function EditarExpediente() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
               window.location = "/expedientes";
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
-    return function onSubmitForm(_x) {
+    return function editarPaciente(_x) {
       return _ref.apply(this, arguments);
     };
   }();
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "main",
     className: "layout-navbar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "main-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "page-heading"
@@ -83357,7 +84793,7 @@ var EditarExpediente = function EditarExpediente() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: onSubmitForm
+    onSubmit: handleSubmit(editarPaciente)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -83370,59 +84806,71 @@ var EditarExpediente = function EditarExpediente() {
     htmlFor: "identificacion"
   }, "Identificaci\xF3n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "identificacion",
+    name: "identificacion",
+    id: "identificacion"
+  }, register('identificacion'), {
     value: identificacion,
     onChange: function onChange(e) {
       return setIdentificacion(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$identificacio = errors.identificacion) === null || _errors$identificacio === void 0 ? void 0 : _errors$identificacio.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "first-name-icon"
-  }, "Nombre (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    htmlFor: "nombres"
+  }, "Nombres (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "first-name-icon",
+    name: "nombres",
+    id: "nombres"
+  }, register('nombres'), {
     value: nombres,
     onChange: function onChange(e) {
       return setNombres(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombres = errors.nombres) === null || _errors$nombres === void 0 ? void 0 : _errors$nombres.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "first-name-icon"
+    htmlFor: "apellidos"
   }, "Apellidos (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "first-name-icon",
+    name: "apellidos",
+    id: "apellidos"
+  }, register('apellidos'), {
     value: apellidos,
     onChange: function onChange(e) {
       return setApellidos(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellidos = errors.apellidos) === null || _errors$apellidos === void 0 ? void 0 : _errors$apellidos.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -83430,78 +84878,94 @@ var EditarExpediente = function EditarExpediente() {
     htmlFor: "fecha_nacimiento"
   }, "Fecha de nacimiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "date",
     className: "form-control",
-    id: "fecha_nacimiento",
+    name: "fecha_nacimiento",
+    id: "fecha_nacimiento"
+  }, register('fecha_nacimiento'), {
     value: fecha_nacimiento,
     onChange: function onChange(e) {
       return setFecha_nacimiento(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-calendar"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$fecha_nacimie = errors.fecha_nacimiento) === null || _errors$fecha_nacimie === void 0 ? void 0 : _errors$fecha_nacimie.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "estado_paciente"
-  }, "Estado del paciente (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Estado paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "estado_paciente",
+    name: "estado_paciente",
+    id: "estado_paciente"
+  }, register('estado_paciente'), {
     value: estado_paciente,
     onChange: function onChange(e) {
       return setEstado_paciente(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$estado_pacien = errors.estado_paciente) === null || _errors$estado_pacien === void 0 ? void 0 : _errors$estado_pacien.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "genero"
+    htmlFor: "id_genero"
   }, "G\xE9nero (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
-    id: "genero",
+    name: "id_genero",
+    id: "id_genero"
+  }, register('id_genero'), {
     value: id_genero,
     onChange: function onChange(e) {
       return setId_genero(e.target.value);
-    },
-    required: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), generos.map(function (genero) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: genero.id_genero,
       value: genero.id_genero
     }, genero.genero);
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_genero = errors.id_genero) === null || _errors$id_genero === void 0 ? void 0 : _errors$id_genero.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "estado_civil"
   }, "Estado civil (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
-    id: "estado_civil",
+    name: "estado_civil",
+    id: "estado_civil"
+  }, register('estado_civil'), {
     value: estado_civil,
     onChange: function onChange(e) {
       return setEstado_civil(e.target.value);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "Casado/a"
   }, "Casado/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "Soltero/a"
-  }, "Soltero/a")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Soltero/a")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$estado_civil = errors.estado_civil) === null || _errors$estado_civil === void 0 ? void 0 : _errors$estado_civil.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -83509,85 +84973,105 @@ var EditarExpediente = function EditarExpediente() {
     htmlFor: "nombre_conyugue"
   }, "Nombre conyugue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
+    name: "nombre_conyugue",
+    id: "nombre_conyugue"
+  }, register('nombre_conyugue'), {
     value: nombre_conyugue,
     onChange: function onChange(e) {
       return setNombre_conyugue(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_conyug = errors.nombre_conyugue) === null || _errors$nombre_conyug === void 0 ? void 0 : _errors$nombre_conyug.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "apellidos_conyugue"
+    htmlFor: "apellido_conyugue"
   }, "Apellidos conyugue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
+    name: "apellido_conyugue",
+    id: "apellido_conyugue"
+  }, register('apellido_conyugue'), {
     value: apellido_conyugue,
     onChange: function onChange(e) {
       return setApellido_conyugue(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$apellido_cony = errors.apellido_conyugue) === null || _errors$apellido_cony === void 0 ? void 0 : _errors$apellido_cony.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "mobile-id-icon"
+    htmlFor: "telefono"
   }, "Tel\xE9fono (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "mobile-id-icon",
+    name: "telefono",
+    id: "telefono"
+  }, register('telefono'), {
     value: telefono,
     onChange: function onChange(e) {
       return setTelefono(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-phone"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$telefono = errors.telefono) === null || _errors$telefono === void 0 ? void 0 : _errors$telefono.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "email-id-icon"
+    htmlFor: "correo"
   }, "Correo electr\xF3nico "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "email-id-icon",
+    name: "correo",
+    id: "correo"
+  }, register('correo'), {
     value: correo,
     onChange: function onChange(e) {
       return setCorreo(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-envelope"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$correo = errors.correo) === null || _errors$correo === void 0 ? void 0 : _errors$correo.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-4 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "pais"
+    htmlFor: "id_pais"
   }, "Pa\xEDs (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
-    id: "pais",
+    name: "id_pais",
+    id: "id_pais"
+  }, register('id_pais'), {
     value: id_pais,
     onChange: function onChange(e) {
       return setId_pais(e.target.value);
@@ -83595,30 +85079,34 @@ var EditarExpediente = function EditarExpediente() {
     onClick: function onClick(e) {
       return setOpcion_pais(e.target.value);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: -1
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
   }, "--Seleccione una opci\xF3n--"), paises.map(function (pais) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
       key: pais.id_pais,
       value: pais.id_pais
     }, pais.nombre_pais);
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_pais = errors.id_pais) === null || _errors$id_pais === void 0 ? void 0 : _errors$id_pais.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-4 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "departamento"
+    htmlFor: "id_departamento"
   }, "Departamento/Estado (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
-    id: "departamento",
-    value: id_departamento,
+    name: "id_departamento",
+    id: "id_departamento",
+    value: id_departamento
+  }, register('id_departamento'), {
     onChange: function onChange(e) {
       return setId_departamento(e.target.value);
     },
     onClick: function onClick(e) {
       return setOpcion_depto(e.target.value);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), departamentos.map(function (departamento) {
     if (departamento.id_pais == opcion_pais) {
@@ -83627,20 +85115,24 @@ var EditarExpediente = function EditarExpediente() {
         value: departamento.id_departamento
       }, departamento.nombre_departamento);
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_departamen = errors.id_departamento) === null || _errors$id_departamen === void 0 ? void 0 : _errors$id_departamen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-4 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "municipio"
+    htmlFor: "id_municipio"
   }, "Municipio/Ciudad (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
-    id: "municipio",
+    name: "id_municipio",
+    id: "id_municipio"
+  }, register('id_municipio'), {
     value: id_municipio,
     onChange: function onChange(e) {
       return setId_municipio(e.target.value);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
   }, "--Seleccione una opci\xF3n--"), municipios.map(function (municipio) {
     if (municipio.id_departamento == opcion_depto) {
@@ -83649,7 +85141,9 @@ var EditarExpediente = function EditarExpediente() {
         value: municipio.id_municipio
       }, municipio.nombre_municipio);
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_municipio = errors.id_municipio) === null || _errors$id_municipio === void 0 ? void 0 : _errors$id_municipio.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -83657,63 +85151,75 @@ var EditarExpediente = function EditarExpediente() {
     htmlFor: "direccion"
   }, "Direcci\xF3n (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "direccion",
+    name: "direccion",
+    id: "direccion"
+  }, register('direccion'), {
     value: direccion,
     onChange: function onChange(e) {
       return setDireccion(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-house"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "En caso de emergencias"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$direccion = errors.direccion) === null || _errors$direccion === void 0 ? void 0 : _errors$direccion.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "En caso de emergencias"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "contacto_emergencia"
+    htmlFor: "nombre_contacto_emergencia"
   }, "Contacto en caso de emergencia (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "contacto_emergencia",
+    name: "nombre_contacto_emergencia",
+    id: "nombre_contacto_emergencia"
+  }, register('nombre_contacto_emergencia'), {
     value: nombre_contacto_emergencia,
     onChange: function onChange(e) {
       return setNombre_contacto_emergencia(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_contac = errors.nombre_contacto_emergencia) === null || _errors$nombre_contac === void 0 ? void 0 : _errors$nombre_contac.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "telefono_emergencia"
+    htmlFor: "telefono_contacto_emergencia"
   }, "T\xE9lefono en caso de emergencia (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    id: "telefono_emergencia",
+    name: "telefono_contacto_emergencia",
+    id: "telefono_contacto_emergencia"
+  }, register('telefono_contacto_emergencia'), {
     value: telefono_contacto_emergencia,
     onChange: function onChange(e) {
       return setTelefono_contacto_emergencia(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-phone"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$telefono_cont = errors.telefono_contacto_emergencia) === null || _errors$telefono_cont === void 0 ? void 0 : _errors$telefono_cont.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-secondary"
-  }, "Actualizar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (EditarExpediente);
@@ -83731,14 +85237,412 @@ var EditarExpediente = function EditarExpediente() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _AntecedentesComponents_VerAntecedente__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../AntecedentesComponents/VerAntecedente */ "./resources/js/src/AntecedentesComponents/VerAntecedente.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
 
 
 var VerExpediente = function VerExpediente() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_6__["default"].API_URL;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      nombres = _useState2[0],
+      setNombres = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      apellidos = _useState4[0],
+      setApellidos = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      identificacion = _useState6[0],
+      setIdentificacion = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      fecha_nacimiento = _useState8[0],
+      setFecha_nacimiento = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      direccion = _useState10[0],
+      setDireccion = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      telefono = _useState12[0],
+      setTelefono = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      correo = _useState14[0],
+      setCorreo = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      estado_civil = _useState16[0],
+      setEstado_civil = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      nombre_conyugue = _useState18[0],
+      setNombre_conyugue = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      apellido_conyugue = _useState20[0],
+      setApellido_conyugue = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      nombre_contacto_emergencia = _useState22[0],
+      setNombre_contacto_emergencia = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      telefono_contacto_emergencia = _useState24[0],
+      setTelefono_contacto_emergencia = _useState24[1];
+
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState26 = _slicedToArray(_useState25, 2),
+      estado_paciente = _useState26[0],
+      setEstado_paciente = _useState26[1];
+
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState28 = _slicedToArray(_useState27, 2),
+      genero = _useState28[0],
+      setGenero = _useState28[1];
+
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState30 = _slicedToArray(_useState29, 2),
+      pais = _useState30[0],
+      setPais = _useState30[1];
+
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState32 = _slicedToArray(_useState31, 2),
+      municipio = _useState32[0],
+      setMunicipio = _useState32[1];
+
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState34 = _slicedToArray(_useState33, 2),
+      departamento = _useState34[0],
+      setDepartamento = _useState34[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_6__["default"].paciente_ver(codigo).then(function (res) {
+      var paciente = res.data;
+      setNombres(paciente.nombres);
+      setApellidos(paciente.apellidos);
+      setIdentificacion(paciente.identificacion);
+      setFecha_nacimiento(paciente.fecha_nacimiento);
+      setDireccion(paciente.direccion);
+      setTelefono(paciente.telefono);
+      setCorreo(paciente.correo);
+      setEstado_civil(paciente.estado_civil);
+      setNombre_conyugue(paciente.nombre_conyugue);
+      setApellido_conyugue(paciente.apellido_conyugue);
+      setNombre_contacto_emergencia(paciente.nombre_contacto_emergencia);
+      setTelefono_contacto_emergencia(paciente.telefono_contacto_emergencia);
+      setEstado_paciente(paciente.estado_paciente);
+      setGenero(paciente.genero);
+      setPais(paciente.nombre_pais);
+      setMunicipio(paciente.nombre_municipio);
+      setDepartamento(paciente.nombre_departamento);
+    });
+  }, []);
+
+  function edad() {
+    var nace = new Date(fecha_nacimiento);
+    var hoy = new Date();
+    var mes = hoy.getMonth();
+    var dia = hoy.getDate();
+    var año = hoy.getFullYear();
+    hoy.setDate(dia);
+    hoy.setMonth(mes);
+    hoy.setFullYear(año);
+    edad = Math.floor((hoy - nace) / (1000 * 60 * 60 * 24) / 365);
+    return edad;
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "footer clearfix mb-0 text-muted"
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "float-start"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2021 \xA9 Expediente cl\xEDnico")));
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "C\xF3digo de expediente: ", codigo)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/expedientes"
+  }, "Consulta expedientes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "ver"
+  }, "Ver expediente"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Datos personales"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, identificacion ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Identificaci\xF3n") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, identificacion ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", identificacion) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Nombre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, nombres)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Apellidos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, apellidos)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Estado paciente"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, estado_paciente)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "G\xE9nero"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, genero)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fecha de nacimiento [A\xF1o-Mes-D\xEDa]"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, fecha_nacimiento)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Edad"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, String(edad()), " a\xF1os")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Direcci\xF3n"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, direccion, ", ", municipio, ", ", departamento, ", ", pais)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tel\xE9fono"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, telefono)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Correo electr\xF3nico"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, correo)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Estado civil"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, estado_civil)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, nombre_conyugue || apellido_conyugue ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Conyugue") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, nombre_conyugue || apellido_conyugue ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, nombre_conyugue, " ", apellido_conyugue) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Contacto de emergencia"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, nombre_contacto_emergencia)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tel\xE9fono del contacto de emergencia"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, telefono_contacto_emergencia)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "editar",
+    className: "btn btn-primary"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-pencil"
+  }), " Editar"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AntecedentesComponents_VerAntecedente__WEBPACK_IMPORTED_MODULE_5__["default"], null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VerExpediente);
@@ -84064,26 +85968,26 @@ var NotFound = function NotFound() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
 
-var schemaAgregarExpediente = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
-  identificacion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo identificación debe ser una cadena de texto").max(30, "El máximo de caracteres es 30"),
-  nombres: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo nombres debe ser una cadena de texto").max(150, "El máximo de caracteres es 150").required("El campo nombre es obligatorio"),
-  apellidos: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo apellidos debe ser una cadena de texto").max(150, "El máximo de caracteres es 150").required("El campo apellidos es obligatorio"),
-  fecha_nacimiento: yup__WEBPACK_IMPORTED_MODULE_0__["date"]("El campo fecha de nacimiento debe ser una fecha").required("El campo fecha de nacimiento es obligatorio"),
-  estado_paciente: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo estado paciente debe ser una cadena de texto").max(150, "El máximo de caracteres es 150").required("El campo estado paciente es obligatorio"),
-  direccion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo direccion debe ser una cadena de texto").max(250, "El máximo de caracteres es 250").required("El campo direccion es obligatorio"),
-  telefono: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo telefono debe ser una cadena de texto").max(25, "El máximo de caracteres es 25").required("El campo telefono es obligatorio"),
-  correo: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo correo debe ser una cadena de texto").email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150"),
-  estado_civil: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo estado civil debe ser una cadena de texto").max(30, "El máximo de caracteres es 30").required("El campo estado civil es obligatorio"),
-  nombre_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo nombre conyugue debe ser una cadena de texto").max(150, "El máximo de caracteres es 150"),
-  apellido_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo apellido conyugue debe ser una cadena de texto").max(150, "El máximo de caracteres es 150"),
-  nombre_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo nombre contacto de emergencia debe ser una cadena de texto").max(150, "El máximo de caracteres es 150").required("El campo contacto de emergencia es obligatorio"),
-  telefono_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]("El campo teléfono contacto de emergencia debe ser una cadena de texto").max(25, "El máximo de caracteres es 25").required("El campo teléfono contacto de emergencia es obligatorio"),
-  id_genero: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo género es obligatorio"),
-  id_pais: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo pais es obligatorio"),
-  id_departamento: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo departamento/estado es obligatorio"),
-  id_municipio: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo municipio/estado es obligatorio")
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  identificacion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(30, "El máximo de caracteres es 30").notRequired(),
+  nombres: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombres solo debe contener letras'),
+  apellidos: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo apellidos es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo apellidos solo debe contener letras'),
+  fecha_nacimiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo fecha de nacimiento es obligatorio"),
+  estado_paciente: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo estado paciente es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo estado paciente solo debe contener letras'),
+  direccion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250").required("El campo direccion es obligatorio"),
+  telefono: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(25, "El máximo de caracteres es 25").required("El campo telefono es obligatorio"),
+  correo: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150"),
+  estado_civil: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(30, "El máximo de caracteres es 30").required("El campo estado civil es obligatorio"),
+  nombre_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150"),
+  apellido_conyugue: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150"),
+  nombre_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo contacto de emergencia es obligatorio").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombre contacto de emergencia solo debe contener letras').max(150, "El máximo de caracteres es 150"),
+  telefono_contacto_emergencia: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo teléfono del contacto de emergencia es obligatorio").max(25, "El máximo de caracteres es 25").required("El campo teléfono contacto de emergencia es obligatorio"),
+  id_genero: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo genéro es obligatorio"),
+  id_pais: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo país es obligatorio"),
+  id_departamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo departamento/estado es obligatorio"),
+  id_municipio: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo municipio/ciudad es obligatorio")
 });
-/* harmony default export */ __webpack_exports__["default"] = (schemaAgregarExpediente);
+/* harmony default export */ __webpack_exports__["default"] = (schema);
 
 /***/ }),
 
@@ -84109,8 +86013,18 @@ var API_URL = 'http://localhost:8000/api';
   paciente_editar: function paciente_editar(codigo) {
     return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/editar"));
   },
+  paciente_ver: function paciente_ver(codigo) {
+    return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/ver"));
+  },
   paciente_buscar: function paciente_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/expedientes/").concat(param_busqueda, "/buscar"));
+  },
+  //Antecedentes
+  antecedente_editar: function antecedente_editar(codigo) {
+    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/editar"));
+  },
+  antecedente_ver: function antecedente_ver(codigo) {
+    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/ver"));
   },
   //Diagnósticos
   diagnosticos: function diagnosticos() {

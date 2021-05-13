@@ -14,6 +14,9 @@ import EditarExpediente from './ExpedientesComponents/EditarExpediente';
 import BuscarExpediente from './ExpedientesComponents/BuscarExpediente';
 import VerExpediente from './ExpedientesComponents/VerExpediente';
 
+import AgregarAntecedente from './AntecedentesComponents/AgregarAntecedente';
+import EditarAntecedente from './AntecedentesComponents/EditarAntecedente';
+
 import ConsultarDiagnostico from './DiagnosticosComponents/ConsultarDiagnostico';
 import AgregarDiagnostico from './DiagnosticosComponents/AgregarDiagnostico';
 import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
@@ -27,6 +30,7 @@ const App = () => {
     return(
         <Router className="container">
             <Switch>
+                
                 <Route exact path="/" component={Home}/>
 
                 <Route exact path="/expedientes" component={ConsultarExpediente} />
@@ -34,6 +38,9 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/editar" component={EditarExpediente} />
                 <Route exact path="/expedientes/:codigo/ver" component={VerExpediente} />
                 <Route exact path="/expedientes/:param_busqueda/buscar" component={BuscarExpediente} />
+
+                <Route exact path="/expedientes/:codigo/antecedentes/crear" component={AgregarAntecedente} />
+                <Route exact path="/expedientes/:codigo/antecedentes/editar" component={EditarAntecedente} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
