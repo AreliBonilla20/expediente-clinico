@@ -81069,7 +81069,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagnosticosComponents/BuscarDiagnostico */ "./resources/js/src/DiagnosticosComponents/BuscarDiagnostico.js");
 /* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagnosticosComponents/VerDiagnostico */ "./resources/js/src/DiagnosticosComponents/VerDiagnostico.js");
 /* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+/* harmony import */ var _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./TratamientosComponents/ConsultarTratamiento */ "./resources/js/src/TratamientosComponents/ConsultarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./TratamientosComponents/AgregarTratamiento */ "./resources/js/src/TratamientosComponents/AgregarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./TratamientosComponents/EditarTratamiento */ "./resources/js/src/TratamientosComponents/EditarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./TratamientosComponents/BuscarTratamiento */ "./resources/js/src/TratamientosComponents/BuscarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./TratamientosComponents/VerTratamiento */ "./resources/js/src/TratamientosComponents/VerTratamiento.js");
+/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+
+
+
+
+
 
 
 
@@ -81134,7 +81144,27 @@ var App = function App() {
     path: "/diagnosticos/:param_busqueda/buscar",
     component: _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_14__["default"]
+    exact: true,
+    path: "/tratamientosmedicos",
+    component: _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_14__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/tratamientosmedicos/crear",
+    component: _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_15__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/tratamientosmedicos/:codigo/editar",
+    component: _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_16__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/tratamientosmedicos/:codigo/ver",
+    component: _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_18__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/tratamientosmedicos/:param_busqueda/buscar",
+    component: _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_17__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_19__["default"]
   })));
 };
 
@@ -84016,6 +84046,23 @@ var Menu = function Menu() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/diagnosticos/crear"
   }, "Agregar diagn\xF3stico")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-grid-1x2-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Tratamientos M\xE9dicos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos/crear"
+  }, "Agregar tratamiento m\xE9dico")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "sidebar-title"
   }, "Forms & Tables"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "sidebar-toggler btn x"
@@ -84050,6 +84097,984 @@ var NotFound = function NotFound() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NotFound);
+
+/***/ }),
+
+/***/ "./resources/js/src/TratamientosComponents/AgregarTratamiento.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/src/TratamientosComponents/AgregarTratamiento.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var AgregarTratamiento = function AgregarTratamiento() {
+  var _errors$codigo_tratam, _errors$nombre_tratam, _errors$id_tipo_trata, _errors$descripcion_t, _errors$costo_tratami;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL; //Datos para el formulario
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tipos_tratamientos = _useState2[0],
+      setTipos_tratamientos = _useState2[1]; //Datos para la tabla
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      codigo_tratamiento = _useState4[0],
+      setCodigo_tratamiento = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      nombre_tratamiento = _useState6[0],
+      setNombre_tratamiento = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      id_tipo_tratamiento = _useState8[0],
+      setId_tipo_tratamiento = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      descripcion_tratamiento = _useState10[0],
+      setDescripcion_tratamiento = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      costo_tratamiento = _useState12[0],
+      setCosto_tratamiento = _useState12[1]; //Función para traer los datos que se ven en el formulario
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_tratamiento().then(function (res) {
+      var result = res.data;
+      setTipos_tratamientos(result.tipos_tratamientos);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schemaAgregarExpediente),
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors; //Funcion para guardar
+
+
+  var agregarTratamiento = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.prev = 1;
+              body = {
+                codigo_tratamiento: codigo_tratamiento,
+                nombre_tratamiento: nombre_tratamiento,
+                id_tipo_tratamiento: id_tipo_tratamiento,
+                descripcion_tratamiento: descripcion_tratamiento,
+                costo_tratamiento: costo_tratamiento
+              };
+              _context.next = 5;
+              return fetch("".concat(API_URL, "/tratamientosmedicos/guardar"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 5:
+              response = _context.sent;
+              window.location = "/tratamientosmedicos";
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+              console.error(_context.t0.message);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function agregarTratamiento(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Tratamientos m\xE9dicos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar tratamiento")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/tratamientosmedicos/crear"
+  }, "Agregar tratamiento"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: agregarTratamiento
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_tratamiento"
+  }, "C\xF3digo de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "codigo_tratamiento",
+    id: "codigo_tratamiento"
+  }, register('codigotratamiento'), {
+    value: codigo_tratamiento,
+    onChange: function onChange(e) {
+      return setCodigo_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-upc-scan"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_tratamiento"
+  }, "Nombre del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_tratamientoo",
+    id: "nombre_tratamiento"
+  }, register('nombre_tratamiento'), {
+    value: nombre_tratamiento,
+    onChange: function onChange(e) {
+      return setNombre_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_tratam = errors.nombre_tratamiento) === null || _errors$nombre_tratam === void 0 ? void 0 : _errors$nombre_tratam.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "id_tipo_tratamiento"
+  }, "Tipo del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "id_tipo_tratamiento",
+    id: "id_tipo_tratamiento"
+  }, register('id_tipo_tratamiento'), {
+    value: id_tipo_tratamiento,
+    onChange: function onChange(e) {
+      return setId_tipo_tratamiento(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), tipos_tratamientos.map(function (tipo_tratamiento) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: tipo_tratamiento.id_tipo_tratamiento
+    }, tipo_tratamiento.tipo_tratamiento);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_tipo_trata = errors.id_tipo_tratamiento) === null || _errors$id_tipo_trata === void 0 ? void 0 : _errors$id_tipo_trata.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "descripcion_tratamiento"
+  }, "Descripci\xF3n del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "descripcion_tratamiento",
+    id: "descripcion_tratamiento"
+  }, register('descripcion_tratamiento'), {
+    value: descripcion_tratamiento,
+    onChange: function onChange(e) {
+      return setDescripcion_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-card-checklist"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "costo_tratamiento"
+  }, "Costo del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "costo_tratamiento",
+    id: "costo_tratamiento"
+  }, register('descripcion_tratamiento'), {
+    value: costo_tratamiento,
+    onChange: function onChange(e) {
+      return setCosto_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-cash"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$costo_tratami = errors.costo_tratamiento) === null || _errors$costo_tratami === void 0 ? void 0 : _errors$costo_tratami.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarTratamiento);
+
+/***/ }),
+
+/***/ "./resources/js/src/TratamientosComponents/BuscarTratamiento.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/src/TratamientosComponents/BuscarTratamiento.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var BuscarTratamiento = function BuscarTratamiento() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      param_busqueda = _useParams.param_busqueda;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tratamientosmedicos = _useState2[0],
+      setTratamientosMedicos = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].tratamiento_buscar(param_busqueda).then(function (res) {
+      var result = res.data;
+      setTratamientosMedicos(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Tratamientos m\xE9dicos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "B\xFAsqueda")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos"
+  }, "Consulta tratamientos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos",
+    className: "btn btn-secondary"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-arrow-left"
+  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Resultados "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tratamientos encontrados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped",
+    id: "table1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, tratamientosmedicos.map(function (tratamiento) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.codigo_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.nombre_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "editar",
+      className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "ver",
+      className: "btn btn-info"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-table"
+    }), " Consultar")));
+  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BuscarTratamiento);
+
+/***/ }),
+
+/***/ "./resources/js/src/TratamientosComponents/ConsultarTratamiento.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/src/TratamientosComponents/ConsultarTratamiento.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var ConsultarTratamiento = function ConsultarTratamiento() {
+  var _React$createElement;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tratamientosmedicos = _useState2[0],
+      setTratamientosMedicos = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      param_busqueda = _useState4[0],
+      setParam_busqueda = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].tratamientosmedicos().then(function (res) {
+      var result = res.data;
+      setTratamientosMedicos(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Tratamientos m\xE9dicos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Consulta de tratamientos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos"
+  }, "Consulta tratamientos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientosmedicos/crear",
+    className: "btn btn-success"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-plus"
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-12 mb-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input-group mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "input-group-text",
+    id: "basic-addon1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-search"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
+    type: "text",
+    id: "last-name-column",
+    className: "form-control",
+    placeholder: "C\xF3digo, nombre del tratamiento",
+    name: "lname-column"
+  }, _defineProperty(_React$createElement, "id", "codigo_busqueda"), _defineProperty(_React$createElement, "value", param_busqueda), _defineProperty(_React$createElement, "onChange", function onChange(e) {
+    return setParam_busqueda(e.target.value);
+  }), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "tratamientosmedicos/".concat(param_busqueda, "/buscar"),
+    className: "btn btn-secondary"
+  }, " Buscar"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped",
+    id: "table1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, tratamientosmedicos.map(function (tratamiento) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.codigo_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.nombre_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "tratamientosmedicos/".concat(tratamiento.codigo_tratamiento, "/editar"),
+      className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "tratamientosmedicos/".concat(tratamiento.nombre_tratamiento, "/ver"),
+      className: "btn btn-info"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-table"
+    }), " Consultar")));
+  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ConsultarTratamiento);
+
+/***/ }),
+
+/***/ "./resources/js/src/TratamientosComponents/EditarTratamiento.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/src/TratamientosComponents/EditarTratamiento.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+var AgregarTratamiento = function AgregarTratamiento() {
+  var _errors$codigo_tratam, _errors$nombre_tratam, _errors$setId_tipo_tr, _errors$descripcion_t, _errors$costo_tratami;
+
+  //Aqui se guardar el codigo de diganostico que viene como parámetro 
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL; //Datos para el formulario
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tipos_tratamientos = _useState2[0],
+      setTipos_tratamientos = _useState2[1]; //Datos para la tabla
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      codigo_tratamiento = _useState4[0],
+      setCodigo_tratamiento = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      nombre_tratamiento = _useState6[0],
+      setNombre_tratamiento = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      id_tipo_tratamiento = _useState8[0],
+      setId_tipo_tratamiento = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      descripcion_tratamiento = _useState10[0],
+      setDescripcion_tratamiento = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      costo_tratamiento = _useState12[0],
+      setCosto_tratamiento = _useState12[1]; //Función para traer los datos que se ven en el formulario
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_tratamiento().then(function (res) {
+      var result = res.data;
+      setTipos_tratamientos(result.tipos_tratamientos);
+    });
+  }, []); //Función para cargar los datos del diagnostico que se va a editar
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].tratamiento_editar(codigo).then(function (res) {
+      var tratamiento = res.data;
+      setCodigo_tratamiento(tratamiento.codigo_tratamiento);
+      setNombre_tratamiento(tratamiento.nombre_tratamiento);
+      setId_tipo_tratamiento(tratamiento.id_tipo_tratamiento);
+      setDescripcion_tratamiento(tratamiento.descripcion_tratamiento);
+      setCosto_tratamiento(tratamiento.costo_tratamiento);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schemaAgregarExpediente),
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors; //Funcion para guardar
+
+
+  var editarTratamiento = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.prev = 1;
+              body = {
+                codigo_tratamiento: codigo_tratamiento,
+                nombre_tratamiento: nombre_tratamiento,
+                id_tipo_tratamiento: id_tipo_tratamiento,
+                descripcion_tratamiento: descripcion_tratamiento,
+                costo_tratamiento: costo_tratamiento
+              };
+              _context.next = 5;
+              return fetch("".concat(API_URL, "/tratamientosmedicos/").concat(codigo, "/actualizar"), {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 5:
+              response = _context.sent;
+              window.location = "/tratamientosmedicos";
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+              console.error(_context.t0.message);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function editarTratamiento(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Tratamientos m\xE9dicos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar tratamiento")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/tratamientosmedicos"
+  }, "Consultar diagn\xF3stico"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: editarTratamiento
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_tratamiento"
+  }, "C\xF3digo de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "codigo_tratamiento",
+    id: "codigo_tratamiento"
+  }, register('codigo_tratamiento'), {
+    value: codigo_tratamiento,
+    onChange: function onChange(e) {
+      return setCodigo_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_tratamiento"
+  }, "Nombre tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_tratamiento",
+    id: "nombre_tratamiento"
+  }, register('nombre_tratamiento'), {
+    value: nombre_tratamiento,
+    onChange: function onChange(e) {
+      return setNombre_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_tratam = errors.nombre_tratamiento) === null || _errors$nombre_tratam === void 0 ? void 0 : _errors$nombre_tratam.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "id_tipo_tratamiento"
+  }, "Tipo tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "id_tipo_tratamiento",
+    id: "id_tipo_tratamiento"
+  }, register('id_tipo_tratamiento'), {
+    value: id_tipo_tratamiento,
+    onChange: function onChange(e) {
+      return setId_tipo_tratamiento(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), tipos_tratamientos.map(function (tipo_tratamiento) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: tipo_tratamiento.id_tipo_tratamiento
+    }, tipo_tratamiento.tipo_tratamiento);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$setId_tipo_tr = errors.setId_tipo_tratamiento) === null || _errors$setId_tipo_tr === void 0 ? void 0 : _errors$setId_tipo_tr.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "descripcion_tratamiento"
+  }, "Descripci\xF3n del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "descripcion_tratamiento",
+    id: "descripcion_tratamiento"
+  }, register('descripcion_tratamiento'), {
+    value: descripcion_tratamiento,
+    onChange: function onChange(e) {
+      return setDescripcion_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-card-checklist"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "costo_tratamiento"
+  }, "Costo del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "costo_tratamiento",
+    id: "costo_tratamiento"
+  }, register('descripcion_tratamiento'), {
+    value: costo_tratamiento,
+    onChange: function onChange(e) {
+      return setCosto_tratamiento(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-cash"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$costo_tratami = errors.costo_tratamiento) === null || _errors$costo_tratami === void 0 ? void 0 : _errors$costo_tratami.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Actualizar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarTratamiento);
+
+/***/ }),
+
+/***/ "./resources/js/src/TratamientosComponents/VerTratamiento.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/TratamientosComponents/VerTratamiento.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var VerTratamiento = function VerTratamiento() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "footer clearfix mb-0 text-muted"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "float-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2021 \xA9 Tratamientos m\xE9dicos")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (VerTratamiento);
 
 /***/ }),
 
@@ -84124,6 +85149,19 @@ var API_URL = 'http://localhost:8000/api';
   },
   diagnostico_buscar: function diagnostico_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/diagnosticos/").concat(param_busqueda, "/buscar"));
+  },
+  //Tratamientos
+  tratamientosmedicos: function tratamientosmedicos() {
+    return axios.get("".concat(API_URL, "/tratamientosmedicos"));
+  },
+  datos_formulario_tratamiento: function datos_formulario_tratamiento() {
+    return axios.get("".concat(API_URL, "/tratamientosmedicos/crear"));
+  },
+  tratamiento_editar: function tratamiento_editar(codigo) {
+    return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(codigo, "/editar"));
+  },
+  tratamiento_buscar: function tratamiento_buscar(param_busqueda) {
+    return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(param_busqueda, "/buscar"));
   },
   API_URL: API_URL
 });
