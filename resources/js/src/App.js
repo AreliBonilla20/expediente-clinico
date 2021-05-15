@@ -20,6 +20,12 @@ import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
 import BuscarDiagnostico from './DiagnosticosComponents/BuscarDiagnostico';
 import VerDiagnostico from './DiagnosticosComponents/VerDiagnostico';
 
+import ConsultarExamen from './ExamenesComponents/ConsultarExamen';
+import AgregarExamen from './ExamenesComponents/AgregarExamen';
+import EditarExamen from './ExamenesComponents/EditarExamen';
+import BuscarExamen from './ExamenesComponents/BuscarExamen';
+import VerExamen from './ExamenesComponents/VerExamen';
+
 import NotFound from './LayoutComponents/NotFound';
 
 
@@ -41,7 +47,12 @@ const App = () => {
                 <Route exact path="/diagnosticos/:codigo/ver" component={VerDiagnostico} />
                 <Route exact path="/diagnosticos/:param_busqueda/buscar" component={BuscarDiagnostico} />
 
-                
+                <Route exact path="/examenes" component={ConsultarExamen} />
+                <Route exact path="/examenes/crear" component={AgregarExamen} />
+                <Route exact path="/examenes/:codigo/editar" component={EditarExamen} />
+                <Route exact path="/examenes/:codigo/ver" component={VerExamen} />
+                <Route exact path="/examenes/:param_busqueda/buscar" component={BuscarExamen} />
+
                 <Route component={NotFound} />
             </Switch>
         </Router>
