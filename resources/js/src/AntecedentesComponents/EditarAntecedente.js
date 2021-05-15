@@ -8,7 +8,7 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
-import schema from '../Validaciones/ExpedienteValidacion';
+import schema from '../Validaciones/AntecedenteValidacion';
 
 import API from '../api';
 
@@ -51,11 +51,10 @@ const AgregarAntecedente = () => {
      }, []);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schema),
+        resolver: yupResolver(schema),
       });
 
     const editarAntecedente = async (e) => {
-        e.preventDefault();
         try {
           const body = { historial_enfermedades, nombre_padre, apellidos_padre, fecha_nacimiento_padre, direccion_padre, 
                          padecimientos_padre, nombre_madre, apellidos_madre, fecha_nacimiento_madre, direccion_madre, padecimientos_madre, padecimientos_familiares
@@ -119,7 +118,7 @@ const AgregarAntecedente = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={editarAntecedente}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(editarAntecedente)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -275,7 +274,7 @@ const AgregarAntecedente = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="fecha_nacimiento_madre">Fecha de nacimiento del madre</label>
+                                                            <label htmlFor="fecha_nacimiento_madre">Fecha de nacimiento de la madre</label>
                                                             <div className="position-relative">
                                                                 <input type="date" className="form-control"
                                                                     name="fecha_nacimiento_madre"
@@ -293,7 +292,7 @@ const AgregarAntecedente = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="direccion_madre">Dirección del madre</label>
+                                                            <label htmlFor="direccion_madre">Dirección de la madre</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="direccion_madre"
@@ -312,7 +311,7 @@ const AgregarAntecedente = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="padecimientos_madre">Padecimientos del madre</label>
+                                                            <label htmlFor="padecimientos_madre">Padecimientos de la madre</label>
                                                             <div className="position-relative">
                                                                 <textarea type="text" className="form-control" rows="4"
                                                                     name="padecimientos_madre"

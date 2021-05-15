@@ -15,7 +15,8 @@ class PacienteController extends Controller
 {
     public function index()
     {  
-       return PacienteResource::collection(Paciente::orderBy('created_at', 'desc')->paginate(15));
+       $pacientes = DB::select('select * from pacientes order by created_at desc limit 10');
+       return PacienteResource::collection($pacientes);
     }
 
 
@@ -43,8 +44,55 @@ class PacienteController extends Controller
         $nombre = $request->nombres;
         $apellidos = $request->apellidos;
         $codigo_calculado = $this->get_codigo($nombre, $apellidos);
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::table('pacientes')->insert(
+        DB::insert('insert into pacientes (codigo, identificacion, nombres, apellidos, fecha_nacimiento, estado_paciente, direccion,
+                    telefono, correo, estado_civil, nombre_conyugue, apellido_conyugue, nombre_contacto_emergencia, telefono_contacto_emergencia,
+                    id_genero, id_pais, id_departamento, id_municipio, created_at) 
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    [$codigo_calculado,
+                     $request->identificacion,
+                     $request->nombres,
+                     $request->apellidos,
+                     $request->fecha_nacimiento,
+                     $request->estado_paciente, 
+                     $request->direccion, 
+                     $request->telefono, 
+                     $request->correo, 
+                     $request->estado_civil, 
+                     $request->nombre_conyugue, 
+                     $request->apellido_conyugue, 
+                     $request->nombre_contacto_emergencia, 
+                     $request->telefono_contacto_emergencia, 
+                     $request->id_genero, 
+                     $request->id_pais, 
+                     $request->id_departamento, 
+                     $request->id_municipio, 
+                     $fecha_actual
+                    ]);
+
+        DB::insert('insert into centros_medicos (id_centro_medico, nombre_centro_medico, direccion_centro_medico, director, telefono_director, correo_director, telefono1_centro_medico,
+        telefono2_centro_medico, correo_centro_medico, tiempo_consulta_medica, id_tipo_centro_medico, id_pais, id_departamento, id_municipio, created_at) 
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    [
+                     $request->id_centro_medico,
+                     $request->nombre_centro_medico,
+                     $request->direccion_centro_medico,
+                     $request->director,
+                     $request->telefono_director, 
+                     $request->correo_director, 
+                     $request->telefono1_centro_medico, 
+                     $request->telefono2_centro_medico, 
+                     $request->correo_centro_medico, 
+                     $request->tiempo_consulta_medica, 
+                     $request->id_tipo_centro_medico, 
+                     $request->id_pais, 
+                     $request->id_departamento, 
+                     $request->id_municipio, 
+                     $fecha_actual
+                    ]);
+
+        /*DB::table('pacientes')->insert(
             [
              'codigo' => $codigo_calculado,
              'identificacion' => $request->identificacion,
@@ -65,7 +113,7 @@ class PacienteController extends Controller
              'id_departamento' => $request->id_departamento,
              'id_municipio' => $request->id_municipio
              ]
-        );
+        );*/
         
         return response()->json('Expediente creado!');    
     }
@@ -94,7 +142,59 @@ class PacienteController extends Controller
 
     public function update($codigo, Request $request)
     {
-        DB::table('pacientes')->where('codigo', $codigo)->update(array
+        
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+        
+        DB::update('update pacientes set identificacion = ?, nombres = ?, apellidos = ?, fecha_nacimiento = ?, estado_paciente = ?, direccion = ?,
+                    telefono = ?, correo = ?, estado_civil = ?, nombre_conyugue = ?, apellido_conyugue = ?, nombre_contacto_emergencia = ?, telefono_contacto_emergencia = ?,
+                    id_genero = ?, id_pais = ?, id_departamento = ?, id_municipio = ?, updated_at = ?
+                    where codigo = ?', 
+                    [
+                    $request->identificacion,
+                    $request->nombres,
+                    $request->apellidos,
+                    $request->fecha_nacimiento,
+                    $request->estado_paciente, 
+                    $request->direccion, 
+                    $request->telefono, 
+                    $request->correo, 
+                    $request->estado_civil, 
+                    $request->nombre_conyugue, 
+                    $request->apellido_conyugue, 
+                    $request->nombre_contacto_emergencia, 
+                    $request->telefono_contacto_emergencia, 
+                    $request->id_genero, 
+                    $request->id_pais, 
+                    $request->id_departamento, 
+                    $request->id_municipio, 
+                    $fecha_actual,
+                    $codigo
+                    ]);
+
+                    DB::update('insert centros_medicos set id_centro_medico = ?, nombre_centro_medico = ?, direccion_centro_medico = ?, director = ?, telefono_director = ?, correo_director = ?, telefono1_centro_medico = ?,
+                    telefono2_centro_medico = ?, correo_centro_medico = ?, tiempo_consulta_medica = ?, id_tipo_centro_medico = ?, id_pais = ?, id_departamento = ?, id_municipio = ?, created_at = ? 
+                    where id_centro_medico = ?', 
+                                [
+                                 $request->id_centro_medico,
+                                 $request->nombre_centro_medico,
+                                 $request->direccion_centro_medico,
+                                 $request->director,
+                                 $request->telefono_director, 
+                                 $request->correo_director, 
+                                 $request->telefono1_centro_medico, 
+                                 $request->telefono2_centro_medico, 
+                                 $request->correo_centro_medico, 
+                                 $request->tiempo_consulta_medica, 
+                                 $request->id_tipo_centro_medico, 
+                                 $request->id_pais, 
+                                 $request->id_departamento, 
+                                 $request->id_municipio, 
+                                 $fecha_actual
+                                 $codigo
+                                ]);
+        
+        
+        /*DB::table('pacientes')->where('codigo', $codigo)->update(array
             (
              'identificacion' => $request->identificacion,
              'nombres' => $request->nombres,
@@ -114,7 +214,7 @@ class PacienteController extends Controller
              'id_departamento' => $request->id_departamento,
              'id_municipio' => $request->id_municipio
             )
-        );
+        );*/
 
         return response()->json('Paciente actualizado!');    
     }

@@ -1,3 +1,5 @@
+CREATE extension unaccent;
+
 INSERT INTO generos (id_genero, genero) VALUES
 	(1, 'Masculino'),
 	(2, 'Femenino');

@@ -39,6 +39,9 @@ export default {
     diagnostico_editar: (codigo) =>
     axios.get(`${API_URL}/diagnosticos/${codigo}/editar`),
 
+    diagnostico_ver: (codigo) =>
+    axios.get(`${API_URL}/diagnosticos/${codigo}/ver`),
+
     diagnostico_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/diagnosticos/${param_busqueda}/buscar`),
 

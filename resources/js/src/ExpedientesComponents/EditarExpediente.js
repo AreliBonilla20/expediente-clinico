@@ -30,6 +30,7 @@ const EditarExpediente = () => {
 
     const [opcion_pais, setOpcion_pais] = useState();
     const [opcion_depto, setOpcion_depto] = useState();
+    
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [identificacion, setIdentificacion] = useState('');
@@ -116,7 +117,7 @@ const EditarExpediente = () => {
             body: JSON.stringify(body)
             
           });
-          window.location = "/expedientes";
+          window.location = `/expedientes/${codigo}/ver`;
           
         } catch (err) {
           console.error(err.message);

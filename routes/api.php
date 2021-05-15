@@ -23,7 +23,6 @@ Route::put('/expedientes/{codigo}/actualizar', 'PacienteController@update');
 Route::get('/expedientes/{param_busqueda}/buscar', 'PacienteController@buscar');
 
 //Rutas para antecedentes
-
 Route::post('/antecedentes/{codigo}/guardar', 'AntecedentePacienteController@store');
 Route::get('/antecedentes/{codigo}/editar', 'AntecedentePacienteController@edit');
 Route::get('/antecedentes/{codigo}/ver', 'AntecedentePacienteController@show');

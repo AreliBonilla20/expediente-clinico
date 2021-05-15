@@ -71,7 +71,7 @@ const ConsultarDiagnostico = () => {
                                             <span className="input-group-text" id="basic-addon1"><i
                                                     className="bi bi-search"></i></span>
                                         <input type="text" id="last-name-column" className="form-control"
-                                                    placeholder="Código,nombre del diagnóstico" name="lname-column" 
+                                                    placeholder="Código, nombre del diagnóstico" name="lname-column" 
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />

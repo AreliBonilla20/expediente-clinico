@@ -251,13 +251,13 @@ const VerExpediente = () => {
             }
                 
             
-            {!antecedente == '' &&
+            {antecedente.id_antecedentes_paciente &&
             <div className="col-12 d-flex justify-content-end">
                 <Link to="antecedentes/editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
             </div>
             }
 
-            {antecedente.length == 0 &&
+            {!antecedente.id_antecedentes_paciente &&
             <div className="col-12 d-flex justify-content-start">
                 <Link to="antecedentes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar antecedentes</Link>
             </div>

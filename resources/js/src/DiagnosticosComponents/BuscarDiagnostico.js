@@ -18,9 +18,9 @@ const BuscarDiagnostico = () => {
     const [diagnosticos, setDiagnosticos] =useState([]);
 
     useEffect(() => {
-        API.diagnostico_buscar(param_busqueda).then(res => {
+        API.diagnostico_buscar(param_busqueda) .then(res => {
            const result = res.data;
-           setDiagnosticos(result.data);  
+           setDiagnosticos(result);  
        })
      }, []);
 

@@ -27,7 +27,7 @@ const Menu = () => {
                     
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i className="bi bi-grid-1x2-fill"></i>
+                            <i class="bi bi-folder-fill"></i>
                             <span>Expedientes</span>
                         </a>
                         <ul className="submenu">
@@ -42,7 +42,7 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i className="bi bi-grid-1x2-fill"></i>
+                            <i class="bi bi-file-earmark-check-fill"></i>
                             <span>Diagnósticos</span>
                         </a>
                         <ul className="submenu">

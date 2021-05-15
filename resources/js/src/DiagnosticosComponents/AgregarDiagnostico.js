@@ -7,38 +7,42 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import schema from '../Validaciones/DiagnosticoValidacion';
+
 import API from '../api';
 
 const AgregarDiagnostico = () => {
     
     const API_URL = API.API_URL;
 
-    //Datos para el formulario
+    const [diagnosticos, setDiagnosticos] = useState([]);
+
     const [tipos_diagnosticos, setTipos_diagnosticos] = useState([]);
 
-    //Datos para la tabla
     const [codigo_diagnostico, setCodigo_diagnostico] = useState('');
     const [nombre_diagnostico, setNombre_diagnostico] = useState('');
     const [id_tipo_diagnostico, setId_tipo_diagnostico] = useState('');
     const [descripcion_diagnostico, setDescripcion_diagnostico] = useState('');
     
-    //Función para traer los datos que se ven en el formulario
     useEffect(() => {
         API.datos_formulario_diagnostico().then(res => {
            const result = res.data;
            setTipos_diagnosticos(result.tipos_diagnosticos);
        })
+
+       API.diagnosticos().then(res => {
+           const result = res.data;
+           setDiagnosticos(result.data);
+       })
+
      }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-       // resolver: yupResolver(schema),
+        resolver: yupResolver(schema),
       });
 
-
-    //Funcion para guardar
-    const agregarDiagnostico = async e => {
-        e.preventDefault();
+    const agregarDiagnostico = async (data) => {
         try {
           const body = { codigo_diagnostico, nombre_diagnostico, id_tipo_diagnostico, descripcion_diagnostico};
           const response = await fetch(`${API_URL}/diagnosticos/guardar`, {
@@ -67,7 +71,7 @@ const AgregarDiagnostico = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Diagnósticos</h3>
-                                
+                              
                                 <p className="text-subtitle text-muted">Agregar diagnóstico</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
@@ -92,7 +96,7 @@ const AgregarDiagnostico = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={agregarDiagnostico}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(agregarDiagnostico)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -114,10 +118,19 @@ const AgregarDiagnostico = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_diagnostico?.message} </small>
+                                                              {
+                                                                  diagnosticos.map((diagnostico) => {
+                                                                      if(diagnostico.codigo_diagnostico === codigo_diagnostico){
+                                                                        return(
+                                                                            <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
+                                                                        )
+                                                                    }
+                                                                  })
+                                                              }
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-6">
+                                                    <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_diagnostico">Nombre diagnóstico (*)</label>
                                                             <div className="position-relative">
@@ -169,8 +182,9 @@ const AgregarDiagnostico = () => {
                                                                     <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.descripcion_diagnostico?.message} </small>
                                                         </div>
-                                                        <small className="text-danger"> {errors.descripcion_diagnostico?.message} </small>
+                                                        
                                                     </div>
 
                                                    
@@ -186,7 +200,7 @@ const AgregarDiagnostico = () => {
                                 </div>
                             </div>
                         </div>
-                   
+                        
                     </div>
                 </div>   
             </div>

@@ -8,14 +8,21 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import schema from '../Validaciones/DiagnosticoValidacion';
+
 import API from '../api';
 
-const AgregarDiagnostico = () => {
+const EditarDiagnostico = () => {
 
     //Aqui se guardar el codigo de diganostico que viene como parámetro 
     const { codigo } = useParams();
 
     const API_URL = API.API_URL;
+
+    const labels = document.getElementsByTagName('label');
+
+    const [diagnosticos, setDiagnosticos] = useState([]);
+    const [codigo_inicial, setCodigo_inicial] = useState('');
 
     //Datos para el formulario
     const [tipos_diagnosticos, setTipos_diagnosticos] = useState([]);
@@ -31,7 +38,19 @@ const AgregarDiagnostico = () => {
         API.datos_formulario_diagnostico().then(res => {
            const result = res.data;
            setTipos_diagnosticos(result.tipos_diagnosticos);
+
+           for(let i=0; i<labels.length; i++){
+                labels[i].click();
+            }
+
+            labels[0].click();
        })
+
+       API.diagnosticos().then(res => {
+        const result = res.data;
+        setDiagnosticos(result.data);
+
+        })
      }, []);
 
 
@@ -43,18 +62,18 @@ const AgregarDiagnostico = () => {
            setNombre_diagnostico(diagnostico.nombre_diagnostico);
            setId_tipo_diagnostico(diagnostico.id_tipo_diagnostico);
            setDescripcion_diagnostico(diagnostico.descripcion_diagnostico);
+           setCodigo_inicial(diagnostico.codigo_diagnostico);
        })
      }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const editarDiagnostico = async e => {
-        e.preventDefault();
+    const editarDiagnostico = async (data) => {
         try {
           const body = { codigo_diagnostico, nombre_diagnostico, id_tipo_diagnostico, descripcion_diagnostico};
           const response = await fetch(`${API_URL}/diagnosticos/${codigo}/actualizar`, {
@@ -108,7 +127,7 @@ const AgregarDiagnostico = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={editarDiagnostico}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(editarDiagnostico)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -130,6 +149,17 @@ const AgregarDiagnostico = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_diagnostico?.message} </small>
+                                                            {   
+                                                                  diagnosticos.map((diagnostico) => {
+                                                                      if(diagnostico.codigo_diagnostico !== codigo_inicial){
+                                                                        if(diagnostico.codigo_diagnostico === codigo_diagnostico){
+                                                                            return(
+                                                                                <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
+                                                                            )
+                                                                          }
+                                                                      }
+                                                                  })
+                                                              }
                                                         </div>
                                                     </div>
                                            
@@ -212,4 +242,4 @@ const AgregarDiagnostico = () => {
     );
 }
 
-export default AgregarDiagnostico;
+export default EditarDiagnostico;

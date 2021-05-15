@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAntecendentesPacientesTable extends Migration
+class CreateAntecedentesPacientesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAntecendentesPacientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('antecendentes_pacientes', function (Blueprint $table) {
+        Schema::create('antecedentes_pacientes', function (Blueprint $table) {
             $table->increments('id_antecedentes_paciente');
             
             $table->string('codigo_paciente');
@@ -45,6 +45,6 @@ class CreateAntecendentesPacientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('antecendentes_pacientes');
+        Schema::dropIfExists('antecedentes_pacientes');
     }
 }

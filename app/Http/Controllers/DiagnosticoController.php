@@ -11,7 +11,8 @@ class DiagnosticoController extends Controller
 {
     public function index()
     {  
-       return DiagnosticoResource::collection(Diagnostico::orderBy('created_at', 'desc')->paginate(15));
+       $diagnosticos = DB::select('select * from diagnosticos order by created_at asc limit 10');
+       return DiagnosticoResource::collection($diagnosticos);
       
     }
 
@@ -28,15 +29,25 @@ class DiagnosticoController extends Controller
 
     public function store(Request $request)
     {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::table('diagnosticos')->insert(
+        DB::insert('insert into diagnosticos (codigo_diagnostico, id_tipo_diagnostico, nombre_diagnostico, descripcion_diagnostico, created_at) 
+                    values (?, ?, ?, ?, ?)', 
+                    [$request->codigo_diagnostico, 
+                     $request->id_tipo_diagnostico,
+                     $request->nombre_diagnostico,
+                     $request->descripcion_diagnostico, 
+                     $fecha_actual
+                    ]);
+
+        /*DB::table('diagnosticos')->insert(
             [
              'codigo_diagnostico' => $request->codigo_diagnostico,
              'id_tipo_diagnostico' => $request->id_tipo_diagnostico,
              'nombre_diagnostico' => $request->nombre_diagnostico,
              'descripcion_diagnostico' => $request->descripcion_diagnostico
              ]
-        );
+        );*/
         
         return response()->json('Diagnóstico creado!');    
     }
@@ -48,27 +59,51 @@ class DiagnosticoController extends Controller
         return response()->json($diagnostico_editar[0]);    
     }
 
-    public function update($codigo, Request $request)
+    public function show($codigo)
     {
-        DB::table('diagnosticos')->where('codigo_diagnostico', $codigo)->update(array
+        $diagnostico_ver = DB::select('select * from diagnosticos inner join tipo_diagnostico on diagnosticos.id_tipo_diagnostico = tipo_diagnostico.id_tipo_diagnostico
+        where codigo_diagnostico = ?', [$codigo]); 
+
+        return response()->json($diagnostico_ver[0]);    
+    }
+
+    public function update(Request $request, $codigo)
+    {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+        
+        DB::update('update diagnosticos set codigo_diagnostico = ?, id_tipo_diagnostico = ?, nombre_diagnostico = ?,  descripcion_diagnostico = ?, updated_at = ?
+                    where codigo_diagnostico = ?', 
+                    [$request->codigo_diagnostico, 
+                     $request->id_tipo_diagnostico,
+                     $request->nombre_diagnostico,
+                     $request->descripcion_diagnostico,
+                     $fecha_actual,
+                     $codigo
+                    ]);
+
+        /*DB::table('diagnosticos')->where('codigo_diagnostico', $codigo)->update(array
             (
             'codigo_diagnostico' => $request->codigo_diagnostico,
             'id_tipo_diagnostico' => $request->id_tipo_diagnostico,
             'nombre_diagnostico' => $request->nombre_diagnostico,
             'descripcion_diagnostico' => $request->descripcion_diagnostico
             )
-        );
+        );*/
 
         return response()->json('Diagnóstico actualizado!');    
     }
 
     public function buscar($param_busqueda)
     {
+        $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
 
-        $diagnosticos = DB::select("select * from diagnosticos where lower(codigo_diagnostico) = ? or lower(nombre_diagnostico) = ?", 
-        [strtolower($param_busqueda), strtolower($param_busqueda)]);
+        $codigo_diagnostico = '%'.$param_busqueda.'%';
+        $nombre_diagnostico = '%'.$param_busqueda.'%';
         
-        return DiagnosticoResource::collection($diagnosticos);
+        $diagnosticos = DB::select('select * from diagnosticos where UNACCENT(lower(codigo_diagnostico)) LIKE ? or UNACCENT(lower(nombre_diagnostico)) LIKE ?', 
+        [strtolower($codigo_diagnostico), strtolower($nombre_diagnostico)]);
+
+        return response()->json($diagnosticos);
 
     }
 
