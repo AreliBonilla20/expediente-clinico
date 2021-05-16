@@ -23,6 +23,12 @@ import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
 import BuscarDiagnostico from './DiagnosticosComponents/BuscarDiagnostico';
 import VerDiagnostico from './DiagnosticosComponents/VerDiagnostico';
 
+import ConsultarCentroMedico from './CentrosMedicosComponents/ConsultarCentroMedico';
+import AgregarCentroMedico from './CentrosMedicosComponents/AgregarCentroMedico';
+import EditarCentroMedico from './CentrosMedicosComponents/EditarCentroMedico';
+import BuscarCentroMedico from './CentrosMedicosComponents/BuscarCentroMedico';
+import VerCentroMedico from './CentrosMedicosComponents/VerCentroMedico';
+
 import NotFound from './LayoutComponents/NotFound';
 
 
@@ -48,7 +54,12 @@ const App = () => {
                 <Route exact path="/diagnosticos/:codigo/ver" component={VerDiagnostico} />
                 <Route exact path="/diagnosticos/:param_busqueda/buscar" component={BuscarDiagnostico} />
 
-                
+                <Route exact path="/centros_medicos" component={ConsultarCentroMedico} />
+                <Route exact path="/centros_medicos/crear" component={AgregarCentroMedico} />
+                <Route exact path="/centros_medicos/:codigo/editar" component={EditarCentroMedico} />
+                <Route exact path="/centros_medicos/:codigo/ver" component={VerCentroMedico} />
+                <Route exact path="/centros_medicos/:param_busqueda/buscar" component={BuscarCentroMedico} />
+                                
                 <Route component={NotFound} />
             </Switch>
         </Router>
