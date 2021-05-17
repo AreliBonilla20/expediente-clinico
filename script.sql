@@ -310,6 +310,13 @@ insert into tipo_diagnostico (id_tipo_diagnostico, tipo_diagnostico) values
 (19, 'Causas externas de morbilidad'),
 (20, 'Factores que influyen en el estado de salud y contacto con los servicios sanitarios');
 
+INSERT INTO tipo_centro_medico (id_tipo_centro_medico, tipo_centro_medico) VALUES 
+(1, 'Centro de atención psiquiátrica'),
+(2, 'Centro de cuidados ambulatorios'),
+(3, 'Consultorio médico'),
+(4, 'Hospital');
+
+
 
 
 
