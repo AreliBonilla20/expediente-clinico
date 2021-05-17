@@ -82612,7 +82612,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Validaciones_CentroMedicoValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/CentroMedicoValidacion */ "./resources/js/src/Validaciones/CentroMedicoValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -82639,140 +82642,149 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- //import schemaAgregarExpediente from '../Validaciones/ExpedienteValidacion';
+
 
 
 
 var AgregarCentroMedico = function AgregarCentroMedico() {
-  var _errors$id_centro_med, _errors$nombre_centro, _errors$id_tipo_centr, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion_cen, _errors$telefono1_cen, _errors$telefono2_cen, _errors$correo_centro, _errors$director, _errors$telefono_dire, _errors$correo_direct, _errors$tiempo_consul;
+  var _errors$id_centro_med, _errors$nombre_centro, _errors$id_tipo_centr, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion_cen, _errors$telefono1_cen, _errors$telefono2_cen, _errors$correo_centro, _errors$director, _errors$telefono_dire, _errors$correo_direct, _extends2, _errors$tiempo_consul;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      tipo_centro_medico = _useState2[0],
-      setTipo_centro_medico = _useState2[1];
+      centros_medicos = _useState2[0],
+      setCentros_medicos = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      paises = _useState4[0],
-      setPaises = _useState4[1];
+      tipo_centro_medico = _useState4[0],
+      setTipo_centro_medico = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      municipios = _useState6[0],
-      setMunicipios = _useState6[1];
+      paises = _useState6[0],
+      setPaises = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      departamentos = _useState8[0],
-      setDepartamentos = _useState8[1];
+      municipios = _useState8[0],
+      setMunicipios = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      opcion_pais = _useState10[0],
-      setOpcion_pais = _useState10[1];
+      departamentos = _useState10[0],
+      setDepartamentos = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState12 = _slicedToArray(_useState11, 2),
-      opcion_depto = _useState12[0],
-      setOpcion_depto = _useState12[1];
+      opcion_pais = _useState12[0],
+      setOpcion_pais = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState14 = _slicedToArray(_useState13, 2),
-      id_centro_medico = _useState14[0],
-      setId_centro_medico = _useState14[1];
+      opcion_depto = _useState14[0],
+      setOpcion_depto = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      nombre_centro_medico = _useState16[0],
-      setNombre_centro_medico = _useState16[1];
+      id_centro_medico = _useState16[0],
+      setId_centro_medico = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      direccion_centro_medico = _useState18[0],
-      setDireccion_centro_medico = _useState18[1];
+      nombre_centro_medico = _useState18[0],
+      setNombre_centro_medico = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      director = _useState20[0],
-      setDirector = _useState20[1];
+      direccion_centro_medico = _useState20[0],
+      setDireccion_centro_medico = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState22 = _slicedToArray(_useState21, 2),
-      telefono_director = _useState22[0],
-      setTelefono_director = _useState22[1];
+      director = _useState22[0],
+      setDirector = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState24 = _slicedToArray(_useState23, 2),
-      correo_director = _useState24[0],
-      setCorreo_director = _useState24[1];
+      telefono_director = _useState24[0],
+      setTelefono_director = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState26 = _slicedToArray(_useState25, 2),
-      telefono1_centro_medico = _useState26[0],
-      setTelefono1_centro_medico = _useState26[1];
+      correo_director = _useState26[0],
+      setCorreo_director = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState28 = _slicedToArray(_useState27, 2),
-      telefono2_centro_medico = _useState28[0],
-      setTelefono2_centro_medico = _useState28[1];
+      telefono1_centro_medico = _useState28[0],
+      setTelefono1_centro_medico = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState30 = _slicedToArray(_useState29, 2),
-      correo_centro_medico = _useState30[0],
-      setCorreo_centro_medico = _useState30[1];
+      telefono2_centro_medico = _useState30[0],
+      setTelefono2_centro_medico = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState32 = _slicedToArray(_useState31, 2),
-      tiempo_consulta_medica = _useState32[0],
-      setTiempo_consulta_medica = _useState32[1];
+      correo_centro_medico = _useState32[0],
+      setCorreo_centro_medico = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState34 = _slicedToArray(_useState33, 2),
-      id_tipo_centro_medico = _useState34[0],
-      setId_tipo_centro_medico = _useState34[1];
+      tiempo_consulta_medica = _useState34[0],
+      setTiempo_consulta_medica = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState36 = _slicedToArray(_useState35, 2),
-      id_pais = _useState36[0],
-      setId_pais = _useState36[1];
+      id_tipo_centro_medico = _useState36[0],
+      setId_tipo_centro_medico = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      id_departamento = _useState38[0],
-      setId_departamento = _useState38[1];
+      id_pais = _useState38[0],
+      setId_pais = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState40 = _slicedToArray(_useState39, 2),
-      id_municipio = _useState40[0],
-      setId_municipio = _useState40[1];
+      id_departamento = _useState40[0],
+      setId_departamento = _useState40[1];
+
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState42 = _slicedToArray(_useState41, 2),
+      id_municipio = _useState42[0],
+      setId_municipio = _useState42[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_centro_medico().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_centro_medico().then(function (res) {
       var result = res.data;
       setTipo_centro_medico(result.tipos_centros_medicos);
       setPaises(result.paises);
       setDepartamentos(result.departamentos);
       setMunicipios(result.municipios);
     });
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].centros_medicos().then(function (res) {
+      var result = res.data;
+      setCentros_medicos(result.data);
+    });
   }, []);
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//  resolver: yupResolver(schemaAgregarCentroMedico),
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_CentroMedicoValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.formState.errors;
 
   var agregarCentroMedico = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 id_centro_medico: id_centro_medico,
                 nombre_centro_medico: nombre_centro_medico,
@@ -82789,7 +82801,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
                 id_departamento: id_departamento,
                 id_municipio: id_municipio
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/centros_medicos/guardar"), {
                 method: "POST",
                 headers: {
@@ -82798,24 +82810,24 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
               //Regresa luego de guardar. Misma ruta de api.php
               window.location = "/centros_medicos";
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function agregarCentroMedico(_x) {
@@ -82872,7 +82884,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: agregarCentroMedico
+    onSubmit: handleSubmit(agregarCentroMedico)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -82883,7 +82895,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "id_centro_medico"
-  }, "Identificador"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Identificador(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -82898,11 +82910,17 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-person"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$id_centro_med = errors.id_centro_medico) === null || _errors$id_centro_med === void 0 ? void 0 : _errors$id_centro_med.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+  }, " ", (_errors$id_centro_med = errors.id_centro_medico) === null || _errors$id_centro_med === void 0 ? void 0 : _errors$id_centro_med.message, " "), centros_medicos.map(function (centros) {
+    if (centros.id_centro_medico === id_centro_medico) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+        className: "text-danger"
+      }, "Ya existe un registro con este mismo identificador, debe ser distinto");
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -83031,7 +83049,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$id_municipio = errors.id_municipio) === null || _errors$id_municipio === void 0 ? void 0 : _errors$id_municipio.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -83051,7 +83069,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-person"
+    className: "bi bi-house"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$direccion_cen = errors.direccion_centro_medico) === null || _errors$direccion_cen === void 0 ? void 0 : _errors$direccion_cen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -83084,7 +83102,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "telefono2_centro_medico"
-  }, "Otro tel\xE9fono centro m\xE9dico (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Otro tel\xE9fono centro m\xE9dico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -83108,7 +83126,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "correo_centro_medico"
-  }, "Correo electr\xF3nico centro m\xE9dico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Correo electr\xF3nico centro m\xE9dico(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -83118,7 +83136,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
   }, register('correo_centro_medico'), {
     value: correo_centro_medico,
     onChange: function onChange(e) {
-      return setCorre_centro_medico(e.target.value);
+      return setCorreo_centro_medico(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -83132,7 +83150,7 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "director"
-  }, "Director"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Director(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -83148,9 +83166,9 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$director = errors.director) === null || _errors$director === void 0 ? void 0 : _errors$director.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$director = errors.director) === null || _errors$director === void 0 ? void 0 : _errors$director.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -83206,12 +83224,12 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
     htmlFor: "tiempo_consulta_medica"
   }, "Tiempo de consulta m\xE9dica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends((_extends2 = {
     type: "text",
     className: "form-control",
-    name: "tiempo_consulta_medica",
-    id: "tiempo_consulta_medica"
-  }, register('tiempo_consulta_medica'), {
+    placeholder: "Formato HH:MM:SS",
+    name: "lname-column"
+  }, _defineProperty(_extends2, "name", "tiempo_consulta_medica"), _defineProperty(_extends2, "id", "tiempo_consulta_medica"), _extends2), register('tiempo_consulta_medica'), {
     value: tiempo_consulta_medica,
     onChange: function onChange(e) {
       return setTiempo_consulta_medica(e.target.value);
@@ -83316,7 +83334,7 @@ var BuscarCentroMedico = function BuscarCentroMedico() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/centros_medicos"
+    to: "/"
   }, "Consulta centros m\xE9dicos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -83485,8 +83503,8 @@ var ConsultarCentroMedico = function ConsultarCentroMedico() {
   }, " Buscar"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
     id: "table1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Identificador"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nombre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Direcci\xF3n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tel\xE9fono"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Correo electr\xF3nico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, centros_medicos.map(function (centro_medico) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.id_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.nombre_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.direccion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.telefono1_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.correo_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Identificador"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nombre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tel\xE9fono"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Correo electr\xF3nico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, centros_medicos.map(function (centro_medico) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.id_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.nombre_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.telefono1_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, centro_medico.correo_centro_medico), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "centros_medicos/".concat(centro_medico.id_centro_medico, "/editar"),
       className: "btn btn-primary"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -83517,14 +83535,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
 /* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Validaciones_CentroMedicoValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/CentroMedicoValidacion */ "./resources/js/src/Validaciones/CentroMedicoValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -83555,123 +83573,151 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditarCentroMedico = function EditarCentroMedico() {
   var _errors$id_centro_med, _errors$nombre_centro, _errors$id_tipo_centr, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion_cen, _errors$telefono1_cen, _errors$telefono2_cen, _errors$correo_centro, _errors$director, _errors$telefono_dire, _errors$correo_direct, _errors$tiempo_consul;
 
-  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useParams"])(),
+  //Aqui se guardar el codigo de diganostico que viene como parámetro 
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      tipo_centro_medico = _useState2[0],
-      setTipo_centro_medico = _useState2[1];
+      centros_medicos = _useState2[0],
+      setCentros_medicos = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      paises = _useState4[0],
-      setPaises = _useState4[1];
+      codigo_inicial = _useState4[0],
+      setCodigo_inicial = _useState4[1]; //Datos para el formulario
+
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      municipios = _useState6[0],
-      setMunicipios = _useState6[1];
+      tipo_centro_medico = _useState6[0],
+      setTipo_centro_medico = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      departamentos = _useState8[0],
-      setDepartamentos = _useState8[1];
+      paises = _useState8[0],
+      setPaises = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      opcion_pais = _useState10[0],
-      setOpcion_pais = _useState10[1];
+      municipios = _useState10[0],
+      setMunicipios = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      opcion_depto = _useState12[0],
-      setOpcion_depto = _useState12[1];
+      departamentos = _useState12[0],
+      setDepartamentos = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState14 = _slicedToArray(_useState13, 2),
-      id_centro_medico = _useState14[0],
-      setId_centro_medico = _useState14[1];
+      opcion_pais = _useState14[0],
+      setOpcion_pais = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState16 = _slicedToArray(_useState15, 2),
-      nombre_centro_medico = _useState16[0],
-      setNombre_centro_medico = _useState16[1];
+      opcion_depto = _useState16[0],
+      setOpcion_depto = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      direccion_centro_medico = _useState18[0],
-      setDireccion_centro_medico = _useState18[1];
+      id_centro_medico = _useState18[0],
+      setId_centro_medico = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      director = _useState20[0],
-      setDirector = _useState20[1];
+      nombre_centro_medico = _useState20[0],
+      setNombre_centro_medico = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState22 = _slicedToArray(_useState21, 2),
-      telefono_director = _useState22[0],
-      setTelefono_director = _useState22[1];
+      direccion_centro_medico = _useState22[0],
+      setDireccion_centro_medico = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState24 = _slicedToArray(_useState23, 2),
-      correo_director = _useState24[0],
-      setCorreo_director = _useState24[1];
+      director = _useState24[0],
+      setDirector = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState26 = _slicedToArray(_useState25, 2),
-      telefono1_centro_medico = _useState26[0],
-      setTelefono1_centro_medico = _useState26[1];
+      telefono_director = _useState26[0],
+      setTelefono_director = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState28 = _slicedToArray(_useState27, 2),
-      telefono2_centro_medico = _useState28[0],
-      setTelefono2_centro_medico = _useState28[1];
+      correo_director = _useState28[0],
+      setCorreo_director = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState30 = _slicedToArray(_useState29, 2),
-      correo_centro_medico = _useState30[0],
-      setCorreo_centro_medico = _useState30[1];
+      telefono1_centro_medico = _useState30[0],
+      setTelefono1_centro_medico = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState32 = _slicedToArray(_useState31, 2),
-      tiempo_consulta_medica = _useState32[0],
-      setTiempo_consulta_medica = _useState32[1];
+      telefono2_centro_medico = _useState32[0],
+      setTelefono2_centro_medico = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState34 = _slicedToArray(_useState33, 2),
-      id_tipo_centro_medico = _useState34[0],
-      setId_tipo_centro_medico = _useState34[1];
+      correo_centro_medico = _useState34[0],
+      setCorreo_centro_medico = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState36 = _slicedToArray(_useState35, 2),
-      id_pais = _useState36[0],
-      setId_pais = _useState36[1];
+      tiempo_consulta_medica = _useState36[0],
+      setTiempo_consulta_medica = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState38 = _slicedToArray(_useState37, 2),
-      id_departamento = _useState38[0],
-      setId_departamento = _useState38[1];
+      id_tipo_centro_medico = _useState38[0],
+      setId_tipo_centro_medico = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState40 = _slicedToArray(_useState39, 2),
-      id_municipio = _useState40[0],
-      setId_municipio = _useState40[1];
+      id_pais = _useState40[0],
+      setId_pais = _useState40[1];
+
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState42 = _slicedToArray(_useState41, 2),
+      id_departamento = _useState42[0],
+      setId_departamento = _useState42[1];
+
+  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState44 = _slicedToArray(_useState43, 2),
+      id_municipio = _useState44[0],
+      setId_municipio = _useState44[1]; //Función para traer los datos que se ven en el formulario
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_centro_medico().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_centro_medico().then(function (res) {
       var result = res.data;
       setTipo_centro_medico(result.tipos_centros_medicos);
       setPaises(result.paises);
       setDepartamentos(result.departamentos);
       setMunicipios(result.municipios);
+
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].click();
+      }
+
+      labels[0].click();
     });
-    _api__WEBPACK_IMPORTED_MODULE_8__["default"].centro_medico_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].centros_medicos().then(function (res) {
+      var result = res.data;
+      setCentros_medicos(result.data);
+    });
+  }, []); //Función para cargar los datos del centro médico que se va a editar
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].centro_medico_editar(codigo).then(function (res) {
       var centro_medico = res.data;
       setId_centro_medico(centro_medico.id_centro_medico);
       setNombre_centro_medico(centro_medico.nombre_centro_medico);
@@ -83683,6 +83729,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
       setTelefono2_centro_medico(centro_medico.telefono2_centro_medico);
       setCorreo_centro_medico(centro_medico.correo_centro_medico);
       setTiempo_consulta_medica(centro_medico.tiempo_consulta_medica);
+      setCodigo_inicial(centro_medico.id_centro_medico);
       setId_tipo_centro_medico(centro_medico.id_tipo_centro_medico);
       setId_pais(centro_medico.id_pais);
       setId_municipio(centro_medico.id_municipio);
@@ -83692,21 +83739,22 @@ var EditarCentroMedico = function EditarCentroMedico() {
     });
   }, []);
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_2__["useForm"])({//  resolver: yupResolver(schemaAgregarCentroMedico),
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_CentroMedicoValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
-      errors = _useForm.formState.errors;
+      errors = _useForm.formState.errors; //Funcion para guardar
+
 
   var editarCentroMedico = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 id_centro_medico: id_centro_medico,
                 nombre_centro_medico: nombre_centro_medico,
@@ -83723,7 +83771,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
                 id_departamento: id_departamento,
                 id_municipio: id_municipio
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/centros_medicos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
@@ -83732,24 +83780,23 @@ var EditarCentroMedico = function EditarCentroMedico() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
-              //Regresa luego de guardar. Misma ruta de api.php
               window.location = "/centros_medicos";
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function editarCentroMedico(_x) {
@@ -83772,7 +83819,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12 col-md-6 order-md-1 order-last"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Editar centro m\xE9dico ", codigo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Centro m\xE9dico: ", nombre_centro_medico)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Editar centro m\xE9dico ", codigo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, nombre_centro_medico)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12 col-md-6 order-md-2 order-first"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
     "aria-label": "breadcrumb",
@@ -83781,14 +83828,14 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "breadcrumb"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
     className: "breadcrumb-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/"
   }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
     className: "breadcrumb-item active",
     "aria-current": "page"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/expedientes/crear"
-  }, "Agregar centro m\xE9dico"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/centros_medicos"
+  }, "Consultar centros m\xE9dicos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12 col-12"
@@ -83804,7 +83851,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: editarCentroMedico
+    onSubmit: handleSubmit(editarCentroMedico)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -83830,11 +83877,19 @@ var EditarCentroMedico = function EditarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-person"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$id_centro_med = errors.id_centro_medico) === null || _errors$id_centro_med === void 0 ? void 0 : _errors$id_centro_med.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+  }, " ", (_errors$id_centro_med = errors.id_centro_medico) === null || _errors$id_centro_med === void 0 ? void 0 : _errors$id_centro_med.message, " "), centros_medicos.map(function (centro) {
+    if (centro.id_centro_medico !== codigo_inicial) {
+      if (centro.id_centro_medico === id_centro_medico) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+          className: "text-danger"
+        }, "Ya existe un registro con este mismo identificador, debe ser distinto");
+      }
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -83963,7 +84018,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$id_municipio = errors.id_municipio) === null || _errors$id_municipio === void 0 ? void 0 : _errors$id_municipio.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -83983,7 +84038,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-person"
+    className: "bi bi-house"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$direccion_cen = errors.direccion_centro_medico) === null || _errors$direccion_cen === void 0 ? void 0 : _errors$direccion_cen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -84016,7 +84071,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "telefono2_centro_medico"
-  }, "Otro tel\xE9fono centro m\xE9dico (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Otro tel\xE9fono centro m\xE9dico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -84040,7 +84095,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "correo_centro_medico"
-  }, "Correo electr\xF3nico centro m\xE9dico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Correo electr\xF3nico centro m\xE9dico(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -84050,7 +84105,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
   }, register('correo_centro_medico'), {
     value: correo_centro_medico,
     onChange: function onChange(e) {
-      return setCorre_centro_medico(e.target.value);
+      return setCorreo_centro_medico(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -84064,7 +84119,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "director"
-  }, "Director"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Director(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -84080,9 +84135,9 @@ var EditarCentroMedico = function EditarCentroMedico() {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-person"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$director = errors.director) === null || _errors$director === void 0 ? void 0 : _errors$director.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$director = errors.director) === null || _errors$director === void 0 ? void 0 : _errors$director.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -88160,6 +88215,40 @@ var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape(_defineProperty(
   direccion_madre: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150").nullable(),
   padecimientos_madre: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 150").nullable()
 }, "padecimientos_madre", yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 150").nullable()));
+/* harmony default export */ __webpack_exports__["default"] = (schema);
+
+/***/ }),
+
+/***/ "./resources/js/src/Validaciones/CentroMedicoValidacion.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/src/Validaciones/CentroMedicoValidacion.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  id_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo identificador es obligatorio").max(10, "El máximo de caracteres es 10"),
+  nombre_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre es obligatorio").max(250, "El máximo de caracteres es 250").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo nombre solo debe contener letras'),
+  direccion_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250").required("El campo dirección es obligatorio"),
+  director: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo director es obligatorio").max(150, "El máximo de caracteres es 150").matches('^[ñíóáéú a-zA-Z ]+$', 'El campo director solo debe contener letras'),
+  telefono_director: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(25, "El máximo de caracteres es 25").required("El campo teléfono es obligatorio"),
+  correo_director: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().nullable().email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150"),
+  correo_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().email("La dirección de correo debe ser válida").max(150, "El máximo de caracteres es 150").required("El campo correo eléctronico es obligatorio"),
+  telefono1_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(25, "El máximo de caracteres es 25").required("El campo teléfono es obligatorio"),
+  telefono2_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().nullable().max(25, "El máximo de caracteres es 25"),
+
+  /* tiempo_consulta_medica: yup
+   .string("El formato es HH:MM:SS"),
+  */
+  id_tipo_centro_medico: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo tipo centro médico es obligatorio"),
+  id_pais: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo país es obligatorio"),
+  id_departamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo departamento/estado es obligatorio"),
+  id_municipio: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo municipio/ciudad es obligatorio")
+});
 /* harmony default export */ __webpack_exports__["default"] = (schema);
 
 /***/ }),

@@ -44,7 +44,7 @@ const BuscarCentroMedico = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/centros_medicos">Consulta centros médicos</Link>
+                                        <Link to="/">Consulta centros médicos</Link>
                                         </li>
                                     </ol>
                                 </nav>

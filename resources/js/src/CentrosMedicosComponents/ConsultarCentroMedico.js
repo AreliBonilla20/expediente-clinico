@@ -91,7 +91,6 @@ const ConsultarCentroMedico = () => {
                                         <tr>
                                             <th>Identificador</th>
                                             <th>Nombre</th>
-                                            <th>Dirección</th>
                                             <th>Teléfono</th>
                                             <th>Correo electrónico</th>
                                             <th>Editar</th>
@@ -104,7 +103,6 @@ const ConsultarCentroMedico = () => {
                                           <tr>
                                             <td>{centro_medico.id_centro_medico}</td>
                                             <td>{centro_medico.nombre_centro_medico}</td>
-                                            <td>{centro_medico.direccion}</td>
                                             <td>{centro_medico.telefono1_centro_medico}</td>
                                             <td>{centro_medico.correo_centro_medico}</td>
                                             <td>
