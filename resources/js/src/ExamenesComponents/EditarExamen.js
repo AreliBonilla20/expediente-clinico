@@ -8,6 +8,8 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import schema from '../Validaciones/ExamenValidacion';
+
 import API from '../api';
 
 const AgregarExamen = () => {
@@ -16,6 +18,11 @@ const AgregarExamen = () => {
     const { codigo } = useParams();
 
     const API_URL = API.API_URL;
+
+    const labels = document.getElementsByTagName('label');
+
+    const [examenes, setExamenes] = useState([]);
+    const [codigo_inicial, setCodigo_inicial] = useState('');
 
    //Datos para el formulario
    const [tipos_examenes, setTipos_examenes] = useState([]);
@@ -32,7 +39,18 @@ const AgregarExamen = () => {
        API.datos_formulario_examen().then(res => {
           const result = res.data;
           setTipos_examenes(result.tipos_examenes);
-      })
+          
+          for(let i=0; i<labels.length; i++){
+              labels[i].click();
+            }
+            
+            labels[0].click();
+        })
+       
+       API.examenes().then(res => {
+          const result = res.data;
+          setExamenes(result.data);
+        })
     }, []);
 
 
@@ -45,18 +63,18 @@ const AgregarExamen = () => {
            setId_tipo_examen(examen.id_tipo_examen);
            setIndicaciones_examen(examen.indicaciones_examen);
            setCosto(examen.costo);
+           setCodigo_inicial(examen.codigo_examen);
        })
      }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const editarExamen = async e => {
-        e.preventDefault();
+    const editarExamen = async (data) => {
         try {
           const body = { codigo_examen, nombre_examen, id_tipo_examen, indicaciones_examen, costo};
           const response = await fetch(`${API_URL}/examenes/${codigo}/actualizar`, {
@@ -110,7 +128,7 @@ const AgregarExamen = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={editarExamen}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(editarExamen)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -132,8 +150,19 @@ const AgregarExamen = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_examen?.message} </small>
+                                                                {
+                                                                   examenes.map((examen) => {
+                                                                    if(examen.codigo_examen !== codigo_inicial){
+                                                                      if(examen.codigo_examen === codigo_examen){
+                                                                          return(
+                                                                              <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
+                                                                          )
+                                                                        }
+                                                                    }
+                                                                })
+                                                                }
                                                         </div>
-                                                    </div>
+                                                </div>
                                            
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">

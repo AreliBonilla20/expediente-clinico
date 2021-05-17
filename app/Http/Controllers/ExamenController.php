@@ -48,6 +48,13 @@ class ExamenController extends Controller
 
         return response()->json($examen_editar[0]);    
     }
+    
+    public function show($codigo)
+    {
+        $examen_ver = DB::select('select * from examenes where codigo_examen = ?', [$codigo]); 
+
+        return response()->json($examen_ver[0]);    
+    }
 
     public function update($codigo, Request $request)
     {

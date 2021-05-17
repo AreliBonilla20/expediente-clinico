@@ -59,7 +59,7 @@ const ConsultarExamen = () => {
                             
                             <br />
                             <div className="card-body">
-                            <h4>Buscar exámen</h4>
+                            <h4>Buscar examen</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
                            
                     

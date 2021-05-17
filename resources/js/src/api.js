@@ -40,6 +40,9 @@ export default {
     examen_editar: (codigo) =>
     axios.get(`${API_URL}/examenes/${codigo}/editar`),
 
+    examen_ver: (codigo) =>
+    axios.get(`${API_URL}/examenes/${codigo}/ver`),
+
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 

@@ -7,12 +7,15 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import schema from '../Validaciones/ExamenValidacion';
 
 import API from '../api';
 
 const AgregarExamen = () => {
 
     const API_URL = API.API_URL;
+
+    const [examenes, setExamenes] = useState([]);
 
     //Datos para el formulario
     const [tipos_examenes, setTipos_examenes] = useState([]);
@@ -30,17 +33,21 @@ const AgregarExamen = () => {
            const result = res.data;
            setTipos_examenes(result.tipos_examenes);
        })
-     }, []);
+
+       API.examenes().then(res => {
+           const result = res.data;
+           setExamenes(result.data);
+        })
+    }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const agregarExamen = async e => {
-        e.preventDefault();
+    const agregarExamen = async (data) => {
         try {
           const body = { codigo_examen, nombre_examen, id_tipo_examen, indicaciones_examen, costo};
           const response = await fetch(`${API_URL}/examenes/guardar`, {
@@ -94,7 +101,7 @@ const AgregarExamen = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={agregarExamen}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(agregarExamen)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -116,6 +123,15 @@ const AgregarExamen = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_examen?.message} </small>
+                                                                {
+                                                                    examenes.map((examen) => {
+                                                                        if(examen.codigo_examen === codigo_examen){
+                                                                            return(
+                                                                                <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
+                                                                            )
+                                                                        }
+                                                                  })
+                                                                }
                                                         </div>
                                                     </div>
                                            
@@ -177,7 +193,7 @@ const AgregarExamen = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo">Costo de examen</label>
+                                                            <label htmlFor="costo">Costo de examen (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="costo" 
