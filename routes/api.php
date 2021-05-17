@@ -28,6 +28,17 @@ Route::get('/antecedentes/{codigo}/editar', 'AntecedentePacienteController@edit'
 Route::get('/antecedentes/{codigo}/ver', 'AntecedentePacienteController@show');
 Route::put('/antecedentes/{codigo}/actualizar', 'AntecedentePacienteController@update');
 
+//Rutas para hospitalizaciones
+Route::get('/hospitalizaciones', 'HospitalizacionController@index');
+Route::post('/hospitalizaciones/{id_hospitalizacion}/guardar', 'HospitalizacionController@store');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/ver', 'HospitalizacionController@show');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionController@edit');
+Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'HospitalizacionController@update');
+
+//Rutas para chequeos - hospitalizaciones
+Route::get('/chequeos_hospitalizaciones', 'ChequeoHospitalizacionController@index');
+Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'ChequeoHospitalizacionController@store');
+
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
 Route::get('/diagnosticos/crear', 'DiagnosticoController@create');

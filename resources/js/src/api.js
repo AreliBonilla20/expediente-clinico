@@ -21,13 +21,21 @@ export default {
     axios.get(`${API_URL}/expedientes/${param_busqueda}/buscar`),
 
     //Antecedentes
-
     antecedente_editar: (codigo) =>
     axios.get(`${API_URL}/antecedentes/${codigo}/editar`),
 
     antecedente_ver: (codigo) =>
     axios.get(`${API_URL}/antecedentes/${codigo}/ver`),
 
+    //Hospitalizacion
+    hospitalizaciones: () =>
+    axios.get(`${API_URL}/hospitalizaciones`),
+
+    hospitalizacion_editar: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/editar`),
+
+    hospitalizacion_ver: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/ver`),
 
     //Diagnósticos
     diagnosticos: () =>

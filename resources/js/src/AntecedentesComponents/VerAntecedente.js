@@ -58,6 +58,25 @@ const VerExpediente = () => {
             <h5>Antecedentes</h5>
             <hr />
 
+            {historial_enfermedades &&
+                <div className="row">
+                <h6>Antecedentes del paciente</h6>
+               
+                <div className="col-md-3">
+                        <div className="form-group">
+                        
+                            <p>Historial de enfermedades</p>
+                        
+                        </div>
+                </div>
+                <div className="col-md-9">
+                        <div className="form-group">
+                            <p style={{fontWeight: "bold"}}> {historial_enfermedades}</p>
+                        </div>
+                </div>
+                </div>
+            }
+            <br />
             
             <div className="row">
             {nombre_padre && 
@@ -231,25 +250,7 @@ const VerExpediente = () => {
             }
             <br />
 
-            {historial_enfermedades &&
-                <div className="row">
-                <h6>Antecedentes del paciente</h6>
-               
-                <div className="col-md-3">
-                        <div className="form-group">
-                        
-                            <p>Historial de enfermedades</p>
-                        
-                        </div>
-                </div>
-                <div className="col-md-9">
-                        <div className="form-group">
-                            <p style={{fontWeight: "bold"}}> {historial_enfermedades}</p>
-                        </div>
-                </div>
-                </div>
-            }
-                
+           
             
             {antecedente.id_antecedentes_paciente &&
             <div className="col-12 d-flex justify-content-end">

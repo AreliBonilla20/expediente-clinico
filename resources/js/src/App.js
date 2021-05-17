@@ -17,6 +17,10 @@ import VerExpediente from './ExpedientesComponents/VerExpediente';
 import AgregarAntecedente from './AntecedentesComponents/AgregarAntecedente';
 import EditarAntecedente from './AntecedentesComponents/EditarAntecedente';
 
+import AgregarHospitalizacion from './HospitalizacionesComponents/AgregarHospitalizacion';
+import EditarHospitalizacion from './HospitalizacionesComponents/EditarHospitalizacion';
+import VerHospitalizacion from './/HospitalizacionesComponents/VerHospitalizacion';
+
 import ConsultarDiagnostico from './DiagnosticosComponents/ConsultarDiagnostico';
 import AgregarDiagnostico from './DiagnosticosComponents/AgregarDiagnostico';
 import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
@@ -39,8 +43,13 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/ver" component={VerExpediente} />
                 <Route exact path="/expedientes/:param_busqueda/buscar" component={BuscarExpediente} />
 
+
                 <Route exact path="/expedientes/:codigo/antecedentes/crear" component={AgregarAntecedente} />
                 <Route exact path="/expedientes/:codigo/antecedentes/editar" component={EditarAntecedente} />
+
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/crear" component={AgregarHospitalizacion} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/editar" component={EditarHospitalizacion} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/ver" component={VerHospitalizacion} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
