@@ -24,7 +24,7 @@ const Menu = () => {
             <div className="sidebar-menu">
                 <ul className="menu">
                     <li className="sidebar-title">Menu</li>
-                    
+
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                             <i class="bi bi-folder-fill"></i>
@@ -57,23 +57,37 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i className="bi bi-grid-1x2-fill"></i>
-                            <span>Tratamientos Médicos</span>
+                            <i class="bi bi-file-earmark-check-fill"></i>
+                            <span>Tratamientos médicos</span>
                         </a>
                         <ul className="submenu">
                             <li className="submenu-item ">
                                 <Link to="/tratamientosmedicos">Consultar</Link>
                             </li>
                             <li className="submenu-item ">
-                                <Link to="/tratamientosmedicos/crear">Agregar tratamiento médico</Link>
+                                <Link to="/tratamientosmedicos/crear">Agregar diagnóstico</Link>
                             </li>
                         </ul>
                     </li>
 
-                    
-                    <li className="sidebar-title">Forms &amp; Tables</li>
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                            <i class="bi bi-file-earmark-check-fill"></i>
+                            <span>Exámenes</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/examenes">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/examenes/crear">Agregar diagnóstico</Link>
+                            </li>
+                        </ul>
+                    </li>
 
-                    
+                   
+
+
 
                 </ul>
             </div>
