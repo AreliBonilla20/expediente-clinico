@@ -87975,8 +87975,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     setTratamientosMedicos(result.data);
   });
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
-    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_TratamientoValidacion__WEBPACK_IMPORTED_MODULE_9__["default"])
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
@@ -87984,13 +87983,14 @@ var AgregarTratamiento = function AgregarTratamiento() {
 
 
   var agregarTratamiento = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
+              e.preventDefault();
+              _context.prev = 1;
               body = {
                 codigo_tratamiento: codigo_tratamiento,
                 nombre_tratamiento: nombre_tratamiento,
@@ -87998,7 +87998,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
                 descripcion_tratamiento: descripcion_tratamiento,
                 costo_tratamiento: costo_tratamiento
               };
-              _context.next = 4;
+              _context.next = 5;
               return fetch("".concat(API_URL, "/tratamientosmedicos/guardar"), {
                 method: "POST",
                 headers: {
@@ -88007,23 +88007,23 @@ var AgregarTratamiento = function AgregarTratamiento() {
                 body: JSON.stringify(body)
               });
 
-            case 4:
+            case 5:
               response = _context.sent;
               window.location = "/tratamientosmedicos";
-              _context.next = 11;
+              _context.next = 12;
               break;
 
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context["catch"](0);
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
               console.error(_context.t0.message);
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 8]]);
+      }, _callee, null, [[1, 9]]);
     }));
 
     return function agregarTratamiento(_x) {
@@ -88080,7 +88080,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: handleSubmit(agregarTratamiento)
+    onSubmit: agregarTratamiento
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -88168,12 +88168,12 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "descripcion_tratamiento"
-  }, "Descripci\xF3n del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Descripci\xF3n del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    name: "descripcion_tratamiento",
+    name: "descripcion_tratamientoo",
     id: "descripcion_tratamiento"
   }, register('descripcion_tratamiento'), {
     value: descripcion_tratamiento,
@@ -88183,23 +88183,23 @@ var AgregarTratamiento = function AgregarTratamiento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-card-checklist"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "costo_tratamiento"
-  }, "Costo del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Costo del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    name: "costo_tratamiento",
+    name: "costo_tratamientoo",
     id: "costo_tratamiento"
-  }, register('descripcion_tratamiento'), {
+  }, register('costo_tratamiento'), {
     value: costo_tratamiento,
     onChange: function onChange(e) {
       return setCosto_tratamiento(e.target.value);
@@ -88207,7 +88207,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-cash"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$costo_tratami = errors.costo_tratamiento) === null || _errors$costo_tratami === void 0 ? void 0 : _errors$costo_tratami.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -88827,12 +88827,12 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "descripcion_tratamiento"
-  }, "Descripci\xF3n del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Descripci\xF3n del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    name: "descripcion_tratamiento",
+    name: "descripcion_tratamientoo",
     id: "descripcion_tratamiento"
   }, register('descripcion_tratamiento'), {
     value: descripcion_tratamiento,
@@ -88842,23 +88842,23 @@ var AgregarTratamiento = function AgregarTratamiento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-card-checklist"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$descripcion_t = errors.descripcion_tratamiento) === null || _errors$descripcion_t === void 0 ? void 0 : _errors$descripcion_t.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "costo_tratamiento"
-  }, "Costo del tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Costo del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    name: "costo_tratamiento",
+    name: "costo_tratamientoo",
     id: "costo_tratamiento"
-  }, register('descripcion_tratamiento'), {
+  }, register('costo_tratamiento'), {
     value: costo_tratamiento,
     onChange: function onChange(e) {
       return setCosto_tratamiento(e.target.value);
@@ -88866,10 +88866,10 @@ var AgregarTratamiento = function AgregarTratamiento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    "class": "bi bi-cash"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$costo_tratami = errors.costo_tratamiento) === null || _errors$costo_tratami === void 0 ? void 0 : _errors$costo_tratami.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$costo_tratami = errors.costo_tratamiento) === null || _errors$costo_tratami === void 0 ? void 0 : _errors$costo_tratami.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-secondary"
@@ -89226,7 +89226,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var schemaAgregarTratamiento = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
-  codigo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo código de tratamiento es obligatorio").max(10, "El máximo de caracteres es 10"),
+  codigo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(10, "El máximo de caracteres es 10").required("El campo código de tratamiento es obligatorio"),
   nombre_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre de tratamiento es obligatorio").max(150, "El máximo de caracteres es 150"),
   descripcion_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250"),
   id_tipo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo tipo de tratamiento es obligatorio"),

@@ -5,9 +5,9 @@ const schemaAgregarTratamiento = yup.object().shape({
 
     codigo_tratamiento: yup
     .string()
-    .required("El campo código de tratamiento es obligatorio")
-    .max(10, "El máximo de caracteres es 10"),
-
+    .max(10, "El máximo de caracteres es 10")
+    .required("El campo código de tratamiento es obligatorio"),
+    
     nombre_tratamiento: yup
     .string()
     .required("El campo nombre de tratamiento es obligatorio")

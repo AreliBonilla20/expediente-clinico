@@ -310,6 +310,22 @@ insert into tipo_diagnostico (id_tipo_diagnostico, tipo_diagnostico) values
 (19, 'Causas externas de morbilidad'),
 (20, 'Factores que influyen en el estado de salud y contacto con los servicios sanitarios');
 
-
+INSERT INTO tipo_tratamiento (id_tipo_tratamiento, tipo_tratamiento) VALUES
+	(1, 'Cirugía'),
+	(2, 'Dietoterapia'),
+	(3, 'Farmacoterapia'),
+	(4, 'Fisioterapia'),
+	(5, 'Hidroterapia'),
+	(6, 'Logopedia'),
+	(7, 'Ortopedia'),
+	(8, 'Prótesis'),
+	(9, 'Psicoterapia'),
+	(10, 'Quimioterapia'),
+	(11, 'Radioterapia'),
+	(12, 'Rehabilitación'),
+	(13, 'Reposo'),
+	(14, 'Sueroterapia'),
+	(15, 'Terapia de quelación'),
+	(16, 'Terapia ocupacional');
 
 

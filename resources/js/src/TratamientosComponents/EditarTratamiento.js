@@ -206,38 +206,38 @@ const AgregarTratamiento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="descripcion_tratamiento">Descripción del tratamiento</label>
+                                                            <label htmlFor="descripcion_tratamiento">Descripción del tratamiento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    name="descripcion_tratamiento" 
-                                                                    id="descripcion_tratamiento" 
+                                                                    name="descripcion_tratamientoo"
+                                                                    id="descripcion_tratamiento"
                                                                     {...register('descripcion_tratamiento')}
                                                                     value={descripcion_tratamiento}
                                                                     onChange={e => setDescripcion_tratamiento(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i class="bi bi-card-checklist"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.descripcion_tratamiento?.message} </small>
                                                         </div>
-                                                        <small className="text-danger"> {errors.descripcion_tratamiento?.message} </small>
                                                     </div>
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo_tratamiento">Costo del tratamiento</label>
+                                                            <label htmlFor="costo_tratamiento">Costo del tratamiento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    name="costo_tratamiento" 
-                                                                    id="costo_tratamiento" 
-                                                                    {...register('descripcion_tratamiento')}
+                                                                    name="costo_tratamientoo"
+                                                                    id="costo_tratamiento"
+                                                                    {...register('costo_tratamiento')}
                                                                     value={costo_tratamiento}
                                                                     onChange={e => setCosto_tratamiento(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i class="bi bi-cash"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.costo_tratamiento?.message} </small>
                                                         </div>
-                                                        <small className="text-danger"> {errors.costo_tratamiento?.message} </small>
                                                     </div>
 
                                                    
