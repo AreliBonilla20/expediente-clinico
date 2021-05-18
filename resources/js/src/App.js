@@ -32,6 +32,11 @@ import AgregarTratamiento from './TratamientosComponents/AgregarTratamiento';
 import EditarTratamiento from './TratamientosComponents/EditarTratamiento';
 import BuscarTratamiento from './TratamientosComponents/BuscarTratamiento';
 import VerTratamiento from './TratamientosComponents/VerTratamiento';
+import ConsultarMedicamento from './MedicamentosComponents/ConsultarMedicamento';
+import AgregarMedicamento from './MedicamentosComponents/AgregarMedicamento';
+import EditarMedicamento from './MedicamentosComponents/EditarMedicamento';
+import BuscarMedicamento from './MedicamentosComponents/BuscarMedicamento';
+import VerMedicamento from './MedicamentosComponents/VerMedicamento';
 
 import NotFound from './LayoutComponents/NotFound';
 
@@ -70,6 +75,12 @@ const App = () => {
                 <Route exact path="/tratamientosmedicos/:param_busqueda/buscar" component={BuscarTratamiento} />
 
                 
+                <Route exact path="/medicamentos" component={ConsultarMedicamento} />
+                <Route exact path="/medicamentos/crear" component={AgregarMedicamento} />
+                <Route exact path="/medicamentos/:codigo/editar" component={EditarMedicamento} />
+                <Route exact path="/medicamentos/:codigo/ver" component={VerMedicamento} />
+                <Route exact path="/medicamentos/:param_busqueda/buscar" component={BuscarMedicamento} />
+
                 <Route component={NotFound} />
             </Switch>
         </Router>

@@ -68,6 +68,21 @@ export default {
 
     tratamiento_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/tratamientosmedicos/${param_busqueda}/buscar`),
+    //Medicamentos
+    medicamentos: () =>
+    axios.get(`${API_URL}/medicamentos`),
+
+    datos_formulario_medicamento: () =>
+    axios.get(`${API_URL}/medicamentos/crear`),
+
+    medicamento_editar: (codigo) =>
+    axios.get(`${API_URL}/medicamentos/${codigo}/editar`),
+
+    medicamento_ver: (codigo) =>
+    axios.get(`${API_URL}/medicamentos/${codigo}/ver`),
+
+    medicamento_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/medicamentos/${param_busqueda}/buscar`),
 
     API_URL,
 
