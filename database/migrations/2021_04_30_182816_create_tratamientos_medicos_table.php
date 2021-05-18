@@ -20,8 +20,8 @@ class CreateTratamientosMedicosTable extends Migration
             $table->foreign('id_tipo_tratamiento')->references('id_tipo_tratamiento')->on('tipo_tratamiento');
             
             $table->string('nombre_tratamiento', 150);
-            $table->string('descripcion_tratamiento', 250);
-            $table->float('costo_tratamiento');
+            $table->string('descripcion_tratamiento', 500);
+            $table->float('costo_tratamiento', 8,2);
             $table->timestamps();
         });
     }

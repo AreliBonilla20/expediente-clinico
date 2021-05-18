@@ -135,7 +135,7 @@ const AgregarExamen = () => {
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-6">
+                                                    <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_examen">Nombre examen (*)</label>
                                                             <div className="position-relative">
@@ -193,7 +193,7 @@ const AgregarExamen = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo">Costo de examen (*)</label>
+                                                            <label htmlFor="costo">Costo de examen $ (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="costo" 

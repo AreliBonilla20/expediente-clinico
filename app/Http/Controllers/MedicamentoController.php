@@ -11,7 +11,8 @@ class MedicamentoController extends Controller
 {
     public function index()
     {  
-       return MedicamentoResource::collection(Medicamento::orderBy('created_at', 'desc')->paginate(15));
+       $medicamentos = DB::select('select * from medicamentos order by codigo_medicamento');
+       return MedicamentoResource::collection($medicamentos);
       
     }
 
@@ -27,19 +28,24 @@ class MedicamentoController extends Controller
     }
 
     public function store(Request $request)
-    {   
-        DB::table('medicamentos')->insert(
-            [
-             'codigo_medicamento' => $request->codigo_medicamento,
-             'id_tipo_medicamento' => $request->id_tipo_medicamento,
-             'nombre_medicamento' => $request->nombre_medicamento,
-             'descripcion_medicamento' => $request->descripcion_medicamento,
-             'presentacion_medicamento' => $request->presentacion_medicamento,
-             'costo_medicamento' => $request->costo_medicamento,
-             'existencia_medicamento' => $request->existencia_medicamento,
-             ]
-        );
-        
+    { 
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+
+        DB::insert('insert into medicamentos (codigo_medicamento, id_tipo_medicamento, nombre_medicamento, via_administracion, descripcion_medicamento, presentacion_medicamento,
+                    costo_medicamento, existencia_medicamento, created_at) 
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    [$request->codigo_medicamento, 
+                    $request->id_tipo_medicamento,
+                    $request->nombre_medicamento,
+                    $request->via_administracion, 
+                    $request->descripcion_medicamento, 
+                    $request->presentacion_medicamento, 
+                    $request->costo_medicamento, 
+                    $request->existencia_medicamento, 
+                    $fecha_actual
+                    ]);
+      
+       
         return response()->json('Medicamento creado!');    
     }
 
@@ -59,26 +65,36 @@ class MedicamentoController extends Controller
     }
 
     public function update($codigo, Request $request)
-    {
-        DB::table('medicamentos')->where('codigo_medicamento', $codigo)->update(array
-            (
-                'codigo_medicamento' => $request->codigo_medicamento,
-                'id_tipo_medicamento' => $request->id_tipo_medicamento,
-                'nombre_medicamento' => $request->nombre_medicamento,
-                'descripcion_medicamento' => $request->descripcion_medicamento,
-                'presentacion_medicamento' => $request->presentacion_medicamento,
-                'costo_medicamento' => $request->costo_medicamento,
-                'existencia_medicamento' => $request->existencia_medicamento,
-            )
-        );
+    {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+        
+        DB::update('update medicamentos set codigo_medicamento = ?, id_tipo_medicamento = ?, nombre_medicamento = ?, via_administracion = ?, descripcion_medicamento = ?, 
+                    presentacion_medicamento = ?, costo_medicamento = ?, existencia_medicamento = ?, updated_at = ? where codigo_medicamento = ?', 
+                    [$request->codigo_medicamento, 
+                     $request->id_tipo_medicamento,
+                     $request->nombre_medicamento,
+                     $request->via_administracion,
+                     $request->descripcion_medicamento,
+                     $request->descripcion_medicamento,
+                     $request->costo_medicamento,
+                     $request->existencia_medicamento,
+                     $fecha_actual,
+                     $codigo
+                    ]);
+
 
         return response()->json('Medicamento  actualizado!');    
     }
 
     public function buscar($param_busqueda)
     {
-        $medicamentos = DB::select("select * from medicamentos where lower(codigo_medicamento) = ? or lower(nombre_medicamento) = ?", 
-        [strtolower($param_busqueda), strtolower($param_busqueda)]);
+        $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
+
+        $codigo_medicamento = '%'.$param_busqueda.'%';
+        $nombre_medicamento = '%'.$param_busqueda.'%';
+        
+        $medicamentos = DB::select('select * from medicamentos where UNACCENT(lower(codigo_medicamento)) LIKE ? or UNACCENT(lower(nombre_medicamento)) LIKE ?', 
+        [strtolower($codigo_medicamento), strtolower($nombre_medicamento)]);
         
         return MedicamentoResource::collection($medicamentos);
 

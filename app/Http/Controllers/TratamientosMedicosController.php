@@ -11,8 +11,8 @@ class TratamientosMedicosController extends Controller
 {
     public function index()
     {  
-
-       return TratamientosMedicosResource::collection(TratamientosMedicos::orderBy('created_at', 'desc')->paginate(15));
+       $tratamientos_medicos = DB::select('select * from tratamientos_medicos order by codigo_tratamiento');
+       return TratamientosMedicosResource::collection($tratamientos_medicos);
       
     }
 
@@ -30,16 +30,17 @@ class TratamientosMedicosController extends Controller
 
     public function store(Request $request)
     {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::table('tratamientos_medicos')->insert(
-            [
-             'codigo_tratamiento' => $request->codigo_tratamiento,
-             'id_tipo_tratamiento' => $request->id_tipo_tratamiento,
-             'nombre_tratamiento' => $request->nombre_tratamiento,
-             'descripcion_tratamiento' => $request->descripcion_tratamiento,
-             'costo_tratamiento' => $request->costo_tratamiento,
-             ]
-        );
+        DB::insert('insert into tratamientos_medicos (codigo_tratamiento, id_tipo_tratamiento, nombre_tratamiento, descripcion_tratamiento, costo_tratamiento, created_at) 
+                    values (?, ?, ?, ?, ?, ?)', 
+                    [$request->codigo_tratamiento, 
+                     $request->id_tipo_tratamiento,
+                     $request->nombre_tratamiento,
+                     $request->descripcion_tratamiento, 
+                     $request->costo_tratamiento, 
+                     $fecha_actual
+                    ]);
         
         return response()->json('Tratamiento médico creado!');    
     }
@@ -60,26 +61,34 @@ class TratamientosMedicosController extends Controller
     }
 
     public function update($codigo, Request $request)
-    {
-        DB::table('tratamientos_medicos')->where('codigo_tratamiento', $codigo)->update(array
-            (
-                'codigo_tratamiento'=> $request->codigo_tratamiento,
-                'id_tipo_tratamiento' => $request->id_tipo_tratamiento,
-                'nombre_tratamiento' => $request->nombre_tratamiento,
-                'descripcion_tratamiento' => $request->descripcion_tratamiento,
-                'costo_tratamiento' => $request->costo_tratamiento,
-            )
-        );
+    {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+        
+        DB::update('update tratamientos_medicos set codigo_tratamiento = ?, id_tipo_tratamiento = ?, nombre_tratamiento = ?, descripcion_tratamiento = ?, costo_tratamiento = ?, updated_at = ?
+                    where codigo_tratamiento = ?', 
+                    [$request->codigo_tratamiento, 
+                     $request->id_tipo_tratamiento,
+                     $request->nombre_tratamiento,
+                     $request->descripcion_tratamiento,
+                     $request->costo_tratamiento,
+                     $fecha_actual,
+                     $codigo
+                    ]);
 
         return response()->json('Tratamiento médico actualizado!');    
     }
 
     public function buscar($param_busqueda)
     {
-        $tratamientos = DB::select("select * from tratamientos_medicos where lower(codigo_tratamiento) = ? or lower(nombre_tratamiento) = ?", 
-        [strtolower($param_busqueda), strtolower($param_busqueda)]);
+        $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
+
+        $codigo_tratamiento = '%'.$param_busqueda.'%';
+        $nombre_tratamiento = '%'.$param_busqueda.'%';
         
-        return TratamientosMedicosResource::collection($tratamientos);
+        $tratamientos_medicos = DB::select('select * from tratamientos_medicos where UNACCENT(lower(codigo_tratamiento)) LIKE ? or UNACCENT(lower(nombre_tratamiento)) LIKE ?', 
+        [strtolower($codigo_tratamiento), strtolower($nombre_tratamiento)]);
+
+        return TratamientosMedicosResource::collection($tratamientos_medicos);
 
     }
 

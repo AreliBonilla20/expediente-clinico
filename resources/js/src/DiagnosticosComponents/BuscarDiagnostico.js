@@ -20,7 +20,8 @@ const BuscarDiagnostico = () => {
     useEffect(() => {
         API.diagnostico_buscar(param_busqueda) .then(res => {
            const result = res.data;
-           setDiagnosticos(result);  
+           setDiagnosticos(result.data);
+             
        })
      }, []);
 
@@ -60,6 +61,7 @@ const BuscarDiagnostico = () => {
                             </div>
                             
                             <br />
+                            {diagnosticos.length > 0 &&
                             <div className="card-body">
                             <h4>Resultados </h4>
                             <p>Diagnósticos encontrados</p>
@@ -92,6 +94,13 @@ const BuscarDiagnostico = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            }
+                            {diagnosticos.length == 0 &&
+                               <div className="card-body">
+                                   <hr />
+                                   <p>No se encontaron resultados</p>
+                               </div>
+                            }
                         </div>
                     </section>
             </div>

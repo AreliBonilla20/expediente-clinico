@@ -82805,23 +82805,23 @@ var App = function App() {
     component: _CentrosMedicosComponents_BuscarCentroMedico__WEBPACK_IMPORTED_MODULE_22__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/tratamientosmedicos",
+    path: "/tratamientos_medicos",
     component: _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_24__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/tratamientosmedicos/crear",
+    path: "/tratamientos_medicos/crear",
     component: _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_25__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/tratamientosmedicos/:codigo/editar",
+    path: "/tratamientos_medicos/:codigo/editar",
     component: _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_26__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/tratamientosmedicos/:codigo/ver",
+    path: "/tratamientos_medicos/:codigo/ver",
     component: _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_28__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/tratamientosmedicos/:param_busqueda/buscar",
+    path: "/tratamientos_medicos/:param_busqueda/buscar",
     component: _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_27__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
@@ -83607,7 +83607,7 @@ var BuscarCentroMedico = function BuscarCentroMedico() {
     className: "btn btn-secondary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-arrow-left"
-  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), centros_medicos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Resultados "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Centros m\xE9dicos encontrados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
@@ -83624,7 +83624,9 @@ var BuscarCentroMedico = function BuscarCentroMedico() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-table"
     }), " Consultar")));
-  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  })))), centros_medicos.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No se encontaron resultados")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BuscarCentroMedico);
@@ -83733,7 +83735,7 @@ var ConsultarCentroMedico = function ConsultarCentroMedico() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), centros_medicos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar centro m\xE9dico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -83801,7 +83803,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_CentroMedicoValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/CentroMedicoValidacion */ "./resources/js/src/Validaciones/CentroMedicoValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -83833,6 +83836,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditarCentroMedico = function EditarCentroMedico() {
   var _errors$id_centro_med, _errors$nombre_centro, _errors$id_tipo_centr, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion_cen, _errors$telefono1_cen, _errors$telefono2_cen, _errors$correo_centro, _errors$director, _errors$telefono_dire, _errors$correo_direct, _errors$tiempo_consul;
 
@@ -83840,7 +83844,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
   var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -83956,27 +83960,23 @@ var EditarCentroMedico = function EditarCentroMedico() {
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_centro_medico().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].datos_formulario_centro_medico().then(function (res) {
       var result = res.data;
       setTipo_centro_medico(result.tipos_centros_medicos);
       setPaises(result.paises);
       setDepartamentos(result.departamentos);
       setMunicipios(result.municipios);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].centros_medicos().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].centros_medicos().then(function (res) {
       var result = res.data;
       setCentros_medicos(result.data);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []); //Función para cargar los datos del centro médico que se va a editar
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].centro_medico_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].centro_medico_editar(codigo).then(function (res) {
       var centro_medico = res.data;
       setId_centro_medico(centro_medico.id_centro_medico);
       setNombre_centro_medico(centro_medico.nombre_centro_medico);
@@ -83995,6 +83995,7 @@ var EditarCentroMedico = function EditarCentroMedico() {
       setId_departamento(centro_medico.id_departamento);
       setOpcion_pais(centro_medico.id_pais);
       setOpcion_depto(centro_medico.id_departamento);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -84939,6 +84940,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
     id: "default",
     tabindex: "-1",
     role: "dialog",
+    "data-backdrop": "static",
     "aria-labelledby": "myModalLabel1",
     "aria-hidden": "true"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -85430,7 +85432,7 @@ var BuscarDiagnostico = function BuscarDiagnostico() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     _api__WEBPACK_IMPORTED_MODULE_5__["default"].diagnostico_buscar(param_busqueda).then(function (res) {
       var result = res.data;
-      setDiagnosticos(result);
+      setDiagnosticos(result.data);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -85479,7 +85481,7 @@ var BuscarDiagnostico = function BuscarDiagnostico() {
     className: "btn btn-secondary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-arrow-left"
-  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), diagnosticos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Resultados "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Diagn\xF3sticos encontrados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
@@ -85496,7 +85498,9 @@ var BuscarDiagnostico = function BuscarDiagnostico() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-table"
     }), " Consultar")));
-  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  })))), diagnosticos.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No se encontaron resultados")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BuscarDiagnostico);
@@ -85605,7 +85609,7 @@ var ConsultarDiagnostico = function ConsultarDiagnostico() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), diagnosticos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar diagn\xF3stico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -85673,7 +85677,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_DiagnosticoValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/DiagnosticoValidacion */ "./resources/js/src/Validaciones/DiagnosticoValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -85705,6 +85710,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditarDiagnostico = function EditarDiagnostico() {
   var _errors$codigo_diagno, _errors$nombre_diagno, _errors$id_tipo_diagn, _errors$descripcion_d;
 
@@ -85712,7 +85718,7 @@ var EditarDiagnostico = function EditarDiagnostico() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
   var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -85754,30 +85760,27 @@ var EditarDiagnostico = function EditarDiagnostico() {
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_diagnostico().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].datos_formulario_diagnostico().then(function (res) {
       var result = res.data;
       setTipos_diagnosticos(result.tipos_diagnosticos);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].diagnosticos().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].diagnosticos().then(function (res) {
       var result = res.data;
       setDiagnosticos(result.data);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []); //Función para cargar los datos del diagnostico que se va a editar
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].diagnostico_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].diagnostico_editar(codigo).then(function (res) {
       var diagnostico = res.data;
       setCodigo_diagnostico(diagnostico.codigo_diagnostico);
       setNombre_diagnostico(diagnostico.nombre_diagnostico);
       setId_tipo_diagnostico(diagnostico.id_tipo_diagnostico);
       setDescripcion_diagnostico(diagnostico.descripcion_diagnostico);
       setCodigo_inicial(diagnostico.codigo_diagnostico);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -86433,7 +86436,7 @@ var AgregarExamen = function AgregarExamen() {
       }, "Ya existe un registro con este mismo c\xF3digo, debe ser distinto");
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -86509,7 +86512,7 @@ var AgregarExamen = function AgregarExamen() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "costo"
-  }, "Costo de examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Costo de examen $ (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -86761,7 +86764,7 @@ var ConsultarExamen = function ConsultarExamen() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), examenes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -86829,7 +86832,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_ExamenValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExamenValidacion */ "./resources/js/src/Validaciones/ExamenValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -86861,6 +86865,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AgregarExamen = function AgregarExamen() {
   var _errors$codigo_examen, _errors$nombre_examen, _errors$id_tipo_exame, _errors$indicaciones_, _errors$costo;
 
@@ -86868,7 +86873,7 @@ var AgregarExamen = function AgregarExamen() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
   var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -86915,24 +86920,20 @@ var AgregarExamen = function AgregarExamen() {
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_examen().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].datos_formulario_examen().then(function (res) {
       var result = res.data;
       setTipos_examenes(result.tipos_examenes);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].examenes().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].examenes().then(function (res) {
       var result = res.data;
       setExamenes(result.data);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []); //Función para cargar los datos del examen que se va a editar
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].examen_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].examen_editar(codigo).then(function (res) {
       var examen = res.data;
       setCodigo_examen(examen.codigo_examen);
       setNombre_examen(examen.nombre_examen);
@@ -86940,6 +86941,7 @@ var AgregarExamen = function AgregarExamen() {
       setIndicaciones_examen(examen.indicaciones_examen);
       setCosto(examen.costo);
       setCodigo_inicial(examen.codigo_examen);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -87380,7 +87382,7 @@ var VerExamen = function VerExamen() {
     style: {
       fontWeight: "bold"
     }
-  }, " ", costo) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, " $ ", costo) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "editar",
@@ -88221,7 +88223,7 @@ var BuscarPaciente = function BuscarPaciente() {
     className: "btn btn-secondary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-arrow-left"
-  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), pacientes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Resultados "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Expedientes encontrados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped"
@@ -88237,7 +88239,9 @@ var BuscarPaciente = function BuscarPaciente() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-table"
     }), " Consultar")));
-  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  })))), pacientes.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No se encontaron resultados")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BuscarPaciente);
@@ -88346,7 +88350,7 @@ var ConsultarExpediente = function ConsultarExpediente() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), pacientes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar expediente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -88414,7 +88418,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_ExpedienteValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExpedienteValidacion */ "./resources/js/src/Validaciones/ExpedienteValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -88446,13 +88451,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditarExpediente = function EditarExpediente() {
   var _errors$identificacio, _errors$nombres, _errors$apellidos, _errors$fecha_nacimie, _errors$estado_pacien, _errors$id_genero, _errors$estado_civil, _errors$nombre_conyug, _errors$apellido_cony, _errors$telefono, _errors$correo, _errors$id_pais, _errors$id_departamen, _errors$id_municipio, _errors$direccion, _errors$nombre_contac, _errors$telefono_cont;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
   var labels = document.getElementsByTagName('label');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -88571,7 +88577,7 @@ var EditarExpediente = function EditarExpediente() {
       setId_departamento = _useState46[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].paciente_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].paciente_editar(codigo).then(function (res) {
       var paciente = res.data;
       setNombres(paciente.nombres);
       setApellidos(paciente.apellidos);
@@ -88592,25 +88598,15 @@ var EditarExpediente = function EditarExpediente() {
       setId_departamento(paciente.id_departamento);
       setOpcion_pais(paciente.id_pais);
       setOpcion_depto(paciente.id_departamento);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_paciente().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].datos_formulario_paciente().then(function (res) {
       var result = res.data;
       setGeneros(result.generos);
       setPaises(result.paises);
       setDepartamentos(result.departamentos);
       setMunicipios(result.municipios);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -89159,7 +89155,7 @@ var EditarExpediente = function EditarExpediente() {
     className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-secondary"
-  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+  }, "Actualizar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (EditarExpediente);
@@ -89660,6 +89656,27 @@ var VerExpediente = function VerExpediente() {
 
 /***/ }),
 
+/***/ "./resources/js/src/Funciones/ClickLabel.js":
+/*!**************************************************!*\
+  !*** ./resources/js/src/Funciones/ClickLabel.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ClickLabel = function ClickLabel(labels) {
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].click();
+  }
+
+  labels[0].click();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ClickLabel);
+
+/***/ }),
+
 /***/ "./resources/js/src/HospitalizacionesComponents/AgregarHospitalizacion.js":
 /*!********************************************************************************!*\
   !*** ./resources/js/src/HospitalizacionesComponents/AgregarHospitalizacion.js ***!
@@ -90076,7 +90093,7 @@ var ConsultarHospitalizacion = function ConsultarHospitalizacion() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), hospitalizaciones.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Hospitalizaciones del paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
@@ -90120,7 +90137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_HospitalizacionValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/HospitalizacionValidacion */ "./resources/js/src/Validaciones/HospitalizacionValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -90152,10 +90170,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var EditarHospitalizacion = function EditarHospitalizacion() {
   var _errors$fecha_ingreso, _errors$hora_ingreso, _errors$motivo_ingres, _errors$sala, _errors$camilla, _errors$estado_pacien;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id_hospitalizacion = _useParams.id_hospitalizacion;
@@ -90205,7 +90224,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
       errors = _useForm.formState.errors;
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].hospitalizacion_editar(id_hospitalizacion).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].hospitalizacion_editar(id_hospitalizacion).then(function (res) {
       var hospitalizacion = res.data;
       setCodigo_paciente(hospitalizacion.codigo_paciente);
       setFecha_ingreso(hospitalizacion.fecha_ingreso);
@@ -90214,12 +90233,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
       setSala(hospitalizacion.sala);
       setCamilla(hospitalizacion.camilla);
       setEstado_paciente(hospitalizacion.estado_paciente);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -91055,6 +91069,23 @@ var Menu = function Menu() {
     href: "",
     className: "sidebar-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-grid-1x2-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Centros M\xE9dicos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/centros_medicos"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/medicamentos/crear"
+  }, "Agregar centro m\xE9dico")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     "class": "bi bi-file-earmark-check-fill"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Diagn\xF3sticos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "submenu"
@@ -91072,18 +91103,52 @@ var Menu = function Menu() {
     href: "",
     className: "sidebar-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "bi bi-grid-1x2-fill"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Centros M\xE9dicos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    "class": "bi bi-file-earmark-check-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Medicamentos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "submenu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "submenu-item "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/centros_medicos"
+    to: "/medicamentos"
   }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "submenu-item "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/medicamentos/crear"
-  }, "Agregar diagn\xF3stico")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Agregar medicamentos")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "bi bi-file-earmark-check-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Tratamientos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientos_medicos"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/tratamientos_medicos/crear"
+  }, "Agregar tratamientos")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "bi bi-file-earmark-check-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Examenes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes/crear"
+  }, "Agregar ex\xE1menes")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "sidebar-toggler btn x"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     "data-feather": "x"
@@ -91171,7 +91236,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var AgregarMedicamento = function AgregarMedicamento() {
-  var _errors$codigo_medica, _errors$nombre_medica, _errors$id_tipo_medic, _errors$descripcion_m, _errors$presentacion_, _errors$costo_medicam, _errors$existencia_me;
+  var _errors$codigo_medica, _errors$nombre_medica, _errors$id_tipo_medic, _errors$via_administr, _errors$descripcion_m, _errors$presentacion_, _errors$costo_medicam, _errors$existencia_me;
 
   var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
 
@@ -91188,37 +91253,42 @@ var AgregarMedicamento = function AgregarMedicamento() {
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       codigo_medicamento = _useState6[0],
-      setCodigoMedicamento = _useState6[1];
+      setCodigo_medicamento = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
       id_tipo_medicamento = _useState8[0],
-      setIdTipoMedicamento = _useState8[1];
+      setIdTipo_medicamento = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
       nombre_medicamento = _useState10[0],
-      setNombreMedicamento = _useState10[1];
+      setNombre_medicamento = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      descripcion_medicamento = _useState12[0],
-      setDescripcionMedicamento = _useState12[1];
+      via_administracion = _useState12[0],
+      setVia_administracion = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      presentacion_medicamento = _useState14[0],
-      setPresentacionMedicamento = _useState14[1];
+      descripcion_medicamento = _useState14[0],
+      setDescripcion_medicamento = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      costo_medicamento = _useState16[0],
-      setCostoMedicamento = _useState16[1];
+      presentacion_medicamento = _useState16[0],
+      setPresentacion_medicamento = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      existencia_medicamento = _useState18[0],
-      setExistenciaMedicamento = _useState18[1]; //Función para traer los datos al select de tipo medicamento y para los demás campos
+      costo_medicamento = _useState18[0],
+      setCosto_medicamento = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      existencia_medicamento = _useState20[0],
+      setExistencia_medicamento = _useState20[1]; //Función para traer los datos al select de tipo medicamento y para los demás campos
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -91251,6 +91321,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
                 codigo_medicamento: codigo_medicamento,
                 id_tipo_medicamento: id_tipo_medicamento,
                 nombre_medicamento: nombre_medicamento,
+                via_administracion: via_administracion,
                 descripcion_medicamento: descripcion_medicamento,
                 presentacion_medicamento: presentacion_medicamento,
                 costo_medicamento: costo_medicamento,
@@ -91359,7 +91430,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('codigo_medicamento'), {
     value: codigo_medicamento,
     onChange: function onChange(e) {
-      return setCodigoMedicamento(e.target.value);
+      return setCodigo_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91379,7 +91450,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "nombre_medicamento"
-  }, "Nombre Medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Nombre medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -91389,7 +91460,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('nombre_medicamento'), {
     value: nombre_medicamento,
     onChange: function onChange(e) {
-      return setNombreMedicamento(e.target.value);
+      return setNombre_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91401,7 +91472,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
     className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "id_tipo_medicamento"
-  }, "Tipo Medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Tipo medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
     className: "choices form-select",
@@ -91410,7 +91481,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('id_tipo_medicamento'), {
     value: id_tipo_medicamento,
     onChange: function onChange(e) {
-      return setIdTipoMedicamento(e.target.value);
+      return setIdTipo_medicamento(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
@@ -91421,12 +91492,53 @@ var AgregarMedicamento = function AgregarMedicamento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$id_tipo_medic = errors.id_tipo_medicamento) === null || _errors$id_tipo_medic === void 0 ? void 0 : _errors$id_tipo_medic.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "via_administracion"
+  }, "V\xEDa de administraci\xF3n (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "via_administracion",
+    id: "via_administracion"
+  }, register('via_administracion'), {
+    value: via_administracion,
+    onChange: function onChange(e) {
+      return setVia_administracion(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa inhalatoria"
+  }, "V\xEDa inhalatoria"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa intramuscular"
+  }, "V\xEDa intramuscular"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa intravenosa"
+  }, "V\xEDa intravenosa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa nasal"
+  }, "V\xEDa nasal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa oft\xE1lmica"
+  }, "V\xEDa oft\xE1lmica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa oral"
+  }, "V\xEDa oral"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa \xF3tica"
+  }, "V\xEDa \xF3tica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa rectal y vaginal"
+  }, "V\xEDa rectal y vaginal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa subcut\xE1nea"
+  }, "V\xEDa subcut\xE1nea"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa t\xF3pica"
+  }, "V\xEDa t\xF3pica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa transd\xE9rmica"
+  }, "V\xEDa transd\xE9rmica")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$via_administr = errors.via_administracion) === null || _errors$via_administr === void 0 ? void 0 : _errors$via_administr.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "descripcion_medicamento"
-  }, "Descripci\xF3n Medicamento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Descripci\xF3n medicamento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -91436,7 +91548,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('descripcion_medicamento'), {
     value: descripcion_medicamento,
     onChange: function onChange(e) {
-      return setDescripcionMedicamento(e.target.value);
+      return setDescripcion_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91450,7 +91562,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "presentacion_medicamento"
-  }, "Presentaci\xF3n Medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Presentaci\xF3n medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -91460,7 +91572,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('presentacion_medicamento'), {
     value: presentacion_medicamento,
     onChange: function onChange(e) {
-      return setPresentacionMedicamento(e.target.value);
+      return setPresentacion_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91474,7 +91586,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "costo_medicamento"
-  }, "Costo Medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Costo medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "number",
@@ -91486,7 +91598,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('costo_medicamento'), {
     value: costo_medicamento,
     onChange: function onChange(e) {
-      return setCostoMedicamento(e.target.value);
+      return setCosto_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91500,7 +91612,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "existencia_medicamento"
-  }, "Existencia Medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Existencia medicamento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -91510,7 +91622,7 @@ var AgregarMedicamento = function AgregarMedicamento() {
   }, register('existencia_medicamento'), {
     value: existencia_medicamento,
     onChange: function onChange(e) {
-      return setExistenciaMedicamento(e.target.value);
+      return setExistencia_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -91752,7 +91864,7 @@ var ConsultarMedicamento = function ConsultarMedicamento() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), medicamentos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar medicamento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -91820,7 +91932,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _Validaciones_MedicamentoValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/MedicamentoValidacion */ "./resources/js/src/Validaciones/MedicamentoValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -91852,10 +91965,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var EditarMedicamento = function EditarMedicamento() {
-  var _errors$codigo_medica, _errors$nombre_medica, _errors$id_tipo_medic, _errors$descripcion_m, _errors$presentacion_, _errors$costo_medicam, _errors$existencia_me;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+var EditarMedicamento = function EditarMedicamento() {
+  var _errors$codigo_medica, _errors$nombre_medica, _errors$id_tipo_medic, _errors$via_administr, _errors$descripcion_m, _errors$presentacion_, _errors$costo_medicam, _errors$existencia_me;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_10__["default"].API_URL;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       codigo = _useParams.codigo;
@@ -91870,82 +91984,78 @@ var EditarMedicamento = function EditarMedicamento() {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
       codigo_inicial = _useState4[0],
-      setCodigoInicial = _useState4[1];
+      setCodigo_inicial = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
       tipos_medicamentos = _useState6[0],
-      setTipos_Medicamentos = _useState6[1];
+      setTipos_medicamentos = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
       codigo_medicamento = _useState8[0],
-      setCodigoMedicamento = _useState8[1];
+      setCodigo_medicamento = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
       id_tipo_medicamento = _useState10[0],
-      setIdTipoMedicamento = _useState10[1];
+      setIdTipo_medicamento = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
       nombre_medicamento = _useState12[0],
-      setNombreMedicamento = _useState12[1];
+      setNombre_medicamento = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      descripcion_medicamento = _useState14[0],
-      setDescripcionMedicamento = _useState14[1];
+      via_administracion = _useState14[0],
+      setVia_administracion = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      presentacion_medicamento = _useState16[0],
-      setPresentacionMedicamento = _useState16[1];
+      descripcion_medicamento = _useState16[0],
+      setDescripcion_medicamento = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      costo_medicamento = _useState18[0],
-      setCostoMedicamento = _useState18[1];
+      presentacion_medicamento = _useState18[0],
+      setPresentacion_medicamento = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      existencia_medicamento = _useState20[0],
-      setExistenciaMedicamento = _useState20[1]; //Función para traer los datos al select de tipo medicamento y para los demás campos
+      costo_medicamento = _useState20[0],
+      setCosto_medicamento = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      existencia_medicamento = _useState22[0],
+      setExistencia_medicamento = _useState22[1]; //Función para traer los datos al select de tipo medicamento y para los demás campos
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].medicamento_editar(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].medicamento_editar(codigo).then(function (res) {
       var medicamento = res.data;
-      setCodigoMedicamento(medicamento.codigo_medicamento);
-      setIdTipoMedicamento(medicamento.id_tipo_medicamento);
-      setNombreMedicamento(medicamento.nombre_medicamento);
-      setDescripcionMedicamento(medicamento.descripcion_medicamento);
-      setPresentacionMedicamento(medicamento.presentacion_medicamento);
-      setCostoMedicamento(medicamento.costo_medicamento);
-      setExistenciaMedicamento(medicamento.existencia_medicamento);
-      setCodigoInicial(medicamento.codigo_medicamento);
+      setCodigo_medicamento(medicamento.codigo_medicamento);
+      setIdTipo_medicamento(medicamento.id_tipo_medicamento);
+      setNombre_medicamento(medicamento.nombre_medicamento);
+      setVia_administracion(medicamento.via_administracion);
+      setDescripcion_medicamento(medicamento.descripcion_medicamento);
+      setPresentacion_medicamento(medicamento.presentacion_medicamento);
+      setCosto_medicamento(medicamento.costo_medicamento);
+      setExistencia_medicamento(medicamento.existencia_medicamento);
+      setCodigo_inicial(medicamento.codigo_medicamento);
     });
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_medicamento().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].datos_formulario_medicamento().then(function (res) {
       var result = res.data;
-      setTipos_Medicamentos(result.tipos_medicamentos);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      setTipos_medicamentos(result.tipos_medicamentos);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
-    _api__WEBPACK_IMPORTED_MODULE_9__["default"].medicamentos().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_10__["default"].medicamentos().then(function (res) {
       var result = res.data;
       setMedicamentos(result.data);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
 
@@ -91968,6 +92078,7 @@ var EditarMedicamento = function EditarMedicamento() {
                 codigo_medicamento: codigo_medicamento,
                 id_tipo_medicamento: id_tipo_medicamento,
                 nombre_medicamento: nombre_medicamento,
+                via_administracion: via_administracion,
                 descripcion_medicamento: descripcion_medicamento,
                 presentacion_medicamento: presentacion_medicamento,
                 costo_medicamento: costo_medicamento,
@@ -92076,7 +92187,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('codigo_medicamento'), {
     value: codigo_medicamento,
     onChange: function onChange(e) {
-      return setCodigoMedicamento(e.target.value);
+      return setCodigo_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92108,7 +92219,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('nombre_medicamento'), {
     value: nombre_medicamento,
     onChange: function onChange(e) {
-      return setNombreMedicamento(e.target.value);
+      return setNombre_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92129,7 +92240,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('id_tipo_medicamento'), {
     value: id_tipo_medicamento,
     onChange: function onChange(e) {
-      return setIdTipoMedicamento(e.target.value);
+      return setIdTipo_medicamento(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: ""
@@ -92140,6 +92251,47 @@ var EditarMedicamento = function EditarMedicamento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$id_tipo_medic = errors.id_tipo_medicamento) === null || _errors$id_tipo_medic === void 0 ? void 0 : _errors$id_tipo_medic.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "via_administracion"
+  }, "V\xEDa de administraci\xF3n (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "via_administracion",
+    id: "via_administracion"
+  }, register('via_administracion'), {
+    value: via_administracion,
+    onChange: function onChange(e) {
+      return setVia_administracion(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa inhalatoria"
+  }, "V\xEDa inhalatoria"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa intramuscular"
+  }, "V\xEDa intramuscular"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa intravenosa"
+  }, "V\xEDa intravenosa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa nasal"
+  }, "V\xEDa nasal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa oft\xE1lmica"
+  }, "V\xEDa oft\xE1lmica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa oral"
+  }, "V\xEDa oral"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa \xF3tica"
+  }, "V\xEDa \xF3tica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa rectal y vaginal"
+  }, "V\xEDa rectal y vaginal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa subcut\xE1nea"
+  }, "V\xEDa subcut\xE1nea"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa t\xF3pica"
+  }, "V\xEDa t\xF3pica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "V\xEDa transd\xE9rmica"
+  }, "V\xEDa transd\xE9rmica")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$via_administr = errors.via_administracion) === null || _errors$via_administr === void 0 ? void 0 : _errors$via_administr.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -92155,7 +92307,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('descripcion_medicamento'), {
     value: descripcion_medicamento,
     onChange: function onChange(e) {
-      return setDescripcionMedicamento(e.target.value);
+      return setDescripcion_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92179,7 +92331,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('presentacion_medicamento'), {
     value: presentacion_medicamento,
     onChange: function onChange(e) {
-      return setPresentacionMedicamento(e.target.value);
+      return setPresentacion_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92205,7 +92357,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('costo_medicamento'), {
     value: costo_medicamento,
     onChange: function onChange(e) {
-      return setCostoMedicamento(e.target.value);
+      return setCosto_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92229,7 +92381,7 @@ var EditarMedicamento = function EditarMedicamento() {
   }, register('existencia_medicamento'), {
     value: existencia_medicamento,
     onChange: function onChange(e) {
-      return setExistenciaMedicamento(e.target.value);
+      return setExistencia_medicamento(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
@@ -92293,48 +92445,54 @@ var VerMedicamento = function VerMedicamento() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
       codigo_medicamento = _useState2[0],
-      setCodigoMedicamento = _useState2[1];
+      setCodigo_medicamento = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
       id_tipo_medicamento = _useState4[0],
-      setTipoMedicamento = _useState4[1];
+      setTipo_medicamento = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       nombre_medicamento = _useState6[0],
-      setNombreMedicamento = _useState6[1];
+      setNombre_medicamento = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      descripcion_medicamento = _useState8[0],
-      setDescripcionMedicamento = _useState8[1];
+      via_administracion = _useState8[0],
+      setVia_administracion = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      presentacion_medicamento = _useState10[0],
-      setPresentacionMedicamento = _useState10[1];
+      descripcion_medicamento = _useState10[0],
+      setDescripcion_medicamento = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      costo_medicamento = _useState12[0],
-      setCostoMedicamento = _useState12[1];
+      presentacion_medicamento = _useState12[0],
+      setPresentacion_medicamento = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      existencia_medicamento = _useState14[0],
-      setExistenciaMedicamento = _useState14[1];
+      costo_medicamento = _useState14[0],
+      setCosto_medicamento = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      existencia_medicamento = _useState16[0],
+      setExistencia_medicamento = _useState16[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     _api__WEBPACK_IMPORTED_MODULE_5__["default"].medicamento_ver(codigo).then(function (res) {
       var medicamento = res.data;
-      setCodigoMedicamento(medicamento.codigo_medicamento);
-      setTipoMedicamento(medicamento.tipo_medicamento);
-      setNombreMedicamento(medicamento.nombre_medicamento);
-      setDescripcionMedicamento(medicamento.descripcion_medicamento);
-      setPresentacionMedicamento(medicamento.presentacion_medicamento);
-      setCostoMedicamento(medicamento.costo_medicamento);
-      setExistenciaMedicamento(medicamento.existencia_medicamento);
+      setCodigo_medicamento(medicamento.codigo_medicamento);
+      setTipo_medicamento(medicamento.tipo_medicamento);
+      setNombre_medicamento(medicamento.nombre_medicamento);
+      setVia_administracion(medicamento.via_administracion);
+      setDescripcion_medicamento(medicamento.descripcion_medicamento);
+      setPresentacion_medicamento(medicamento.presentacion_medicamento);
+      setCosto_medicamento(medicamento.costo_medicamento);
+      setExistencia_medicamento(medicamento.existencia_medicamento);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -92424,6 +92582,20 @@ var VerMedicamento = function VerMedicamento() {
       fontWeight: "bold"
     }
   }, id_tipo_medicamento)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "V\xEDa de administraci\xF3n"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, via_administracion)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-4"
@@ -92555,8 +92727,8 @@ var AgregarTratamiento = function AgregarTratamiento() {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      tratamientosmedicos = _useState2[0],
-      setTratamientosMedicos = _useState2[1]; //Datos para el formulario
+      tratamientos_medicos = _useState2[0],
+      setTratamientos_medicos = _useState2[1]; //Datos para el formulario
 
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -92597,12 +92769,13 @@ var AgregarTratamiento = function AgregarTratamiento() {
       setTipos_tratamientos(result.tipos_tratamientos);
     });
   }, []);
-  _api__WEBPACK_IMPORTED_MODULE_8__["default"].tratamientosmedicos().then(function (res) {
+  _api__WEBPACK_IMPORTED_MODULE_8__["default"].tratamientos_medicos().then(function (res) {
     var result = res.data;
-    setTratamientosMedicos(result.data);
+    setTratamientos_medicos(result.data);
   });
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_TratamientoValidacion__WEBPACK_IMPORTED_MODULE_9__["default"])
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
@@ -92610,14 +92783,13 @@ var AgregarTratamiento = function AgregarTratamiento() {
 
 
   var agregarTratamiento = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 codigo_tratamiento: codigo_tratamiento,
                 nombre_tratamiento: nombre_tratamiento,
@@ -92625,8 +92797,8 @@ var AgregarTratamiento = function AgregarTratamiento() {
                 descripcion_tratamiento: descripcion_tratamiento,
                 costo_tratamiento: costo_tratamiento
               };
-              _context.next = 5;
-              return fetch("".concat(API_URL, "/tratamientosmedicos/guardar"), {
+              _context.next = 4;
+              return fetch("".concat(API_URL, "/tratamientos_medicos/guardar"), {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
@@ -92634,23 +92806,23 @@ var AgregarTratamiento = function AgregarTratamiento() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
-              window.location = "/tratamientosmedicos";
-              _context.next = 12;
+              window.location = "/tratamientos_medicos";
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function agregarTratamiento(_x) {
@@ -92690,7 +92862,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/tratamientosmedicos/crear"
+    to: "/tratamientos_medicos/crear"
   }, "Agregar tratamiento"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -92707,7 +92879,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: agregarTratamiento
+    onSubmit: handleSubmit(agregarTratamiento)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -92718,14 +92890,14 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "codigo_tratamiento"
-  }, "C\xF3digo de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "C\xF3digo del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
     className: "form-control",
-    name: "codigo_tratamiento",
+    name: "codigo_tratamientoo",
     id: "codigo_tratamiento"
-  }, register('codigotratamiento'), {
+  }, register('codigo_tratamiento'), {
     value: codigo_tratamiento,
     onChange: function onChange(e) {
       return setCodigo_tratamiento(e.target.value);
@@ -92733,17 +92905,17 @@ var AgregarTratamiento = function AgregarTratamiento() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-upc-scan"
+    className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "), tratamientosmedicos.map(function (tratamiento) {
+  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "), tratamientos_medicos.map(function (tratamiento) {
     if (tratamiento.codigo_tratamiento == codigo_tratamiento) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
         className: "text-danger"
-      }, " Ya existe un registro con este c\xF3digo. ");
+      }, " Ya existe un registro con este c\xF3digo.");
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -92797,9 +92969,10 @@ var AgregarTratamiento = function AgregarTratamiento() {
     htmlFor: "descripcion_tratamiento"
   }, "Descripci\xF3n del tratamiento (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
     type: "text",
     className: "form-control",
+    rows: "4",
     name: "descripcion_tratamientoo",
     id: "descripcion_tratamiento"
   }, register('descripcion_tratamiento'), {
@@ -92931,7 +93104,7 @@ var BuscarTratamiento = function BuscarTratamiento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos"
+    to: "/tratamientos_medicos"
   }, "Consulta tratamientos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -92941,7 +93114,7 @@ var BuscarTratamiento = function BuscarTratamiento() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos",
+    to: "/tratamientos_medicos",
     className: "btn btn-secondary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-arrow-left"
@@ -93011,8 +93184,8 @@ var ConsultarTratamiento = function ConsultarTratamiento() {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      tratamientosmedicos = _useState2[0],
-      setTratamientosMedicos = _useState2[1];
+      tratamientos_medicos = _useState2[0],
+      setTratamientos_medicos = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -93020,9 +93193,9 @@ var ConsultarTratamiento = function ConsultarTratamiento() {
       setParam_busqueda = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_5__["default"].tratamientosmedicos().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].tratamientos_medicos().then(function (res) {
       var result = res.data;
-      setTratamientosMedicos(result.data);
+      setTratamientos_medicos(result.data);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -93057,7 +93230,7 @@ var ConsultarTratamiento = function ConsultarTratamiento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos"
+    to: "/tratamientos_medicos"
   }, "Consulta tratamientos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -93067,11 +93240,11 @@ var ConsultarTratamiento = function ConsultarTratamiento() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos/crear",
+    to: "tratamientos_medicos/crear",
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), tratamientos_medicos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -93095,19 +93268,19 @@ var ConsultarTratamiento = function ConsultarTratamiento() {
   }, _defineProperty(_React$createElement, "id", "codigo_busqueda"), _defineProperty(_React$createElement, "value", param_busqueda), _defineProperty(_React$createElement, "onChange", function onChange(e) {
     return setParam_busqueda(e.target.value);
   }), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "tratamientosmedicos/".concat(param_busqueda, "/buscar"),
+    to: "tratamientos_medicos/".concat(param_busqueda, "/buscar"),
     className: "btn btn-secondary"
   }, " Buscar"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
     id: "table1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, tratamientosmedicos.map(function (tratamiento) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, tratamientos_medicos.map(function (tratamiento) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.codigo_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, tratamiento.nombre_tratamiento), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "tratamientosmedicos/".concat(tratamiento.codigo_tratamiento, "/editar"),
+      to: "tratamientos_medicos/".concat(tratamiento.codigo_tratamiento, "/editar"),
       className: "btn btn-primary"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-pencil"
     }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "tratamientosmedicos/".concat(tratamiento.codigo_tratamiento, "/ver"),
+      to: "tratamientos_medicos/".concat(tratamiento.codigo_tratamiento, "/ver"),
       className: "btn btn-info"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-table"
@@ -93140,6 +93313,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 /* harmony import */ var _Validaciones_TratamientoValidacion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Validaciones/TratamientoValidacion */ "./resources/js/src/Validaciones/TratamientoValidacion.js");
+/* harmony import */ var _Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Funciones/ClickLabel */ "./resources/js/src/Funciones/ClickLabel.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -93171,6 +93345,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AgregarTratamiento = function AgregarTratamiento() {
   var _errors$codigo_tratam, _errors$nombre_tratam, _errors$setId_tipo_tr, _errors$descripcion_t, _errors$costo_tratami;
 
@@ -93183,8 +93358,8 @@ var AgregarTratamiento = function AgregarTratamiento() {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      tratamientosmedicos = _useState2[0],
-      setTratamientosMedicos = _useState2[1];
+      tratamientos_medicos = _useState2[0],
+      setTratamientos_medicos = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -93228,22 +93403,10 @@ var AgregarTratamiento = function AgregarTratamiento() {
     _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_tratamiento().then(function (res) {
       var result = res.data;
       setTipos_tratamientos(result.tipos_tratamientos);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
     });
-    _api__WEBPACK_IMPORTED_MODULE_8__["default"].tratamientosmedicos().then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].tratamientos_medicos().then(function (res) {
       var result = res.data;
-      setTratamientosMedicos(result.data);
-
-      for (var i = 0; i < labels.length; i++) {
-        labels[i].click();
-      }
-
-      labels[0].click();
+      setTratamientos_medicos(result.data);
     });
   }, []); //Función para cargar los datos del diagnostico que se va a editar
 
@@ -93256,6 +93419,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
       setDescripcion_tratamiento(tratamiento.descripcion_tratamiento);
       setCosto_tratamiento(tratamiento.costo_tratamiento);
       setCodigo_Inicial(tratamiento.codigo_tratamiento);
+      Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_10__["default"])(labels);
     });
   }, []);
 
@@ -93283,7 +93447,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
                 costo_tratamiento: costo_tratamiento
               };
               _context.next = 4;
-              return fetch("".concat(API_URL, "/tratamientosmedicos/").concat(codigo, "/actualizar"), {
+              return fetch("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json"
@@ -93293,7 +93457,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
 
             case 4:
               response = _context.sent;
-              window.location = "/tratamientosmedicos";
+              window.location = "/tratamientos_medicos";
               _context.next = 11;
               break;
 
@@ -93347,7 +93511,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/tratamientosmedicos"
+    to: "/tratamientos_medicos"
   }, "Consultar diagn\xF3stico"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -93393,7 +93557,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
     className: "bi bi-clipboard-check"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "), tratamientosmedicos.map(function (tratamiento) {
+  }, " ", (_errors$codigo_tratam = errors.codigo_tratamiento) === null || _errors$codigo_tratam === void 0 ? void 0 : _errors$codigo_tratam.message, " "), tratamientos_medicos.map(function (tratamiento) {
     if (tratamiento.codigo_tratamiento !== codigo_inicial) {
       if (tratamiento.codigo_tratamiento == codigo_tratamiento) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
@@ -93612,7 +93776,7 @@ var VerTratamiento = function VerTratamiento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos"
+    to: "/tratamientos_medicos"
   }, "Consulta tratamientos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "breadcrumb-item active",
     "aria-current": "page"
@@ -93908,6 +94072,7 @@ __webpack_require__.r(__webpack_exports__);
 var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
   codigo_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo código del medicamento es obligatorio").max(10, "El máximo de caracteres es 10"),
   nombre_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250").required("El campo nombre del medicamento es obligatorio"),
+  via_administracion: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo vía de administración de medicamento es obligatorio"),
   id_tipo_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo tipo de medicamento es obligatorio"),
   descripcion_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250"),
   presentacion_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150").required("El campo código del medicamento es obligatorio"),
@@ -93932,14 +94097,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var yup_lib_locale__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(yup_lib_locale__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var schemaAgregarTratamiento = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
-  codigo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(10, "El máximo de caracteres es 10").required("El campo código de tratamiento es obligatorio"),
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  codigo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo código de tratamiento es obligatorio").max(10, "El máximo de caracteres es 10"),
   nombre_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre de tratamiento es obligatorio").max(150, "El máximo de caracteres es 150"),
-  descripcion_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(250, "El máximo de caracteres es 250"),
+  descripcion_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo descripción de tratamiento es obligatorio").max(500, "El máximo de caracteres es 500"),
   id_tipo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo tipo de tratamiento es obligatorio"),
   costo_tratamiento: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo costo de tratamiento es obligatorio")
 });
-/* harmony default export */ __webpack_exports__["default"] = (schemaAgregarTratamiento);
+/* harmony default export */ __webpack_exports__["default"] = (schema);
 
 /***/ }),
 
@@ -94021,20 +94186,20 @@ var API_URL = 'http://localhost:8000/api';
     return axios.get("".concat(API_URL, "/centros_medicos/").concat(codigo, "/ver"));
   },
   //Tratamientos
-  tratamientosmedicos: function tratamientosmedicos() {
-    return axios.get("".concat(API_URL, "/tratamientosmedicos"));
+  tratamientos_medicos: function tratamientos_medicos() {
+    return axios.get("".concat(API_URL, "/tratamientos_medicos"));
   },
   datos_formulario_tratamiento: function datos_formulario_tratamiento() {
-    return axios.get("".concat(API_URL, "/tratamientosmedicos/crear"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/crear"));
   },
   tratamiento_editar: function tratamiento_editar(codigo) {
-    return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/editar"));
   },
   tratamiento_ver: function tratamiento_ver(codigo) {
-    return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/ver"));
   },
   tratamiento_buscar: function tratamiento_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(param_busqueda, "/buscar"));
   },
   //Medicamentos
   medicamentos: function medicamentos() {

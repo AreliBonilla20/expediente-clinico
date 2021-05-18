@@ -47,7 +47,7 @@ const AgregarDiagnostico = () => {
         </button>
 
         
-        <div className="modal fade text-left" id="default" tabindex="-1" role="dialog"
+        <div className="modal fade text-left" id="default" tabindex="-1" role="dialog" data-backdrop="static"
             aria-labelledby="myModalLabel1" aria-hidden="true">
             <div className="modal-dialog modal-dialog-scrollable" role="document">
                 <div className="modal-content">

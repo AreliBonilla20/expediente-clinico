@@ -7,7 +7,6 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
-
 import API from '../api';
 import schema from '../Validaciones/TratamientoValidacion';
 
@@ -15,7 +14,7 @@ const AgregarTratamiento = () => {
 
     const API_URL = API.API_URL;
 
-    const [tratamientosmedicos, setTratamientosMedicos] = useState([]);
+    const [tratamientos_medicos, setTratamientos_medicos] = useState([]);
 
     //Datos para el formulario
     const [tipos_tratamientos, setTipos_tratamientos] = useState([]);
@@ -35,29 +34,28 @@ const AgregarTratamiento = () => {
        })
      }, []);
 
-     API.tratamientosmedicos().then(res => {
+     API.tratamientos_medicos().then(res => {
         const result = res.data;
-        setTratamientosMedicos(result.data);
+        setTratamientos_medicos(result.data);
      })
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schema),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const agregarTratamiento = async (e) => {
-        e.preventDefault();
+    const agregarTratamiento = async (data) => {
         try {
           const body = { codigo_tratamiento, nombre_tratamiento, id_tipo_tratamiento, descripcion_tratamiento, costo_tratamiento};
-          const response = await fetch(`${API_URL}/tratamientosmedicos/guardar`, {
+          const response = await fetch(`${API_URL}/tratamientos_medicos/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
             
           });
           
-          window.location = "/tratamientosmedicos";
+          window.location = "/tratamientos_medicos";
         } catch (err) {
           console.error(err.message);
         }
@@ -84,7 +82,7 @@ const AgregarTratamiento = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/tratamientosmedicos/crear">Agregar tratamiento</Link>
+                                        <Link to="/tratamientos_medicos/crear">Agregar tratamiento</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -101,33 +99,32 @@ const AgregarTratamiento = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={agregarTratamiento}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(agregarTratamiento)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
                                                 <h5>Datos de tratamiento</h5>
 
-                                                    <div className="col-12">
+                                                <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="codigo_tratamiento">Código de tratamiento</label>
+                                                            <label htmlFor="codigo_tratamiento">Código del tratamiento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
-                                                                    name="codigo_tratamiento"
+                                                                    name="codigo_tratamientoo"
                                                                     id="codigo_tratamiento"
-                                                                    {...register('codigotratamiento')}
+                                                                    {...register('codigo_tratamiento')}
                                                                     value={codigo_tratamiento}
-                                                                    onChange={e => setCodigo_tratamiento(e.target.value)} 
-                                                                     />
+                                                                    onChange={e => setCodigo_tratamiento(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-upc-scan"></i>
+                                                                    <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_tratamiento?.message} </small>
                                                             {
-                                                                tratamientosmedicos.map((tratamiento)=> {
+                                                                tratamientos_medicos.map((tratamiento)=> {
                                                                     if(tratamiento.codigo_tratamiento == codigo_tratamiento){
                                                                         return(
-                                                                        <small className="text-danger"> Ya existe un registro con este código. </small>
+                                                                        <small className="text-danger"> Ya existe un registro con este código.</small>
                                                                         )
                                                                     }
                                                                 })
@@ -135,7 +132,7 @@ const AgregarTratamiento = () => {
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-6">
+                                                    <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_tratamiento">Nombre del tratamiento (*)</label>
                                                             <div className="position-relative">
@@ -176,7 +173,7 @@ const AgregarTratamiento = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="descripcion_tratamiento">Descripción del tratamiento (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="descripcion_tratamientoo"
                                                                     id="descripcion_tratamiento"
                                                                     {...register('descripcion_tratamiento')}

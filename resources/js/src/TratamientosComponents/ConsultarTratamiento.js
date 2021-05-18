@@ -12,13 +12,13 @@ import API from '../api';
 
 const ConsultarTratamiento = () => {
 
-    const [tratamientosmedicos, setTratamientosMedicos] =useState([]);
+    const [tratamientos_medicos, setTratamientos_medicos] =useState([]);
     const [param_busqueda, setParam_busqueda] = useState('');
    
     useEffect(() => {
-         API.tratamientosmedicos().then(res => {
+         API.tratamientos_medicos().then(res => {
             const result = res.data;
-            setTratamientosMedicos(result.data);
+            setTratamientos_medicos(result.data);
         })
       }, []);
 
@@ -42,7 +42,7 @@ const ConsultarTratamiento = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/tratamientosmedicos">Consulta tratamientos</Link>
+                                        <Link to="/tratamientos_medicos">Consulta tratamientos</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -54,11 +54,13 @@ const ConsultarTratamiento = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/tratamientosmedicos/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                                <Link to="tratamientos_medicos/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
                             </div>
                             
                             <br />
+                            {tratamientos_medicos.length > 0  &&
                             <div className="card-body">
+                             
                             <h4>Buscar tratamiento</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
                            
@@ -75,7 +77,7 @@ const ConsultarTratamiento = () => {
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />
-                                            <Link to={`tratamientosmedicos/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
+                                            <Link to={`tratamientos_medicos/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -92,16 +94,16 @@ const ConsultarTratamiento = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {tratamientosmedicos.map((tratamiento) => 
+                                    {tratamientos_medicos.map((tratamiento) => 
                                           <tr>
                                             <td>{tratamiento.codigo_tratamiento}</td>
                                             <td>{tratamiento.nombre_tratamiento}</td>
                                            
                                             <td>
-                                            <Link to={`tratamientosmedicos/${tratamiento.codigo_tratamiento}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`tratamientosmedicos/${tratamiento.codigo_tratamiento}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>
@@ -109,6 +111,8 @@ const ConsultarTratamiento = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            }
+                                    
                         </div>
                     </section>
             </div>

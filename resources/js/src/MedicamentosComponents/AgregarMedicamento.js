@@ -19,13 +19,14 @@ const AgregarMedicamento = () => {
 
     const [tipos_medicamentos, setTipos_Medicamentos] = useState([]);
     
-    const [codigo_medicamento, setCodigoMedicamento] = useState('');
-    const [id_tipo_medicamento, setIdTipoMedicamento] = useState('');
-    const [nombre_medicamento, setNombreMedicamento] = useState('');
-    const [descripcion_medicamento, setDescripcionMedicamento] = useState('');
-    const [presentacion_medicamento, setPresentacionMedicamento] = useState('');
-    const [costo_medicamento, setCostoMedicamento] = useState('');
-    const [existencia_medicamento, setExistenciaMedicamento] = useState('');
+    const [codigo_medicamento, setCodigo_medicamento] = useState('');
+    const [id_tipo_medicamento, setIdTipo_medicamento] = useState('');
+    const [nombre_medicamento, setNombre_medicamento] = useState('');
+    const [via_administracion, setVia_administracion] = useState('');
+    const [descripcion_medicamento, setDescripcion_medicamento] = useState('');
+    const [presentacion_medicamento, setPresentacion_medicamento] = useState('');
+    const [costo_medicamento, setCosto_medicamento] = useState('');
+    const [existencia_medicamento, setExistencia_medicamento] = useState('');
 
     //Función para traer los datos al select de tipo medicamento y para los demás campos
     useEffect(() => {
@@ -46,7 +47,7 @@ const AgregarMedicamento = () => {
 
     const agregarMedicamento = async (data) => {
         try {
-          const body = { codigo_medicamento, id_tipo_medicamento, nombre_medicamento, descripcion_medicamento, 
+          const body = { codigo_medicamento, id_tipo_medicamento, nombre_medicamento, via_administracion, descripcion_medicamento, 
             presentacion_medicamento, costo_medicamento, existencia_medicamento
          };
           const response = await fetch(`${API_URL}/medicamentos/guardar`, {
@@ -115,7 +116,7 @@ const AgregarMedicamento = () => {
                                                                     id="codigo_medicamento"
                                                                     {...register('codigo_medicamento')}
                                                                     value={codigo_medicamento}
-                                                                    onChange={e => setCodigoMedicamento(e.target.value)} 
+                                                                    onChange={e => setCodigo_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -136,14 +137,14 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="nombre_medicamento">Nombre Medicamento (*)</label>
+                                                            <label htmlFor="nombre_medicamento">Nombre medicamento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control" 
                                                                     name="nombre_medicamento"                   
                                                                     id="nombre_medicamento"
                                                                     {...register('nombre_medicamento')}
                                                                     value={nombre_medicamento}
-                                                                    onChange={e => setNombreMedicamento(e.target.value)} />
+                                                                    onChange={e => setNombre_medicamento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
                                                                 </div>
@@ -153,14 +154,14 @@ const AgregarMedicamento = () => {
                                                     </div>
 
                                                     <div className="col-md-12 mb-4">
-                                                    <label htmlFor="id_tipo_medicamento">Tipo Medicamento (*)</label>
+                                                    <label htmlFor="id_tipo_medicamento">Tipo medicamento (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select"
                                                                 name="id_tipo_medicamento" 
                                                                 id="id_tipo_medicamento" 
                                                                 {...register('id_tipo_medicamento')}
                                                                 value={id_tipo_medicamento}
-                                                                onChange={e => setIdTipoMedicamento(e.target.value)} >
+                                                                onChange={e => setIdTipo_medicamento(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {tipos_medicamentos.map((tipo_medicamento) => (
                                                                 <option value={tipo_medicamento.id_tipo_medicamento}>{tipo_medicamento.tipo_medicamento}</option>
@@ -170,16 +171,43 @@ const AgregarMedicamento = () => {
                                                         </div>
                                                     </div>
 
+                                                    <div className="col-md-12 mb-4">
+                                                    <label htmlFor="via_administracion">Vía de administración (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="choices form-select"
+                                                                name="via_administracion" 
+                                                                id="via_administracion" 
+                                                                {...register('via_administracion')}
+                                                                value={via_administracion}
+                                                                onChange={e => setVia_administracion(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                <option value="Vía inhalatoria">Vía inhalatoria</option>
+                                                                <option value="Vía intramuscular">Vía intramuscular</option>
+                                                                <option value="Vía intravenosa">Vía intravenosa</option>
+                                                                <option value="Vía nasal">Vía nasal</option>
+                                                                <option value="Vía oftálmica">Vía oftálmica</option>
+                                                                <option value="Vía oral">Vía oral</option>
+                                                                <option value="Vía ótica">Vía ótica</option>
+                                                                <option value="Vía rectal y vaginal">Vía rectal y vaginal</option>
+                                                                <option value="Vía subcutánea">Vía subcutánea</option>
+                                                                <option value="Vía tópica">Vía tópica</option>
+                                                                <option value="Vía transdérmica">Vía transdérmica</option>
+                                                                
+                                                            </select>
+                                                            <small className="text-danger"> {errors.via_administracion?.message} </small>
+                                                        </div>
+                                                    </div>
+
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="descripcion_medicamento">Descripción Medicamento</label>
+                                                            <label htmlFor="descripcion_medicamento">Descripción medicamento</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="descripcion_medicamento"
                                                                     id="descripcion_medicamento"
                                                                     {...register('descripcion_medicamento')}
                                                                     value={descripcion_medicamento}
-                                                                    onChange={e => setDescripcionMedicamento(e.target.value)} />
+                                                                    onChange={e => setDescripcion_medicamento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
                                                                 </div>
@@ -190,14 +218,14 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="presentacion_medicamento">Presentación Medicamento (*)</label>
+                                                            <label htmlFor="presentacion_medicamento">Presentación medicamento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="presentacion_medicamento"
                                                                     id="presentacion_medicamento"
                                                                     {...register('presentacion_medicamento')}
                                                                     value={presentacion_medicamento}
-                                                                    onChange={e => setPresentacionMedicamento(e.target.value)} 
+                                                                    onChange={e => setPresentacion_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -209,14 +237,14 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo_medicamento">Costo Medicamento (*)</label>
+                                                            <label htmlFor="costo_medicamento">Costo medicamento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="number" className="form-control" step="0.01" min="0"
                                                                     name="costo_medicamento"
                                                                     id="costo_medicamento"
                                                                     {...register('costo_medicamento')}
                                                                     value={costo_medicamento}
-                                                                    onChange={e => setCostoMedicamento(e.target.value)} 
+                                                                    onChange={e => setCosto_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -228,14 +256,14 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="existencia_medicamento">Existencia Medicamento (*)</label>
+                                                            <label htmlFor="existencia_medicamento">Existencia medicamento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="existencia_medicamento"
                                                                     id="existencia_medicamento"
                                                                     {...register('existencia_medicamento')}
                                                                     value={existencia_medicamento}
-                                                                    onChange={e => setExistenciaMedicamento(e.target.value)} 
+                                                                    onChange={e => setExistencia_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>

@@ -11,6 +11,7 @@ import Footer from '../LayoutComponents/Footer';
 import API from '../api';
 
 import schema from '../Validaciones/TratamientoValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 const AgregarTratamiento = () => {
 
@@ -21,7 +22,7 @@ const AgregarTratamiento = () => {
 
     const labels = document.getElementsByTagName('label');
 
-    const [tratamientosmedicos, setTratamientosMedicos] = useState([]);
+    const [tratamientos_medicos, setTratamientos_medicos] = useState([]);
     const [codigo_inicial, setCodigo_Inicial] = useState('');
 
     //Datos para el formulario
@@ -39,19 +40,13 @@ const AgregarTratamiento = () => {
         API.datos_formulario_tratamiento().then(res => {
            const result = res.data;
            setTipos_tratamientos(result.tipos_tratamientos);
-           for(let i=0; i<labels.length; i++){
-               labels[i].click();
-           }
-           labels[0].click();
+          
        })
 
-       API.tratamientosmedicos().then(res => {
-        const result = res.data;
-        setTratamientosMedicos(result.data);
-        for(let i=0; i<labels.length; i++){
-            labels[i].click();
-        }
-        labels[0].click();
+       API.tratamientos_medicos().then(res => {
+           const result = res.data;
+           setTratamientos_medicos(result.data);
+            
      })
      }, []);
 
@@ -66,6 +61,8 @@ const AgregarTratamiento = () => {
            setDescripcion_tratamiento(tratamiento.descripcion_tratamiento);
            setCosto_tratamiento(tratamiento.costo_tratamiento);
            setCodigo_Inicial(tratamiento.codigo_tratamiento);
+           
+           ClickLabel(labels);
        })
      }, []);
 
@@ -79,14 +76,14 @@ const AgregarTratamiento = () => {
     const editarTratamiento = async (data) => {
         try {
           const body = { codigo_tratamiento, nombre_tratamiento, id_tipo_tratamiento, descripcion_tratamiento, costo_tratamiento};
-          const response = await fetch(`${API_URL}/tratamientosmedicos/${codigo}/actualizar`, {
+          const response = await fetch(`${API_URL}/tratamientos_medicos/${codigo}/actualizar`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
             
           });
           
-          window.location = "/tratamientosmedicos";
+          window.location = "/tratamientos_medicos";
         } catch (err) {
           console.error(err.message);
         }
@@ -113,7 +110,7 @@ const AgregarTratamiento = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/tratamientosmedicos">Consultar diagnóstico</Link>
+                                        <Link to="/tratamientos_medicos">Consultar diagnóstico</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -153,7 +150,7 @@ const AgregarTratamiento = () => {
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_tratamiento?.message} </small>
                                                             {
-                                                                tratamientosmedicos.map((tratamiento)=> {
+                                                                tratamientos_medicos.map((tratamiento)=> {
                                                                     if(tratamiento.codigo_tratamiento !== codigo_inicial){
                                                                     if(tratamiento.codigo_tratamiento == codigo_tratamiento){
                                                                         return(

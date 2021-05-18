@@ -11,7 +11,8 @@ class ExamenController extends Controller
 {
     public function index()
     {  
-       return ExamenResource::collection(Examen::orderBy('created_at', 'desc')->paginate(15));
+       $examenes = DB::select('select * from examenes order by codigo_examen');
+       return ExamenResource::collection($examenes);
       
     }
 
@@ -28,16 +29,17 @@ class ExamenController extends Controller
 
     public function store(Request $request)
     {   
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::table('examenes')->insert(
-            [
-             'codigo_examen' => $request->codigo_examen,
-             'id_tipo_examen' => $request->id_tipo_examen,
-             'nombre_examen' => $request->nombre_examen,
-             'indicaciones_examen' => $request->indicaciones_examen,
-             'costo' => $request->costo
-             ]
-        );
+        DB::insert('insert into examenes (codigo_examen, id_tipo_examen, nombre_examen, indicaciones_examen, costo, created_at) 
+                    values (?, ?, ?, ?, ?, ?)', 
+                    [$request->codigo_examen,
+                     $request->id_tipo_examen,
+                     $request->nombre_examen,
+                     $request->indicaciones_examen, 
+                     $request->costo, 
+                     $fecha_actual
+                    ]);
         
         return response()->json('Examen creado!');    
     }
@@ -58,26 +60,29 @@ class ExamenController extends Controller
 
     public function update($codigo, Request $request)
     {
-        DB::table('examenes')->where('codigo_examen', $codigo)->update(array
-            (
-            'codigo_examen' => $request->codigo_examen,
-            'id_tipo_examen' => $request->id_tipo_examen,
-            'nombre_examen' => $request->nombre_examen,
-            'indicaciones_examen' => $request->indicaciones_examen,
-            'costo' => $request->costo
-            )
-        );
-
+        DB::update('update examenes set codigo_examen = ?, id_tipo_examen = ?, nombre_examen = ?, indicaciones_examen = ?, costo = ?, updated_at = ?)', 
+        [$request->codigo_examen,
+         $request->id_tipo_examen,
+         $request->nombre_examen,
+         $request->indicaciones_examen, 
+         $request->costo, 
+         $fecha_actual
+        ]);
+        
         return response()->json('Examen actualizado!');    
     }
 
     public function buscar($param_busqueda)
     {
 
-        $examenes = DB::select("select * from examenes where lower(codigo_examen) = ? or lower(nombre_examen) = ?", 
-        [strtolower($param_busqueda), strtolower($param_busqueda)]);
+        $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
+        $codigo_examen = '%'.$param_busqueda.'%';
+        $nombre_examen = '%'.$param_busqueda.'%';
+       
+        $examenes = DB::select('select * from examenes where UNACCENT(lower(codigo_examen)) LIKE ? or UNACCENT(lower(nombre_examen)) LIKE ?', 
+        [strtolower($codigo_examen), strtolower($nombre_examen)]);
         
-        return ExamenResource::collection($examenes);
+        return ExamenResource::collection($centros_medicos);
 
     }
 }

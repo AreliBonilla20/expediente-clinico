@@ -141,7 +141,7 @@ const VerExamen = () => {
                                 <div className="col-md-8">
                                         <div className="form-group">
                                         {costo ? (
-                                            <p style={{fontWeight: "bold"}}> {costo}</p>
+                                            <p style={{fontWeight: "bold"}}> $ {costo}</p>
                                         ) : (
                                             <p></p>
                                         )}

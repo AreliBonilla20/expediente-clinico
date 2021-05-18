@@ -62,7 +62,9 @@ const ConsultarExpediente = () => {
                             </div>
                             
                             <br />
+                            {pacientes.length > 0 && 
                             <div className="card-body">
+                           
                             <h4>Buscar expediente</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
                            
@@ -119,6 +121,7 @@ const ConsultarExpediente = () => {
                                     </tbody>
                                 </table>
                             </div>
+                        }
                         </div>
                     </section>
             </div>

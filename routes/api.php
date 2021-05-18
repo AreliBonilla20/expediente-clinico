@@ -58,13 +58,13 @@ Route::put('/centros_medicos/{codigo}/actualizar', 'CentroMedicoController@updat
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
 
 //Rutas para tratamientos medicos
-Route::get('/tratamientosmedicos', 'TratamientosMedicosController@index');
-Route::get('/tratamientosmedicos/crear', 'TratamientosMedicosController@create');
-Route::post('/tratamientosmedicos/guardar', 'TratamientosMedicosController@store');
-Route::get('/tratamientosmedicos/{codigo}/ver', 'TratamientosmedicosController@show');
-Route::get('/tratamientosmedicos/{codigo}/editar', 'TratamientosmedicosController@edit');
-Route::put('/tratamientosmedicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
-Route::get('/tratamientosmedicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');
+Route::get('/tratamientos_medicos', 'TratamientosMedicosController@index');
+Route::get('/tratamientos_medicos/crear', 'TratamientosMedicosController@create');
+Route::post('/tratamientos_medicos/guardar', 'TratamientosMedicosController@store');
+Route::get('/tratamientos_medicos/{codigo}/ver', 'TratamientosmedicosController@show');
+Route::get('/tratamientos_medicos/{codigo}/editar', 'TratamientosmedicosController@edit');
+Route::put('/tratamientos_medicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
+Route::get('/tratamientos_medicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');
 
 //Rutas para medicamentos
 Route::get('/medicamentos', 'MedicamentoController@index');

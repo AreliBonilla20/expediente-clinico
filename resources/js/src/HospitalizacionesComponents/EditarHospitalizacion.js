@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/HospitalizacionValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -43,11 +44,7 @@ const EditarHospitalizacion = () => {
             setCamilla(hospitalizacion.camilla);
             setEstado_paciente(hospitalizacion.estado_paciente);
             
-            for(let i=0; i<labels.length; i++){
-                labels[i].click();
-                }
-    
-                labels[0].click();
+            ClickLabel(labels);
        })
 
      }, []);

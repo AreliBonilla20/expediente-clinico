@@ -62,6 +62,7 @@ const ConsultarCentroMedico = () => {
                             </div>
                             
                             <br />
+                            {centros_medicos.length > 0 &&
                             <div className="card-body">
                             <h4>Buscar centro médico</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
@@ -117,6 +118,7 @@ const ConsultarCentroMedico = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            }
                         </div>
                     </section>
             </div>

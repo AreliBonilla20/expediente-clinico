@@ -56,8 +56,8 @@ const ConsultarExamen = () => {
                             <div className="card-header">
                                 <Link to="/examenes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
                             </div>
-                            
                             <br />
+                            {examenes.length > 0  && 
                             <div className="card-body">
                             <h4>Buscar examen</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
@@ -96,7 +96,7 @@ const ConsultarExamen = () => {
                                           <tr>
                                             <td>{examen.codigo_examen}</td>
                                             <td>{examen.nombre_examen}</td>
-                                           
+                                 
                                             <td>
                                             <Link to={`examenes/${examen.codigo_examen}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
@@ -108,7 +108,9 @@ const ConsultarExamen = () => {
                                     )}
                                     </tbody>
                                 </table>
+                           
                             </div>
+                             }
                         </div>
                     </section>
             </div>

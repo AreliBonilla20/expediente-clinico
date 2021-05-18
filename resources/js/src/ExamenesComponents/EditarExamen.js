@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/ExamenValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -40,16 +41,13 @@ const AgregarExamen = () => {
           const result = res.data;
           setTipos_examenes(result.tipos_examenes);
           
-          for(let i=0; i<labels.length; i++){
-              labels[i].click();
-            }
-            
-            labels[0].click();
+          ClickLabel(labels);
         })
        
        API.examenes().then(res => {
           const result = res.data;
           setExamenes(result.data);
+          ClickLabel(labels);
         })
     }, []);
 
@@ -64,6 +62,7 @@ const AgregarExamen = () => {
            setIndicaciones_examen(examen.indicaciones_examen);
            setCosto(examen.costo);
            setCodigo_inicial(examen.codigo_examen);
+           ClickLabel(labels);
        })
      }, []);
 

@@ -1,12 +1,12 @@
 import * as yup from "yup";
 import { string } from "yup/lib/locale";
 
-const schemaAgregarTratamiento = yup.object().shape({
+const schema = yup.object().shape({
 
     codigo_tratamiento: yup
     .string()
-    .max(10, "El máximo de caracteres es 10")
-    .required("El campo código de tratamiento es obligatorio"),
+    .required("El campo código de tratamiento es obligatorio")
+    .max(10, "El máximo de caracteres es 10"),
     
     nombre_tratamiento: yup
     .string()
@@ -15,7 +15,8 @@ const schemaAgregarTratamiento = yup.object().shape({
     
     descripcion_tratamiento: yup
     .string()
-    .max(250, "El máximo de caracteres es 250"),
+    .required("El campo descripción de tratamiento es obligatorio")
+    .max(500, "El máximo de caracteres es 500"),
 
     id_tipo_tratamiento: yup
     .string()
@@ -29,4 +30,4 @@ const schemaAgregarTratamiento = yup.object().shape({
   });
 
 
-export default schemaAgregarTratamiento;
+export default schema;

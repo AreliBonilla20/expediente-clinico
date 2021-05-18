@@ -18,7 +18,7 @@ class CreateCirugiasTable extends Migration
             
             $table->string('nombre_cirugia', 250);
             $table->string('descripcion_cirugia', 500);
-            $table->float('costo_cirugia');
+            $table->float('costo_cirugia', 8,2);
             $table->timestamps();
         });
     }

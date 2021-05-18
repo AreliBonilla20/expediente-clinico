@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/CentroMedicoValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -57,18 +58,15 @@ const EditarCentroMedico = () => {
            setDepartamentos(result.departamentos);
            setMunicipios(result.municipios);
 
-           for(let i=0; i<labels.length; i++){
-                labels[i].click();
-            }
-
-            labels[0].click();
+           ClickLabel(labels);
        })
 
        API.centros_medicos().then(res => {
-        const result = res.data;
-        setCentros_medicos(result.data);
+            const result = res.data;
+            setCentros_medicos(result.data);
+            ClickLabel(labels);
 
-        })
+       })
      }, []);
 
      //Función para cargar los datos del centro médico que se va a editar
@@ -96,6 +94,7 @@ const EditarCentroMedico = () => {
  
            setOpcion_pais(centro_medico.id_pais);
            setOpcion_depto(centro_medico.id_departamento);
+           ClickLabel(labels);
        })
      }, []);
 

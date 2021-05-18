@@ -338,7 +338,20 @@ insert into tipo_examen (id_tipo_examen, nombre_tipo_examen) values
 (1, 'Examen físico'),
 (2, 'Examen químico');
 
-
+insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
+(1, 'Analgésico'),
+(2, 'Antibiótico'),
+(3, 'Vacina'),
+(4, 'Antiséptico'),
+(5, 'Antiinflamatorio'),
+(6, 'Antihistamínico'),
+(7, 'Anestésico'),
+(8, 'Antidepresivo'),
+(9, 'Diurético'),
+(10, 'Laxante'),
+(11, 'Broncodilatador'),
+(12, 'Antipirético'),
+(13, 'Antifúngico');
 
 
 

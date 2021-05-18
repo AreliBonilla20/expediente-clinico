@@ -53,7 +53,7 @@ export default {
     diagnostico_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/diagnosticos/${param_busqueda}/buscar`),
 
-     //Centros Médicos
+    //Centros Médicos
      centros_medicos: () =>
      axios.get(`${API_URL}/centros_medicos`),
  
@@ -68,21 +68,23 @@ export default {
  
      centro_medico_ver: (codigo) =>
      axios.get(`${API_URL}/centros_medicos/${codigo}/ver`),
+
     //Tratamientos
-    tratamientosmedicos: () =>
-    axios.get(`${API_URL}/tratamientosmedicos`),
+    tratamientos_medicos: () =>
+    axios.get(`${API_URL}/tratamientos_medicos`),
 
     datos_formulario_tratamiento: () =>
-    axios.get(`${API_URL}/tratamientosmedicos/crear`),
+    axios.get(`${API_URL}/tratamientos_medicos/crear`),
 
     tratamiento_editar: (codigo) =>
-    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/editar`),
+    axios.get(`${API_URL}/tratamientos_medicos/${codigo}/editar`),
 
     tratamiento_ver: (codigo) =>
-    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/ver`),
+    axios.get(`${API_URL}/tratamientos_medicos/${codigo}/ver`),
 
     tratamiento_buscar: (param_busqueda) =>
-    axios.get(`${API_URL}/tratamientosmedicos/${param_busqueda}/buscar`),
+    axios.get(`${API_URL}/tratamientos_medicos/${param_busqueda}/buscar`),
+
     //Medicamentos
     medicamentos: () =>
     axios.get(`${API_URL}/medicamentos`),
@@ -98,6 +100,7 @@ export default {
 
     medicamento_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/medicamentos/${param_busqueda}/buscar`),
+    
     //Exámenes
     examenes: () =>
     axios.get(`${API_URL}/examenes`),

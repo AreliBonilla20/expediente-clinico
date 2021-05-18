@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/DiagnosticoValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -36,21 +37,19 @@ const EditarDiagnostico = () => {
     //Función para traer los datos que se ven en el formulario
     useEffect(() => {
         API.datos_formulario_diagnostico().then(res => {
-           const result = res.data;
-           setTipos_diagnosticos(result.tipos_diagnosticos);
+            const result = res.data;
+            setTipos_diagnosticos(result.tipos_diagnosticos);
 
-           for(let i=0; i<labels.length; i++){
-                labels[i].click();
-            }
-
-            labels[0].click();
+            ClickLabel(labels);
        })
 
-       API.diagnosticos().then(res => {
-        const result = res.data;
-        setDiagnosticos(result.data);
+        API.diagnosticos().then(res => {
+            const result = res.data;
+            setDiagnosticos(result.data);
 
-        })
+            ClickLabel(labels);
+
+            })
      }, []);
 
 
@@ -63,6 +62,8 @@ const EditarDiagnostico = () => {
            setId_tipo_diagnostico(diagnostico.id_tipo_diagnostico);
            setDescripcion_diagnostico(diagnostico.descripcion_diagnostico);
            setCodigo_inicial(diagnostico.codigo_diagnostico);
+           
+           ClickLabel(labels);
        })
      }, []);
 

@@ -60,6 +60,7 @@ const BuscarCentroMedico = () => {
                             </div>
                             
                             <br />
+                            {centros_medicos.length > 0 &&
                             <div className="card-body">
                             <h4>Resultados </h4>
                             <p>Centros médicos encontrados</p>
@@ -91,6 +92,13 @@ const BuscarCentroMedico = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            }
+                            {centros_medicos.length === 0 &&
+                               <div className="card-body">
+                                   <hr />
+                                   <p>No se encontaron resultados</p>
+                               </div>
+                            }  
                         </div>
                     </section>
             </div>

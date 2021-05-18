@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/MedicamentoValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -21,52 +22,49 @@ const EditarMedicamento = () => {
     const labels = document.getElementsByTagName('label');
 
     const [medicamentos,setMedicamentos] = useState([]);
-    const [codigo_inicial, setCodigoInicial] = useState('');
+    const [codigo_inicial, setCodigo_inicial] = useState('');
 
-    const [tipos_medicamentos, setTipos_Medicamentos] = useState([]);
+    const [tipos_medicamentos, setTipos_medicamentos] = useState([]);
     
-    const [codigo_medicamento, setCodigoMedicamento] = useState('');
-    const [id_tipo_medicamento, setIdTipoMedicamento] = useState('');
-    const [nombre_medicamento, setNombreMedicamento] = useState('');
-    const [descripcion_medicamento, setDescripcionMedicamento] = useState('');
-    const [presentacion_medicamento, setPresentacionMedicamento] = useState('');
-    const [costo_medicamento, setCostoMedicamento] = useState('');
-    const [existencia_medicamento, setExistenciaMedicamento] = useState('');
+    const [codigo_medicamento, setCodigo_medicamento] = useState('');
+    const [id_tipo_medicamento, setIdTipo_medicamento] = useState('');
+    const [nombre_medicamento, setNombre_medicamento] = useState('');
+    const [via_administracion, setVia_administracion] = useState('');
+    const [descripcion_medicamento, setDescripcion_medicamento] = useState('');
+    const [presentacion_medicamento, setPresentacion_medicamento] = useState('');
+    const [costo_medicamento, setCosto_medicamento] = useState('');
+    const [existencia_medicamento, setExistencia_medicamento] = useState('');
 
     //Función para traer los datos al select de tipo medicamento y para los demás campos
 
     useEffect(() => {
         API.medicamento_editar(codigo).then(res => {
             const medicamento = res.data;
-            setCodigoMedicamento(medicamento.codigo_medicamento);
-            setIdTipoMedicamento(medicamento.id_tipo_medicamento);
-            setNombreMedicamento(medicamento.nombre_medicamento);
-            setDescripcionMedicamento(medicamento.descripcion_medicamento);
-            setPresentacionMedicamento(medicamento.presentacion_medicamento);
-            setCostoMedicamento(medicamento.costo_medicamento);
-            setExistenciaMedicamento(medicamento.existencia_medicamento);
-            setCodigoInicial(medicamento.codigo_medicamento);
+            setCodigo_medicamento(medicamento.codigo_medicamento);
+            setIdTipo_medicamento(medicamento.id_tipo_medicamento);
+            setNombre_medicamento(medicamento.nombre_medicamento);
+            setVia_administracion(medicamento.via_administracion);
+            setDescripcion_medicamento(medicamento.descripcion_medicamento);
+            setPresentacion_medicamento(medicamento.presentacion_medicamento);
+            setCosto_medicamento(medicamento.costo_medicamento);
+            setExistencia_medicamento(medicamento.existencia_medicamento);
+            setCodigo_inicial(medicamento.codigo_medicamento);
        })
     },[]);
 
     useEffect(() => {
         API.datos_formulario_medicamento().then(res => {
             const result = res.data;
-            setTipos_Medicamentos(result.tipos_medicamentos);
-            for(let i=0; i<labels.length; i++){
-                labels[i].click();
-            }
-            labels[0].click();
+            setTipos_medicamentos(result.tipos_medicamentos);
+            
+            ClickLabel(labels);
        })
 
        API.medicamentos().then( res => {
-        const result = res.data;
-        setMedicamentos(result.data);
+            const result = res.data;
+            setMedicamentos(result.data);
 
-        for(let i=0; i<labels.length; i++){
-            labels[i].click();
-        }
-        labels[0].click();
+            ClickLabel(labels);
     })
     },[]);
 
@@ -76,7 +74,7 @@ const EditarMedicamento = () => {
 
     const editarMedicamento = async (data) => {
         try {
-          const body = { codigo_medicamento, id_tipo_medicamento, nombre_medicamento, descripcion_medicamento, 
+          const body = { codigo_medicamento, id_tipo_medicamento, nombre_medicamento, via_administracion, descripcion_medicamento, 
             presentacion_medicamento, costo_medicamento, existencia_medicamento
          };
           const response = await fetch(`${API_URL}/medicamentos/${codigo}/actualizar`, {
@@ -145,7 +143,7 @@ const EditarMedicamento = () => {
                                                                     id="codigo_medicamento"
                                                                     {...register('codigo_medicamento')}
                                                                     value={codigo_medicamento}
-                                                                    onChange={e => setCodigoMedicamento(e.target.value)} 
+                                                                    onChange={e => setCodigo_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -175,7 +173,7 @@ const EditarMedicamento = () => {
                                                                     id="nombre_medicamento"
                                                                     {...register('nombre_medicamento')}
                                                                     value={nombre_medicamento}
-                                                                    onChange={e => setNombreMedicamento(e.target.value)} />
+                                                                    onChange={e => setNombre_medicamento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
                                                                 </div>
@@ -192,13 +190,40 @@ const EditarMedicamento = () => {
                                                                 id="id_tipo_medicamento" 
                                                                 {...register('id_tipo_medicamento')}
                                                                 value={id_tipo_medicamento}
-                                                                onChange={e => setIdTipoMedicamento(e.target.value)} >
+                                                                onChange={e => setIdTipo_medicamento(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {tipos_medicamentos.map((tipo_medicamento) => (
                                                                 <option value={tipo_medicamento.id_tipo_medicamento}>{tipo_medicamento.tipo_medicamento}</option>
                                                                 ))}
                                                             </select>
                                                             <small className="text-danger"> {errors.id_tipo_medicamento?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-12 mb-4">
+                                                    <label htmlFor="via_administracion">Vía de administración (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="choices form-select"
+                                                                name="via_administracion" 
+                                                                id="via_administracion" 
+                                                                {...register('via_administracion')}
+                                                                value={via_administracion}
+                                                                onChange={e => setVia_administracion(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                <option value="Vía inhalatoria">Vía inhalatoria</option>
+                                                                <option value="Vía intramuscular">Vía intramuscular</option>
+                                                                <option value="Vía intravenosa">Vía intravenosa</option>
+                                                                <option value="Vía nasal">Vía nasal</option>
+                                                                <option value="Vía oftálmica">Vía oftálmica</option>
+                                                                <option value="Vía oral">Vía oral</option>
+                                                                <option value="Vía ótica">Vía ótica</option>
+                                                                <option value="Vía rectal y vaginal">Vía rectal y vaginal</option>
+                                                                <option value="Vía subcutánea">Vía subcutánea</option>
+                                                                <option value="Vía tópica">Vía tópica</option>
+                                                                <option value="Vía transdérmica">Vía transdérmica</option>
+                                                                
+                                                            </select>
+                                                            <small className="text-danger"> {errors.via_administracion?.message} </small>
                                                         </div>
                                                     </div>
 
@@ -211,7 +236,7 @@ const EditarMedicamento = () => {
                                                                     id="descripcion_medicamento"
                                                                     {...register('descripcion_medicamento')}
                                                                     value={descripcion_medicamento}
-                                                                    onChange={e => setDescripcionMedicamento(e.target.value)} />
+                                                                    onChange={e => setDescripcion_medicamento(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
                                                                 </div>
@@ -229,7 +254,7 @@ const EditarMedicamento = () => {
                                                                     id="presentacion_medicamento"
                                                                     {...register('presentacion_medicamento')}
                                                                     value={presentacion_medicamento}
-                                                                    onChange={e => setPresentacionMedicamento(e.target.value)} 
+                                                                    onChange={e => setPresentacion_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -248,7 +273,7 @@ const EditarMedicamento = () => {
                                                                     id="costo_medicamento"
                                                                     {...register('costo_medicamento')}
                                                                     value={costo_medicamento}
-                                                                    onChange={e => setCostoMedicamento(e.target.value)} 
+                                                                    onChange={e => setCosto_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>
@@ -267,7 +292,7 @@ const EditarMedicamento = () => {
                                                                     id="existencia_medicamento"
                                                                     {...register('existencia_medicamento')}
                                                                     value={existencia_medicamento}
-                                                                    onChange={e => setExistenciaMedicamento(e.target.value)} 
+                                                                    onChange={e => setExistencia_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-clipboard-check"></i>

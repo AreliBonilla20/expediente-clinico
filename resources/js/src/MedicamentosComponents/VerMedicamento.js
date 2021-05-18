@@ -16,25 +16,27 @@ const VerMedicamento = () => {
     const { codigo } = useParams();
     const API_URL = API.API_URL;
     
-    const [codigo_medicamento, setCodigoMedicamento] = useState('');
-    const [id_tipo_medicamento, setTipoMedicamento] = useState('');
-    const [nombre_medicamento, setNombreMedicamento] = useState('');
-    const [descripcion_medicamento, setDescripcionMedicamento] = useState('');
-    const [presentacion_medicamento, setPresentacionMedicamento] = useState('');
-    const [costo_medicamento, setCostoMedicamento] = useState('');
-    const [existencia_medicamento, setExistenciaMedicamento] = useState('');
+    const [codigo_medicamento, setCodigo_medicamento] = useState('');
+    const [id_tipo_medicamento, setTipo_medicamento] = useState('');
+    const [nombre_medicamento, setNombre_medicamento] = useState('');
+    const [via_administracion, setVia_administracion] = useState('');
+    const [descripcion_medicamento, setDescripcion_medicamento] = useState('');
+    const [presentacion_medicamento, setPresentacion_medicamento] = useState('');
+    const [costo_medicamento, setCosto_medicamento] = useState('');
+    const [existencia_medicamento, setExistencia_medicamento] = useState('');
    
 
     useEffect(() => {
         API.medicamento_ver(codigo).then(res => {
            const medicamento = res.data;
-           setCodigoMedicamento(medicamento.codigo_medicamento);
-           setTipoMedicamento(medicamento.tipo_medicamento);
-           setNombreMedicamento(medicamento.nombre_medicamento);
-           setDescripcionMedicamento(medicamento.descripcion_medicamento);
-           setPresentacionMedicamento(medicamento.presentacion_medicamento);
-           setCostoMedicamento(medicamento.costo_medicamento);
-           setExistenciaMedicamento(medicamento.existencia_medicamento);
+           setCodigo_medicamento(medicamento.codigo_medicamento);
+           setTipo_medicamento(medicamento.tipo_medicamento);
+           setNombre_medicamento(medicamento.nombre_medicamento);
+           setVia_administracion(medicamento.via_administracion);
+           setDescripcion_medicamento(medicamento.descripcion_medicamento);
+           setPresentacion_medicamento(medicamento.presentacion_medicamento);
+           setCosto_medicamento(medicamento.costo_medicamento);
+           setExistencia_medicamento(medicamento.existencia_medicamento);
        })
     }, []);
 
@@ -117,6 +119,19 @@ const VerMedicamento = () => {
                                 <div className="col-md-8">
                                         <div className="form-group">
                                         <p style={{fontWeight: "bold"}}>{id_tipo_medicamento}</p>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-4">
+                                        <div className="form-group">
+                                        <p>Vía de administración</p>
+                                        </div>
+                                </div>
+                                <div className="col-md-8">
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{via_administracion}</p>
                                         </div>
                                 </div>
                             </div>

@@ -44,7 +44,7 @@ const BuscarTratamiento = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/tratamientosmedicos">Consulta tratamientos</Link>
+                                        <Link to="/tratamientos_medicos">Consulta tratamientos</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -56,7 +56,7 @@ const BuscarTratamiento = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/tratamientosmedicos" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
+                                <Link to="/tratamientos_medicos" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
                             </div>
                             
                             <br />

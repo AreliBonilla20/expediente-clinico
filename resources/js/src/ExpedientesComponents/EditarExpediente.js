@@ -13,6 +13,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/ExpedienteValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -75,11 +76,7 @@ const EditarExpediente = () => {
            setOpcion_pais(paciente.id_pais);
            setOpcion_depto(paciente.id_departamento);
 
-           for(let i=0; i<labels.length; i++){
-            labels[i].click();
-            }
-
-            labels[0].click();
+           ClickLabel(labels);
 
        })
 
@@ -90,11 +87,7 @@ const EditarExpediente = () => {
             setDepartamentos(result.departamentos);
             setMunicipios(result.municipios);
 
-            for(let i=0; i<labels.length; i++){
-                labels[i].click();
-            }
-
-            labels[0].click();
+            ClickLabel(labels);
         })
 
      }, []);
@@ -537,7 +530,7 @@ const EditarExpediente = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-12 d-flex justify-content-end">
-                                                        <button className="btn btn-secondary">Guardar</button>
+                                                        <button className="btn btn-secondary">Actualizar</button>
                                                     </div>
 
                                                     

@@ -50,7 +50,7 @@ const VerTratamiento = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/tratamientosmedicos">Consulta tratamientos</Link>
+                                        <Link to="/tratamientos_medicos">Consulta tratamientos</Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
                                         <Link to="ver">Ver tratamiento</Link>
