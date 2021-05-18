@@ -328,6 +328,12 @@ INSERT INTO tipo_tratamiento (id_tipo_tratamiento, tipo_tratamiento) VALUES
 	(15, 'Terapia de quelación'),
 	(16, 'Terapia ocupacional');
 
+INSERT INTO tipo_centro_medico (id_tipo_centro_medico, tipo_centro_medico) VALUES 
+(1, 'Centro de atención psiquiátrica'),
+(2, 'Centro de cuidados ambulatorios'),
+(3, 'Consultorio médico'),
+(4, 'Hospital');
+
 insert into tipo_examen (id_tipo_examen, nombre_tipo_examen) values
 (1, 'Examen físico'),
 (2, 'Examen químico');

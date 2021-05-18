@@ -27,6 +27,11 @@ import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
 import BuscarDiagnostico from './DiagnosticosComponents/BuscarDiagnostico';
 import VerDiagnostico from './DiagnosticosComponents/VerDiagnostico';
 
+import ConsultarCentroMedico from './CentrosMedicosComponents/ConsultarCentroMedico';
+import AgregarCentroMedico from './CentrosMedicosComponents/AgregarCentroMedico';
+import EditarCentroMedico from './CentrosMedicosComponents/EditarCentroMedico';
+import BuscarCentroMedico from './CentrosMedicosComponents/BuscarCentroMedico';
+import VerCentroMedico from './CentrosMedicosComponents/VerCentroMedico';
 import ConsultarTratamiento from './TratamientosComponents/ConsultarTratamiento';
 import AgregarTratamiento from './TratamientosComponents/AgregarTratamiento';
 import EditarTratamiento from './TratamientosComponents/EditarTratamiento';
@@ -60,7 +65,7 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/editar" component={EditarExpediente} />
                 <Route exact path="/expedientes/:codigo/ver" component={VerExpediente} />
                 <Route exact path="/expedientes/:param_busqueda/buscar" component={BuscarExpediente} />
-
+                
                 <Route exact path="/expedientes/:codigo/antecedentes/crear" component={AgregarAntecedente} />
                 <Route exact path="/expedientes/:codigo/antecedentes/editar" component={EditarAntecedente} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/crear" component={AgregarHospitalizacion} />
@@ -79,6 +84,12 @@ const App = () => {
                 <Route exact path="/examenes/:codigo/ver" component={VerExamen} />
                 <Route exact path="/examenes/:param_busqueda/buscar" component={BuscarExamen} />
 
+                <Route exact path="/centros_medicos" component={ConsultarCentroMedico} />
+                <Route exact path="/centros_medicos/crear" component={AgregarCentroMedico} />
+                <Route exact path="/centros_medicos/:codigo/editar" component={EditarCentroMedico} />
+                <Route exact path="/centros_medicos/:codigo/ver" component={VerCentroMedico} />
+                <Route exact path="/centros_medicos/:param_busqueda/buscar" component={BuscarCentroMedico} />
+                                
                 <Route exact path="/tratamientosmedicos" component={ConsultarTratamiento} />
                 <Route exact path="/tratamientosmedicos/crear" component={AgregarTratamiento} />
                 <Route exact path="/tratamientosmedicos/:codigo/editar" component={EditarTratamiento} />

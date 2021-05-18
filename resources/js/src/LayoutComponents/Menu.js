@@ -57,28 +57,12 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
-                            <span>Tratamientos médicos</span>
+                            <i className="bi bi-grid-1x2-fill"></i>
+                            <span>Centros Médicos</span>
                         </a>
                         <ul className="submenu">
                             <li className="submenu-item ">
-                                <Link to="/tratamientosmedicos">Consultar</Link>
-                            </li>
-                            <li className="submenu-item ">
-                                <Link to="/tratamientosmedicos/crear">Agregar diagnóstico</Link>
-                            </li>
-                        </ul>
-                    </li>
-
-                    
-                    <li className="sidebar-item has-sub">
-                        <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
-                            <span>Medicamentoss</span>
-                        </a>
-                        <ul className="submenu">
-                            <li className="submenu-item ">
-                                <Link to="/medicamentos">Consultar</Link>
+                                <Link to="/centros_medicos">Consultar</Link>
                             </li>
                             <li className="submenu-item ">
                                 <Link to="/medicamentos/crear">Agregar diagnóstico</Link>
@@ -87,21 +71,11 @@ const Menu = () => {
                     </li>
                     
 
-                    <li className="sidebar-item has-sub">
-                        <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
-                            <span>Exámenes</span>
-                        </a>
-                        <ul className="submenu">
-                            <li className="submenu-item ">
-                                <Link to="/examenes">Consultar</Link>
-                            </li>
-                            <li className="submenu-item ">
-                                <Link to="/examenes/crear">Agregar diagnóstico</Link>
-                            </li>
-                        </ul>
-                    </li>
+                  
+                    
+                    
 
+                   
 
                 </ul>
             </div>
