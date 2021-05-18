@@ -10,12 +10,19 @@ import Footer from '../LayoutComponents/Footer';
 
 import API from '../api';
 
+import schema from '../Validaciones/TratamientoValidacion';
+
 const AgregarTratamiento = () => {
 
     //Aqui se guardar el codigo de diganostico que viene como parámetro 
     const { codigo } = useParams();
 
     const API_URL = API.API_URL;
+
+    const labels = document.getElementsByTagName('label');
+
+    const [tratamientosmedicos, setTratamientosMedicos] = useState([]);
+    const [codigo_inicial, setCodigo_Inicial] = useState('');
 
     //Datos para el formulario
     const [tipos_tratamientos, setTipos_tratamientos] = useState([]);
@@ -32,7 +39,20 @@ const AgregarTratamiento = () => {
         API.datos_formulario_tratamiento().then(res => {
            const result = res.data;
            setTipos_tratamientos(result.tipos_tratamientos);
+           for(let i=0; i<labels.length; i++){
+               labels[i].click();
+           }
+           labels[0].click();
        })
+
+       API.tratamientosmedicos().then(res => {
+        const result = res.data;
+        setTratamientosMedicos(result.data);
+        for(let i=0; i<labels.length; i++){
+            labels[i].click();
+        }
+        labels[0].click();
+     })
      }, []);
 
 
@@ -45,18 +65,18 @@ const AgregarTratamiento = () => {
            setId_tipo_tratamiento(tratamiento.id_tipo_tratamiento);
            setDescripcion_tratamiento(tratamiento.descripcion_tratamiento);
            setCosto_tratamiento(tratamiento.costo_tratamiento);
+           setCodigo_Inicial(tratamiento.codigo_tratamiento);
        })
      }, []);
 
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const editarTratamiento = async e => {
-        e.preventDefault();
+    const editarTratamiento = async (data) => {
         try {
           const body = { codigo_tratamiento, nombre_tratamiento, id_tipo_tratamiento, descripcion_tratamiento, costo_tratamiento};
           const response = await fetch(`${API_URL}/tratamientosmedicos/${codigo}/actualizar`, {
@@ -110,7 +130,7 @@ const AgregarTratamiento = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={editarTratamiento}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(editarTratamiento)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -132,6 +152,17 @@ const AgregarTratamiento = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_tratamiento?.message} </small>
+                                                            {
+                                                                tratamientosmedicos.map((tratamiento)=> {
+                                                                    if(tratamiento.codigo_tratamiento !== codigo_inicial){
+                                                                    if(tratamiento.codigo_tratamiento == codigo_tratamiento){
+                                                                        return(
+                                                                        <small className="text-danger"> Ya existe un registro con este código. </small>
+                                                                        )
+                                                                    }
+                                                                }
+                                                                })
+                                                            }
                                                         </div>
                                                     </div>
                                            

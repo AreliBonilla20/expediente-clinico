@@ -40,6 +40,9 @@ export default {
     tratamiento_editar: (codigo) =>
     axios.get(`${API_URL}/tratamientosmedicos/${codigo}/editar`),
 
+    tratamiento_ver: (codigo) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/ver`),
+
     tratamiento_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/tratamientosmedicos/${param_busqueda}/buscar`),
 

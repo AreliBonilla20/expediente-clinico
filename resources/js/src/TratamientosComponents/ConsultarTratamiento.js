@@ -101,7 +101,7 @@ const ConsultarTratamiento = () => {
                                             <Link to={`tratamientosmedicos/${tratamiento.codigo_tratamiento}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`tratamientosmedicos/${tratamiento.nombre_tratamiento}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`tratamientosmedicos/${tratamiento.codigo_tratamiento}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

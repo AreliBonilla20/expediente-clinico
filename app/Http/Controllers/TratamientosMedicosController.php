@@ -11,6 +11,7 @@ class TratamientosMedicosController extends Controller
 {
     public function index()
     {  
+
        return TratamientosMedicosResource::collection(TratamientosMedicos::orderBy('created_at', 'desc')->paginate(15));
       
     }
@@ -48,6 +49,14 @@ class TratamientosMedicosController extends Controller
         $tratamiento_editar = DB::select('select * from tratamientos_medicos where codigo_tratamiento = ?', [$codigo]); 
 
         return response()->json($tratamiento_editar[0]);    
+    }
+
+    public function show($codigo)
+    {
+        $tratamiento_ver = DB::select('select * from tratamientos_medicos inner join tipo_tratamiento on tratamientos_medicos.id_tipo_tratamiento = tipo_tratamiento.id_tipo_tratamiento 
+        where codigo_tratamiento = ?', [$codigo]); 
+
+        return response()->json($tratamiento_ver[0]);    
     }
 
     public function update($codigo, Request $request)

@@ -9,10 +9,13 @@ import Footer from '../LayoutComponents/Footer';
 
 
 import API from '../api';
+import schema from '../Validaciones/TratamientoValidacion';
 
 const AgregarTratamiento = () => {
 
     const API_URL = API.API_URL;
+
+    const [tratamientosmedicos, setTratamientosMedicos] = useState([]);
 
     //Datos para el formulario
     const [tipos_tratamientos, setTipos_tratamientos] = useState([]);
@@ -32,15 +35,18 @@ const AgregarTratamiento = () => {
        })
      }, []);
 
+     API.tratamientosmedicos().then(res => {
+        const result = res.data;
+        setTratamientosMedicos(result.data);
+     })
 
      const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
       });
 
 
     //Funcion para guardar
-    const agregarTratamiento = async e => {
-        e.preventDefault();
+    const agregarTratamiento = async (data) => {
         try {
           const body = { codigo_tratamiento, nombre_tratamiento, id_tipo_tratamiento, descripcion_tratamiento, costo_tratamiento};
           const response = await fetch(`${API_URL}/tratamientosmedicos/guardar`, {
@@ -94,7 +100,7 @@ const AgregarTratamiento = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={agregarTratamiento}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(agregarTratamiento)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -116,6 +122,15 @@ const AgregarTratamiento = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_tratamiento?.message} </small>
+                                                            {
+                                                                tratamientosmedicos.map((tratamiento)=> {
+                                                                    if(tratamiento.codigo_tratamiento == codigo_tratamiento){
+                                                                        return(
+                                                                        <small className="text-danger"> Ya existe un registro con este código. </small>
+                                                                        )
+                                                                    }
+                                                                })
+                                                            }
                                                         </div>
                                                     </div>
                                            
@@ -189,8 +204,9 @@ const AgregarTratamiento = () => {
                                                                     <i className="bi bi-cash"></i>
                                                                 </div>
                                                             </div>
+                                                            <small className="text-danger"> {errors.costo_tratamiento?.message} </small>
                                                         </div>
-                                                        <small className="text-danger"> {errors.costo_tratamiento?.message} </small>
+                                                        
                                                     </div>
 
                                                    
