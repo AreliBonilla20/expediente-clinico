@@ -70,6 +70,23 @@ const Menu = () => {
                         </ul>
                     </li>
 
+                    
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                            <i class="bi bi-file-earmark-check-fill"></i>
+                            <span>Medicamentoss</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/medicamentos">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/medicamentos/crear">Agregar diagnóstico</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    
+
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                             <i class="bi bi-file-earmark-check-fill"></i>
@@ -84,9 +101,6 @@ const Menu = () => {
                             </li>
                         </ul>
                     </li>
-
-                   
-
 
 
                 </ul>
