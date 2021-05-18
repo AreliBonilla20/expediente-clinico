@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Switch, 
+    Switch,
     Route
 } from 'react-router-dom';
-import ReactDOM from 'react-dom'; 
+import ReactDOM from 'react-dom';
 
 import Home from '../src/LayoutComponents/Home';
 
@@ -37,6 +37,11 @@ import AgregarMedicamento from './MedicamentosComponents/AgregarMedicamento';
 import EditarMedicamento from './MedicamentosComponents/EditarMedicamento';
 import BuscarMedicamento from './MedicamentosComponents/BuscarMedicamento';
 import VerMedicamento from './MedicamentosComponents/VerMedicamento';
+import ConsultarExamen from './ExamenesComponents/ConsultarExamen';
+import AgregarExamen from './ExamenesComponents/AgregarExamen';
+import EditarExamen from './ExamenesComponents/EditarExamen';
+import BuscarExamen from './ExamenesComponents/BuscarExamen';
+import VerExamen from './ExamenesComponents/VerExamen';
 
 import NotFound from './LayoutComponents/NotFound';
 
@@ -45,7 +50,7 @@ const App = () => {
     return(
         <Router className="container">
             <Switch>
-                
+
                 <Route exact path="/" component={Home}/>
 
                 <Route exact path="/expedientes" component={ConsultarExpediente} />
