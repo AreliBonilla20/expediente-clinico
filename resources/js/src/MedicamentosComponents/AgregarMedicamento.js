@@ -109,7 +109,7 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="codigo_medicamento">Código Medicamento (*)</label>
+                                                            <label htmlFor="codigo_medicamento">Código medicamento (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="codigo_medicamento"
@@ -119,7 +119,7 @@ const AgregarMedicamento = () => {
                                                                     onChange={e => setCodigo_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
+                                                                <i className="bi bi-upc-scan"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_medicamento?.message} </small>
@@ -202,7 +202,7 @@ const AgregarMedicamento = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="descripcion_medicamento">Descripción medicamento</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="descripcion_medicamento"
                                                                     id="descripcion_medicamento"
                                                                     {...register('descripcion_medicamento')}
@@ -237,7 +237,7 @@ const AgregarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo_medicamento">Costo medicamento (*)</label>
+                                                            <label htmlFor="costo_medicamento">Costo medicamento ($)</label>
                                                             <div className="position-relative">
                                                                 <input type="number" className="form-control" step="0.01" min="0"
                                                                     name="costo_medicamento"
@@ -247,28 +247,26 @@ const AgregarMedicamento = () => {
                                                                     onChange={e => setCosto_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
+                                                                <i className="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.costo_medicamento?.message} </small>
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-12">
-                                                        <div className="form-group has-icon-left">
-                                                            <label htmlFor="existencia_medicamento">Existencia medicamento (*)</label>
-                                                            <div className="position-relative">
-                                                                <input type="text" className="form-control"
-                                                                    name="existencia_medicamento"
-                                                                    id="existencia_medicamento"
-                                                                    {...register('existencia_medicamento')}
-                                                                    value={existencia_medicamento}
-                                                                    onChange={e => setExistencia_medicamento(e.target.value)} 
-                                                                     />
-                                                                <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
-                                                                </div>
-                                                            </div>
+                                                    <div className="col-md-12 mb-4">
+                                                    <label htmlFor="existencia_medicamento">Existencia medicamento (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="choices form-select"
+                                                                name="existencia_medicamento" 
+                                                                id="existencia_medicamento" 
+                                                                {...register('existencia_medicamento')}
+                                                                value={existencia_medicamento}
+                                                                onChange={e => setExistencia_medicamento(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                <option value="En existencia">En existencia</option>
+                                                                <option value="Agotado">Agotado</option>
+                                                            </select>
                                                             <small className="text-danger"> {errors.existencia_medicamento?.message} </small>
                                                         </div>
                                                     </div>

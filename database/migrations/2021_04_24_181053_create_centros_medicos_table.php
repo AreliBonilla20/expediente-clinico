@@ -36,7 +36,7 @@ class CreateCentrosMedicosTable extends Migration
             $table->string('telefono1_centro_medico', 25);
             $table->string('telefono2_centro_medico', 25)->nullable();
             $table->string('correo_centro_medico', 150);
-            $table->integer('tiempo_consulta_medica');
+            $table->time('tiempo_consulta_medica');
 
             $table->timestamps();
         });

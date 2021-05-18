@@ -195,7 +195,7 @@ const AgregarExamen = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="costo">Costo de examen $ (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <input type="number" className="form-control" step="0.01" min="0"
                                                                     name="costo" 
                                                                     id="costo" 
                                                                     {...register('costo')}

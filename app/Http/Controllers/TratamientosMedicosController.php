@@ -38,7 +38,7 @@ class TratamientosMedicosController extends Controller
                      $request->id_tipo_tratamiento,
                      $request->nombre_tratamiento,
                      $request->descripcion_tratamiento, 
-                     $request->costo_tratamiento, 
+                     round($request->costo_tratamiento, 2),
                      $fecha_actual
                     ]);
         
@@ -70,7 +70,7 @@ class TratamientosMedicosController extends Controller
                      $request->id_tipo_tratamiento,
                      $request->nombre_tratamiento,
                      $request->descripcion_tratamiento,
-                     $request->costo_tratamiento,
+                     round($request->costo_tratamiento, 2),
                      $fecha_actual,
                      $codigo
                     ]);

@@ -51,7 +51,8 @@ const VerMedicamento = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Código de Medicamento: {codigo}</h3>
+                                <h3>Consultar</h3>
+                                <h4>Medicamento: {codigo_medicamento} - {nombre_medicamento}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -170,7 +171,7 @@ const VerMedicamento = () => {
                                 </div>
                                 <div className="col-md-8">
                                         <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{costo_medicamento}</p>
+                                        <p style={{fontWeight: "bold"}}>$ {costo_medicamento}</p>
                                         </div>
                                 </div>
                             </div>

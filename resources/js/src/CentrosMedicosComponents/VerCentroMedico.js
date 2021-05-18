@@ -65,9 +65,8 @@ const VerCentroMedico = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Centro medico: {nombre_centro_medico}</h3>
-                       
-                               
+                                <h3>Consultar</h3>
+                                <h4>Centro medico: {id_centro_medico} - {nombre_centro_medico}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -85,160 +84,232 @@ const VerCentroMedico = () => {
                         </div>
                     </div>
                     <div className="page-heading">
+                    <div className="col-md-12">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h5 className="card-title">Datos del centro médico</h5>
+                                </div>
+                                <div className="card-body">
+                                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link active" id="datos_generales-tab" data-bs-toggle="tab" href="#datos_generales"
+                                                role="tab" aria-controls="datos_generales" aria-selected="true">Datos generales</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="empleados-tab" data-bs-toggle="tab" href="#empleados"
+                                                role="tab" aria-controls="empleados" aria-selected="false">Empleados</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="consultorios-tab" data-bs-toggle="tab" href="#consultorios"
+                                                role="tab" aria-controls="consultorios" aria-selected="false">Consultorios</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="quirofanos-tab" data-bs-toggle="tab" href="#quirofanos"
+                                                role="tab" aria-controls="quirofanos" aria-selected="false">Quirófanos</a>
+                                        </li>
+                                    </ul>
+
+
+                                    <div className="tab-content" id="myTabContent">
+                                        <div className="tab-pane fade show active" id="datos_generales" role="tabpanel"
+                                            aria-labelledby="datos_generales-tab">
+                                            <section className="section">
+                                            <div className="card">
+                                            <div className="card-body">
+                                                <h5>Datos generales</h5>
+                                                <hr />
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            {id_centro_medico ? (
+                                                                <p>Identificador</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            {id_centro_medico ? (
+                                                                <p style={{fontWeight: "bold"}}> {id_centro_medico}</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Tipo centro médico</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{tipo_centro}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Nombre</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{nombre_centro_medico}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Dirección</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{direccion_centro_medico}, {municipio}, {departamento}, {pais}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Teléfono</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{telefono1_centro_medico}, {telefono2_centro_medico}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Correo centro médico</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{correo_centro_medico}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Tiempo consulta médica </p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{tiempo_consulta_medica}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Nombre director</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{director}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Teléfono director</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{telefono_director}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            <p>Correo director</p>
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            <p style={{fontWeight: "bold"}}>{correo_director}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                        
+                                                <div className="col-12 d-flex justify-content-end">
+                                                    <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        
+                                        </section>
+
+                                        </div>
+                                            
+
+                                            <div className="tab-pane fade" id="empleados" role="tabpanel"
+                                                aria-labelledby="empleados-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                       
+
+                                                       
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="consultorios" role="tabpanel"
+                                                aria-labelledby="consultorios-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                        
+
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="quirofanos" role="tabpanel"
+                                                aria-labelledby="quirofanos-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                       
+
+                                                       
+                                                        </div>
+                                                    </section>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                    
-                    <section className="section">
-                        <div className="card">
-                        <div className="card-body">
-                            <h5>Datos generales</h5>
-                            <hr />
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        {id_centro_medico ? (
-                                            <p>Identificador</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        {id_centro_medico ? (
-                                            <p style={{fontWeight: "bold"}}> {id_centro_medico}</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Tipo centro médico</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{tipo_centro}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Nombre</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{nombre_centro_medico}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Dirección</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{direccion_centro_medico}, {municipio}, {departamento}, {pais}</p>
-                                        </div>
-                                </div>
-                            </div>
-                            
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Teléfono</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{telefono1_centro_medico}, {telefono2_centro_medico}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Correo centro médico</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{correo_centro_medico}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Tiempo consulta médica </p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{tiempo_consulta_medica}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Nombre director</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{director}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Teléfono director</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{telefono_director}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Correo director</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{correo_director}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                       
-                            <div className="col-12 d-flex justify-content-end">
-                                <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
-                            </div>
-                        </div>
-                        </div>
-                       
-                    </section>
+                    
 
             </div>
             </div>   

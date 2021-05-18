@@ -128,7 +128,7 @@ const AgregarCentroMedico = () => {
 
                                                 <div className="col-12">
                                                     <div className="form-group has-icon-left">
-                                                        <label htmlFor="id_centro_medico">Identificador(*)</label>
+                                                        <label htmlFor="id_centro_medico">Código del centro médico(*)</label>
                                                         <div className="position-relative">
                                                             <input type="text" className="form-control"
                                                                 name="id_centro_medico"
@@ -138,7 +138,7 @@ const AgregarCentroMedico = () => {
                                                                 onChange={e => setId_centro_medico(e.target.value)} 
                                                                 />
                                                             <div className="form-control-icon">
-                                                                <i className="bi bi-clipboard-check"></i>
+                                                            <i className="bi bi-upc-scan"></i>
                                                             </div>
                                                         </div>
                                                         <small className="text-danger"> {errors.id_centro_medico?.message} </small>
@@ -156,7 +156,7 @@ const AgregarCentroMedico = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="nombre_centro_medico">Nombre (*)</label>
+                                                            <label htmlFor="nombre_centro_medico">Nombre del centro médico(*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="nombre_centro_medico"
@@ -165,7 +165,7 @@ const AgregarCentroMedico = () => {
                                                                     value={nombre_centro_medico}
                                                                     onChange={e => setNombre_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-person"></i>
+                                                                    <i className="bi bi-building"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.nombre_centro_medico?.message} </small>
@@ -389,7 +389,7 @@ const AgregarCentroMedico = () => {
                                                     <div className="form-group has-icon-left">
                                                         <label htmlFor="tiempo_consulta_medica">Tiempo de consulta médica</label>
                                                         <div className="position-relative">
-                                                            <input type="text" className="form-control"
+                                                            <input type="time" className="form-control"
                                                                 placeholder="Formato HH:MM:SS" name="lname-column"
                                                                 name="tiempo_consulta_medica" 
                                                                 id="tiempo_consulta_medica" 
@@ -397,7 +397,7 @@ const AgregarCentroMedico = () => {
                                                                 value={tiempo_consulta_medica}
                                                                 onChange={e => setTiempo_consulta_medica(e.target.value)} />
                                                             <div className="form-control-icon">
-                                                                <i className="bi bi-person"></i>
+                                                                <i className="bi bi-alarm"></i>
                                                             </div>
                                                         </div>
                                                         <small className="text-danger"> {errors.tiempo_consulta_medica?.message} </small>

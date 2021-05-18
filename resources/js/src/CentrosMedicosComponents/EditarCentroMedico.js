@@ -136,8 +136,8 @@ const EditarCentroMedico = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Editar centro médico {codigo}</h3>
-                                <h5>{nombre_centro_medico}</h5>
+                                <h3>Editar</h3>
+                                <h4>Centro medico: {id_centro_medico} - {nombre_centro_medico}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -169,7 +169,7 @@ const EditarCentroMedico = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="id_centro_medico">Identificador</label>
+                                                            <label htmlFor="id_centro_medico">Código del centro médico</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="id_centro_medico"
@@ -179,7 +179,7 @@ const EditarCentroMedico = () => {
                                                                     onChange={e => setId_centro_medico(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
+                                                                <i className="bi bi-upc-scan"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.id_centro_medico?.message} </small>
@@ -199,7 +199,7 @@ const EditarCentroMedico = () => {
                                            
                                                     <div className="col-12">
                                             <div className="form-group has-icon-left">
-                                                <label htmlFor="nombre_centro_medico">Nombre (*)</label>
+                                                <label htmlFor="nombre_centro_medico">Nombre del centro médico(*)</label>
                                                 <div className="position-relative">
                                                     <input type="text" className="form-control"
                                                         name="nombre_centro_medico"
@@ -208,7 +208,7 @@ const EditarCentroMedico = () => {
                                                         value={nombre_centro_medico}
                                                         onChange={e => setNombre_centro_medico(e.target.value)} />
                                                     <div className="form-control-icon">
-                                                        <i className="bi bi-person"></i>
+                                                    <i className="bi bi-building"></i>
                                                     </div>
                                                 </div>
                                                 <small className="text-danger"> {errors.nombre_centro_medico?.message} </small>
@@ -438,14 +438,14 @@ const EditarCentroMedico = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="tiempo_consulta_medica">Tiempo de consulta médica</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <input type="time" className="form-control"
                                                                     name="tiempo_consulta_medica" 
                                                                     id="tiempo_consulta_medica" 
                                                                     {...register('tiempo_consulta_medica')}
                                                                     value={tiempo_consulta_medica}
                                                                     onChange={e => setTiempo_consulta_medica(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-person"></i>
+                                                                    <i className="bi bi-alarm"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.tiempo_consulta_medica?.message} </small>

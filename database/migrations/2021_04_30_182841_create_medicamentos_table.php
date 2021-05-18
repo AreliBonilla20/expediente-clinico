@@ -23,7 +23,7 @@ class CreateMedicamentosTable extends Migration
             $table->string('descripcion_medicamento', 250);
             $table->string('via_administracion', 150);
             $table->string('presentacion_medicamento', 150);
-            $table->float('costo_medicamento',8,2);
+            $table->float('costo_medicamento',8,2)->nullable();
             $table->string('existencia_medicamento', 25);
             $table->timestamps();
         });

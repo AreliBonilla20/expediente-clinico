@@ -30,8 +30,8 @@ const schema = yup.object().shape({
     .required("El campo código del medicamento es obligatorio"),
 
     costo_medicamento: yup
-    .number()
-    .required("El costo del medicamento es obligatorio"),
+    .string()
+    .required("El campo costo del medicamento es obligatorio"),
     
     existencia_medicamento: yup
     .string()

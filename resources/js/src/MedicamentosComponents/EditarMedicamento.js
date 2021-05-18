@@ -102,9 +102,8 @@ const EditarMedicamento = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Medicamentos</h3>
-                                
-                                <p className="text-subtitle text-muted">Agregar medicamento</p>
+                                <h3>Editar</h3>
+                                <h4>Medicamento: {codigo_medicamento} - {nombre_medicamento}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -146,8 +145,7 @@ const EditarMedicamento = () => {
                                                                     onChange={e => setCodigo_medicamento(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
-                                                                </div>
+                                                                <i className="bi bi-upc-scan"></i>                                                                </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_medicamento?.message} </small>
                                                             {
@@ -266,7 +264,7 @@ const EditarMedicamento = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="costo_medicamento">Costo Medicamento (*)</label>
+                                                            <label htmlFor="costo_medicamento">Costo Medicamento $ </label>
                                                             <div className="position-relative">
                                                                 <input type="number" className="form-control" step="0.01" min="0"
                                                                     name="costo_medicamento"

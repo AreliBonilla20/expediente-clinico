@@ -40,7 +40,7 @@ class MedicamentoController extends Controller
                     $request->via_administracion, 
                     $request->descripcion_medicamento, 
                     $request->presentacion_medicamento, 
-                    $request->costo_medicamento, 
+                    round($request->costo_medicamento, 2), 
                     $request->existencia_medicamento, 
                     $fecha_actual
                     ]);
@@ -76,7 +76,7 @@ class MedicamentoController extends Controller
                      $request->via_administracion,
                      $request->descripcion_medicamento,
                      $request->descripcion_medicamento,
-                     $request->costo_medicamento,
+                     round($request->costo_medicamento, 2),
                      $request->existencia_medicamento,
                      $fecha_actual,
                      $codigo

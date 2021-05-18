@@ -36,7 +36,7 @@ Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionCon
 Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'HospitalizacionController@update');
 
 //Rutas para chequeos - hospitalizaciones
-Route::get('/chequeos_hospitalizaciones', 'ChequeoHospitalizacionController@index');
+Route::get('/chequeos_hospitalizaciones/{id_hospitalizacion}', 'ChequeoHospitalizacionController@index');
 Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'ChequeoHospitalizacionController@store');
 
 //Rutas para diagnosticos

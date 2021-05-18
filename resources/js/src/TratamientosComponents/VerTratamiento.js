@@ -43,7 +43,8 @@ const VerTratamiento = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Código de tratamiento: {codigo}</h3>
+                                <h3>Consultar</h3>
+                                <h4>Medicamento: {codigo_tratamiento} - {nombre_tratamiento}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -141,7 +142,7 @@ const VerTratamiento = () => {
                                 <div className="col-md-8">
                                         <div className="form-group">
                                         {costo_tratamiento ? (
-                                            <p style={{fontWeight: "bold"}}> {costo_tratamiento}</p>
+                                            <p style={{fontWeight: "bold"}}>$ {costo_tratamiento}</p>
                                         ) : (
                                             <p></p>
                                         )}

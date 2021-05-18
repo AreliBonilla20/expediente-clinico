@@ -23,7 +23,7 @@ const schema = yup.object().shape({
     .required("El campo tipo de tratamiento es obligatorio"),
 
     costo_tratamiento: yup
-    .number()
+    .string()
     .required("El campo costo de tratamiento es obligatorio"),
 
     

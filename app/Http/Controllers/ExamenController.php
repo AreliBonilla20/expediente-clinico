@@ -37,7 +37,7 @@ class ExamenController extends Controller
                      $request->id_tipo_examen,
                      $request->nombre_examen,
                      $request->indicaciones_examen, 
-                     $request->costo, 
+                     round($request->costo, 2), 
                      $fecha_actual
                     ]);
         
@@ -65,7 +65,7 @@ class ExamenController extends Controller
          $request->id_tipo_examen,
          $request->nombre_examen,
          $request->indicaciones_examen, 
-         $request->costo, 
+         round($request->costo, 2), 
          $fecha_actual
         ]);
         

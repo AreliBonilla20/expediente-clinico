@@ -102,9 +102,9 @@ const EditarDiagnostico = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Diagnósticos</h3>
+                                <h3>Editar</h3>
+                                <h4>Diagnóstico: {codigo_diagnostico} - {nombre_diagnostico}</h4>
                                 
-                                <p className="text-subtitle text-muted">Agregar diagnóstico</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -206,7 +206,7 @@ const EditarDiagnostico = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="descripcion_diagnostico">Descripción de diagnóstico</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="descripcion_diagnostico" 
                                                                     id="descripcion_diagnostico" 
                                                                     {...register('descripcion_diagnostico')}

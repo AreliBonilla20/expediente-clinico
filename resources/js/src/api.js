@@ -37,6 +37,10 @@ export default {
     hospitalizacion_ver: (id_hospitalizacion) =>
     axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/ver`),
 
+    //Chequeos - Hospitalizacion
+    chequeos_hospitalizacion: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}`),
+
     //Diagnósticos
     diagnosticos: () =>
     axios.get(`${API_URL}/diagnosticos`),

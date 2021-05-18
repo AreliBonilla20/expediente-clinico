@@ -101,9 +101,8 @@ const AgregarExamen = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Exámenes</h3>
-                                
-                                <p className="text-subtitle text-muted">Agregar examen</p>
+                                <h3>Editar</h3>
+                                <h4>Medicamento: {codigo_examen} - {nombre_examen}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -223,7 +222,7 @@ const AgregarExamen = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="costo">Costo de examen</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <input type="number" className="form-control" step="0.01" min="0"
                                                                     name="costo" 
                                                                     id="costo" 
                                                                     {...register('costo')}

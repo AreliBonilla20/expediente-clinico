@@ -89,10 +89,7 @@ const VerExpediente = () => {
                                             <a className="nav-link" id="profile-tab" data-bs-toggle="tab" href="#chequeos"
                                                 role="tab" aria-controls="chequeos" aria-selected="false">Chequeos</a>
                                         </li>
-                                        <li className="nav-item" role="presentation">
-                                            <a className="nav-link" id="home-tab" data-bs-toggle="tab" href="#hospitalizaciones"
-                                                role="tab" aria-controls="hospitalizaciones" aria-selected="false">Hospitalizaciones</a>
-                                        </li>
+                                       
                                     </ul>
 
 
@@ -214,15 +211,7 @@ const VerExpediente = () => {
                                                     </section>
                                             </div>
 
-                                            <div className="tab-pane fade" id="hospitalizaciones" role="tabpanel"
-                                                aria-labelledby="hospitalizaciones-tab">
-                                                    
-                                                    <section className="section">
-                                                        <div className="card">
-                                                        
-                                                        </div>
-                                                    </section>
-                                            </div>
+                                         
                                     </div>
                                 </div>
                             </div>

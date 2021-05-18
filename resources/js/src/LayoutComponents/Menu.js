@@ -27,7 +27,7 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-folder-fill"></i>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Expedientes</span>
                         </a>
                         <ul className="submenu">
@@ -50,14 +50,14 @@ const Menu = () => {
                                 <Link to="/centros_medicos">Consultar</Link>
                             </li>
                             <li className="submenu-item ">
-                                <Link to="/medicamentos/crear">Agregar centro médico</Link>
+                                <Link to="/centros_medicos/crear">Agregar centro médico</Link>
                             </li>
                         </ul>
                     </li>
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Diagnósticos</span>
                         </a>
                         <ul className="submenu">
@@ -72,7 +72,7 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Medicamentos</span>
                         </a>
                         <ul className="submenu">
@@ -87,7 +87,7 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Tratamientos</span>
                         </a>
                         <ul className="submenu">
@@ -102,7 +102,7 @@ const Menu = () => {
 
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
-                            <i class="bi bi-file-earmark-check-fill"></i>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Examenes</span>
                         </a>
                         <ul className="submenu">

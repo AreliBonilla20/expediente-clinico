@@ -21,7 +21,7 @@ class CreateTratamientosMedicosTable extends Migration
             
             $table->string('nombre_tratamiento', 150);
             $table->string('descripcion_tratamiento', 500);
-            $table->float('costo_tratamiento', 8,2);
+            $table->float('costo_tratamiento', 8,2)->nullable();
             $table->timestamps();
         });
     }
