@@ -105,7 +105,7 @@ const AgregarTratamiento = () => {
                                                 
                                                 <h5>Datos de tratamiento</h5>
 
-                                                <div className="col-12">
+                                                <div className="col-md-12 mb-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="codigo_tratamiento">Código del tratamiento (*)</label>
                                                             <div className="position-relative">
@@ -132,7 +132,7 @@ const AgregarTratamiento = () => {
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-12">
+                                                    <div className="col-md-12 mb-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_tratamiento">Nombre del tratamiento (*)</label>
                                                             <div className="position-relative">
@@ -206,9 +206,6 @@ const AgregarTratamiento = () => {
                                                     </div>
 
 
-                                                    
-
-                                                   
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Guardar</button>
                                                     </div>

@@ -8,7 +8,7 @@ const ChequeoHospitalizacion = () => {
     const API_URL = API.API_URL;
 
     const {id_hospitalizacion} = useParams();
-
+    const codigo = id_hospitalizacion.substr(0,7);
     const [chequeos, setChequeos] = useState([]);
     const [fecha_chequeo, setFecha_chequeo] = useState('');
     const [hora_chequeo, setHora_chequeo] = useState('');
@@ -34,7 +34,7 @@ const ChequeoHospitalizacion = () => {
             
           });
           
-          window.location = `/hospitalizaciones/${id_hospitalizacion}/ver`;
+          window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
         } catch (err) {
           console.error(err.message);
         }
@@ -143,7 +143,7 @@ const ChequeoHospitalizacion = () => {
                  <h6>Fecha - {chequeo.fecha_chequeo}</h6>
                  <h6>Hora - {chequeo.hora_chequeo}</h6>
                  <p className="card-text">
-                     Observacciones: {chequeo.observacion_chequeo}
+                     Observaciones: {chequeo.observacion_chequeo}
                  </p>
              </div>
          </div>

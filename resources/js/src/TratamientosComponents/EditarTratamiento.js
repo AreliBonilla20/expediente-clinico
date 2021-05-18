@@ -162,7 +162,7 @@ const AgregarTratamiento = () => {
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-6">
+                                                    <div className="col-md-12 mb-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_tratamiento">Nombre tratamiento (*)</label>
                                                             <div className="position-relative">

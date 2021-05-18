@@ -84943,6 +84943,8 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id_hospitalizacion = _useParams.id_hospitalizacion;
 
+  var codigo = id_hospitalizacion.substr(0, 7);
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       chequeos = _useState2[0],
@@ -84995,7 +84997,7 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
 
             case 5:
               response = _context.sent;
-              window.location = "/hospitalizaciones/".concat(id_hospitalizacion, "/ver");
+              window.location = "/expedientes/".concat(codigo, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver");
               _context.next = 12;
               break;
 
@@ -85147,7 +85149,7 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
       className: "card-title"
     }, "Chequeo - ", chequeo.id_chequeo_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "Fecha - ", chequeo.fecha_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "Hora - ", chequeo.hora_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "card-text"
-    }, "Observacciones: ", chequeo.observacion_chequeo))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, "Observaciones: ", chequeo.observacion_chequeo))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "card-footer d-flex justify-content-between"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Registrado por:"))));
   }));
@@ -86015,7 +86017,7 @@ var EditarDiagnostico = function EditarDiagnostico() {
       }
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -93028,7 +93030,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos de tratamiento"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-12"
+    className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -93058,7 +93060,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
       }, " Ya existe un registro con este c\xF3digo.");
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-12"
+    className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -93709,7 +93711,7 @@ var AgregarTratamiento = function AgregarTratamiento() {
       }
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
+    className: "col-md-12 mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
