@@ -65,3 +65,13 @@ Route::get('/tratamientosmedicos/{codigo}/ver', 'TratamientosmedicosController@s
 Route::get('/tratamientosmedicos/{codigo}/editar', 'TratamientosmedicosController@edit');
 Route::put('/tratamientosmedicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
 Route::get('/tratamientosmedicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');
+
+
+//Rutas para examenes
+Route::get('/examenes', 'ExamenController@index');
+Route::get('/examenes/crear', 'ExamenController@create');
+Route::post('/examenes/guardar', 'ExamenController@store');
+Route::get('/examenes/{codigo}/ver', 'ExamenController@show');
+Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
+Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
+Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');

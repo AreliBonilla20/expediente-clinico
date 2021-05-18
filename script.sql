@@ -315,6 +315,15 @@ INSERT INTO tipo_centro_medico (id_tipo_centro_medico, tipo_centro_medico) VALUE
 (2, 'Centro de cuidados ambulatorios'),
 (3, 'Consultorio médico'),
 (4, 'Hospital');
+insert into tipo_examen (id_tipo_examen, nombre_tipo_examen) values
+(1, 'Hemograma completo'),
+(2, 'Urinálisis completo'),
+(3, 'Heces'),
+(4, 'Perfil renal'),
+(5, 'Perfil lipídico'),
+(6, 'Perfil hepático'),
+(7, 'Perfil triode'),
+(8, 'Panel básico metabólico');
 
 
 
