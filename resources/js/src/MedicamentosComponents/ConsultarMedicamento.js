@@ -86,8 +86,8 @@ const ConsultarMedicamento = () => {
                                     <thead>
                                         <tr>
                                             <th>Código Medicamento</th>
-                                            <th>Tipo Medicamento</th>
                                             <th>Nombre</th>
+                                            <th>Existencia</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
                                         </tr>
@@ -96,8 +96,8 @@ const ConsultarMedicamento = () => {
                                     {medicamentos.map((medicamento) => 
                                           <tr>
                                             <td>{medicamento.codigo_medicamento}</td>
-                                            <td>{medicamento.id_tipo_medicamento}</td>
                                             <td>{medicamento.nombre_medicamento}</td>
+                                            <td>{medicamento.existencia_medicamento}</td>
                                             <td>
                                             <Link to={`medicamentos/${medicamento.codigo_medicamento}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>

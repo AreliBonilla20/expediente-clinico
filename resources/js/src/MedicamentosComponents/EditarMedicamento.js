@@ -8,6 +8,8 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import schema from '../Validaciones/MedicamentoValidacion';
+
 import API from '../api';
 
 const EditarMedicamento = () => {
@@ -15,6 +17,11 @@ const EditarMedicamento = () => {
     const API_URL = API.API_URL;
 
     const { codigo } = useParams();
+
+    const labels = document.getElementsByTagName('label');
+
+    const [medicamentos,setMedicamentos] = useState([]);
+    const [codigo_inicial, setCodigoInicial] = useState('');
 
     const [tipos_medicamentos, setTipos_Medicamentos] = useState([]);
     
@@ -27,12 +34,6 @@ const EditarMedicamento = () => {
     const [existencia_medicamento, setExistenciaMedicamento] = useState('');
 
     //Función para traer los datos al select de tipo medicamento y para los demás campos
-    useEffect(() => {
-        API.datos_formulario_medicamento().then(res => {
-            const result = res.data;
-            setTipos_Medicamentos(result.tipos_medicamentos);
-       })
-    },[]);
 
     useEffect(() => {
         API.medicamento_editar(codigo).then(res => {
@@ -44,15 +45,36 @@ const EditarMedicamento = () => {
             setPresentacionMedicamento(medicamento.presentacion_medicamento);
             setCostoMedicamento(medicamento.costo_medicamento);
             setExistenciaMedicamento(medicamento.existencia_medicamento);
+            setCodigoInicial(medicamento.codigo_medicamento);
        })
     },[]);
 
+    useEffect(() => {
+        API.datos_formulario_medicamento().then(res => {
+            const result = res.data;
+            setTipos_Medicamentos(result.tipos_medicamentos);
+            for(let i=0; i<labels.length; i++){
+                labels[i].click();
+            }
+            labels[0].click();
+       })
+
+       API.medicamentos().then( res => {
+        const result = res.data;
+        setMedicamentos(result.data);
+
+        for(let i=0; i<labels.length; i++){
+            labels[i].click();
+        }
+        labels[0].click();
+    })
+    },[]);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schemaAgregarExpediente),
+        resolver: yupResolver(schema),
     });
 
-    const editarMedicamento = async e => {
-        e.preventDefault();
+    const editarMedicamento = async (data) => {
         try {
           const body = { codigo_medicamento, id_tipo_medicamento, nombre_medicamento, descripcion_medicamento, 
             presentacion_medicamento, costo_medicamento, existencia_medicamento
@@ -108,7 +130,7 @@ const EditarMedicamento = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-body">
-                                        <form className="form form-vertical" onSubmit={editarMedicamento}>
+                                        <form className="form form-vertical" onSubmit={handleSubmit(editarMedicamento)}>
                                             <div className="form-body">
                                                 <div className="row">
                                                 
@@ -130,24 +152,17 @@ const EditarMedicamento = () => {
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_medicamento?.message} </small>
-                                                        </div>
-                                                    </div>
-                                           
-                                                    <div className="col-md-12 mb-4">
-                                                    <label htmlFor="id_tipo_medicamento">Tipo Medicamento (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="choices form-select"
-                                                                name="id_tipo_medicamento" 
-                                                                id="id_tipo_medicamento" 
-                                                                {...register('id_tipo_medicamento')}
-                                                                value={id_tipo_medicamento}
-                                                                onChange={e => setIdTipoMedicamento(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {tipos_medicamentos.map((tipo_medicamento) => (
-                                                                <option value={tipo_medicamento.id_tipo_medicamento}>{tipo_medicamento.tipo_medicamento}</option>
-                                                                ))}
-                                                            </select>
-                                                            <small className="text-danger"> {errors.id_tipo_medicamento?.message} </small>
+                                                            {
+                                                                    medicamentos.map((medicamento) => {
+                                                                        if(medicamento.codigo_medicamento !== codigo_inicial){
+                                                                            if(medicamento.codigo_medicamento === codigo_medicamento){
+                                                                                return(
+                                                                                    <small className="text-danger">Ya existe un registro con este código de medicamento, intente uno diferente.</small>
+                                                                                )
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                }
                                                         </div>
                                                     </div>
 
@@ -169,9 +184,27 @@ const EditarMedicamento = () => {
                                                         </div>
                                                     </div>
 
+                                                    <div className="col-md-12 mb-4">
+                                                    <label htmlFor="id_tipo_medicamento">Tipo Medicamento (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="choices form-select"
+                                                                name="id_tipo_medicamento" 
+                                                                id="id_tipo_medicamento" 
+                                                                {...register('id_tipo_medicamento')}
+                                                                value={id_tipo_medicamento}
+                                                                onChange={e => setIdTipoMedicamento(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {tipos_medicamentos.map((tipo_medicamento) => (
+                                                                <option value={tipo_medicamento.id_tipo_medicamento}>{tipo_medicamento.tipo_medicamento}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_tipo_medicamento?.message} </small>
+                                                        </div>
+                                                    </div>
+
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="descripcion_medicamento">Descripción Medicamento (*)</label>
+                                                            <label htmlFor="descripcion_medicamento">Descripción Medicamento</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="descripcion_medicamento"

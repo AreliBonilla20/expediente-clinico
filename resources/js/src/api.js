@@ -40,6 +40,9 @@ export default {
     medicamento_editar: (codigo) =>
     axios.get(`${API_URL}/medicamentos/${codigo}/editar`),
 
+    medicamento_ver: (codigo) =>
+    axios.get(`${API_URL}/medicamentos/${codigo}/ver`),
+
     medicamento_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/medicamentos/${param_busqueda}/buscar`),
 

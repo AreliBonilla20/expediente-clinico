@@ -50,6 +50,14 @@ class MedicamentoController extends Controller
         return response()->json($medicamento_editar[0]);    
     }
 
+    public function show($codigo)
+    {
+        $medicamento_ver = DB::select('select * from medicamentos inner join tipo_medicamento on medicamentos.id_tipo_medicamento = tipo_medicamento.id_tipo_medicamento
+                                        where codigo_medicamento = ?', [$codigo]); 
+
+        return response()->json($medicamento_ver[0]);    
+    }
+
     public function update($codigo, Request $request)
     {
         DB::table('medicamentos')->where('codigo_medicamento', $codigo)->update(array
