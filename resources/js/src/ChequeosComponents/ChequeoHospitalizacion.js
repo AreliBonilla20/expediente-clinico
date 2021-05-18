@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {useParams} from 'react-router-dom';
 
+import ConsultarChequeoHospitalizacion from './ConsultarChequeoHospitalizacion';
+
 import schema from '../Validaciones/ChequeoValidacion';
 
 import API from '../api';
@@ -12,26 +14,28 @@ const AgregarDiagnostico = () => {
     
     const API_URL = API.API_URL;
 
+    const { id_hospitalizacion } = useParams();
+
     const [fecha_chequeo, setFecha_chequeo] = useState('');
     const [hora_chequeo, setHora_chequeo] = useState('');
     const [observacion_chequeo, setObservacion_chequeo] = useState('');
    
-    
      const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
+        //resolver: yupResolver(schema),
       });
 
-    const agregarChequeo = async (data) => {
+    const agregarChequeo = async (e) => {
+        e.preventDefault();
         try {
           const body = { fecha_chequeo, hora_chequeo, observacion_chequeo};
-          const response = await fetch(`${API_URL}/diagnosticos/guardar`, {
+          const response = await fetch(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
             
           });
           
-          window.location = "/diagnosticos";
+          window.location = `${API_URL}/hospitalizaciones/${id_hospitalizacion}/ver`;
         } catch (err) {
           console.error(err.message);
         }
@@ -46,7 +50,6 @@ const AgregarDiagnostico = () => {
             Agregar
         </button>
 
-        
         <div className="modal fade text-left" id="default" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel1" aria-hidden="true">
             <div className="modal-dialog modal-dialog-scrollable" role="document">
@@ -59,11 +62,10 @@ const AgregarDiagnostico = () => {
                         </button>
                     </div>
                     <div className="modal-body">
-                    <form className="form form-vertical" onSubmit={handleSubmit(agregarChequeo)}>
+                    <form className="form form-vertical" onSubmit={agregarChequeo}>
                             <div className="form-body">
                                 <div className="row">
-                                
-                                    
+
                                     <div className="col-6">
                                         <div className="form-group has-icon-left">
                                             <label htmlFor="fecha_chequeo">Fecha del chequeo (*)</label>
@@ -119,20 +121,10 @@ const AgregarDiagnostico = () => {
                                             <small className="text-danger"> {errors.observacion_chequeo?.message} </small>
                                         </div>
                                     </div>
-
-
-                                    <div className="modal-footer">
-                                    <button type="button" className="btn" data-bs-dismiss="modal">
-                                        <i className="bx bx-x d-block d-sm-none"></i>
-                                        <span className="d-none d-sm-block">Cerrar</span>
-                                    </button>
-                                    <button type="button" className="btn btn-secondary"
-                                        data-bs-dismiss="modal">
-                                        <i className="bx bx-check d-block d-sm-none"></i>
-                                        <span className="d-none d-sm-block">Guardar</span>
-                                    </button>
+                                    
+                                    <div className="col-12 d-flex justify-content-end">
+                                        <button className="btn btn-secondary">Guardar</button>
                                     </div>
-
                                     
                                 </div>
                             </div>
@@ -143,6 +135,7 @@ const AgregarDiagnostico = () => {
                 </div>
             </div>
         </div>
+        <ConsultarChequeoHospitalizacion/>
     </div>
     );
 }

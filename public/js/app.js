@@ -82597,8 +82597,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
 /* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
-/* harmony import */ var _Validaciones_ChequeoValidacion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Validaciones/ChequeoValidacion */ "./resources/js/src/Validaciones/ChequeoValidacion.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _ConsultarChequeoHospitalizacion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ConsultarChequeoHospitalizacion */ "./resources/js/src/ChequeosComponents/ConsultarChequeoHospitalizacion.js");
+/* harmony import */ var _Validaciones_ChequeoValidacion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Validaciones/ChequeoValidacion */ "./resources/js/src/Validaciones/ChequeoValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
@@ -82627,10 +82628,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var AgregarDiagnostico = function AgregarDiagnostico() {
   var _errors$fecha_chequeo, _errors$hora_chequeo, _errors$observacion_c;
 
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_6__["default"].API_URL;
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_7__["default"].API_URL;
+
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      id_hospitalizacion = _useParams.id_hospitalizacion;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -82647,28 +82652,28 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
       observacion_chequeo = _useState6[0],
       setObservacion_chequeo = _useState6[1];
 
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
-    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_ChequeoValidacion__WEBPACK_IMPORTED_MODULE_5__["default"])
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
   }),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.formState.errors;
 
   var agregarChequeo = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
+              e.preventDefault();
+              _context.prev = 1;
               body = {
                 fecha_chequeo: fecha_chequeo,
                 hora_chequeo: hora_chequeo,
                 observacion_chequeo: observacion_chequeo
               };
-              _context.next = 4;
-              return fetch("".concat(API_URL, "/diagnosticos/guardar"), {
+              _context.next = 5;
+              return fetch("".concat(API_URL, "/chequeos_hospitalizaciones/").concat(id_hospitalizacion, "/guardar"), {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json"
@@ -82676,23 +82681,23 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
                 body: JSON.stringify(body)
               });
 
-            case 4:
+            case 5:
               response = _context.sent;
-              window.location = "/diagnosticos";
-              _context.next = 11;
+              window.location = "".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver");
+              _context.next = 12;
               break;
 
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context["catch"](0);
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
               console.error(_context.t0.message);
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 8]]);
+      }, _callee, null, [[1, 9]]);
     }));
 
     return function agregarChequeo(_x) {
@@ -82737,7 +82742,7 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
     className: "modal-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "form form-vertical",
-    onSubmit: handleSubmit(agregarChequeo)
+    onSubmit: agregarChequeo
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -82816,27 +82821,77 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
   }, " ", (_errors$observacion_c = errors.observacion_chequeo) === null || _errors$observacion_c === void 0 ? void 0 : _errors$observacion_c.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "modal-footer"
+    className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    type: "button",
-    className: "btn",
-    "data-bs-dismiss": "modal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bx bx-x d-block d-sm-none"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-    className: "d-none d-sm-block"
-  }, "Cerrar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-secondary",
-    "data-bs-dismiss": "modal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bx bx-check d-block d-sm-none"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-    className: "d-none d-sm-block"
-  }, "Guardar")))))))))));
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ConsultarChequeoHospitalizacion__WEBPACK_IMPORTED_MODULE_5__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AgregarDiagnostico);
+
+/***/ }),
+
+/***/ "./resources/js/src/ChequeosComponents/ConsultarChequeoHospitalizacion.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/src/ChequeosComponents/ConsultarChequeoHospitalizacion.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var ConsultarChequeoHospitalizacion = function ConsultarChequeoHospitalizacion() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      id_hospitalizacion = _useParams.id_hospitalizacion;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      chequeos = _useState2[0],
+      setChequeos = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_2__["default"].chequeos(id_hospitalizacion).then(function (res) {
+      var result = res.data;
+      setChequeos(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-content"
+  }, chequeos.map(function (chequeo) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card-body"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      className: "card-title"
+    }, "Chequeo - ", chequeo.id_chequeo_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Fecha: ", chequeo.fecha_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Hora: ", chequeo.hora_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "card-text"
+    }, chequeo.observacion_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Realizado por: "));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ConsultarChequeoHospitalizacion);
 
 /***/ }),
 
@@ -87844,6 +87899,9 @@ var API_URL = 'http://localhost:8000/api';
   },
   hospitalizacion_ver: function hospitalizacion_ver(id_hospitalizacion) {
     return axios.get("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver"));
+  },
+  chequeos: function chequeos(id_hospitalizacion) {
+    return axios.get("".concat(API_URL, "/chequeos_hospitalizaciones/").concat(id_hospitalizacion));
   },
   //Diagnósticos
   diagnosticos: function diagnosticos() {
