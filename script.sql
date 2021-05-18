@@ -310,6 +310,17 @@ insert into tipo_diagnostico (id_tipo_diagnostico, tipo_diagnostico) values
 (19, 'Causas externas de morbilidad'),
 (20, 'Factores que influyen en el estado de salud y contacto con los servicios sanitarios');
 
+insert into tipo_examen (id_tipo_examen, nombre_tipo_examen) values
+(1, 'Hemograma completo'),
+(2, 'Urinálisis completo'),
+(3, 'Heces'),
+(4, 'Perfil renal'),
+(5, 'Perfil lipídico'),
+(6, 'Perfil hepático'),
+(7, 'Perfil triode'),
+(8, 'Panel básico metabólico');
+
+
 
 
 

@@ -81107,17 +81107,6 @@ module.exports = "/images/1.jpg?8e5a2aeff7500b2971010c29d36329a6";
 
 /***/ }),
 
-/***/ "./public/assets/images/logo/logo.png":
-/*!********************************************!*\
-  !*** ./public/assets/images/logo/logo.png ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/logo.png?70448cf15df886e14c1bdbb43a6c9184";
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -82639,7 +82628,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./TratamientosComponents/EditarTratamiento */ "./resources/js/src/TratamientosComponents/EditarTratamiento.js");
 /* harmony import */ var _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./TratamientosComponents/BuscarTratamiento */ "./resources/js/src/TratamientosComponents/BuscarTratamiento.js");
 /* harmony import */ var _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./TratamientosComponents/VerTratamiento */ "./resources/js/src/TratamientosComponents/VerTratamiento.js");
-/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+/* harmony import */ var _ExamenesComponents_ConsultarExamen__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./ExamenesComponents/ConsultarExamen */ "./resources/js/src/ExamenesComponents/ConsultarExamen.js");
+/* harmony import */ var _ExamenesComponents_AgregarExamen__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./ExamenesComponents/AgregarExamen */ "./resources/js/src/ExamenesComponents/AgregarExamen.js");
+/* harmony import */ var _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./ExamenesComponents/EditarExamen */ "./resources/js/src/ExamenesComponents/EditarExamen.js");
+/* harmony import */ var _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./ExamenesComponents/BuscarExamen */ "./resources/js/src/ExamenesComponents/BuscarExamen.js");
+/* harmony import */ var _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./ExamenesComponents/VerExamen */ "./resources/js/src/ExamenesComponents/VerExamen.js");
+/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+
+
+
+
+
 
 
 
@@ -82754,7 +82753,7 @@ var App = function App() {
     path: "/tratamientosmedicos/:param_busqueda/buscar",
     component: _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_22__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_29__["default"]
   })));
 };
 
@@ -84140,6 +84139,1213 @@ var VerDiagnostico = function VerDiagnostico() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VerDiagnostico);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesComponents/AgregarExamen.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/src/ExamenesComponents/AgregarExamen.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _Validaciones_ExamenValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExamenValidacion */ "./resources/js/src/Validaciones/ExamenValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+var AgregarExamen = function AgregarExamen() {
+  var _errors$codigo_examen, _errors$nombre_examen, _errors$id_tipo_exame, _errors$indicaciones_, _errors$costo;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes = _useState2[0],
+      setExamenes = _useState2[1]; //Datos para el formulario
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tipos_examenes = _useState4[0],
+      setTipos_examenes = _useState4[1]; //Datos para la tabla
+
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      codigo_examen = _useState6[0],
+      setCodigo_examen = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      nombre_examen = _useState8[0],
+      setNombre_examen = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      id_tipo_examen = _useState10[0],
+      setId_tipo_examen = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      indicaciones_examen = _useState12[0],
+      setIndicaciones_examen = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      costo = _useState14[0],
+      setCosto = _useState14[1]; //Función para traer los datos que se ven en el formulario
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_examen().then(function (res) {
+      var result = res.data;
+      setTipos_examenes(result.tipos_examenes);
+    });
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].examenes().then(function (res) {
+      var result = res.data;
+      setExamenes(result.data);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_ExamenValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors; //Funcion para guardar
+
+
+  var agregarExamen = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              body = {
+                codigo_examen: codigo_examen,
+                nombre_examen: nombre_examen,
+                id_tipo_examen: id_tipo_examen,
+                indicaciones_examen: indicaciones_examen,
+                costo: costo
+              };
+              _context.next = 4;
+              return fetch("".concat(API_URL, "/examenes/guardar"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 4:
+              response = _context.sent;
+              window.location = "/examenes";
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0.message);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function agregarExamen(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Ex\xE1menes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar examen")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/examen/crear"
+  }, "Agregar examen"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: handleSubmit(agregarExamen)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos generales"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_examen"
+  }, "C\xF3digo de examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "codigo_examen",
+    id: "codigo_examen"
+  }, register('codigo_examen'), {
+    value: codigo_examen,
+    onChange: function onChange(e) {
+      return setCodigo_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_examen = errors.codigo_examen) === null || _errors$codigo_examen === void 0 ? void 0 : _errors$codigo_examen.message, " "), examenes.map(function (examen) {
+    if (examen.codigo_examen === codigo_examen) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+        className: "text-danger"
+      }, "Ya existe un registro con este mismo c\xF3digo, debe ser distinto");
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_examen"
+  }, "Nombre examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_examen",
+    id: "nombre_examen"
+  }, register('nombre_examen'), {
+    value: nombre_examen,
+    onChange: function onChange(e) {
+      return setNombre_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_examen = errors.nombre_examen) === null || _errors$nombre_examen === void 0 ? void 0 : _errors$nombre_examen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "id_tipo_examen"
+  }, "Tipo examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "id_tipo_examen",
+    id: "id_tipo_examen"
+  }, register('id_tipo_examen'), {
+    value: id_tipo_examen,
+    onChange: function onChange(e) {
+      return setId_tipo_examen(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), tipos_examenes.map(function (tipo_examen) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: tipo_examen.id_tipo_examen
+    }, tipo_examen.nombre_tipo_examen);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_tipo_exame = errors.id_tipo_examen) === null || _errors$id_tipo_exame === void 0 ? void 0 : _errors$id_tipo_exame.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "indicaciones_examen"
+  }, "Indicaciones de examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "indicaciones_examen",
+    id: "indicaciones_examen"
+  }, register('indicaciones_examen'), {
+    value: indicaciones_examen,
+    onChange: function onChange(e) {
+      return setIndicaciones_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-card-checklist"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$indicaciones_ = errors.indicaciones_examen) === null || _errors$indicaciones_ === void 0 ? void 0 : _errors$indicaciones_.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "costo"
+  }, "Costo de examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "costo",
+    id: "costo"
+  }, register('costo'), {
+    value: costo,
+    onChange: function onChange(e) {
+      return setCosto(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-cash"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$costo = errors.costo) === null || _errors$costo === void 0 ? void 0 : _errors$costo.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarExamen);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesComponents/BuscarExamen.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/src/ExamenesComponents/BuscarExamen.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var BuscarExamen = function BuscarExamen() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      param_busqueda = _useParams.param_busqueda;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes = _useState2[0],
+      setExamenes = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].examen_buscar(param_busqueda).then(function (res) {
+      var result = res.data;
+      setExamenes(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Ex\xE1menes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "B\xFAsqueda")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes"
+  }, "Consulta ex\xE1menes"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes",
+    className: "btn btn-secondary"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-arrow-left"
+  }), " Regresar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Resultados "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ex\xE1menes encontrados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped",
+    id: "table1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ex\xE1men"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, examenes.map(function (examen) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, examen.codigo_examen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, examen.nombre_examen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "editar",
+      className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "ver",
+      className: "btn btn-info"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-table"
+    }), " Consultar")));
+  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BuscarExamen);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesComponents/ConsultarExamen.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/ExamenesComponents/ConsultarExamen.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var ConsultarExamen = function ConsultarExamen() {
+  var _React$createElement;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes = _useState2[0],
+      setExamenes = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      param_busqueda = _useState4[0],
+      setParam_busqueda = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].examenes().then(function (res) {
+      var result = res.data;
+      setExamenes(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Ex\xE1menes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Consulta de ex\xE1menes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes"
+  }, "Consulta ex\xE1menes"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes/crear",
+    className: "btn btn-success"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-plus"
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-12 mb-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input-group mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "input-group-text",
+    id: "basic-addon1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-search"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
+    type: "text",
+    id: "last-name-column",
+    className: "form-control",
+    placeholder: "C\xF3digo, identificacion, nombres o apellidos del paciente",
+    name: "lname-column"
+  }, _defineProperty(_React$createElement, "id", "codigo_busqueda"), _defineProperty(_React$createElement, "value", param_busqueda), _defineProperty(_React$createElement, "onChange", function onChange(e) {
+    return setParam_busqueda(e.target.value);
+  }), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "examenes/".concat(param_busqueda, "/buscar"),
+    className: "btn btn-secondary"
+  }, " Buscar"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped",
+    id: "table1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ex\xE1men"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, examenes.map(function (examen) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, examen.codigo_examen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, examen.nombre_examen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "examenes/".concat(examen.codigo_examen, "/editar"),
+      className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "examenes/".concat(examen.codigo_examen, "/ver"),
+      className: "btn btn-info"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-table"
+    }), " Consultar")));
+  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ConsultarExamen);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesComponents/EditarExamen.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/src/ExamenesComponents/EditarExamen.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _Validaciones_ExamenValidacion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Validaciones/ExamenValidacion */ "./resources/js/src/Validaciones/ExamenValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+var AgregarExamen = function AgregarExamen() {
+  var _errors$codigo_examen, _errors$nombre_examen, _errors$id_tipo_exame, _errors$indicaciones_, _errors$costo;
+
+  //Aqui se guardar el codigo de examen que viene como parámetro 
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_9__["default"].API_URL;
+  var labels = document.getElementsByTagName('label');
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes = _useState2[0],
+      setExamenes = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      codigo_inicial = _useState4[0],
+      setCodigo_inicial = _useState4[1]; //Datos para el formulario
+
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      tipos_examenes = _useState6[0],
+      setTipos_examenes = _useState6[1]; //Datos para la tabla
+
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      codigo_examen = _useState8[0],
+      setCodigo_examen = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      nombre_examen = _useState10[0],
+      setNombre_examen = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      id_tipo_examen = _useState12[0],
+      setId_tipo_examen = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      indicaciones_examen = _useState14[0],
+      setIndicaciones_examen = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      costo = _useState16[0],
+      setCosto = _useState16[1]; //Función para traer los datos que se ven en el formulario
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].datos_formulario_examen().then(function (res) {
+      var result = res.data;
+      setTipos_examenes(result.tipos_examenes);
+
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].click();
+      }
+
+      labels[0].click();
+    });
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].examenes().then(function (res) {
+      var result = res.data;
+      setExamenes(result.data);
+    });
+  }, []); //Función para cargar los datos del examen que se va a editar
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_9__["default"].examen_editar(codigo).then(function (res) {
+      var examen = res.data;
+      setCodigo_examen(examen.codigo_examen);
+      setNombre_examen(examen.nombre_examen);
+      setId_tipo_examen(examen.id_tipo_examen);
+      setIndicaciones_examen(examen.indicaciones_examen);
+      setCosto(examen.costo);
+      setCodigo_inicial(examen.codigo_examen);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_ExamenValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors; //Funcion para guardar
+
+
+  var editarExamen = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              body = {
+                codigo_examen: codigo_examen,
+                nombre_examen: nombre_examen,
+                id_tipo_examen: id_tipo_examen,
+                indicaciones_examen: indicaciones_examen,
+                costo: costo
+              };
+              _context.next = 4;
+              return fetch("".concat(API_URL, "/examenes/").concat(codigo, "/actualizar"), {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 4:
+              response = _context.sent;
+              window.location = "/examenes";
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0.message);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function editarExamen(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Ex\xE1menes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar examen")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/examenes"
+  }, "Consultar examen"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: handleSubmit(editarExamen)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos generales"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_examen"
+  }, "C\xF3digo de examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "codigo_examen",
+    id: "codigo_examen"
+  }, register('codigo_examen'), {
+    value: codigo_examen,
+    onChange: function onChange(e) {
+      return setCodigo_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_examen = errors.codigo_examen) === null || _errors$codigo_examen === void 0 ? void 0 : _errors$codigo_examen.message, " "), examenes.map(function (examen) {
+    if (examen.codigo_examen !== codigo_inicial) {
+      if (examen.codigo_examen === codigo_examen) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+          className: "text-danger"
+        }, "Ya existe un registro con este mismo c\xF3digo, debe ser distinto");
+      }
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "nombre_examen"
+  }, "Nombre examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "nombre_examen",
+    id: "nombre_examen"
+  }, register('nombre_examen'), {
+    value: nombre_examen,
+    onChange: function onChange(e) {
+      return setNombre_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$nombre_examen = errors.nombre_examen) === null || _errors$nombre_examen === void 0 ? void 0 : _errors$nombre_examen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "id_tipo_examen"
+  }, "Tipo examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "id_tipo_examen",
+    id: "id_tipo_examen"
+  }, register('id_tipo_examen'), {
+    value: id_tipo_examen,
+    onChange: function onChange(e) {
+      return setId_tipo_examen(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), tipos_examenes.map(function (tipo_examen) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: tipo_examen.id_tipo_examen
+    }, tipo_examen.nombre_tipo_examen);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$id_tipo_exame = errors.id_tipo_examen) === null || _errors$id_tipo_exame === void 0 ? void 0 : _errors$id_tipo_exame.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "indicaciones_examen"
+  }, "Indicaciones de examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "indicaciones_examen",
+    id: "indicaciones_examen"
+  }, register('indicaciones_examen'), {
+    value: indicaciones_examen,
+    onChange: function onChange(e) {
+      return setIndicaciones_examen(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-card-checklist"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$indicaciones_ = errors.indicaciones_examen) === null || _errors$indicaciones_ === void 0 ? void 0 : _errors$indicaciones_.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "costo"
+  }, "Costo de examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "costo",
+    id: "costo"
+  }, register('costo'), {
+    value: costo,
+    onChange: function onChange(e) {
+      return setCosto(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    "class": "bi bi-cash"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$costo = errors.costo) === null || _errors$costo === void 0 ? void 0 : _errors$costo.message, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Actualizar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarExamen);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesComponents/VerExamen.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/src/ExamenesComponents/VerExamen.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var VerExamen = function VerExamen() {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      codigo = _useParams.codigo;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      codigo_examen = _useState2[0],
+      setCodigo_examen = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      nombre_examen = _useState4[0],
+      setNombre_examen = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      id_tipo_examen = _useState6[0],
+      setId_tipo_examen = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      indicaciones_examen = _useState8[0],
+      setIndicaciones_examen = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      costo = _useState10[0],
+      setCosto = _useState10[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].examen_ver(codigo).then(function (res) {
+      var examen = res.data;
+      setCodigo_examen(examen.codigo_examen);
+      setId_tipo_examen(examen.id_tipo_examen);
+      setNombre_examen(examen.nombre_examen);
+      setIndicaciones_examen(examen.indicaciones_examen);
+      setCosto(examen.costo);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "C\xF3digo de examen: ", codigo)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes"
+  }, "Consulta ex\xE1menes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "ver"
+  }, "Ver examen"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "C\xF3digo de examen"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, codigo_examen)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Nombre examen"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, nombre_examen)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tipo examen"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, id_tipo_examen)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, indicaciones_examen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Indicaciones de examen") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, indicaciones_examen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", indicaciones_examen) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, costo ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Costo de examen") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, costo ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, " ", costo) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "editar",
+    className: "btn btn-primary"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-pencil"
+  }), " Editar"))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (VerExamen);
 
 /***/ }),
 
@@ -87737,111 +88943,9 @@ var App = function App() {
   !*** ./resources/js/src/LayoutComponents/Menu.js ***!
   \***************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _public_assets_images_logo_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../public/assets/images/logo/logo.png */ "./public/assets/images/logo/logo.png");
-/* harmony import */ var _public_assets_images_logo_logo_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_public_assets_images_logo_logo_png__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-var Menu = function Menu() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "sidebar",
-    className: "active"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebar-wrapper active"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebar-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "logo"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _public_assets_images_logo_logo_png__WEBPACK_IMPORTED_MODULE_2___default.a,
-    alt: "Logo",
-    srcSet: ""
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "toggler"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "sidebar-hide d-xl-none d-block"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "bi bi-x bi-middle"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sidebar-menu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "menu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "sidebar-title"
-  }, "Menu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "sidebar-item has-sub"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "",
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "bi bi-folder-fill"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Expedientes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "submenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/expedientes"
-  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/expedientes/crear"
-  }, "Agregar expediente")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "sidebar-item has-sub"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "",
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "bi bi-file-earmark-check-fill"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Diagn\xF3sticos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "submenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/diagnosticos"
-  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/diagnosticos/crear"
-  }, "Agregar diagn\xF3stico")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "sidebar-item has-sub"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "",
-    className: "sidebar-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "bi bi-grid-1x2-fill"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Tratamientos M\xE9dicos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "submenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos"
-  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "submenu-item "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/tratamientosmedicos/crear"
-  }, "Agregar tratamiento m\xE9dico")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "sidebar-title"
-  }, "Forms & Tables"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "sidebar-toggler btn x"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "data-feather": "x"
-  }))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Menu);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\expediente-clinico\\resources\\js\\src\\LayoutComponents\\Menu.js: Unexpected token (61:1)\n\n\u001b[0m \u001b[90m 59 |\u001b[39m                         \u001b[33m<\u001b[39m\u001b[33ma\u001b[39m href\u001b[33m=\u001b[39m\u001b[32m\"\"\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'sidebar-link'\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 60 |\u001b[39m                             \u001b[33m<\u001b[39m\u001b[33mi\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"bi bi-grid-1x2-fill\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mi\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 61 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 62 |\u001b[39m                             \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[33mTratamientos\u001b[39m \u001b[33mMédicos\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 63 |\u001b[39m                         \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33ma\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 |\u001b[39m                         \u001b[33m<\u001b[39m\u001b[33mul\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"submenu\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:776:17)\n    at Object.raiseWithData (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:769:17)\n    at Object.raise (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:737:17)\n    at Object.unexpected (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:9736:16)\n    at Object.jsxParseIdentifier (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:4943:12)\n    at Object.jsxParseNamespacedName (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:4953:23)\n    at Object.jsxParseElementName (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:4964:21)\n    at Object.jsxParseOpeningElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5051:22)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5084:33)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElementAt (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5100:32)\n    at Object.jsxParseElement (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5158:17)\n    at Object.parseExprAtom (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5165:19)\n    at Object.parseExprSubscripts (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10709:23)\n    at Object.parseUpdate (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10689:21)\n    at Object.parseMaybeUnary (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10667:23)\n    at Object.parseExprOps (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10524:23)\n    at Object.parseMaybeConditional (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10498:23)\n    at Object.parseMaybeAssign (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10461:21)\n    at C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10428:39\n    at Object.allowInAnd (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:12105:12)\n    at Object.parseMaybeAssignAllowIn (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10428:17)\n    at Object.parseParenAndDistinguishExpression (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:11309:28)\n    at Object.parseExprAtom (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:11027:21)\n    at Object.parseExprAtom (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:5170:20)\n    at Object.parseExprSubscripts (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10709:23)\n    at Object.parseUpdate (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10689:21)\n    at Object.parseMaybeUnary (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10667:23)\n    at Object.parseExprOps (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10524:23)\n    at Object.parseMaybeConditional (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10498:23)\n    at Object.parseMaybeAssign (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10461:21)\n    at Object.parseExpressionBase (C:\\expediente-clinico\\node_modules\\@babel\\parser\\lib\\index.js:10406:23)");
 
 /***/ }),
 
@@ -89154,6 +90258,28 @@ var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
 
 /***/ }),
 
+/***/ "./resources/js/src/Validaciones/ExamenValidacion.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/src/Validaciones/ExamenValidacion.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  codigo_examen: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo código de examen es obligatorio.").max(25, "El máximo de caracteres es 25"),
+  nombre_examen: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre examen es obligatorio.").max(150, "El máximo de caracteres es 150"),
+  id_tipo_examen: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo tipo examen es obligatorio."),
+  indicaciones_examen: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(500, "El máximo de caracteres es 500"),
+  costo: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required("El campo costo de examen es obligatorio.")
+});
+/* harmony default export */ __webpack_exports__["default"] = (schema);
+
+/***/ }),
+
 /***/ "./resources/js/src/Validaciones/ExpedienteValidacion.js":
 /*!***************************************************************!*\
   !*** ./resources/js/src/Validaciones/ExpedienteValidacion.js ***!
@@ -89312,6 +90438,22 @@ var API_URL = 'http://localhost:8000/api';
   },
   tratamiento_buscar: function tratamiento_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/tratamientosmedicos/").concat(param_busqueda, "/buscar"));
+  },
+  //Exámenes
+  examenes: function examenes() {
+    return axios.get("".concat(API_URL, "/examenes"));
+  },
+  datos_formulario_examen: function datos_formulario_examen() {
+    return axios.get("".concat(API_URL, "/examenes/crear"));
+  },
+  examen_editar: function examen_editar(codigo) {
+    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/editar"));
+  },
+  examen_ver: function examen_ver(codigo) {
+    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/ver"));
+  },
+  examen_buscar: function examen_buscar(param_busqueda) {
+    return axios.get("".concat(API_URL, "/examenes/").concat(param_busqueda, "/buscar"));
   },
   API_URL: API_URL
 });

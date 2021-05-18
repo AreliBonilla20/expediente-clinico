@@ -24,7 +24,7 @@ const Menu = () => {
             <div className="sidebar-menu">
                 <ul className="menu">
                     <li className="sidebar-title">Menu</li>
-                    
+
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                             <i class="bi bi-folder-fill"></i>
@@ -58,6 +58,7 @@ const Menu = () => {
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                             <i className="bi bi-grid-1x2-fill"></i>
+
                             <span>Tratamientos Médicos</span>
                         </a>
                         <ul className="submenu">
@@ -66,14 +67,24 @@ const Menu = () => {
                             </li>
                             <li className="submenu-item ">
                                 <Link to="/tratamientosmedicos/crear">Agregar tratamiento médico</Link>
+
+                            <span>Exámenes</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/examenes">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/examenes/crear">Agregar examen</Link>
+
                             </li>
                         </ul>
                     </li>
 
-                    
+
                     <li className="sidebar-title">Forms &amp; Tables</li>
 
-                    
+
 
                 </ul>
             </div>
