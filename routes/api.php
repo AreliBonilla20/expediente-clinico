@@ -66,6 +66,14 @@ Route::get('/tratamientosmedicos/{codigo}/editar', 'TratamientosmedicosControlle
 Route::put('/tratamientosmedicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
 Route::get('/tratamientosmedicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');
 
+//Rutas para medicamentos
+Route::get('/medicamentos', 'MedicamentoController@index');
+Route::get('/medicamentos/crear', 'MedicamentoController@create');
+Route::post('/medicamentos/guardar', 'MedicamentoController@store');
+Route::get('/medicamentos/{codigo}/ver', 'MedicamentoController@show');
+Route::get('/medicamentos/{codigo}/editar', 'MedicamentoController@edit');
+Route::put('/medicamentos/{codigo}/actualizar', 'MedicamentoController@update');
+Route::get('/medicamentos/{param_busqueda}/buscar', 'MedicamentoController@buscar');
 
 //Rutas para examenes
 Route::get('/examenes', 'ExamenController@index');
