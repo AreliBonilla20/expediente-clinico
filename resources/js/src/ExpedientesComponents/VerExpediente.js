@@ -9,6 +9,7 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 import Antecedentes from '../AntecedentesComponents/VerAntecedente';
+import Hospitalizacion from '../HospitalizacionesComponents/ConsultarHospitalizacion';
 
 import API from '../api';
 
@@ -111,233 +112,277 @@ const VerExpediente = () => {
                         </div>
                     </div>
                     <div className="page-heading">
-                   
-                    <section className="section">
-                        <div className="card">
-                        <div className="card-body">
-                            <h5>Datos personales</h5>
-                            <hr />
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        {identificacion ? (
-                                            <p>Identificación</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        {identificacion ? (
-                                            <p style={{fontWeight: "bold"}}> {identificacion}</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Nombre</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{nombres}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Apellidos</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{apellidos}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Estado paciente</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{estado_paciente}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Género</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{genero}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Fecha de nacimiento [Año-Mes-Día]</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{fecha_nacimiento}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Edad</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{String(edad())} años</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Dirección</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{direccion}, {municipio}, {departamento}, {pais}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Teléfono</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{telefono}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Correo electrónico</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{correo}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Estado civil</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{estado_civil}</p>
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        {nombre_conyugue||apellido_conyugue ? (
-                                            <p>Conyugue</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                       
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        {nombre_conyugue||apellido_conyugue ? (
-                                            <p style={{fontWeight: "bold"}}>{nombre_conyugue} {apellido_conyugue}</p>
-                                        ) : (
-                                            <p></p>
-                                        )}
-                                        </div>
-                                </div>
-                            </div>
 
 
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Contacto de emergencia</p>
-                                        </div>
+                    <div className="col-md-12">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h5 className="card-title">Historial clínico</h5>
                                 </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{nombre_contacto_emergencia}</p>
-                                        </div>
-                                </div>
-                            </div>
+                                <div className="card-body">
+                                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link active" id="home-tab" data-bs-toggle="tab" href="#datos_personales"
+                                                role="tab" aria-controls="datos_personales" aria-selected="true">Datos personales</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="profile-tab" data-bs-toggle="tab" href="#antecedentes"
+                                                role="tab" aria-controls="antecedentes" aria-selected="false">Antecedentes</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="home-tab" data-bs-toggle="tab" href="#hospitalizaciones"
+                                                role="tab" aria-controls="hospitalizaciones" aria-selected="false">Hospitalizaciones</a>
+                                        </li>
+                                    </ul>
 
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Teléfono del contacto de emergencia</p>
+
+                                    <div className="tab-content" id="myTabContent">
+                                        <div className="tab-pane fade show active" id="datos_personales" role="tabpanel"
+                                            aria-labelledby="datos_personales-tab">
+                                             <section className="section">
+                                                <div className="card">
+                                                <div className="card-body">
+                                                    <h5>Datos personales</h5>
+                                                    <hr />
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                {identificacion ? (
+                                                                    <p>Identificación</p>
+                                                                ) : (
+                                                                    <p></p>
+                                                                )}
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                {identificacion ? (
+                                                                    <p style={{fontWeight: "bold"}}> {identificacion}</p>
+                                                                ) : (
+                                                                    <p></p>
+                                                                )}
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Nombre</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{nombres}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Apellidos</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{apellidos}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Estado paciente</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{estado_paciente}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Género</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{genero}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Fecha de nacimiento [Año-Mes-Día]</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{fecha_nacimiento}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Edad</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{String(edad())} años</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Dirección</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{direccion}, {municipio}, {departamento}, {pais}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Teléfono</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{telefono}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Correo electrónico</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{correo}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Estado civil</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{estado_civil}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                {nombre_conyugue||apellido_conyugue ? (
+                                                                    <p>Conyugue</p>
+                                                                ) : (
+                                                                    <p></p>
+                                                                )}
+                                                            
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                {nombre_conyugue||apellido_conyugue ? (
+                                                                    <p style={{fontWeight: "bold"}}>{nombre_conyugue} {apellido_conyugue}</p>
+                                                                ) : (
+                                                                    <p></p>
+                                                                )}
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Contacto de emergencia</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{nombre_contacto_emergencia}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Teléfono del contacto de emergencia</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{telefono_contacto_emergencia}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                            
+                                                    <div className="col-12 d-flex justify-content-end">
+                                                        <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            
+                                            </section>
+
                                         </div>
+                                            <div className="tab-pane fade" id="antecedentes" role="tabpanel"
+                                                aria-labelledby="antecedentes-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                        <Antecedentes />
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="hospitalizaciones" role="tabpanel"
+                                                aria-labelledby="hospitalizaciones-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                        <Hospitalizacion />
+                                                        </div>
+                                                    </section>
+                                            </div>
+                                    </div>
                                 </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{telefono_contacto_emergencia}</p>
-                                        </div>
-                                </div>
-                            </div>
-                       
-                            <div className="col-12 d-flex justify-content-end">
-                                <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                             </div>
                         </div>
-                        </div>
-                       
-                    </section>
 
-                    <section className="section">
-                        <div className="card">
-                        
-                           <Antecedentes />
-                            
-                            
-                        </div>
-                       
-                       
-                    </section>
+
+
+                     
             </div>
             </div>   
             </div>

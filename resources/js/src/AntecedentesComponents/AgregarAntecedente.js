@@ -47,7 +47,7 @@ const AgregarAntecedente = () => {
             
           });
           
-          window.location = "/expedientes";
+          window.location = `/expedientes/${codigo}/ver`;
         } catch (err) {
           console.error(err.message);
         }

@@ -17,6 +17,10 @@ import VerExpediente from './ExpedientesComponents/VerExpediente';
 import AgregarAntecedente from './AntecedentesComponents/AgregarAntecedente';
 import EditarAntecedente from './AntecedentesComponents/EditarAntecedente';
 
+import AgregarHospitalizacion from './HospitalizacionesComponents/AgregarHospitalizacion';
+import EditarHospitalizacion from './HospitalizacionesComponents/EditarHospitalizacion';
+import VerHospitalizacion from './/HospitalizacionesComponents/VerHospitalizacion';
+
 import ConsultarDiagnostico from './DiagnosticosComponents/ConsultarDiagnostico';
 import AgregarDiagnostico from './DiagnosticosComponents/AgregarDiagnostico';
 import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
@@ -28,6 +32,11 @@ import AgregarCentroMedico from './CentrosMedicosComponents/AgregarCentroMedico'
 import EditarCentroMedico from './CentrosMedicosComponents/EditarCentroMedico';
 import BuscarCentroMedico from './CentrosMedicosComponents/BuscarCentroMedico';
 import VerCentroMedico from './CentrosMedicosComponents/VerCentroMedico';
+import ConsultarTratamiento from './TratamientosComponents/ConsultarTratamiento';
+import AgregarTratamiento from './TratamientosComponents/AgregarTratamiento';
+import EditarTratamiento from './TratamientosComponents/EditarTratamiento';
+import BuscarTratamiento from './TratamientosComponents/BuscarTratamiento';
+import VerTratamiento from './TratamientosComponents/VerTratamiento';
 
 import NotFound from './LayoutComponents/NotFound';
 
@@ -45,8 +54,13 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/ver" component={VerExpediente} />
                 <Route exact path="/expedientes/:param_busqueda/buscar" component={BuscarExpediente} />
 
+
                 <Route exact path="/expedientes/:codigo/antecedentes/crear" component={AgregarAntecedente} />
                 <Route exact path="/expedientes/:codigo/antecedentes/editar" component={EditarAntecedente} />
+
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/crear" component={AgregarHospitalizacion} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/editar" component={EditarHospitalizacion} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/ver" component={VerHospitalizacion} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
@@ -60,6 +74,13 @@ const App = () => {
                 <Route exact path="/centros_medicos/:codigo/ver" component={VerCentroMedico} />
                 <Route exact path="/centros_medicos/:param_busqueda/buscar" component={BuscarCentroMedico} />
                                 
+                <Route exact path="/tratamientosmedicos" component={ConsultarTratamiento} />
+                <Route exact path="/tratamientosmedicos/crear" component={AgregarTratamiento} />
+                <Route exact path="/tratamientosmedicos/:codigo/editar" component={EditarTratamiento} />
+                <Route exact path="/tratamientosmedicos/:codigo/ver" component={VerTratamiento} />
+                <Route exact path="/tratamientosmedicos/:param_busqueda/buscar" component={BuscarTratamiento} />
+
+                
                 <Route component={NotFound} />
             </Switch>
         </Router>

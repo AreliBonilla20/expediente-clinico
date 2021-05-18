@@ -350,7 +350,7 @@ const AgregarAntecedente = () => {
 
                                             
                                                     <div className="col-12 d-flex justify-content-end">
-                                                        <button className="btn btn-secondary">Guardar</button>
+                                                        <button className="btn btn-secondary">Actualizar</button>
                                                     </div>
 
                                                     

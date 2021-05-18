@@ -25,9 +25,9 @@ class CreateHospitalizacionesTable extends Migration
             $table->string('sala', 50);
             $table->string('camilla', 10);
             $table->string('estado_paciente', 500);
-            $table->integer('dias_ingreso');
-            $table->date('fecha_alta');
-            $table->float('costo');
+            $table->integer('dias_ingreso')->nullable();
+            $table->date('fecha_alta')->nullable();
+            $table->float('costo')->nullable();
             $table->timestamps();
         });
     }

@@ -21,13 +21,21 @@ export default {
     axios.get(`${API_URL}/expedientes/${param_busqueda}/buscar`),
 
     //Antecedentes
-
     antecedente_editar: (codigo) =>
     axios.get(`${API_URL}/antecedentes/${codigo}/editar`),
 
     antecedente_ver: (codigo) =>
     axios.get(`${API_URL}/antecedentes/${codigo}/ver`),
 
+    //Hospitalizacion
+    hospitalizaciones: () =>
+    axios.get(`${API_URL}/hospitalizaciones`),
+
+    hospitalizacion_editar: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/editar`),
+
+    hospitalizacion_ver: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/ver`),
 
     //Diagnósticos
     diagnosticos: () =>
@@ -60,6 +68,21 @@ export default {
  
      centro_medico_ver: (codigo) =>
      axios.get(`${API_URL}/centros_medicos/${codigo}/ver`),
+    //Tratamientos
+    tratamientosmedicos: () =>
+    axios.get(`${API_URL}/tratamientosmedicos`),
+
+    datos_formulario_tratamiento: () =>
+    axios.get(`${API_URL}/tratamientosmedicos/crear`),
+
+    tratamiento_editar: (codigo) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/editar`),
+
+    tratamiento_ver: (codigo) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/ver`),
+
+    tratamiento_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${param_busqueda}/buscar`),
 
     API_URL,
 

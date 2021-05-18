@@ -28,6 +28,17 @@ Route::get('/antecedentes/{codigo}/editar', 'AntecedentePacienteController@edit'
 Route::get('/antecedentes/{codigo}/ver', 'AntecedentePacienteController@show');
 Route::put('/antecedentes/{codigo}/actualizar', 'AntecedentePacienteController@update');
 
+//Rutas para hospitalizaciones
+Route::get('/hospitalizaciones', 'HospitalizacionController@index');
+Route::post('/hospitalizaciones/{id_hospitalizacion}/guardar', 'HospitalizacionController@store');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/ver', 'HospitalizacionController@show');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionController@edit');
+Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'HospitalizacionController@update');
+
+//Rutas para chequeos - hospitalizaciones
+Route::get('/chequeos_hospitalizaciones', 'ChequeoHospitalizacionController@index');
+Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'ChequeoHospitalizacionController@store');
+
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
 Route::get('/diagnosticos/crear', 'DiagnosticoController@create');
@@ -46,3 +57,11 @@ Route::get('/centros_medicos/{codigo}/editar', 'CentroMedicoController@edit');
 Route::put('/centros_medicos/{codigo}/actualizar', 'CentroMedicoController@update');
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
 
+//Rutas para tratamientos medicos
+Route::get('/tratamientosmedicos', 'TratamientosMedicosController@index');
+Route::get('/tratamientosmedicos/crear', 'TratamientosMedicosController@create');
+Route::post('/tratamientosmedicos/guardar', 'TratamientosMedicosController@store');
+Route::get('/tratamientosmedicos/{codigo}/ver', 'TratamientosmedicosController@show');
+Route::get('/tratamientosmedicos/{codigo}/editar', 'TratamientosmedicosController@edit');
+Route::put('/tratamientosmedicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
+Route::get('/tratamientosmedicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');
