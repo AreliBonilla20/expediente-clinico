@@ -53,6 +53,22 @@ export default {
     diagnostico_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/diagnosticos/${param_busqueda}/buscar`),
 
+    //Tratamientos
+    tratamientosmedicos: () =>
+    axios.get(`${API_URL}/tratamientosmedicos`),
+
+    datos_formulario_tratamiento: () =>
+    axios.get(`${API_URL}/tratamientosmedicos/crear`),
+
+    tratamiento_editar: (codigo) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/editar`),
+
+    tratamiento_ver: (codigo) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${codigo}/ver`),
+
+    tratamiento_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/tratamientosmedicos/${param_busqueda}/buscar`),
+
     API_URL,
 
 }

@@ -48,3 +48,11 @@ Route::get('/diagnosticos/{codigo}/editar', 'DiagnosticoController@edit');
 Route::put('/diagnosticos/{codigo}/actualizar', 'DiagnosticoController@update');
 Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@buscar');
 
+//Rutas para tratamientos medicos
+Route::get('/tratamientosmedicos', 'TratamientosMedicosController@index');
+Route::get('/tratamientosmedicos/crear', 'TratamientosMedicosController@create');
+Route::post('/tratamientosmedicos/guardar', 'TratamientosMedicosController@store');
+Route::get('/tratamientosmedicos/{codigo}/ver', 'TratamientosmedicosController@show');
+Route::get('/tratamientosmedicos/{codigo}/editar', 'TratamientosmedicosController@edit');
+Route::put('/tratamientosmedicos/{codigo}/actualizar', 'TratamientosmedicosController@update');
+Route::get('/tratamientosmedicos/{param_busqueda}/buscar', 'TratamientosmedicosController@buscar');

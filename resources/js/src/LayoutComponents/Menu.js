@@ -55,6 +55,21 @@ const Menu = () => {
                         </ul>
                     </li>
 
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                            <i className="bi bi-grid-1x2-fill"></i>
+                            <span>Tratamientos Médicos</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/tratamientosmedicos">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/tratamientosmedicos/crear">Agregar tratamiento médico</Link>
+                            </li>
+                        </ul>
+                    </li>
+
                     
                     <li className="sidebar-title">Forms &amp; Tables</li>
 
