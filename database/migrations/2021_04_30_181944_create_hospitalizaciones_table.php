@@ -27,7 +27,7 @@ class CreateHospitalizacionesTable extends Migration
             $table->string('estado_paciente', 500);
             $table->integer('dias_ingreso')->nullable();
             $table->date('fecha_alta')->nullable();
-            $table->float('costo')->nullable();
+            $table->float('costo', 8,2)->nullable();
             $table->timestamps();
         });
     }

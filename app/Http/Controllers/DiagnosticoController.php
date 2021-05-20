@@ -39,15 +39,6 @@ class DiagnosticoController extends Controller
                      $request->descripcion_diagnostico, 
                      $fecha_actual
                     ]);
-
-        /*DB::table('diagnosticos')->insert(
-            [
-             'codigo_diagnostico' => $request->codigo_diagnostico,
-             'id_tipo_diagnostico' => $request->id_tipo_diagnostico,
-             'nombre_diagnostico' => $request->nombre_diagnostico,
-             'descripcion_diagnostico' => $request->descripcion_diagnostico
-             ]
-        );*/
         
         return response()->json('Diagnóstico creado!');    
     }
@@ -81,15 +72,6 @@ class DiagnosticoController extends Controller
                      $codigo
                     ]);
 
-        /*DB::table('diagnosticos')->where('codigo_diagnostico', $codigo)->update(array
-            (
-            'codigo_diagnostico' => $request->codigo_diagnostico,
-            'id_tipo_diagnostico' => $request->id_tipo_diagnostico,
-            'nombre_diagnostico' => $request->nombre_diagnostico,
-            'descripcion_diagnostico' => $request->descripcion_diagnostico
-            )
-        );*/
-
         return response()->json('Diagnóstico actualizado!');    
     }
 
@@ -103,8 +85,7 @@ class DiagnosticoController extends Controller
         $diagnosticos = DB::select('select * from diagnosticos where UNACCENT(lower(codigo_diagnostico)) LIKE ? or UNACCENT(lower(nombre_diagnostico)) LIKE ?', 
         [strtolower($codigo_diagnostico), strtolower($nombre_diagnostico)]);
 
-        return response()->json($diagnosticos);
-
+        return DiagnosticoResource::collection($diagnosticos);
     }
 
     

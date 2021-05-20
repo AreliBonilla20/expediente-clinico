@@ -58,6 +58,7 @@ const ConsultarDiagnostico = () => {
                             </div>
                             
                             <br />
+                            {diagnosticos.length > 0 &&
                             <div className="card-body">
                             <h4>Buscar diagnóstico</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
@@ -109,6 +110,7 @@ const ConsultarDiagnostico = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            }
                         </div>
                     </section>
             </div>

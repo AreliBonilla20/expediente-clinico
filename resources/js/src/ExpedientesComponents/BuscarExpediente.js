@@ -59,8 +59,9 @@ const BuscarPaciente = () => {
                             <div className="card-header">
                                 <Link to="/expedientes" className="btn btn-secondary"><i className="bi bi-arrow-left"></i> Regresar </Link>
                             </div>
-                            
                             <br />
+
+                            {pacientes.length > 0 &&
                             <div className="card-body">
                             <h4>Resultados </h4>
                             <p>Expedientes encontrados</p>
@@ -94,13 +95,18 @@ const BuscarPaciente = () => {
                                             </td>
                                              
                                           </tr>
-
-                                    
                                     )}
                                     
                                     </tbody>
                                 </table>
                             </div>
+                            }
+                            {pacientes.length == 0 &&
+                               <div className="card-body">
+                                   <hr />
+                                   <p>No se encontaron resultados</p>
+                               </div>
+                            }
                         </div>
                     </section>
             </div>

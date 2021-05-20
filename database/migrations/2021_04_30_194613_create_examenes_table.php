@@ -21,7 +21,7 @@ class CreateExamenesTable extends Migration
             
             $table->string('nombre_examen', 150);
             $table->string('indicaciones_examen', 150);
-            $table->float('costo');
+            $table->float('costo', 8,2)->nullable();
             $table->timestamps();
         });
     }

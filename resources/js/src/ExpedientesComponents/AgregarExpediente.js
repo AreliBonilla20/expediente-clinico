@@ -214,7 +214,7 @@ const AgregarExpediente = () => {
 
 
                                                 
-                                                    <div className="col-md-12 mb-4">
+                                                    <div className="col-md-6 mb-4">
                                                     <label htmlFor="id_genero">Género (*)</label>
                                                         <div className="form-group">
                                                             <select className="choices form-select"
@@ -233,7 +233,7 @@ const AgregarExpediente = () => {
                                                     </div>
 
 
-                                                    <div className="col-6-12 mb-4">
+                                                    <div className="col-md-6 mb-4">
                                                     <label htmlFor="estado_civil">Estado civil (*)</label>
                                                         <div className="form-group">
                                                                 <select className="choices form-select" 

@@ -172,7 +172,7 @@ const AgregarDiagnostico = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="descripcion_diagnostico">Descripción de diagnóstico</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="descripcion_diagnostico" 
                                                                     id="descripcion_diagnostico" 
                                                                     {...register('descripcion_diagnostico')}

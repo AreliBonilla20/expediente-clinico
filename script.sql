@@ -310,6 +310,48 @@ insert into tipo_diagnostico (id_tipo_diagnostico, tipo_diagnostico) values
 (19, 'Causas externas de morbilidad'),
 (20, 'Factores que influyen en el estado de salud y contacto con los servicios sanitarios');
 
+INSERT INTO tipo_tratamiento (id_tipo_tratamiento, tipo_tratamiento) VALUES
+	(1, 'Cirugía'),
+	(2, 'Dietoterapia'),
+	(3, 'Farmacoterapia'),
+	(4, 'Fisioterapia'),
+	(5, 'Hidroterapia'),
+	(6, 'Logopedia'),
+	(7, 'Ortopedia'),
+	(8, 'Prótesis'),
+	(9, 'Psicoterapia'),
+	(10, 'Quimioterapia'),
+	(11, 'Radioterapia'),
+	(12, 'Rehabilitación'),
+	(13, 'Reposo'),
+	(14, 'Sueroterapia'),
+	(15, 'Terapia de quelación'),
+	(16, 'Terapia ocupacional');
+
+INSERT INTO tipo_centro_medico (id_tipo_centro_medico, tipo_centro_medico) VALUES 
+(1, 'Centro de atención psiquiátrica'),
+(2, 'Centro de cuidados ambulatorios'),
+(3, 'Consultorio médico'),
+(4, 'Hospital');
+
+insert into tipo_examen (id_tipo_examen, nombre_tipo_examen) values
+(1, 'Examen físico'),
+(2, 'Examen químico');
+
+insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
+(1, 'Analgésico'),
+(2, 'Antibiótico'),
+(3, 'Vacina'),
+(4, 'Antiséptico'),
+(5, 'Antiinflamatorio'),
+(6, 'Antihistamínico'),
+(7, 'Anestésico'),
+(8, 'Antidepresivo'),
+(9, 'Diurético'),
+(10, 'Laxante'),
+(11, 'Broncodilatador'),
+(12, 'Antipirético'),
+(13, 'Antifúngico');
 
 
 

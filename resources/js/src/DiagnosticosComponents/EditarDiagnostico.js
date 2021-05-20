@@ -9,6 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/DiagnosticoValidacion';
+import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
@@ -36,21 +37,19 @@ const EditarDiagnostico = () => {
     //Función para traer los datos que se ven en el formulario
     useEffect(() => {
         API.datos_formulario_diagnostico().then(res => {
-           const result = res.data;
-           setTipos_diagnosticos(result.tipos_diagnosticos);
+            const result = res.data;
+            setTipos_diagnosticos(result.tipos_diagnosticos);
 
-           for(let i=0; i<labels.length; i++){
-                labels[i].click();
-            }
-
-            labels[0].click();
+            ClickLabel(labels);
        })
 
-       API.diagnosticos().then(res => {
-        const result = res.data;
-        setDiagnosticos(result.data);
+        API.diagnosticos().then(res => {
+            const result = res.data;
+            setDiagnosticos(result.data);
 
-        })
+            ClickLabel(labels);
+
+            })
      }, []);
 
 
@@ -63,6 +62,8 @@ const EditarDiagnostico = () => {
            setId_tipo_diagnostico(diagnostico.id_tipo_diagnostico);
            setDescripcion_diagnostico(diagnostico.descripcion_diagnostico);
            setCodigo_inicial(diagnostico.codigo_diagnostico);
+           
+           ClickLabel(labels);
        })
      }, []);
 
@@ -101,9 +102,9 @@ const EditarDiagnostico = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Diagnósticos</h3>
+                                <h3>Editar</h3>
+                                <h4>Diagnóstico: {codigo_diagnostico} - {nombre_diagnostico}</h4>
                                 
-                                <p className="text-subtitle text-muted">Agregar diagnóstico</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -163,7 +164,7 @@ const EditarDiagnostico = () => {
                                                         </div>
                                                     </div>
                                            
-                                                    <div className="col-6">
+                                                    <div className="col-md-12 mb-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_diagnostico">Nombre diagnóstico (*)</label>
                                                             <div className="position-relative">
@@ -205,7 +206,7 @@ const EditarDiagnostico = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="descripcion_diagnostico">Descripción de diagnóstico</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="descripcion_diagnostico" 
                                                                     id="descripcion_diagnostico" 
                                                                     {...register('descripcion_diagnostico')}

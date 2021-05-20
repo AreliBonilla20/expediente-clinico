@@ -31,6 +31,7 @@ const ConsultarHospitalizacion = () => {
             </div>
             
             <br />
+            {hospitalizaciones.length > 0 &&
             <div className="card-body">
             <h4>Hospitalizaciones del paciente</h4>
             
@@ -69,6 +70,7 @@ const ConsultarHospitalizacion = () => {
                     </tbody>
                 </table>
             </div>
+            }
         </div>
     </section>
     );

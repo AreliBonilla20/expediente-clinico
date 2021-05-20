@@ -32,25 +32,7 @@ class AntecedentePacienteController extends Controller
                      $request->padecimientos_familiares,
                      $fecha_actual
                     ]);
-        /*
-        DB::table('antecendentes_pacientes')->insert(
-            [
-             'codigo_paciente' => $codigo,
-             'historial_enfermedades' => $request->historial_enfermedades,
-             'nombre_padre' => $request->nombre_padre,
-             'apellidos_padre' => $request->apellidos_padre,
-             'fecha_nacimiento_padre' => $request->fecha_nacimiento_padre,
-             'direccion_padre' => $request->direccion_padre,
-             'padecimientos_padre' => $request->padecimientos_padre,
-             'nombre_madre' => $request->nombre_madre,
-             'apellidos_madre' => $request->apellidos_madre,
-             'fecha_nacimiento_madre' => $request->fecha_nacimiento_madre,
-             'direccion_madre' => $request->direccion_madre,
-             'padecimientos_madre' => $request->padecimientos_madre,
-             'padecimientos_familiares' => $request->padecimientos_familiares
-             ]
-        );*/
-        
+       
         return response()->json('Antecedentes creados!');
     }
 
@@ -94,23 +76,6 @@ class AntecedentePacienteController extends Controller
                      $fecha_actual,
                      $codigo
                     ]);
-
-       /* DB::table('antecendentes_pacientes')->where('codigo_paciente', $codigo)->update(array
-        (
-             'historial_enfermedades' => $request->historial_enfermedades,
-             'nombre_padre' => $request->nombre_padre,
-             'apellidos_padre' => $request->apellidos_padre,
-             'fecha_nacimiento_padre' => $request->fecha_nacimiento_padre,
-             'direccion_padre' => $request->direccion_padre,
-             'padecimientos_padre' => $request->padecimientos_padre,
-             'nombre_madre' => $request->nombre_madre,
-             'apellidos_madre' => $request->apellidos_madre,
-             'fecha_nacimiento_madre' => $request->fecha_nacimiento_madre,
-             'direccion_madre' => $request->direccion_madre,
-             'padecimientos_madre' => $request->padecimientos_madre,
-             'padecimientos_familiares' => $request->padecimientos_familiares
-        )
-       );*/
 
        return response()->json('Antecedentes actualizados!');    
     }

@@ -41,7 +41,8 @@ const VerDiagnostico = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Código de diagnóstico: {codigo}</h3>
+                                <h3>Consultar</h3>
+                                <h4>Diagnóstico: {codigo_diagnostico} - {nombre_diagnostico}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
