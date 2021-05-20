@@ -19,13 +19,13 @@ class CreateSignosVitalesTable extends Migration
             $table->string('id_atencion_medica');
             $table->foreign('id_atencion_medica')->references('id_atencion_medica')->on('atenciones_medicas');
 
-            $table->string('presion_arterial_sistolica');
-            $table->string('presion_arterial_diastolica');
-            $table->float('peso_paciente');
-            $table->float('estatura_paciente');
-            $table->float('temperatura_paciente');
-            $table->integer('ritmo_cardiaco_paciente');
-            $table->integer('respiracion_paciente');
+            $table->integer('presion_arterial_sistolica')->nullable();
+            $table->integer('presion_arterial_diastolica')->nullable();
+            $table->float('peso_paciente', 8,2)->nullable();
+            $table->float('estatura_paciente', 8,2)->nullable();
+            $table->float('temperatura_paciente', 8,2)->nullable();
+            $table->integer('ritmo_cardiaco_paciente')->nullable();
+            $table->integer('respiracion_paciente')->nullable();
             $table->timestamps();
         });
     }

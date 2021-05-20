@@ -44,12 +44,12 @@ const ChequeoHospitalizacion = () => {
     return(
         <div className="card-body">
        
-        <button type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" className="btn btn-success" data-toggle="modal" data-target="#chequeosModal">
         <i className="bi bi-plus"></i>
         Agregar
         </button>
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+        <div className="modal fade" id="chequeosModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content">
             <div className="modal-header">
@@ -154,10 +154,7 @@ const ChequeoHospitalizacion = () => {
         
      </section>
         ))}
-  
-    
-    
-       
+
     </div>
 
     

@@ -10,6 +10,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import ChequeoHospitalizacion from '../ChequeosComponents/ChequeoHospitalizacion';
+import SignosVitales from '../SignosVitalesComponents/SignosVitales';
 
 
 import API from '../api';
@@ -82,12 +83,16 @@ const VerExpediente = () => {
                                 <div className="card-body">
                                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                                         <li className="nav-item" role="presentation">
-                                            <a className="nav-link active" id="home-tab" data-bs-toggle="tab" href="#datos_ingreso"
+                                            <a className="nav-link active" id="datos_ingreso-tab" data-bs-toggle="tab" href="#datos_ingreso"
                                                 role="tab" aria-controls="datos_ingreso" aria-selected="true">Datos de ingreso</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
-                                            <a className="nav-link" id="profile-tab" data-bs-toggle="tab" href="#chequeos"
+                                            <a className="nav-link" id="chequeos-tab" data-bs-toggle="tab" href="#chequeos"
                                                 role="tab" aria-controls="chequeos" aria-selected="false">Chequeos</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="signos_vitales-tab" data-bs-toggle="tab" href="#signos_vitales"
+                                                role="tab" aria-controls="signos_vitales" aria-selected="false">Signos Vitales</a>
                                         </li>
                                        
                                     </ul>
@@ -207,6 +212,16 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <ChequeoHospitalizacion/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="signos_vitales" role="tabpanel"
+                                                aria-labelledby="signos_vitales-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <SignosVitales/>
                                                         </div>
                                                     </section>
                                             </div>

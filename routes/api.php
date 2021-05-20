@@ -39,6 +39,12 @@ Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'Hospitalizacio
 Route::get('/chequeos_hospitalizaciones/{id_hospitalizacion}', 'ChequeoHospitalizacionController@index');
 Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'ChequeoHospitalizacionController@store');
 
+//Rutas para signos vitales
+Route::get('/signos_vitales/{id_hospitalizacion}', 'SignosVitalesController@index');
+Route::get('/signos_vitales/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
+Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
+
+
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
 Route::get('/diagnosticos/crear', 'DiagnosticoController@create');

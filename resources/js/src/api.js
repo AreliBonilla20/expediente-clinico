@@ -41,6 +41,13 @@ export default {
     chequeos_hospitalizacion: (id_hospitalizacion) =>
     axios.get(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}`),
 
+    //Signos vitales
+    signos_vitales: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}`),
+
+    signos_vitales_graficos: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}/graficos`),
+
     //Diagnósticos
     diagnosticos: () =>
     axios.get(`${API_URL}/diagnosticos`),

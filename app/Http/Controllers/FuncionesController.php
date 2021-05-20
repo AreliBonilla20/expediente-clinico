@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FuncionesController extends Controller
 {
@@ -35,4 +36,29 @@ class FuncionesController extends Controller
 
         return $cadena;
     }
+
+    public function codigo_atencion_medica($request)
+    {   
+        $cont = 0;
+        $atenciones_medicas = DB::select('select* from atenciones_medicas');
+
+        if(count($atenciones_medicas)>0)
+        {
+            foreach($atenciones_medicas as $atencion_medica)
+            {
+                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $request->codigo)
+                $cont++;    
+            }   
+
+            $correlativo = (string) $cont + 1;
+            $id_atencion = $request->codigo.'A'.$correlativo;
+        }
+        else {
+            $id_atencion = $request->codigo.'A1';
+        }
+        
+        return $id_atencion;
+    }
+
+    
 }
