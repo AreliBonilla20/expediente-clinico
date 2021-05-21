@@ -11,6 +11,8 @@ import Footer from '../LayoutComponents/Footer';
 
 import ChequeoHospitalizacion from '../ChequeosComponents/ChequeoHospitalizacion';
 import SignosVitales from '../SignosVitalesComponents/SignosVitales';
+import HistorialDiagnosticos from '../DiagnosticosComponents/HistorialDiagnosticos';
+import RecetaMedica from '../MedicamentosComponents/RecetaMedica';
 
 
 import API from '../api';
@@ -93,6 +95,14 @@ const VerExpediente = () => {
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="signos_vitales-tab" data-bs-toggle="tab" href="#signos_vitales"
                                                 role="tab" aria-controls="signos_vitales" aria-selected="false">Signos Vitales</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="diagnosticos-tab" data-bs-toggle="tab" href="#diagnosticos"
+                                                role="tab" aria-controls="diagnosticos" aria-selected="false">Diagnósticos</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="receta_medica-tab" data-bs-toggle="tab" href="#receta_medica"
+                                                role="tab" aria-controls="receta_medica" aria-selected="false">Recetas médicas</a>
                                         </li>
                                        
                                     </ul>
@@ -222,6 +232,26 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <SignosVitales/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="diagnosticos" role="tabpanel"
+                                                aria-labelledby="diagnosticos-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <HistorialDiagnosticos/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="receta_medica" role="tabpanel"
+                                                aria-labelledby="receta_medica-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <RecetaMedica/>
                                                         </div>
                                                     </section>
                                             </div>

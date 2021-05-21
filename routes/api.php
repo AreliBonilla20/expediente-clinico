@@ -44,6 +44,10 @@ Route::get('/signos_vitales/{id_hospitalizacion}', 'SignosVitalesController@inde
 Route::get('/signos_vitales/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
 Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
 
+//Rutas para el historial de diagnósticos del paciente
+Route::get('/historial_diagnosticos/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
+Route::post('/historial_diagnosticos/guardar', 'HistorialDiagnosticosController@store');
+
 
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
@@ -53,6 +57,7 @@ Route::get('/diagnosticos/{codigo}/ver', 'DiagnosticoController@show');
 Route::get('/diagnosticos/{codigo}/editar', 'DiagnosticoController@edit');
 Route::put('/diagnosticos/{codigo}/actualizar', 'DiagnosticoController@update');
 Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@buscar');
+
 
 //Rutas para centrosMedicos
 Route::get('/centros_medicos', 'CentroMedicoController@index');

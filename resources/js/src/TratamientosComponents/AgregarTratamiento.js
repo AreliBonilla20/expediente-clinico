@@ -152,9 +152,9 @@ const AgregarTratamiento = () => {
 
                                                 
                                                     <div className="col-md-12 mb-4">
-                                                    <label htmlFor="id_tipo_tratamiento">Tipo del tratamiento (*)</label>
+                                                    <label htmlFor="id_tipo_tratamiento">Tipo de tratamiento (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                        <select className="form-select"
                                                                 name="id_tipo_tratamiento" 
                                                                 id="id_tipo_tratamiento" 
                                                                 {...register('id_tipo_tratamiento')}

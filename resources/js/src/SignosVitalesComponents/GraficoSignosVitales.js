@@ -78,8 +78,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-estatura" role="tabpanel"
@@ -95,8 +95,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-temperatura" role="tabpanel"
@@ -112,8 +112,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-presion_sistolica" role="tabpanel"
@@ -129,8 +129,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-presion_diastolica" role="tabpanel"
@@ -146,8 +146,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-ritmo_cardiaco" role="tabpanel"
@@ -163,8 +163,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-respiracion" role="tabpanel"
@@ -180,8 +180,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={250}
-                                    width={400}
+                                    height={150}
+                                    width={300}
                                     />
                             </div>
                         </div>
