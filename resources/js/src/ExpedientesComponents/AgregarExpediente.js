@@ -456,7 +456,7 @@ const AgregarExpediente = () => {
                                                         <button className="btn btn-secondary">Guardar</button>
                                                     </div>
 
-                                                    
+                                                   
                                                 </div>
                                             </div>
                                         </form>

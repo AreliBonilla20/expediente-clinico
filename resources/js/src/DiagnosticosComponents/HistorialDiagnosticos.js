@@ -217,8 +217,8 @@ const HistorialDiagnosticos = () => {
          <div className="card">
          <div className="card-content">
              <div className="card-body">
-                 <div class="table-responsive">
-                <table class="table mb-0">
+                 <div className="table-responsive">
+                <table className="table mb-0">
                     <thead>
                         <tr>
                             <th>Fecha</th>

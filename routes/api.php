@@ -42,12 +42,14 @@ Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'Chequeo
 //Rutas para signos vitales
 Route::get('/signos_vitales/{id_hospitalizacion}', 'SignosVitalesController@index');
 Route::get('/signos_vitales/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
-Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
+Route::post('/signos_vitales/{id_hospitalizacion}/guardar', 'SignosVitalesController@store');
 
 //Rutas para el historial de diagnósticos del paciente
 Route::get('/historial_diagnosticos/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
 Route::post('/historial_diagnosticos/guardar', 'HistorialDiagnosticosController@store');
 
+//Rutas para el historial de recetas médicas del paciente
+Route::post('/recetas_medicas/{id_hospitalizacion}/guardar', 'RecetaMedicaController@store');
 
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');

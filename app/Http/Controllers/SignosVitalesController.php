@@ -16,9 +16,9 @@ class SignosVitalesController extends Controller
       return response()->json($signos_vitales);  
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id_hospitalizacion)
     {   
-        $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($request);
+        $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($id_hospitalizacion);
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
         DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica, created_at) 

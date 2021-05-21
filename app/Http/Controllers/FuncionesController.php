@@ -37,24 +37,25 @@ class FuncionesController extends Controller
         return $cadena;
     }
 
-    public function codigo_atencion_medica($request)
+    public function codigo_atencion_medica($id_hospitalizacion)
     {   
         $cont = 0;
+        $codigo = substr($id_hospitalizacion, 0, 7);
         $atenciones_medicas = DB::select('select* from atenciones_medicas');
 
         if(count($atenciones_medicas)>0)
         {
             foreach($atenciones_medicas as $atencion_medica)
             {
-                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $request->codigo)
+                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $codigo)
                 $cont++;    
             }   
 
             $correlativo = (string) $cont + 1;
-            $id_atencion = $request->codigo.'A'.$correlativo;
+            $id_atencion = $codigo.'A'.$correlativo;
         }
         else {
-            $id_atencion = $request->codigo.'A1';
+            $id_atencion = $codigo.'A1';
         }
         
         return $id_atencion;

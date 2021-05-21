@@ -39,7 +39,7 @@ const SignosVitales = () => {
         try {
           const body = {id_hospitalizacion, codigo, fecha_atencion_medica, hora_atencion_medica, presion_arterial_sistolica,
                         presion_arterial_diastolica, peso_paciente, estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente };
-          const response = await fetch(`${API_URL}/signos_vitales/guardar`, {
+          const response = await fetch(`${API_URL}/signos_vitales/${id_hospitalizacion}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -264,8 +264,8 @@ const SignosVitales = () => {
          <div className="card">
          <div className="card-content">
              <div className="card-body">
-                 <div class="table-responsive">
-                <table class="table mb-0">
+                 <div className="table-responsive">
+                <table className="table mb-0">
                     <thead>
                         <tr>
                             <th>Fecha</th>
