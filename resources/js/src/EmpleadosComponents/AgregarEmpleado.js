@@ -164,6 +164,25 @@ const AgregarEmpleado = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
+                                                            <label htmlFor="identificacion_empleado">Identificación (*)</label>
+                                                            <div className="position-relative">
+                                                                <input type="text" className="form-control" 
+                                                                    name="identificacion_empleado"                   
+                                                                    id="identificacion_empleado"
+                                                                    {...register('identificacion_empleado')}
+                                                                    value={identificacion_empleado}
+                                                                    onChange={e => setIdentificacion_empleado(e.target.value)} />
+                                                                <div className="form-control-icon">
+                                                                    <i className="bi bi-person-badge-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <small className="text-danger"> {errors.identificacion_empleado?.message} </small>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_empleado">Nombres(*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
@@ -220,7 +239,7 @@ const AgregarEmpleado = () => {
                                                     <div className="col-md-12 mb-4">
                                                         <label htmlFor="id_genero">Género (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="id_genero" 
                                                                 id="id_genero" 
                                                                 {...register('id_genero')}
@@ -238,7 +257,7 @@ const AgregarEmpleado = () => {
                                                     <div className="col-md-12 mb-4">
                                                         <label htmlFor="id_tipo_personal">Tipo Personal (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="id_tipo_personal" 
                                                                 id="id_tipo_personal" 
                                                                 {...register('id_tipo_personal')}
@@ -256,7 +275,7 @@ const AgregarEmpleado = () => {
                                                     <div className="col-md-12 mb-4">
                                                         <label htmlFor="id_centro_medico">Centro médico (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="id_centro_medico" 
                                                                 id="id_centro_medico" 
                                                                 {...register('id_centro_medico')}
@@ -271,28 +290,11 @@ const AgregarEmpleado = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-12">
-                                                        <div className="form-group has-icon-left">
-                                                            <label htmlFor="identificacion_empleado">Identificación (*)</label>
-                                                            <div className="position-relative">
-                                                                <input type="text" className="form-control" 
-                                                                    name="identificacion_empleado"                   
-                                                                    id="identificacion_empleado"
-                                                                    {...register('identificacion_empleado')}
-                                                                    value={identificacion_empleado}
-                                                                    onChange={e => setIdentificacion_empleado(e.target.value)} />
-                                                                <div className="form-control-icon">
-                                                                    <i className="bi bi-person-badge-fill"></i>
-                                                                </div>
-                                                            </div>
-                                                            <small className="text-danger"> {errors.identificacion_empleado?.message} </small>
-                                                        </div>
-                                                    </div>
-
+                                                   
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_pais">País (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" 
+                                                            <select className="form-select" 
                                                                 name="id_pais" 
                                                                 id="id_pais" 
                                                                 {...register('id_pais')}
@@ -311,7 +313,7 @@ const AgregarEmpleado = () => {
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
-                                                                <select className="choices form-select" 
+                                                                <select className="form-select" 
                                                                 name="id_departamento" 
                                                                 id="id_departamento" 
                                                                 value={id_departamento}
@@ -336,7 +338,7 @@ const AgregarEmpleado = () => {
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_municipio">Municipio/Ciudad (*)</label>
                                                         <div className="form-group">
-                                                                <select className="choices form-select" 
+                                                                <select className="form-select" 
                                                                 name="id_municipio" 
                                                                 id="id_municipio"
                                                                 {...register('id_municipio')}
