@@ -128,6 +128,22 @@ export default {
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 
+    //Empleados
+    empleados: () =>
+    axios.get(`${API_URL}/empleados`),
+
+    datos_formulario_empleado: () =>
+    axios.get(`${API_URL}/empleados/crear`),
+
+    empleado_editar: (id_empleado) =>
+    axios.get(`${API_URL}/empleados/${id_empleado}/editar`),
+
+    empleado_ver: (id_empleado) =>
+    axios.get(`${API_URL}/empleados/${id_empleado}/ver`),
+
+    empleado_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
+
     API_URL,
 
 }

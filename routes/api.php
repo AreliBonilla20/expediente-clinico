@@ -89,3 +89,12 @@ Route::get('/examenes/{codigo}/ver', 'ExamenController@show');
 Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
+
+//Rutas para empleados
+Route::get('/empleados', 'EmpleadoController@index');
+Route::get('/empleados/crear', 'EmpleadoController@create');
+Route::post('/empleados/guardar', 'EmpleadoController@store');
+Route::get('/empleados/{id_empleado}/ver', 'EmpleadoController@show');
+Route::get('/empleados/{id_empleado}/editar', 'EmpleadoController@edit');
+Route::put('/empleados/{id_empleado}/actualizar', 'EmpleadoController@update');
+Route::get('/empleados/{param_busqueda}/buscar', 'EmpleadoController@buscar');
