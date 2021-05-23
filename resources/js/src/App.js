@@ -86,8 +86,8 @@ const App = () => {
 
                 <Route exact path="/centros_medicos" component={ConsultarCentroMedico} />
                 <Route exact path="/centros_medicos/crear" component={AgregarCentroMedico} />
-                <Route exact path="/centros_medicos/:codigo/editar" component={EditarCentroMedico} />
-                <Route exact path="/centros_medicos/:codigo/ver" component={VerCentroMedico} />
+                <Route exact path="/centros_medicos/:id_centro_medico/editar" component={EditarCentroMedico} />
+                <Route exact path="/centros_medicos/:id_centro_medico/ver" component={VerCentroMedico} />
                 <Route exact path="/centros_medicos/:param_busqueda/buscar" component={BuscarCentroMedico} />
                                 
                 <Route exact path="/tratamientos_medicos" component={ConsultarTratamiento} />

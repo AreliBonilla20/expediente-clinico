@@ -9,14 +9,14 @@ import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
+import Consultorio from '../ConsultoriosComponents/Consultorio';
+
 import API from '../api';
 
 const VerCentroMedico = () => {
 
-    const { codigo } = useParams();
+    const { id_centro_medico } = useParams();
    
-    
-    const [id_centro_medico, setId_centro_medico] = useState('');
     const [nombre_centro_medico, setNombre_centro_medico] = useState('');
     const [direccion_centro_medico, setDireccion_centro_medico] = useState('');
     const [director, setDirector] = useState('');
@@ -33,9 +33,8 @@ const VerCentroMedico = () => {
 
     
     useEffect(() => {
-        API.centro_medico_ver(codigo).then(res => {
-           const centro_medico = res.data;
-            setId_centro_medico(centro_medico.id_centro_medico);  
+        API.centro_medico_ver(id_centro_medico).then(res => {
+           const centro_medico = res.data; 
             setNombre_centro_medico(centro_medico.nombre_centro_medico);
             setDireccion_centro_medico(centro_medico.direccion_centro_medico);
             setDirector(centro_medico.director);
@@ -287,7 +286,7 @@ const VerCentroMedico = () => {
                                                     
                                                     <section className="section">
                                                         <div className="card">
-                                                        
+                                                        <Consultorio />
 
                                                         </div>
                                                     </section>
