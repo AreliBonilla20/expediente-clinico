@@ -100,7 +100,7 @@ class EmpleadoController extends Controller
                     id_municipio = ?, nombre_empleado = ?, apellido_empleado = ?, identificacion_empleado = ?, fecha_nacimiento_empleado = ?, direccion_empleado = ?, telefono_empleado = ?,
                     correo_empleado = ?, cargo_empleado = ?, updated_at = ? where id_empleado = ?',
                     [
-                    $request->id_empleado,
+                    $id_empleado,
                     $request->id_genero,
                     $request->id_tipo_personal,
                     $request->id_centro_medico,
