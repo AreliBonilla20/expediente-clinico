@@ -50,6 +50,12 @@ import EditarExamen from './ExamenesComponents/EditarExamen';
 import BuscarExamen from './ExamenesComponents/BuscarExamen';
 import VerExamen from './ExamenesComponents/VerExamen';
 
+import ConsultarEmpleado from './EmpleadosComponents/ConsultarEmpleado';
+import AgregarEmpleado from './EmpleadosComponents/AgregarEmpleado';
+import EditarEmpleado from './EmpleadosComponents/EditarEmpleado';
+import BuscarEmpleado from './EmpleadosComponents/BuscarEmpleado';
+import VerEmpleado from './EmpleadosComponents/VerEmpleado';
+
 import NotFound from './LayoutComponents/NotFound';
 
 
@@ -101,6 +107,12 @@ const App = () => {
                 <Route exact path="/medicamentos/:codigo/editar" component={EditarMedicamento} />
                 <Route exact path="/medicamentos/:codigo/ver" component={VerMedicamento} />
                 <Route exact path="/medicamentos/:param_busqueda/buscar" component={BuscarMedicamento} />
+
+                <Route exact path="/empleados" component={ConsultarEmpleado} />
+                <Route exact path="/empleados/crear" component={AgregarEmpleado} />
+                <Route exact path="/empleados/:id_empleado/editar" component={EditarEmpleado} />
+                <Route exact path="/empleados/:id_empleado/ver" component={VerEmpleado} />
+                <Route exact path="/empleados/:param_busqueda/buscar" component={BuscarEmpleado} />
 
                 <Route component={NotFound} />
             </Switch>

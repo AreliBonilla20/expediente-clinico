@@ -8,6 +8,7 @@ import {
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
+import Empleado from '../EmpleadosComponents/ConsultarEmpleado';
 
 import API from '../api';
 
@@ -275,9 +276,7 @@ const VerCentroMedico = () => {
                                                     
                                                     <section className="section">
                                                         <div className="card">
-                                                       
-
-                                                       
+                                                        <Empleado />
                                                         </div>
                                                     </section>
                                             </div>

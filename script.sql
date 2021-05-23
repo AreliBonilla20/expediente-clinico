@@ -353,5 +353,8 @@ insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
 (12, 'Antipirético'),
 (13, 'Antifúngico');
 
+INSERT INTO tipo_personal (id_tipo_personal, tipo_personal) VALUES
+	(1, 'Administrativo'),
+	(2, 'Salud');
 
 

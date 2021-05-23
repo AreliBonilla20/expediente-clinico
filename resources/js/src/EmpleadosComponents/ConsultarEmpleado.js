@@ -10,17 +10,21 @@ import Footer from '../LayoutComponents/Footer';
 
 import API from '../api';
 
-const ConsultarExamen = () => {
-
-    const [examenes, setExamenes] =useState([]);
+const ConsultarEmpleado = () => {
+    
+    
+    const [empleados, setEmpleados] =useState([]);
     const [param_busqueda, setParam_busqueda] = useState('');
    
+
+
     useEffect(() => {
-         API.examenes().then(res => {
+         API.empleados().then(res => {
             const result = res.data;
-            setExamenes(result.data);
+            setEmpleados(result.data);
         })
       }, []);
+
 
     return(
         <div id="app">
@@ -33,16 +37,16 @@ const ConsultarExamen = () => {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Exámenes</h3>
+                                <h3>Empleados</h3>
                                 
-                                <p className="text-subtitle text-muted">Consulta de exámenes</p>
+                                <p className="text-subtitle text-muted">Consulta de empleados</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/examenes">Consulta exámenes</Link>
+                                        <Link to="/empleados">Consulta de empleados</Link>
                                         </li>
                                     </ol>
                                 </nav>
@@ -54,12 +58,13 @@ const ConsultarExamen = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/examenes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                                <Link to="/empleados/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
                             </div>
+                            
                             <br />
-                            {examenes.length > 0  && 
+                            {empleados.length > 0 &&
                             <div className="card-body">
-                            <h4>Buscar examen</h4>
+                            <h4>Buscar empleado</h4>
                             <p>Ingrese cualquiera de los parámetros solicitados</p>
                            
                     
@@ -71,46 +76,47 @@ const ConsultarExamen = () => {
                                             <span className="input-group-text" id="basic-addon1"><i
                                                     className="bi bi-search"></i></span>
                                         <input type="text" id="last-name-column" className="form-control"
-                                                    placeholder="Código, nombre del examen" name="lname-column" 
+                                                    placeholder="Identificador,nombre del empleado" name="lname-column" 
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />
-                                            <Link to={`examenes/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
+                                            <Link to={`empleados/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
                                         </div>
                                     </div>
                                 </div>
+                               
                             </form>
-
                             <br /><br />
                                 <table className="table table-striped" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Código</th>
-                                            <th>Exámen</th>
+                                            <th>Identificador</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
+                                        
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {examenes.map((examen) => 
+                                    {empleados.map((empleado) => 
                                           <tr>
-                                            <td>{examen.codigo_examen}</td>
-                                            <td>{examen.nombre_examen}</td>
-                                 
+                                            <td>{empleado.id_empleado}</td>
+                                            <td>{empleado.nombre_empleado}</td>
+                                            <td>{empleado.apellido_empleado}</td>
                                             <td>
-                                            <Link to={`examenes/${examen.codigo_examen}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`empleados/${empleado.id_empleado}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`examenes/${examen.codigo_examen}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`empleados/${empleado.id_empleado}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>
                                     )}
                                     </tbody>
                                 </table>
-                           
                             </div>
-                             }
+                            }
                         </div>
                     </section>
             </div>
@@ -122,4 +128,4 @@ const ConsultarExamen = () => {
     );
 }
 
-export default ConsultarExamen;
+export default ConsultarEmpleado;
