@@ -19,21 +19,17 @@ class SignosVitalesController extends Controller
     public function store(Request $request, $id_hospitalizacion)
     {   
         $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($id_hospitalizacion);
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
-        DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica, created_at) 
-                    values (?, ?, ?, ?, ?, ?)', 
+  
+        DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica) 
+                    values (?, ?, ?, current_date, current_time)', 
                     [$id_atencion_medica, 
                      null,
-                     $request->id_hospitalizacion,
-                     $request->fecha_atencion_medica, 
-                     $request->hora_atencion_medica, 
-                     $fecha_actual
+                     $request->id_hospitalizacion
                     ]);
 
         DB::insert('insert into signos_vitales (id_atencion_medica, presion_arterial_sistolica, presion_arterial_diastolica, peso_paciente, 
-        estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente) 
+                    values (?, ?, ?, ?, ?, ?, ?, ?)', 
                     [$id_atencion_medica, 
                      $request->presion_arterial_sistolica,
                      $request->presion_arterial_diastolica,
@@ -41,8 +37,7 @@ class SignosVitalesController extends Controller
                      $request->estatura_paciente, 
                      $request->temperatura_paciente, 
                      $request->ritmo_cardiaco_paciente, 
-                     $request->respiracion_paciente, 
-                     $fecha_actual
+                     $request->respiracion_paciente
                     ]);
         
         return response()->json('Signos vitales registrados!');    

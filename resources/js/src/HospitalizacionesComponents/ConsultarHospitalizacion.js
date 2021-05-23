@@ -44,7 +44,7 @@ const ConsultarHospitalizacion = () => {
                             <th>Hora de ingreso</th>
                             <th>Sala</th>
                             <th>Camilla</th>
-                            <th>Editar</th>
+                            <th>Alta</th>
                             <th>Consultar</th>
                          
                         </tr>
@@ -58,9 +58,17 @@ const ConsultarHospitalizacion = () => {
                         <td>{hospitalizacion.sala}</td>
                         <td>{hospitalizacion.camilla}</td>
                        
-                        <td>
-                        <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
-                        </td>
+                       {!hospitalizacion.fecha_alta &&
+                         <td>
+                         <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                         </td>
+                       }
+
+                        {hospitalizacion.fecha_alta &&
+                         <td>
+                         <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/editar`} className="btn btn-warning"><i className="bi bi-pencil"></i> Editar</Link>
+                         </td>
+                       }
                         <td>
                         <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                         </td>

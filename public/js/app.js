@@ -99774,7 +99774,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _Validaciones_ChequeoValidacion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Validaciones/ChequeoValidacion */ "./resources/js/src/Validaciones/ChequeoValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -99797,8 +99802,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_3__["default"].API_URL;
+  var _errors$observacion_c;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_6__["default"].API_URL;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id_hospitalizacion = _useParams.id_hospitalizacion;
@@ -99812,41 +99822,35 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      fecha_chequeo = _useState4[0],
-      setFecha_chequeo = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      hora_chequeo = _useState6[0],
-      setHora_chequeo = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      observacion_chequeo = _useState8[0],
-      setObservacion_chequeo = _useState8[1];
+      observacion_chequeo = _useState4[0],
+      setObservacion_chequeo = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_3__["default"].chequeos_hospitalizacion(id_hospitalizacion).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_6__["default"].chequeos_hospitalizacion(id_hospitalizacion).then(function (res) {
       var result = res.data;
       setChequeos(result.data);
     });
   }, []);
 
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_ChequeoValidacion__WEBPACK_IMPORTED_MODULE_5__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
   var agregarChequeo = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
-                fecha_chequeo: fecha_chequeo,
-                hora_chequeo: hora_chequeo,
                 observacion_chequeo: observacion_chequeo
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/chequeos_hospitalizaciones/").concat(id_hospitalizacion, "/guardar"), {
                 method: "POST",
                 headers: {
@@ -99855,23 +99859,23 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
               window.location = "/expedientes/".concat(codigo, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver");
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function agregarChequeo(_x) {
@@ -99917,54 +99921,13 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
   }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "modal-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-    className: "form form-vertical"
+    className: "form form-vertical",
+    onSubmit: handleSubmit(agregarChequeo)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-group has-icon-left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "fecha_chequeo"
-  }, "Fecha del chequeo (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "date",
-    className: "form-control",
-    name: "fecha_chequeo",
-    id: "fecha_chequeo",
-    value: fecha_chequeo,
-    onChange: function onChange(e) {
-      return setFecha_chequeo(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-control-icon"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-calendar"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-group has-icon-left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "hora_chequeo"
-  }, "Hora del chequeo (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "time",
-    className: "form-control",
-    name: "hora_chequeo",
-    id: "hora_chequeo",
-    value: hora_chequeo,
-    onChange: function onChange(e) {
-      return setHora_chequeo(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-control-icon"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-alarm"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -99972,30 +99935,32 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
     htmlFor: "observacion_chequeo"
   }, "Observaciones (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
     type: "text",
     className: "form-control",
     rows: "8",
     name: "observacion_chequeo",
-    id: "observacion_chequeo",
+    id: "observacion_chequeo"
+  }, register('observacion_chequeo'), {
     value: observacion_chequeo,
     onChange: function onChange(e) {
       return setObservacion_chequeo(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-card-text"
-  }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$observacion_c = errors.observacion_chequeo) === null || _errors$observacion_c === void 0 ? void 0 : _errors$observacion_c.message, " "))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "modal-footer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "button",
     className: "btn btn-default",
     "data-dismiss": "modal"
   }, "Cerrar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-secondary",
-    onClick: agregarChequeo
+    type: "submit",
+    className: "btn btn-secondary"
   }, "Guardar"))))))), chequeos.map(function (chequeo) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", {
       className: "section"
@@ -100007,9 +99972,9 @@ var ChequeoHospitalizacion = function ChequeoHospitalizacion() {
       className: "card-body"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
       className: "card-title"
-    }, "Chequeo - ", chequeo.id_chequeo_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "Fecha - ", chequeo.fecha_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "Hora - ", chequeo.hora_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    }, "Chequeo - ", chequeo.id_chequeo_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "Fecha : ", chequeo.fecha_chequeo, " - Hora : ", chequeo.hora_chequeo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "card-text"
-    }, "Observaciones: ", chequeo.observacion_chequeo))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, "Observaciones: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), chequeo.observacion_chequeo))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "card-footer d-flex justify-content-between"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Registrado por:"))));
   }));
@@ -105486,10 +105451,15 @@ var ConsultarHospitalizacion = function ConsultarHospitalizacion() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Hospitalizaciones del paciente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-striped",
     id: "table1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Fecha de ingreso"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Hora de ingreso"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Sala"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Camilla"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, hospitalizaciones.map(function (hospitalizacion) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.id_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.fecha_ingreso), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.hora_ingreso), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.sala), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.camilla), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Fecha de ingreso"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Hora de ingreso"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Sala"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Camilla"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Alta"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, hospitalizaciones.map(function (hospitalizacion) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.id_hospitalizacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.fecha_ingreso), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.hora_ingreso), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.sala), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hospitalizacion.camilla), !hospitalizacion.fecha_alta && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "hospitalizaciones/".concat(hospitalizacion.id_hospitalizacion, "/editar"),
       className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), hospitalizacion.fecha_alta && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "hospitalizaciones/".concat(hospitalizacion.id_hospitalizacion, "/editar"),
+      className: "btn btn-warning"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "bi bi-pencil"
     }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -105604,6 +105574,11 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
       estado_paciente = _useState14[0],
       setEstado_paciente = _useState14[1];
 
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      alta_paciente = _useState16[0],
+      setAlta_paciente = _useState16[1];
+
   var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
     resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_HospitalizacionValidacion__WEBPACK_IMPORTED_MODULE_8__["default"])
   }),
@@ -105621,6 +105596,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
       setSala(hospitalizacion.sala);
       setCamilla(hospitalizacion.camilla);
       setEstado_paciente(hospitalizacion.estado_paciente);
+      setAlta_paciente(hospitalizacion.alta_paciente);
       Object(_Funciones_ClickLabel__WEBPACK_IMPORTED_MODULE_9__["default"])(labels);
     });
   }, []);
@@ -105652,7 +105628,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
 
             case 4:
               response = _context.sent;
-              window.location = "/expedientes/".concat(codigo_paciente, "/ver");
+              window.location = "/expedientes/".concat(codigo_paciente, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver");
               _context.next = 11;
               break;
 
@@ -105739,6 +105715,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "date",
     className: "form-control",
+    readOnly: true,
     name: "fecha_ingreso",
     id: "fecha_ingreso"
   }, register('fecha_ingreso'), {
@@ -105763,6 +105740,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "time",
     className: "form-control",
+    readOnly: true,
     name: "hora_ingreso",
     id: "hora_ingreso"
   }, register('hora_ingreso'), {
@@ -105788,6 +105766,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
     type: "text",
     className: "form-control",
     rows: "4",
+    readOnly: true,
     name: "motivo_ingreso",
     id: "motivo_ingreso"
   }, register('motivo_ingreso'), {
@@ -105807,7 +105786,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
     className: "form-group has-icon-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "sala"
-  }, "Sala de ingreso (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, "Sala (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "text",
@@ -105861,6 +105840,7 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
     type: "text",
     className: "form-control",
     rows: "4",
+    readOnly: true,
     name: "estado_paciente",
     id: "estado_paciente"
   }, register('estado_paciente'), {
@@ -105874,11 +105854,11 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
     className: "bi bi-person"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
     className: "text-danger"
-  }, " ", (_errors$estado_pacien = errors.estado_paciente) === null || _errors$estado_pacien === void 0 ? void 0 : _errors$estado_pacien.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, " ", (_errors$estado_pacien = errors.estado_paciente) === null || _errors$estado_pacien === void 0 ? void 0 : _errors$estado_pacien.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12 d-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-secondary"
-  }, "Actualizar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+  }, "Actualizar")), JSON.stringify(alta_paciente)))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (EditarHospitalizacion);
@@ -108680,8 +108660,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
-/* harmony import */ var _GraficoSignosVitales__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GraficoSignosVitales */ "./resources/js/src/SignosVitalesComponents/GraficoSignosVitales.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var _GraficoSignosVitales__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./GraficoSignosVitales */ "./resources/js/src/SignosVitalesComponents/GraficoSignosVitales.js");
+/* harmony import */ var _Validaciones_SignosVitalesValidacion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Validaciones/SignosVitalesValidacion */ "./resources/js/src/Validaciones/SignosVitalesValidacion.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -108705,91 +108690,85 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var SignosVitales = function SignosVitales() {
-  var API_URL = _api__WEBPACK_IMPORTED_MODULE_3__["default"].API_URL;
+  var _errors$estatura_paci;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_5__["default"].API_URL;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
       id_hospitalizacion = _useParams.id_hospitalizacion;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      prueba = _useState2[0],
-      setPrueba = _useState2[1];
-
   var codigo = id_hospitalizacion.substr(0, 7);
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      signos_vitales = _useState2[0],
+      setSignos_vitales = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      signos_vitales = _useState4[0],
-      setSignos_vitales = _useState4[1];
+      presion_arterial_sistolica = _useState4[0],
+      setPresion_arterial_sistolica = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      fecha_atencion_medica = _useState6[0],
-      setFecha_atencion_medica = _useState6[1];
+      presion_arterial_diastolica = _useState6[0],
+      setPresion_arterial_diastolica = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      hora_atencion_medica = _useState8[0],
-      setHora_atencion_medica = _useState8[1];
+      peso_paciente = _useState8[0],
+      setPeso_paciente = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      presion_arterial_sistolica = _useState10[0],
-      setPresion_arterial_sistolica = _useState10[1];
+      estatura_paciente = _useState10[0],
+      setEstatura_paciente = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      presion_arterial_diastolica = _useState12[0],
-      setPresion_arterial_diastolica = _useState12[1];
+      temperatura_paciente = _useState12[0],
+      setTemperatura_paciente = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      peso_paciente = _useState14[0],
-      setPeso_paciente = _useState14[1];
+      ritmo_cardiaco_paciente = _useState14[0],
+      setRitmo_cardiaco_paciente = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      estatura_paciente = _useState16[0],
-      setEstatura_paciente = _useState16[1];
-
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState18 = _slicedToArray(_useState17, 2),
-      temperatura_paciente = _useState18[0],
-      setTemperatura_paciente = _useState18[1];
-
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState20 = _slicedToArray(_useState19, 2),
-      ritmo_cardiaco_paciente = _useState20[0],
-      setRitmo_cardiaco_paciente = _useState20[1];
-
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState22 = _slicedToArray(_useState21, 2),
-      respiracion_paciente = _useState22[0],
-      setRespiracion_paciente = _useState22[1];
+      respiracion_paciente = _useState16[0],
+      setRespiracion_paciente = _useState16[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_3__["default"].signos_vitales(id_hospitalizacion).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].signos_vitales(id_hospitalizacion).then(function (res) {
       var result = res.data;
       setSignos_vitales(result);
       setPrueba(signos_vitales.length);
     });
   }, []);
 
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_SignosVitalesValidacion__WEBPACK_IMPORTED_MODULE_7__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
   var agregarSignosvitales = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
       var body, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              _context.prev = 1;
+              _context.prev = 0;
               body = {
                 id_hospitalizacion: id_hospitalizacion,
                 codigo: codigo,
-                fecha_atencion_medica: fecha_atencion_medica,
-                hora_atencion_medica: hora_atencion_medica,
                 presion_arterial_sistolica: presion_arterial_sistolica,
                 presion_arterial_diastolica: presion_arterial_diastolica,
                 peso_paciente: peso_paciente,
@@ -108798,7 +108777,7 @@ var SignosVitales = function SignosVitales() {
                 ritmo_cardiaco_paciente: ritmo_cardiaco_paciente,
                 respiracion_paciente: respiracion_paciente
               };
-              _context.next = 5;
+              _context.next = 4;
               return fetch("".concat(API_URL, "/signos_vitales/").concat(id_hospitalizacion, "/guardar"), {
                 method: "POST",
                 headers: {
@@ -108807,23 +108786,23 @@ var SignosVitales = function SignosVitales() {
                 body: JSON.stringify(body)
               });
 
-            case 5:
+            case 4:
               response = _context.sent;
               window.location = "/expedientes/".concat(codigo, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver");
-              _context.next = 12;
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               console.error(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function agregarSignosvitales(_x) {
@@ -108871,54 +108850,13 @@ var SignosVitales = function SignosVitales() {
   }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "modal-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-    className: "form form-vertical"
+    className: "form form-vertical",
+    onSubmit: handleSubmit(agregarSignosvitales)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-group has-icon-left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "fecha_atencion_medica"
-  }, "Fecha (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "date",
-    className: "form-control",
-    name: "fecha_atencion_medica",
-    id: "fecha_atencion_medica",
-    value: fecha_atencion_medica,
-    onChange: function onChange(e) {
-      return setFecha_atencion_medica(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-control-icon"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-calendar"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-group has-icon-left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: "hora_atencion_medica"
-  }, "Hora(*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "time",
-    className: "form-control",
-    name: "hora_atencion_medica",
-    id: "hora_atencion_medica",
-    value: hora_atencion_medica,
-    onChange: function onChange(e) {
-      return setHora_atencion_medica(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "form-control-icon"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-    className: "bi bi-alarm"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -108949,22 +108887,25 @@ var SignosVitales = function SignosVitales() {
     htmlFor: "estatura_paciente"
   }, "Estatura (cm)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
     type: "number",
     className: "form-control",
     step: "0.01",
     min: "0",
     name: "estatura_paciente",
-    id: "estatura_paciente",
+    id: "estatura_paciente"
+  }, register('estatura_paciente'), {
     value: estatura_paciente,
     onChange: function onChange(e) {
       return setEstatura_paciente(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-control-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "bi bi-card-text"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$estatura_paci = errors.estatura_paciente) === null || _errors$estatura_paci === void 0 ? void 0 : _errors$estatura_paci.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group has-icon-left"
@@ -109079,9 +109020,9 @@ var SignosVitales = function SignosVitales() {
     className: "btn btn-default",
     "data-dismiss": "modal"
   }, "Cerrar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    type: "button",
+    type: "submit",
     className: "btn btn-secondary",
-    onClick: agregarSignosvitales
+    id: "guardarBtn"
   }, "Guardar"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", {
     className: "section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -109096,7 +109037,7 @@ var SignosVitales = function SignosVitales() {
     className: "table mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Fecha"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Hora"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Peso"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Estatura"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Temperatura"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Presi\xF3n sist\xF3lica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Presi\xF3n diast\xF3lica"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Ritmo card\xEDaco"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Respiraci\xF3n"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, signos_vitales.map(function (signo_vital) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.fecha_atencion_medica), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.hora_atencion_medica), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.peso_paciente, " kg"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.estatura_paciente, " cm"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.temperatura_paciente, " \xB0C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.presion_arterial_sistolica, " mmHg"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.presion_arterial_diastolica, " mmHg"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.ritmo_cardiaco_paciente, " x min"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, signo_vital.respiracion_paciente, " x min"));
-  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_GraficoSignosVitales__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_GraficoSignosVitales__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SignosVitales);
@@ -110374,6 +110315,24 @@ var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
 
 /***/ }),
 
+/***/ "./resources/js/src/Validaciones/ChequeoValidacion.js":
+/*!************************************************************!*\
+  !*** ./resources/js/src/Validaciones/ChequeoValidacion.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  observacion_chequeo: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(500, "El máximo de caracteres es 500").required("El campo observaciones es obligatorio")
+});
+/* harmony default export */ __webpack_exports__["default"] = (schema);
+
+/***/ }),
+
 /***/ "./resources/js/src/Validaciones/DiagnosticoValidacion.js":
 /*!****************************************************************!*\
   !*** ./resources/js/src/Validaciones/DiagnosticoValidacion.js ***!
@@ -110494,6 +110453,27 @@ var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
   presentacion_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(150, "El máximo de caracteres es 150").required("El campo código del medicamento es obligatorio"),
   costo_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo costo del medicamento es obligatorio"),
   existencia_medicamento: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().max(25, "El máximo de caracteres es 25").required("El campo existencia del medicamento es obligatorio")
+});
+/* harmony default export */ __webpack_exports__["default"] = (schema);
+
+/***/ }),
+
+/***/ "./resources/js/src/Validaciones/SignosVitalesValidacion.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/Validaciones/SignosVitalesValidacion.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var yup_lib_locale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! yup/lib/locale */ "./node_modules/yup/lib/locale.js");
+/* harmony import */ var yup_lib_locale__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(yup_lib_locale__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  peso_paciente: yup__WEBPACK_IMPORTED_MODULE_0__["number"]().required().positive().integer()
 });
 /* harmony default export */ __webpack_exports__["default"] = (schema);
 
