@@ -71,14 +71,14 @@ export default {
      datos_formulario_centro_medico: () =>
      axios.get(`${API_URL}/centros_medicos/crear`),
  
-     centro_medico_editar: (codigo) =>
-     axios.get(`${API_URL}/centros_medicos/${codigo}/editar`),
+     centro_medico_editar: (id_centro_medico) =>
+     axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/editar`),
  
      centro_medico_buscar: (param_busqueda) =>
      axios.get(`${API_URL}/centros_medicos/${param_busqueda}/buscar`),
  
-     centro_medico_ver: (codigo) =>
-     axios.get(`${API_URL}/centros_medicos/${codigo}/ver`),
+     centro_medico_ver: (id_centro_medico) =>
+     axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/ver`),
 
     //Tratamientos
     tratamientos_medicos: () =>
@@ -127,6 +127,10 @@ export default {
 
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
+
+    //Quirófanos
+    quirofanos: (id_centro_medico) =>
+    axios.get(`${API_URL}/quirofanos/${id_centro_medico}`),
 
     API_URL,
 

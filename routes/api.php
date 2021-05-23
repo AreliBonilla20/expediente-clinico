@@ -58,9 +58,9 @@ Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@busca
 Route::get('/centros_medicos', 'CentroMedicoController@index');
 Route::get('/centros_medicos/crear', 'CentroMedicoController@create');
 Route::post('/centros_medicos/guardar', 'CentroMedicoController@store');
-Route::get('/centros_medicos/{codigo}/ver', 'CentroMedicoController@show');
-Route::get('/centros_medicos/{codigo}/editar', 'CentroMedicoController@edit');
-Route::put('/centros_medicos/{codigo}/actualizar', 'CentroMedicoController@update');
+Route::get('/centros_medicos/{id_centro_medico}/ver', 'CentroMedicoController@show');
+Route::get('/centros_medicos/{id_centro_medico}/editar', 'CentroMedicoController@edit');
+Route::put('/centros_medicos/{id_centro_medico}/actualizar', 'CentroMedicoController@update');
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
 
 //Rutas para tratamientos medicos
@@ -89,3 +89,8 @@ Route::get('/examenes/{codigo}/ver', 'ExamenController@show');
 Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
+
+//Rutas para quirofanos
+Route::get('/quirofanos/{id_centro_medico}', 'QuirofanoController@index');
+Route::post('/quirofanos/{id_centro_medico}/guardar', 'QuirofanoController@store');
+

@@ -97653,11 +97653,11 @@ var App = function App() {
     component: _CentrosMedicosComponents_AgregarCentroMedico__WEBPACK_IMPORTED_MODULE_20__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/centros_medicos/:codigo/editar",
+    path: "/centros_medicos/:id_centro_medico/editar",
     component: _CentrosMedicosComponents_EditarCentroMedico__WEBPACK_IMPORTED_MODULE_21__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/centros_medicos/:codigo/ver",
+    path: "/centros_medicos/:id_centro_medico/ver",
     component: _CentrosMedicosComponents_VerCentroMedico__WEBPACK_IMPORTED_MODULE_23__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
@@ -99352,10 +99352,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
-/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
-/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _QuirofanosComponents_AgregarQuirofano__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../QuirofanosComponents/AgregarQuirofano */ "./resources/js/src/QuirofanosComponents/AgregarQuirofano.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99376,84 +99378,80 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var VerCentroMedico = function VerCentroMedico() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
-      codigo = _useParams.codigo;
+      id_centro_medico = _useParams.id_centro_medico;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
-      id_centro_medico = _useState2[0],
-      setId_centro_medico = _useState2[1];
+      nombre_centro_medico = _useState2[0],
+      setNombre_centro_medico = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      nombre_centro_medico = _useState4[0],
-      setNombre_centro_medico = _useState4[1];
+      direccion_centro_medico = _useState4[0],
+      setDireccion_centro_medico = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      direccion_centro_medico = _useState6[0],
-      setDireccion_centro_medico = _useState6[1];
+      director = _useState6[0],
+      setDirector = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      director = _useState8[0],
-      setDirector = _useState8[1];
+      telefono_director = _useState8[0],
+      setTelefono_director = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      telefono_director = _useState10[0],
-      setTelefono_director = _useState10[1];
+      correo_director = _useState10[0],
+      setCorreo_director = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      correo_director = _useState12[0],
-      setCorreo_director = _useState12[1];
+      telefono1_centro_medico = _useState12[0],
+      setTelefono1_centro_medico = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      telefono1_centro_medico = _useState14[0],
-      setTelefono1_centro_medico = _useState14[1];
+      telefono2_centro_medico = _useState14[0],
+      setTelefono2_centro_medico = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      telefono2_centro_medico = _useState16[0],
-      setTelefono2_centro_medico = _useState16[1];
+      correo_centro_medico = _useState16[0],
+      setCorreo_centro_medico = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      correo_centro_medico = _useState18[0],
-      setCorreo_centro_medico = _useState18[1];
+      tiempo_consulta_medica = _useState18[0],
+      setTiempo_consulta_medica = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      tiempo_consulta_medica = _useState20[0],
-      setTiempo_consulta_medica = _useState20[1];
+      tipo_centro = _useState20[0],
+      setTipo_centro = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState22 = _slicedToArray(_useState21, 2),
-      tipo_centro = _useState22[0],
-      setTipo_centro = _useState22[1];
+      pais = _useState22[0],
+      setPais = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState24 = _slicedToArray(_useState23, 2),
-      pais = _useState24[0],
-      setPais = _useState24[1];
+      municipio = _useState24[0],
+      setMunicipio = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState26 = _slicedToArray(_useState25, 2),
-      municipio = _useState26[0],
-      setMunicipio = _useState26[1];
-
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState28 = _slicedToArray(_useState27, 2),
-      departamento = _useState28[0],
-      setDepartamento = _useState28[1];
+      departamento = _useState26[0],
+      setDepartamento = _useState26[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    _api__WEBPACK_IMPORTED_MODULE_5__["default"].centro_medico_ver(codigo).then(function (res) {
+    _api__WEBPACK_IMPORTED_MODULE_7__["default"].centro_medico_ver(id_centro_medico).then(function (res) {
       var centro_medico = res.data;
-      setId_centro_medico(centro_medico.id_centro_medico);
       setNombre_centro_medico(centro_medico.nombre_centro_medico);
       setDireccion_centro_medico(centro_medico.direccion_centro_medico);
       setDirector(centro_medico.director);
@@ -99471,10 +99469,10 @@ var VerCentroMedico = function VerCentroMedico() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "main",
     className: "layout-navbar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "main-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-heading"
@@ -99753,7 +99751,7 @@ var VerCentroMedico = function VerCentroMedico() {
     className: "section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card"
-  }))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_QuirofanosComponents_AgregarQuirofano__WEBPACK_IMPORTED_MODULE_6__["default"], null)))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VerCentroMedico);
@@ -107696,6 +107694,223 @@ var VerMedicamento = function VerMedicamento() {
 
 /***/ }),
 
+/***/ "./resources/js/src/QuirofanosComponents/AgregarQuirofano.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/QuirofanosComponents/AgregarQuirofano.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _Validaciones_QuirofanoValidacion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Validaciones/QuirofanoValidacion */ "./resources/js/src/Validaciones/QuirofanoValidacion.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var AgregarQuirofano = function AgregarQuirofano() {
+  var _errors$quirofano;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_6__["default"].API_URL;
+
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      id_centro_medico = _useParams.id_centro_medico;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      quirofanos = _useState2[0],
+      setQuirofanos = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      quirofano = _useState4[0],
+      setQuirofano = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_6__["default"].quirofanos(id_centro_medico).then(function (res) {
+      var result = res.data;
+      setQuirofanos(result.data);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({
+    resolver: Object(_hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__["yupResolver"])(_Validaciones_QuirofanoValidacion__WEBPACK_IMPORTED_MODULE_5__["default"])
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  var agregarQuirofano = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              body = {
+                quirofano: quirofano
+              };
+              _context.next = 4;
+              return fetch("".concat(API_URL, "/quirofanos/").concat(id_centro_medico, "/guardar"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 4:
+              response = _context.sent;
+              window.location = "/centros_medicos/".concat(id_centro_medico, "/ver");
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0.message);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function agregarQuirofano(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-success",
+    "data-toggle": "modal",
+    "data-target": "#quirofanoModal"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-plus"
+  }), "Agregar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal fade",
+    id: "quirofanoModal",
+    tabIndex: "-1",
+    role: "dialog",
+    "aria-labelledby": "exampleModalLabel",
+    "data-keyboard": "false",
+    "data-backdrop": "static",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-dialog",
+    role: "document"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "modal-title",
+    id: "exampleModalLabel"
+  }, "Agregar quir\xF3fano"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: handleSubmit(agregarQuirofano)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "quirofano"
+  }, "Nombre quir\xF3fano (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", _extends({
+    type: "text",
+    className: "form-control",
+    name: "quirofano",
+    id: "quirofano"
+  }, register('quirofano'), {
+    value: quirofano,
+    onChange: function onChange(e) {
+      return setQuirofano(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-card-text"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$quirofano = errors.quirofano) === null || _errors$quirofano === void 0 ? void 0 : _errors$quirofano.message, " "))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-footer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-default",
+    "data-dismiss": "modal"
+  }, "Cerrar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-secondary"
+  }, "Guardar"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "table-responsive"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+    className: "table mb-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Id quir\xF3fano"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Quir\xF3fano"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, quirofanos.map(function (quirofano) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, quirofano.id_quirofano), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, quirofano.quirofano));
+  }))))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarQuirofano);
+
+/***/ }),
+
 /***/ "./resources/js/src/SignosVitalesComponents/GraficoSignosVitales.js":
 /*!**************************************************************************!*\
   !*** ./resources/js/src/SignosVitalesComponents/GraficoSignosVitales.js ***!
@@ -109816,6 +110031,24 @@ var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
 
 /***/ }),
 
+/***/ "./resources/js/src/Validaciones/QuirofanoValidacion.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/src/Validaciones/QuirofanoValidacion.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+
+var schema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
+  quirofano: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required("El campo nombre del quirofano es obligatorio").max(150, "El máximo de caracteres es 150")
+});
+/* harmony default export */ __webpack_exports__["default"] = (schema);
+
+/***/ }),
+
 /***/ "./resources/js/src/Validaciones/TratamientoValidacion.js":
 /*!****************************************************************!*\
   !*** ./resources/js/src/Validaciones/TratamientoValidacion.js ***!
@@ -109920,14 +110153,14 @@ var API_URL = 'http://localhost:8000/api';
   datos_formulario_centro_medico: function datos_formulario_centro_medico() {
     return axios.get("".concat(API_URL, "/centros_medicos/crear"));
   },
-  centro_medico_editar: function centro_medico_editar(codigo) {
-    return axios.get("".concat(API_URL, "/centros_medicos/").concat(codigo, "/editar"));
+  centro_medico_editar: function centro_medico_editar(id_centro_medico) {
+    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/editar"));
   },
   centro_medico_buscar: function centro_medico_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/centros_medicos/").concat(param_busqueda, "/buscar"));
   },
-  centro_medico_ver: function centro_medico_ver(codigo) {
-    return axios.get("".concat(API_URL, "/centros_medicos/").concat(codigo, "/ver"));
+  centro_medico_ver: function centro_medico_ver(id_centro_medico) {
+    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/ver"));
   },
   //Tratamientos
   tratamientos_medicos: function tratamientos_medicos() {
@@ -109977,6 +110210,10 @@ var API_URL = 'http://localhost:8000/api';
   examen_buscar: function examen_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/examenes/").concat(param_busqueda, "/buscar"));
   },
+  //Quirófanos
+  quirofanos: function quirofanos(id_centro_medico) {
+    return axios.get("".concat(API_URL, "/quirofanos/").concat(id_centro_medico));
+  },
   API_URL: API_URL
 });
 
@@ -110000,8 +110237,8 @@ var API_URL = 'http://localhost:8000/api';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\margh\Desktop\Proyecto React\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\margh\Desktop\Proyecto React\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
