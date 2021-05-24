@@ -121,6 +121,13 @@ export default {
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 
+    //Hemogramas
+    examenes_hemogramas: () =>
+    axios.get(`${API_URL}/examenes_hemogramas`),
+
+    datos_formulario_examen_hemograma: () =>
+    axios.get(`${API_URL}/examenes_hemogramas/crear`),
+
     API_URL,
 
 }

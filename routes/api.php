@@ -83,3 +83,11 @@ Route::get('/examenes/{codigo}/ver', 'ExamenController@show');
 Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
+
+//Rutas para hemogramas
+Route::get('/examenes_hemogramas', 'ExamenHemogramaController@index');
+Route::get('/examenes_hemogramas/crear', 'ExamenHemogramaController@create');
+Route::post('/examenes_hemogramas/guardar', 'ExamenHemogramaController@store');
+Route::get('/examenes_hemogramas/{codigo}/ver', 'ExamenHemogramaController@show');
+Route::get('/examenes_hemogramas/{codigo}/editar', 'ExamenHemogramaController@edit');
+Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaController@update');

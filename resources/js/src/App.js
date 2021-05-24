@@ -50,6 +50,9 @@ import EditarExamen from './ExamenesComponents/EditarExamen';
 import BuscarExamen from './ExamenesComponents/BuscarExamen';
 import VerExamen from './ExamenesComponents/VerExamen';
 
+import ConsultarExamenHemograma from './ExamenesHemogramasComponents/ConsultarExamenHemograma';
+import AgregarExamenHemograma from './ExamenesHemogramasComponents/AgregarExamenHemograma';
+
 import NotFound from './LayoutComponents/NotFound';
 
 
@@ -101,6 +104,9 @@ const App = () => {
                 <Route exact path="/medicamentos/:codigo/editar" component={EditarMedicamento} />
                 <Route exact path="/medicamentos/:codigo/ver" component={VerMedicamento} />
                 <Route exact path="/medicamentos/:param_busqueda/buscar" component={BuscarMedicamento} />
+
+                <Route exact path="/examenes_hemogramas" component={ConsultarExamenHemograma} />
+                <Route exact path="/examenes_hemogramas/crear" component={AgregarExamenHemograma} />
 
                 <Route component={NotFound} />
             </Switch>

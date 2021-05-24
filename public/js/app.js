@@ -82654,7 +82654,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./ExamenesComponents/EditarExamen */ "./resources/js/src/ExamenesComponents/EditarExamen.js");
 /* harmony import */ var _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./ExamenesComponents/BuscarExamen */ "./resources/js/src/ExamenesComponents/BuscarExamen.js");
 /* harmony import */ var _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./ExamenesComponents/VerExamen */ "./resources/js/src/ExamenesComponents/VerExamen.js");
-/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+/* harmony import */ var _ExamenesHemogramasComponents_ConsultarExamenHemograma__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./ExamenesHemogramasComponents/ConsultarExamenHemograma */ "./resources/js/src/ExamenesHemogramasComponents/ConsultarExamenHemograma.js");
+/* harmony import */ var _ExamenesHemogramasComponents_AgregarExamenHemograma__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./ExamenesHemogramasComponents/AgregarExamenHemograma */ "./resources/js/src/ExamenesHemogramasComponents/AgregarExamenHemograma.js");
+/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+
+
 
 
 
@@ -82844,7 +82848,15 @@ var App = function App() {
     path: "/medicamentos/:param_busqueda/buscar",
     component: _MedicamentosComponents_BuscarMedicamento__WEBPACK_IMPORTED_MODULE_32__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_39__["default"]
+    exact: true,
+    path: "/examenes_hemogramas",
+    component: _ExamenesHemogramasComponents_ConsultarExamenHemograma__WEBPACK_IMPORTED_MODULE_39__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/examenes_hemogramas/crear",
+    component: _ExamenesHemogramasComponents_AgregarExamenHemograma__WEBPACK_IMPORTED_MODULE_40__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_41__["default"]
   })));
 };
 
@@ -87563,6 +87575,602 @@ var VerExamen = function VerExamen() {
 
 /***/ }),
 
+/***/ "./resources/js/src/ExamenesHemogramasComponents/AgregarExamenHemograma.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/src/ExamenesHemogramasComponents/AgregarExamenHemograma.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var _hookform_resolvers_yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hookform/resolvers/yup */ "./node_modules/@hookform/resolvers/yup/dist/yup.module.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+ //import schema from '../Validaciones/MedicamentoValidacion';
+
+
+
+var AgregarExamenHemograma = function AgregarExamenHemograma() {
+  var _errors$codigo_hemogr, _errors$codigo_examen, _errors$parametro, _errors$unidad_de_med, _errors$valor_min_muj, _errors$valor_max_muj, _errors$valor_min_hom, _errors$valor_max_hom, _errors$valor_resulta;
+
+  var API_URL = _api__WEBPACK_IMPORTED_MODULE_8__["default"].API_URL;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes_hemogramas = _useState2[0],
+      setExamenesHemogramas = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      examenes = _useState4[0],
+      setCodigoExamen = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      codigo_hemograma = _useState6[0],
+      setCodigo_hemograma = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      codigo_examen = _useState8[0],
+      setCodigo_examen = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      parametro = _useState10[0],
+      setParametro = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      unidad_de_medida = _useState12[0],
+      setUnidad_Medida = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      valor_min_mujeres = _useState14[0],
+      setValor_min_mujeres = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      valor_max_mujeres = _useState16[0],
+      setValor_max_mujeres = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      valor_min_hombres = _useState18[0],
+      setValor_min_hombres = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      valor_max_hombres = _useState20[0],
+      setValor_max_hombres = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      valor_resultado = _useState22[0],
+      setValor_resultado = _useState22[1]; //Función para traer los datos al select de tipo medicamento y para los demás campos
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].datos_formulario_examen_hemograma().then(function (res) {
+      var result = res.data;
+      setCodigoExamen(result.examenes);
+    });
+    _api__WEBPACK_IMPORTED_MODULE_8__["default"].examenes_hemogramas().then(function (res) {
+      var result = res.data;
+      setExamenesHemogramas(result.data);
+    });
+  }, []);
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])({//resolver: yupResolver(schema),
+  }),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  var agregarExamenHemograma = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+      var body, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              body = {
+                codigo_medicamento: codigo_medicamento,
+                id_tipo_medicamento: id_tipo_medicamento,
+                nombre_medicamento: nombre_medicamento,
+                via_administracion: via_administracion,
+                descripcion_medicamento: descripcion_medicamento,
+                presentacion_medicamento: presentacion_medicamento,
+                costo_medicamento: costo_medicamento,
+                existencia_medicamento: existencia_medicamento
+              };
+              _context.next = 4;
+              return fetch("".concat(API_URL, "/examenes_hemogramas/guardar"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+              });
+
+            case 4:
+              response = _context.sent;
+              window.location = "/examenes_hemogramas";
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0.message);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function agregarExamenHemograma(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Hemogramas"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Agregar hemograma")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/examenes_hemogramas/crear"
+  }, "Agregar hemograma"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "card-title"
+  }, "Complete los campos del formulario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Los campos que contienen (*) son obligatorios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "form form-vertical",
+    onSubmit: handleSubmit(agregarExamenHemograma)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Datos Hemograma"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_hemograma"
+  }, "C\xF3digo hemograma (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "codigo_hemograma",
+    id: "codigo_hemograma"
+  }, register('codigo_hemograma'), {
+    value: codigo_hemograma,
+    onChange: function onChange(e) {
+      return setCodigo_hemograma(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-upc-scan"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_hemogr = errors.codigo_hemograma) === null || _errors$codigo_hemogr === void 0 ? void 0 : _errors$codigo_hemogr.message, " "), examenes_hemogramas.map(function (hemograma) {
+    if (hemograma.codigo_hemograma === codigo_hemograma) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+        className: "text-danger"
+      }, "Ya existe un registro con este c\xF3digo de hemograma, intente uno diferente.");
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12 mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "codigo_examen"
+  }, "C\xF3digo Examen (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", _extends({
+    className: "choices form-select",
+    name: "codigo_examen",
+    id: "codigo_examen"
+  }, register('codigo_examen'), {
+    value: codigo_examen,
+    onChange: function onChange(e) {
+      return setCodigo_examen(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: ""
+  }, "--Seleccione una opci\xF3n--"), examenes.map(function (examen) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      value: examen.codigo_examen
+    }, examen.codigo_examen);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$codigo_examen = errors.codigo_examen) === null || _errors$codigo_examen === void 0 ? void 0 : _errors$codigo_examen.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "parametro"
+  }, "Par\xE1metro (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "parametro",
+    id: "parametro"
+  }, register('parametro'), {
+    value: parametro,
+    onChange: function onChange(e) {
+      return setParametro(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$parametro = errors.parametro) === null || _errors$parametro === void 0 ? void 0 : _errors$parametro.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "unidad_de_medida"
+  }, "Unidad de medida (*)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    name: "unidad_de_medida",
+    id: "unidad_de_medida"
+  }, register('unidad_de_medida'), {
+    value: unidad_de_medida,
+    onChange: function onChange(e) {
+      return setUnidad_Medida(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$unidad_de_med = errors.unidad_de_medida) === null || _errors$unidad_de_med === void 0 ? void 0 : _errors$unidad_de_med.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "valor_min_mujeres"
+  }, "Valor M\xEDnimo Mujeres "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "number",
+    className: "form-control",
+    step: "0.01",
+    min: "0",
+    name: "valor_min_mujeres",
+    id: "valor_min_mujeres"
+  }, register('valor_min_mujeres'), {
+    value: valor_min_mujeres,
+    onChange: function onChange(e) {
+      return setValor_min_mujeres(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$valor_min_muj = errors.valor_min_mujeres) === null || _errors$valor_min_muj === void 0 ? void 0 : _errors$valor_min_muj.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "valor_max_mujeres"
+  }, "Valor M\xE1ximo Mujeres "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "number",
+    className: "form-control",
+    step: "0.01",
+    min: "0",
+    name: "valor_max_mujeres",
+    id: "valor_max_mujeres"
+  }, register('valor_max_mujeres'), {
+    value: valor_max_mujeres,
+    onChange: function onChange(e) {
+      return setValor_max_mujeres(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$valor_max_muj = errors.valor_max_mujeres) === null || _errors$valor_max_muj === void 0 ? void 0 : _errors$valor_max_muj.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "valor_min_hombres"
+  }, "Valor M\xEDnimo Hombres "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "number",
+    className: "form-control",
+    step: "0.01",
+    min: "0",
+    name: "valor_min_hombres",
+    id: "valor_min_hombres"
+  }, register('valor_min_hombres'), {
+    value: valor_min_hombres,
+    onChange: function onChange(e) {
+      return setValor_min_hombres(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$valor_min_hom = errors.valor_min_hombres) === null || _errors$valor_min_hom === void 0 ? void 0 : _errors$valor_min_hom.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "valor_max_hombres"
+  }, "Valor M\xE1ximo Hombres "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "number",
+    className: "form-control",
+    step: "0.01",
+    min: "0",
+    name: "valor_max_hombres",
+    id: "valor_max_hombres"
+  }, register('valor_max_hombres'), {
+    value: valor_max_hombres,
+    onChange: function onChange(e) {
+      return setValor_max_hombres(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$valor_max_hom = errors.valor_max_hombres) === null || _errors$valor_max_hom === void 0 ? void 0 : _errors$valor_max_hom.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group has-icon-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "valor_resultado"
+  }, "Valor Resultado "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "position-relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({
+    type: "number",
+    className: "form-control",
+    step: "0.01",
+    min: "0",
+    name: "valor_resultado",
+    id: "valor_resultado"
+  }, register('valor_resultado'), {
+    value: valor_resultado,
+    onChange: function onChange(e) {
+      return setValor_resultado(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-control-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "bi bi-clipboard-check"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", {
+    className: "text-danger"
+  }, " ", (_errors$valor_resulta = errors.valor_resultado) === null || _errors$valor_resulta === void 0 ? void 0 : _errors$valor_resulta.message, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12 d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-secondary"
+  }, "Guardar"))))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AgregarExamenHemograma);
+
+/***/ }),
+
+/***/ "./resources/js/src/ExamenesHemogramasComponents/ConsultarExamenHemograma.js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/src/ExamenesHemogramasComponents/ConsultarExamenHemograma.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api */ "./resources/js/src/api.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var ConsultarExamenHemograma = function ConsultarExamenHemograma() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      examenes_hemogramas = _useState2[0],
+      setExamenesHemogramas = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _api__WEBPACK_IMPORTED_MODULE_5__["default"].examenes_hemogramas().then(function (res) {
+      var result = res.data;
+      setExamenesHemogramas(result.data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main",
+    className: "layout-navbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "main-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-1 order-last"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hemogramas"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-subtitle text-muted"
+  }, "Consulta de hemogramas")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-6 order-md-2 order-first"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    "aria-label": "breadcrumb",
+    className: "breadcrumb-header float-start float-lg-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Inicio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "breadcrumb-item active",
+    "aria-current": "page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes_hemogramas"
+  }, "Consulta hemogramas"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "page-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes_hemogramas/crear",
+    className: "btn btn-success"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-plus"
+  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), examenes_hemogramas.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped",
+    id: "table1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo Hemograma"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "C\xF3digo Examen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Parametro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Editar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Consultar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, examenes_hemogramas.map(function (hemograma) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hemograma.codigo_hemograma), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hemograma.codigo_examen), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, hemograma.parametro), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "examenes_hemogramas/".concat(hemograma.codigo_hemograma, "/editar"),
+      className: "btn btn-primary"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-pencil"
+    }), " Editar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "examenes_hemogramas/".concat(hemograma.codigo_hemograma, "/ver"),
+      className: "btn btn-info"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "bi bi-table"
+    }), " Consultar")));
+  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ConsultarExamenHemograma);
+
+/***/ }),
+
 /***/ "./resources/js/src/ExpedientesComponents/AgregarExpediente.js":
 /*!*********************************************************************!*\
   !*** ./resources/js/src/ExpedientesComponents/AgregarExpediente.js ***!
@@ -91295,7 +91903,24 @@ var Menu = function Menu() {
     className: "submenu-item "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/examenes/crear"
-  }, "Agregar ex\xE1menes")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Agregar ex\xE1menes")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-grid-1x2-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Hemogramas")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes_hemogramas"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/examenes_hemogramas/crear"
+  }, "Agregar hemograma")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "sidebar-toggler btn x"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     "data-feather": "x"
@@ -91871,7 +92496,7 @@ var BuscarMedicamento = function BuscarMedicamento() {
     className: "breadcrumb-item active",
     "aria-current": "page"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
+    to: "/medicamentos"
   }, "Consulta medicamentos"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "page-heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -94364,6 +94989,13 @@ var API_URL = 'http://localhost:8000/api';
   examen_buscar: function examen_buscar(param_busqueda) {
     return axios.get("".concat(API_URL, "/examenes/").concat(param_busqueda, "/buscar"));
   },
+  //Hemogramas
+  examenes_hemogramas: function examenes_hemogramas() {
+    return axios.get("".concat(API_URL, "/examenes_hemogramas"));
+  },
+  datos_formulario_examen_hemograma: function datos_formulario_examen_hemograma() {
+    return axios.get("".concat(API_URL, "/examenes_hemogramas/crear"));
+  },
   API_URL: API_URL
 });
 
@@ -94387,8 +95019,8 @@ var API_URL = 'http://localhost:8000/api';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\FelixCarpio\Documents\Ciclo I - 2021\Proyecto\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\FelixCarpio\Documents\Ciclo I - 2021\Proyecto\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
