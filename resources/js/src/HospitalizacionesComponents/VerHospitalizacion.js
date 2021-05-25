@@ -13,9 +13,11 @@ import ChequeoHospitalizacion from '../ChequeosComponents/ChequeoHospitalizacion
 import SignosVitales from '../SignosVitalesComponents/SignosVitales';
 import HistorialDiagnosticos from '../DiagnosticosComponents/HistorialDiagnosticos';
 import RecetaMedica from '../MedicamentosComponents/RecetaMedica';
+import HistorialTratamientos from '../TratamientosComponents/HistorialTratamientos';
 
 
 import API from '../api';
+
 
 const VerExpediente = () => {
 
@@ -103,6 +105,10 @@ const VerExpediente = () => {
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="receta_medica-tab" data-bs-toggle="tab" href="#receta_medica"
                                                 role="tab" aria-controls="receta_medica" aria-selected="false">Recetas médicas</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="tratamientos-tab" data-bs-toggle="tab" href="#tratamientos"
+                                                role="tab" aria-controls="tratamientos" aria-selected="false">Tratamientos</a>
                                         </li>
                                        
                                     </ul>
@@ -252,6 +258,16 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <RecetaMedica/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="tratamientos" role="tabpanel"
+                                                aria-labelledby="tratamientos-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <HistorialTratamientos/>
                                                         </div>
                                                     </section>
                                             </div>

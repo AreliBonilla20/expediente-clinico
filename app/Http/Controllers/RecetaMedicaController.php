@@ -6,7 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RecetaMedicaController extends Controller
-{
+{   
+    
+    public function index($id_hospitalizacion)
+    {  
+       $recetas = DB::select('select * from recetas inner join atenciones_medicas on atenciones_medicas.id_atencion_medica = recetas.id_atencion_medica
+       inner join medicamentos on medicamentos.codigo_medicamento = recetas.codigo_medicamento inner join tipo_medicamento on tipo_medicamento.id_tipo_medicamento = medicamentos.id_tipo_medicamento
+       where id_hospitalizacion = ?', [$id_hospitalizacion]);
+       return response()->json($recetas);   
+    }
+
+
     public function store(Request $request, $id_hospitalizacion)
     {   
         $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($id_hospitalizacion);

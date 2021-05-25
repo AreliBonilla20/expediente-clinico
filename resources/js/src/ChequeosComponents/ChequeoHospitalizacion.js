@@ -106,26 +106,33 @@ const ChequeoHospitalizacion = () => {
         </div>
 
         
-        {chequeos.map((chequeo)=>(
         <section className="section">
-           
-         <div className="card">
-         <div className="card-content">
-             <div className="card-body">
-                 <h4 className="card-title">Chequeo - {chequeo.id_chequeo_hospitalizacion}</h4>
-                 <h6>Fecha : {chequeo.fecha_chequeo} - Hora : {chequeo.hora_chequeo}</h6>
-                 <p className="card-text">
-                     Observaciones: <br />{chequeo.observacion_chequeo}
-                 </p>
-             </div>
-         </div>
-         <div className="card-footer d-flex justify-content-between">
-             <span>Registrado por:</span>
-         </div>
-         </div>
+        <br />
+        <h4>Historial de chequeos</h4>
+        <div className="card">
+        <div className="card-content">
+        {chequeos.map((chequeo, i) =>
+            <div className="card-body">
+                <div className="alert alert-secondary">
+                    <h4 className="alert-heading">Chequeo {i + 1 } </h4>
+                    <h6>Fecha: {chequeo.fecha_chequeo} Hora: {chequeo.hora_chequeo}</h6>
+                </div>
+            
+                <p className="card-text">
+                    <p>Observaciones: {chequeo.observacion_chequeo}</p>
+                </p>
         
-     </section>
-        ))}
+                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
+            </div>
+        )}
+
+        <hr />
+    </div>
+
+  
+</div>
+
+ </section>
 
     </div>
 

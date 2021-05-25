@@ -26,23 +26,27 @@ import AgregarDiagnostico from './DiagnosticosComponents/AgregarDiagnostico';
 import EditarDiagnostico from './DiagnosticosComponents/EditarDiagnostico';
 import BuscarDiagnostico from './DiagnosticosComponents/BuscarDiagnostico';
 import VerDiagnostico from './DiagnosticosComponents/VerDiagnostico';
+import AsignarDiagnosticos from './DiagnosticosComponents/AsignarDiagnosticos';
 
 import ConsultarCentroMedico from './CentrosMedicosComponents/ConsultarCentroMedico';
 import AgregarCentroMedico from './CentrosMedicosComponents/AgregarCentroMedico';
 import EditarCentroMedico from './CentrosMedicosComponents/EditarCentroMedico';
 import BuscarCentroMedico from './CentrosMedicosComponents/BuscarCentroMedico';
 import VerCentroMedico from './CentrosMedicosComponents/VerCentroMedico';
+
 import ConsultarTratamiento from './TratamientosComponents/ConsultarTratamiento';
 import AgregarTratamiento from './TratamientosComponents/AgregarTratamiento';
 import EditarTratamiento from './TratamientosComponents/EditarTratamiento';
 import BuscarTratamiento from './TratamientosComponents/BuscarTratamiento';
 import VerTratamiento from './TratamientosComponents/VerTratamiento';
+import AsignarTratamientos from './TratamientosComponents/AsignarTratamientos';
 
 import ConsultarMedicamento from './MedicamentosComponents/ConsultarMedicamento';
 import AgregarMedicamento from './MedicamentosComponents/AgregarMedicamento';
 import EditarMedicamento from './MedicamentosComponents/EditarMedicamento';
 import BuscarMedicamento from './MedicamentosComponents/BuscarMedicamento';
 import VerMedicamento from './MedicamentosComponents/VerMedicamento';
+import AsignarRecetaMedica from './MedicamentosComponents/AsignarRecetaMedica';
 
 import ConsultarExamen from './ExamenesComponents/ConsultarExamen';
 import AgregarExamen from './ExamenesComponents/AgregarExamen';
@@ -57,6 +61,7 @@ import BuscarEmpleado from './EmpleadosComponents/BuscarEmpleado';
 import VerEmpleado from './EmpleadosComponents/VerEmpleado';
 
 import NotFound from './LayoutComponents/NotFound';
+
 
 
 const App = () => {
@@ -77,12 +82,16 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/crear" component={AgregarHospitalizacion} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/editar" component={EditarHospitalizacion} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/ver" component={VerHospitalizacion} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_diagnosticos" component={AsignarDiagnosticos} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_receta_medica" component={AsignarRecetaMedica} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_tratamientos" component={AsignarTratamientos} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
                 <Route exact path="/diagnosticos/:codigo/editar" component={EditarDiagnostico} />
                 <Route exact path="/diagnosticos/:codigo/ver" component={VerDiagnostico} />
                 <Route exact path="/diagnosticos/:param_busqueda/buscar" component={BuscarDiagnostico} />
+                
 
                 <Route exact path="/examenes" component={ConsultarExamen} />
                 <Route exact path="/examenes/crear" component={AgregarExamen} />

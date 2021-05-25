@@ -10,33 +10,36 @@ class HistorialDiagnosticosController extends Controller
     public function index($id_hospitalizacion)
     {  
        $historial_diagnosticos = DB::select('select * from historial_diagnosticos inner join atenciones_medicas on historial_diagnosticos.id_atencion_medica=atenciones_medicas.id_atencion_medica
-       inner join diagnosticos on diagnosticos.codigo_diagnostico=historial_diagnosticos.codigo_diagnostico');
+       inner join diagnosticos on diagnosticos.codigo_diagnostico=historial_diagnosticos.codigo_diagnostico join tipo_diagnostico on 
+       tipo_diagnostico.id_tipo_diagnostico=diagnosticos.id_tipo_diagnostico
+       where atenciones_medicas.id_hospitalizacion = ?', [$id_hospitalizacion]);
        return response()->json($historial_diagnosticos);    
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id_hospitalizacion)
     {   
-        $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($request);
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-        DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica, created_at) 
-                    values (?, ?, ?, ?, ?, ?)', 
+        $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($id_hospitalizacion);
+  
+        DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica) 
+                    values (?, ?, ?, current_date, current_time)', 
                     [$id_atencion_medica, 
                      null,
-                     $request->id_hospitalizacion,
-                     $request->fecha_atencion_medica, 
-                     $request->hora_atencion_medica, 
-                     $fecha_actual
+                     $id_hospitalizacion
                     ]);
 
-       DB::insert('insert into historial_diagnosticos (id_atencion_medica, codigo_diagnostico, observaciones_diagnostico, indicaciones_diagnostico, created_at) 
-                    values (?, ?, ?, ?, ?)', 
-                    [$id_atencion_medica, 
-                        $request->codigo_diagnostico,
-                        $request->observaciones_diagnostico,
-                        $request->indicaciones_diagnostico,
-                        $fecha_actual
-                    ]);
 
-                    return response()->json($request);   
+        for($i=0; $i<count($request->inputList); $i++){
+            DB::insert('insert into historial_diagnosticos (id_atencion_medica, codigo_diagnostico, observaciones_diagnostico, indicaciones_diagnostico, created_at) 
+                values (?, ?, ?, ?, current_date + current_time)', 
+                [$id_atencion_medica, 
+                $request->inputList[$i]['codigo_diagnostico'],
+                $request->inputList[$i]['observaciones_diagnostico'],
+                $request->inputList[$i]['indicaciones_diagnostico']
+            ]);
+        }
+
+    
+
+        return response()->json($request);   
     }
 }

@@ -25,26 +25,33 @@ const ConsultarChequeoHospitalizacion = () => {
 
     return(
 
+        <section className="section">
+        <br />
+        <h4>Historial de chequeos</h4>
         <div className="card">
         <div className="card-content">
-        {chequeos.map((chequeo) =>
+        {chequeos.map((chequeo, i) =>
             <div className="card-body">
-                <h4 className="card-title">Chequeo - {chequeo.id_chequeo_hospitalizacion}</h4>
-                <h6>Fecha: {chequeo.fecha_chequeo}</h6>
-                <h6>Hora: {chequeo.hora_chequeo}</h6>
+                <div className="alert alert-secondary">
+                    <h4 className="alert-heading">Chequeo {i + 1 } </h4>
+                    <h6>Fecha: {chequeo.fecha_atencion_medica} Hora: {chequeo.hora_atencion_medica}</h6>
+                </div>
+            
                 <p className="card-text">
-                    {chequeo.observacion_chequeo}
+                    <p>Observaciones: {chequeo.observaciones}</p>
                 </p>
-
-                <span>Realizado por: </span>
+        
+                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
             </div>
         )}
-   
+
         <hr />
-        </div>
-    
-      
     </div>
+
+  
+</div>
+
+ </section>
         
    
         

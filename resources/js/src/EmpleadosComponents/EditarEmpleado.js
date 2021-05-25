@@ -22,6 +22,8 @@ const EditarEmpleado = () => {
     const [empleados, setEmpleados]=useState([]);
 
     //Datos para el formulario
+    const labels = document.getElementsByTagName('label');
+    
     const [tipo_personal, setTipo_personal] =useState([]);
     const [generos, setGeneros] =useState([]);
     const [paises, setPaises] =useState([]);
@@ -47,6 +49,7 @@ const EditarEmpleado = () => {
     const [telefono_empleado, setTelefono_empleado] = useState('');
     const [correo_empleado, setCorreo_empleado] = useState('');
     const [cargo_empleado, setCargo_empleado] = useState('');
+
 
     //Función para traer los datos que se ven en el formulario
 

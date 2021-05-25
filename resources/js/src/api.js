@@ -48,9 +48,17 @@ export default {
     signos_vitales_graficos: (id_hospitalizacion) =>
     axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}/graficos`),
 
-    //Historial_diagnosticos
+    //Historial diagnosticos
     historial_diagnosticos: (id_hospitalizacion) =>
     axios.get(`${API_URL}/historial_diagnosticos/${id_hospitalizacion}`),
+
+     //Historial recetas médicas
+    recetas_medicas: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/recetas_medicas/${id_hospitalizacion}`),
+
+     //Historial recetas médicas
+    historial_tratamientos: (id_hospitalizacion) =>
+     axios.get(`${API_URL}/historial_tratamientos/${id_hospitalizacion}`),
 
     //Diagnósticos
     diagnosticos: () =>
