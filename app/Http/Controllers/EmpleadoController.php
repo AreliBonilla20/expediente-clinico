@@ -79,7 +79,7 @@ class EmpleadoController extends Controller
                                     inner join paises on paises.id_pais=empleados.id_pais 
                                     inner join departamentos on departamentos.id_departamento=empleados.id_departamento
                                     inner join municipios on municipios.id_municipio=empleados.id_municipio 
-                                    where codigo= ?", [$id_empleado]);
+                                    where id_empleado= ?", [$id_empleado]);
 
         return response()->json($empleado[0]);    
     }

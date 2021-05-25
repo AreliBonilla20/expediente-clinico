@@ -13,16 +13,10 @@ import API from '../api';
 
 const VerEmpleado = () => {
 
-    const { codigo } = useParams();
-    const API_URL = API.API_URL;
-
-    const [id_empleado, setId_empleado] = useState('');
-    const [id_genero, setId_genero] = useState('');
-    const [id_tipo_personal, setId_tipo_personal] = useState('');
-    const [id_centro_medico, setId_centro_medico] = useState('');
-    const [pais, setPais] = useState('');
-    const [departamento, setDepartamento] = useState('');
-    const [municipio, setMunicipio] = useState('');
+    const {id_empleado } = useParams();
+    
+    
+    const [genero, setGenero] = useState('');
     const [nombre_empleado, setNombre_empleado] = useState('');
     const [apellido_empleado, setApellido_empleado] = useState('');
     const [identificacion_empleado, setIdentificacion_empleado] = useState('');
@@ -31,26 +25,31 @@ const VerEmpleado = () => {
     const [telefono_empleado, setTelefono_empleado] = useState('');
     const [correo_empleado, setCorreo_empleado] = useState('');
     const [cargo_empleado, setCargo_empleado] = useState('');
+    const [centro_medico, setCentro_medico] = useState('');
+    const [tipo_personal, setTipo_personal] = useState('');
+    const [pais, setPais] = useState('');
+    const [departamento, setDepartamento] = useState('');
+    const [municipio, setMunicipio] = useState('');
 
     useEffect(() => {
-        API.empleado_ver(codigo).then(res => {
+        API.empleado_ver(id_empleado).then(res => {
            const empleado = res.data;
 
-           setId_empleado(empleado.id_empleado);
-           setId_genero(empleado.id_genero);
-           setId_tipo_personal(empleado.id_tipo_personal);
-           setId_centro_medico(empleado.id_centro_medico);
+    
+           setGenero(empleado.genero);
            setNombre_empleado(empleado.nombre_empleado);
            setApellido_empleado(empleado.apellido_empleado);
            setIdentificacion_empleado(empleado.identificacion_empleado);
            setFecha_nacimiento_empleado(empleado.fecha_nacimiento_empleado);
-           setPais(empleado.nombre_pais);
-           setDepartamento(empleado.nombre_departamento);
-           setMunicipio(empleado.nombre_municipio);
            setDireccion_empleado(empleado.direccion_empleado);
            setTelefono_empleado(empleado.telefono_empleado);
            setCorreo_empleado(empleado.correo_empleado);
            setCargo_empleado(empleado.cargo_empleado);
+           setCentro_medico(empleado.nombre_centro_medico);
+           setTipo_personal(empleado.tipo_personal);
+           setPais(empleado.nombre_pais);
+           setDepartamento(empleado.nombre_departamento);
+           setMunicipio(empleado.nombre_municipio);
            
         })
     }, []);
@@ -67,7 +66,7 @@ const VerEmpleado = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Consultar</h3>
-                                <h4>Empleado: {id_empleado} - {id_empleado}</h4>
+                                <h4>Empleado: {id_empleado} </h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -107,30 +106,26 @@ const VerEmpleado = () => {
 
                             <div className="row">
                                 <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Nombres</p>
-                                        </div>
+                                            <div className="form-group">
+                                            {nombre_empleado||apellido_empleado ? (
+                                            <p>Empleado</p>
+                                            ) : (
+                                            <p></p>
+                                            )}
+                                                            
+                                            </div>
                                 </div>
                                 <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{nombre_empleado}</p>
-                                        </div>
+                                            <div className="form-group">
+                                            {nombre_empleado||apellido_empleado ? (
+                                            <p style={{fontWeight: "bold"}}>{nombre_empleado} {apellido_empleado}</p>
+                                            ) : (
+                                            <p></p>
+                                            )}
+                                            </div>
                                 </div>
                             </div>
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Apellidos</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{apellido_empleado}</p>
-                                        </div>
-                                </div>
-                            </div>
-
+ 
                             <div className="row">
                                 <div className="col-md-4">
                                         <div className="form-group">
@@ -152,24 +147,25 @@ const VerEmpleado = () => {
                                 </div>
                                 <div className="col-md-8">
                                         <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{id_genero}</p>
+                                        <p style={{fontWeight: "bold"}}>{genero}</p>
                                         </div>
                                 </div>
                             </div>
 
-                            {/* 
+
                             <div className="row">
                                 <div className="col-md-4">
                                         <div className="form-group">
-                                        <p>Tipo de empleado</p>
+                                        <p>Tipo personal</p>
                                         </div>
                                 </div>
                                 <div className="col-md-8">
                                         <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{id_tipo_empleado}</p>
+                                        <p style={{fontWeight: "bold"}}>{tipo_personal}</p>
                                         </div>
                                 </div>
                             </div>
+ 
 
                             <div className="row">
                                 <div className="col-md-4">
@@ -179,11 +175,11 @@ const VerEmpleado = () => {
                                 </div>
                                 <div className="col-md-8">
                                         <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{id_centro_medico}</p>
+                                        <p style={{fontWeight: "bold"}}>{centro_medico}</p>
                                         </div>
                                 </div>
                             </div>
-                            */}
+ 
 
                             <div className="row">
                                 <div className="col-md-4">
