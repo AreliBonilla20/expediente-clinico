@@ -167,6 +167,10 @@ export default {
 
     datos_formulario_examen_hemograma: () =>
     axios.get(`${API_URL}/examenes_hemogramas/crear`),
+    
+    //Quirófanos
+    quirofanos: (id_centro_medico) =>
+    axios.get(`${API_URL}/quirofanos/${id_centro_medico}`),
 
     API_URL,
 

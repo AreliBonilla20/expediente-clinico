@@ -123,3 +123,8 @@ Route::post('/examenes_hemogramas/guardar', 'ExamenHemogramaController@store');
 Route::get('/examenes_hemogramas/{codigo}/ver', 'ExamenHemogramaController@show');
 Route::get('/examenes_hemogramas/{codigo}/editar', 'ExamenHemogramaController@edit');
 Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaController@update');
+
+//Rutas para quirofanos
+Route::get('/quirofanos/{id_centro_medico}', 'QuirofanoController@index');
+Route::post('/quirofanos/{id_centro_medico}/guardar', 'QuirofanoController@store');
+

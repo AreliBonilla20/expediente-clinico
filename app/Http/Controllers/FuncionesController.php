@@ -61,5 +61,27 @@ class FuncionesController extends Controller
         return $id_atencion;
     }
 
+public function id_quirofano($id_centro_medico)
+    {   
+        $cont = 0;
+        $quirofanos = DB::select('select* from quirofanos');
+
+        if(count($quirofanos)>0)
+        {
+            foreach($quirofanos as $quirofano)
+            {
+                if($quirofano->id_centro_medico == $id_centro_medico)
+                $cont++;    
+            }   
+
+            $correlativo = (string) $cont + 1;
+            $id_quirofano = $id_centro_medico.'Q'.$correlativo;
+        }
+        else {
+            $id_quirofano = $id_centro_medico.'Q1';
+        }
+        
+        return $id_quirofano;
+    }
     
 }

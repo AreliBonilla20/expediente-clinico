@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import {
     BrowserRouter as Router,
     Link
@@ -11,6 +12,7 @@ import Footer from '../LayoutComponents/Footer';
 import Empleado from '../EmpleadosComponents/ConsultarEmpleado';
 
 import Consultorio from '../ConsultoriosComponents/Consultorio';
+import AgregarQuirofano from '../QuirofanosComponents/AgregarQuirofano';
 
 import API from '../api';
 
@@ -18,6 +20,7 @@ const VerCentroMedico = () => {
 
     const { id_centro_medico } = useParams();
    
+
     const [nombre_centro_medico, setNombre_centro_medico] = useState('');
     const [direccion_centro_medico, setDireccion_centro_medico] = useState('');
     const [director, setDirector] = useState('');
@@ -297,7 +300,7 @@ const VerCentroMedico = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                        
-
+                                                                   < AgregarQuirofano/>     
                                                        
                                                         </div>
                                                     </section>
