@@ -140,7 +140,7 @@ export default {
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 
-<<<<<<< HEAD
+
     //Empleados
     empleados: () =>
     axios.get(`${API_URL}/empleados`),
@@ -156,11 +156,17 @@ export default {
 
     empleado_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
-=======
+
     //Consultorios - centro medico
      consultorios : (id_centro_medico) =>
      axios.get(`${API_URL}/consultorios/${id_centro_medico}`),
->>>>>>> afca567f110d8c9a8c9f8d5f884d775bfea4b41d
+
+    //Hemogramas
+    examenes_hemogramas: () =>
+    axios.get(`${API_URL}/examenes_hemogramas`),
+
+    datos_formulario_examen_hemograma: () =>
+    axios.get(`${API_URL}/examenes_hemogramas/crear`),
 
     API_URL,
 

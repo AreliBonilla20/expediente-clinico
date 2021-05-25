@@ -60,6 +60,9 @@ import EditarEmpleado from './EmpleadosComponents/EditarEmpleado';
 import BuscarEmpleado from './EmpleadosComponents/BuscarEmpleado';
 import VerEmpleado from './EmpleadosComponents/VerEmpleado';
 
+import ConsultarExamenHemograma from './ExamenesHemogramasComponents/ConsultarExamenHemograma';
+import AgregarExamenHemograma from './ExamenesHemogramasComponents/AgregarExamenHemograma';
+
 import NotFound from './LayoutComponents/NotFound';
 
 
@@ -122,6 +125,9 @@ const App = () => {
                 <Route exact path="/empleados/:id_empleado/editar" component={EditarEmpleado} />
                 <Route exact path="/empleados/:id_empleado/ver" component={VerEmpleado} />
                 <Route exact path="/empleados/:param_busqueda/buscar" component={BuscarEmpleado} />
+                
+                <Route exact path="/examenes_hemogramas" component={ConsultarExamenHemograma} />
+                <Route exact path="/examenes_hemogramas/crear" component={AgregarExamenHemograma} />
 
                 <Route component={NotFound} />
             </Switch>

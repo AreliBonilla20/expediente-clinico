@@ -102,7 +102,7 @@ Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
 
-<<<<<<< HEAD
+
 //Rutas para empleados
 Route::get('/empleados', 'EmpleadoController@index');
 Route::get('/empleados/crear', 'EmpleadoController@create');
@@ -111,8 +111,15 @@ Route::get('/empleados/{id_empleado}/ver', 'EmpleadoController@show');
 Route::get('/empleados/{id_empleado}/editar', 'EmpleadoController@edit');
 Route::put('/empleados/{id_empleado}/actualizar', 'EmpleadoController@update');
 Route::get('/empleados/{param_busqueda}/buscar', 'EmpleadoController@buscar');
-=======
+
 //Rutas para consultorios-centrosm medicos
 Route::get('/consultorios/{id_centro_medico}', 'ConsultorioController@index');
 Route::post('/consultorios/{id_centro_medico}/guardar', 'ConsultorioController@store');
->>>>>>> afca567f110d8c9a8c9f8d5f884d775bfea4b41d
+
+//Rutas para hemogramas
+Route::get('/examenes_hemogramas', 'ExamenHemogramaController@index');
+Route::get('/examenes_hemogramas/crear', 'ExamenHemogramaController@create');
+Route::post('/examenes_hemogramas/guardar', 'ExamenHemogramaController@store');
+Route::get('/examenes_hemogramas/{codigo}/ver', 'ExamenHemogramaController@show');
+Route::get('/examenes_hemogramas/{codigo}/editar', 'ExamenHemogramaController@edit');
+Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaController@update');
