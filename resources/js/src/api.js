@@ -83,14 +83,14 @@ export default {
      datos_formulario_centro_medico: () =>
      axios.get(`${API_URL}/centros_medicos/crear`),
  
-     centro_medico_editar: (codigo) =>
-     axios.get(`${API_URL}/centros_medicos/${codigo}/editar`),
+     centro_medico_editar: (id_centro_medico) =>
+     axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/editar`),
  
      centro_medico_buscar: (param_busqueda) =>
      axios.get(`${API_URL}/centros_medicos/${param_busqueda}/buscar`),
  
-     centro_medico_ver: (codigo) =>
-     axios.get(`${API_URL}/centros_medicos/${codigo}/ver`),
+     centro_medico_ver: (id_centro_medico) =>
+     axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/ver`),
 
     //Tratamientos
     tratamientos_medicos: () =>
@@ -140,6 +140,7 @@ export default {
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 
+<<<<<<< HEAD
     //Empleados
     empleados: () =>
     axios.get(`${API_URL}/empleados`),
@@ -155,6 +156,11 @@ export default {
 
     empleado_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
+=======
+    //Consultorios - centro medico
+     consultorios : (id_centro_medico) =>
+     axios.get(`${API_URL}/consultorios/${id_centro_medico}`),
+>>>>>>> afca567f110d8c9a8c9f8d5f884d775bfea4b41d
 
     API_URL,
 

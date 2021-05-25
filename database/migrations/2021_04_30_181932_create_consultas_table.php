@@ -19,7 +19,7 @@ class CreateConsultasTable extends Migration
             $table->string('id_cita');
             $table->foreign('id_cita')->references('id_cita')->on('citas');
 
-            $table->string('sintomatolgia', 1000);
+            $table->string('sintomatologia', 1000);
             $table->string('observaciones', 1000);
             $table->timestamps();
         });

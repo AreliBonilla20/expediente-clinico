@@ -70,9 +70,9 @@ Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@busca
 Route::get('/centros_medicos', 'CentroMedicoController@index');
 Route::get('/centros_medicos/crear', 'CentroMedicoController@create');
 Route::post('/centros_medicos/guardar', 'CentroMedicoController@store');
-Route::get('/centros_medicos/{codigo}/ver', 'CentroMedicoController@show');
-Route::get('/centros_medicos/{codigo}/editar', 'CentroMedicoController@edit');
-Route::put('/centros_medicos/{codigo}/actualizar', 'CentroMedicoController@update');
+Route::get('/centros_medicos/{id_centro_medico}/ver', 'CentroMedicoController@show');
+Route::get('/centros_medicos/{id_centro_medico}/editar', 'CentroMedicoController@edit');
+Route::put('/centros_medicos/{id_centro_medico}/actualizar', 'CentroMedicoController@update');
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
 
 //Rutas para tratamientos medicos
@@ -102,6 +102,7 @@ Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
 
+<<<<<<< HEAD
 //Rutas para empleados
 Route::get('/empleados', 'EmpleadoController@index');
 Route::get('/empleados/crear', 'EmpleadoController@create');
@@ -110,3 +111,8 @@ Route::get('/empleados/{id_empleado}/ver', 'EmpleadoController@show');
 Route::get('/empleados/{id_empleado}/editar', 'EmpleadoController@edit');
 Route::put('/empleados/{id_empleado}/actualizar', 'EmpleadoController@update');
 Route::get('/empleados/{param_busqueda}/buscar', 'EmpleadoController@buscar');
+=======
+//Rutas para consultorios-centrosm medicos
+Route::get('/consultorios/{id_centro_medico}', 'ConsultorioController@index');
+Route::post('/consultorios/{id_centro_medico}/guardar', 'ConsultorioController@store');
+>>>>>>> afca567f110d8c9a8c9f8d5f884d775bfea4b41d
