@@ -14,54 +14,59 @@ const AgregarEmpleado = () => {
 
     const API_URL = API.API_URL;
     
-    const [empleados, setEmpleados]=useState([]);
 
     //Datos para el formulario
-    const [tipo_personal, setTipo_personal] =useState([]);
-    const [generos, setGeneros] =useState([]);
-    const [paises, setPaises] =useState([]);
-    const [municipios, setMunicipios] =useState([]);
-    const [departamentos, setDepartamentos] =useState([]);
-    const [centros_medicos, setCentros_medicos] =useState([]);
+    const [tipo_personal, set_tipo_personal] =useState([]);
+    const [generos, set_generos] =useState([]);
+    const [paises, set_paises] =useState([]);
+    const [municipios, set_municipios] =useState([]);
+    const [departamentos, set_departamentos] =useState([]);
+    const [centros_medicos, set_centros_medicos] =useState([]);
+    const [especialidades, set_especialidades] =useState([]);
 
-    const [opcion_pais, setOpcion_pais] = useState();
-    const [opcion_depto, setOpcion_depto] = useState();
+    const [opcion_pais, set_opcion_pais] = useState();
+    const [opcion_depto, set_opcion_depto] = useState();
+    const [id_medico, set_id_medico] = useState('');
     
     //Datos para la tabla
-    const [id_empleado, setId_empleado] = useState('');
-    const [id_genero, setId_genero] = useState('');
-    const [id_tipo_personal, setId_tipo_personal] = useState('');
-    const [id_centro_medico, setId_centro_medico] = useState('');
-    const [id_pais, setId_pais] = useState('');
-    const [id_departamento, setId_departamento] = useState('');
-    const [id_municipio, setId_municipio] = useState('');
-    const [nombre_empleado, setNombre_empleado] = useState('');
-    const [apellido_empleado, setApellido_empleado] = useState('');
-    const [identificacion_empleado, setIdentificacion_empleado] = useState('');
-    const [fecha_nacimiento_empleado, setFecha_nacimiento_empleado] = useState('');
-    const [direccion_empleado, setDireccion_empleado] = useState('');
-    const [telefono_empleado, setTelefono_empleado] = useState('');
-    const [correo_empleado, setCorreo_empleado] = useState('');
-    const [cargo_empleado, setCargo_empleado] = useState('');
+    const [id_genero, set_id_genero] = useState('');
+    const [id_tipo_personal, set_id_tipo_personal] = useState('');
+    const [id_centro_medico, set_id_centro_medico] = useState('');
+    const [id_pais, set_id_pais] = useState('');
+    const [id_departamento, set_id_departamento] = useState('');
+    const [id_municipio, set_id_municipio] = useState('');
+    const [nombre_empleado, set_nombre_empleado] = useState('');
+    const [apellido_empleado, set_apellido_empleado] = useState('');
+    const [identificacion_empleado, set_identificacion_empleado] = useState('');
+    const [fecha_nacimiento_empleado, set_fecha_nacimiento_empleado] = useState('');
+    const [direccion_empleado, set_direccion_empleado] = useState('');
+    const [telefono_empleado, set_telefono_empleado] = useState('');
+    const [correo_empleado, set_correo_empleado] = useState('');
+    const [id_especialidad, set_id_especialidad] = useState('');
+    const [area_atencion, set_area_atencion] = useState('');
+ 
 
     //Función para traer los datos que se ven en el formulario
 
     useEffect(() => {
         API.datos_formulario_empleado().then(res => {
            const result = res.data;
-           setTipo_personal(result.tipo_personal);
-           setGeneros(result.generos);
-           setPaises(result.paises);
-           setDepartamentos(result.departamentos);
-           setMunicipios(result.municipios);
-           setCentros_medicos(result.centros_medicos);
+           set_tipo_personal(result.tipo_personal);
+           set_generos(result.generos);
+           set_paises(result.paises);
+           set_departamentos(result.departamentos);
+           set_municipios(result.municipios);
+           set_centros_medicos(result.centros_medicos);
+           set_id_medico(result.id_medico);
+           set_especialidad(0);
+           set_area_atencion(" ");
+           
         })
-
-        API.empleados().then(res => {
+        API.especialidades().then(res => {
             const result = res.data;
-            setEmpleados(result.data);
-        }) 
-
+            set_especialidades(result);
+        })
+        
      }, []);
 
 
@@ -73,9 +78,9 @@ const AgregarEmpleado = () => {
       //Funcion para guardar
     const agregarEmpleado = async (data) => {
         try {
-          const body = { id_empleado, id_genero, id_tipo_personal, id_centro_medico, id_pais, id_departamento, id_municipio, 
+          const body = { id_genero, id_tipo_personal, id_centro_medico, id_pais, id_departamento, id_municipio, area_atencion, id_especialidad,
           nombre_empleado, apellido_empleado, identificacion_empleado, fecha_nacimiento_empleado, direccion_empleado, telefono_empleado, 
-          correo_empleado, cargo_empleado
+          correo_empleado
          };
           const response = await fetch(`${API_URL}/empleados/guardar`, {
             method: "POST",
@@ -134,34 +139,6 @@ const AgregarEmpleado = () => {
                                                 
                                                 <h5>Datos generales</h5>
 
-                                                <div className="col-12">
-                                                    <div className="form-group has-icon-left">
-                                                        <label htmlFor="id_empleado">Código del empleado (*)</label>
-                                                        <div className="position-relative">
-                                                            <input type="text" className="form-control"
-                                                                name="id_empleado"
-                                                                id="id_empleado"
-                                                                {...register('id_empleado')}
-                                                                value={id_empleado}
-                                                                onChange={e => setId_empleado(e.target.value)} 
-                                                                />
-                                                            <div className="form-control-icon">
-                                                            <i className="bi bi-person"></i>
-                                                            </div>
-                                                        </div>
-                                                        <small className="text-danger"> {errors.id_empleado?.message} </small>
-                                                        {
-                                                                                empleados.map((empleados) => {
-                                                                                if(empleados.id_empleado === id_empleado){
-                                                                                    return(
-                                                                                        <small className="text-danger">Ya existe un registro con este mismo identificador, debe ser distinto</small>
-                                                                                    )
-                                                                                }
-                                                                            })
-                                                                        }
-                                                         </div>
-                                                    </div>
-
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="identificacion_empleado">Identificación (*)</label>
@@ -171,7 +148,7 @@ const AgregarEmpleado = () => {
                                                                     id="identificacion_empleado"
                                                                     {...register('identificacion_empleado')}
                                                                     value={identificacion_empleado}
-                                                                    onChange={e => setIdentificacion_empleado(e.target.value)} />
+                                                                    onChange={e => set_identificacion_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person-badge-fill"></i>
                                                                 </div>
@@ -190,7 +167,7 @@ const AgregarEmpleado = () => {
                                                                     id="nombre_empleado"
                                                                     {...register('nombre_empleado')}
                                                                     value={nombre_empleado}
-                                                                    onChange={e => setNombre_empleado(e.target.value)} />
+                                                                    onChange={e => set_nombre_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -208,7 +185,7 @@ const AgregarEmpleado = () => {
                                                                     id="apellido_empleado"
                                                                     {...register('apellido_empleado')}
                                                                     value={apellido_empleado}
-                                                                    onChange={e => setApellido_empleado(e.target.value)} />
+                                                                    onChange={e => set_apellido_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -226,7 +203,7 @@ const AgregarEmpleado = () => {
                                                                     id="fecha_nacimiento_empleado"
                                                                     {...register('fecha_nacimiento_empleado')}
                                                                     value={fecha_nacimiento_empleado}
-                                                                    onChange={e => setFecha_nacimiento_empleado(e.target.value)} />
+                                                                    onChange={e => set_fecha_nacimiento_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-calendar"></i>
                                                                 </div>
@@ -244,7 +221,7 @@ const AgregarEmpleado = () => {
                                                                 id="id_genero" 
                                                                 {...register('id_genero')}
                                                                 value={id_genero}
-                                                                onChange={e => setId_genero(e.target.value)} >
+                                                                onChange={e => set_id_genero(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {generos.map((genero) => (
                                                                 <option value={genero.id_genero}>{genero.genero}</option>
@@ -254,42 +231,7 @@ const AgregarEmpleado = () => {
                                                         </div>
                                                     </div>
  
-                                                    <div className="col-md-12 mb-4">
-                                                        <label htmlFor="id_tipo_personal">Tipo Personal (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="form-select"
-                                                                name="id_tipo_personal" 
-                                                                id="id_tipo_personal" 
-                                                                {...register('id_tipo_personal')}
-                                                                value={id_tipo_personal}
-                                                                onChange={e => setId_tipo_personal(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {tipo_personal.map((personal) => (
-                                                                <option value={personal.id_tipo_personal}>{personal.tipo_personal}</option>
-                                                                ))}
-                                                            </select>
-                                                            <small className="text-danger"> {errors.id_tipo_personal?.message} </small>
-                                                        </div>
-                                                    </div> 
-
-                                                    <div className="col-md-12 mb-4">
-                                                        <label htmlFor="id_centro_medico">Centro médico (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="form-select"
-                                                                name="id_centro_medico" 
-                                                                id="id_centro_medico" 
-                                                                {...register('id_centro_medico')}
-                                                                value={id_centro_medico}
-                                                                onChange={e => setId_centro_medico(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {centros_medicos.map((centro_medico) => (
-                                                                <option value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
-                                                                ))}
-                                                            </select>
-                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
-                                                        </div>
-                                                    </div>
-
+                                                   
                                                    
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_pais">País (*)</label>
@@ -299,8 +241,8 @@ const AgregarEmpleado = () => {
                                                                 id="id_pais" 
                                                                 {...register('id_pais')}
                                                                 value={id_pais}
-                                                                onChange={e => setId_pais(e.target.value)} 
-                                                                onClick={e => setOpcion_pais(e.target.value)} >
+                                                                onChange={e => set_id_pais(e.target.value)} 
+                                                                onClick={e => set_opcion_pais(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {paises.map((pais) => (
                                                                 <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
@@ -318,8 +260,8 @@ const AgregarEmpleado = () => {
                                                                 id="id_departamento" 
                                                                 value={id_departamento}
                                                                 {...register('id_departamento')}
-                                                                onChange={e => setId_departamento(e.target.value)} 
-                                                                onClick={e => setOpcion_depto(e.target.value)} >
+                                                                onChange={e => set_id_departamento(e.target.value)} 
+                                                                onClick={e => set_opcion_depto(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                     {departamentos.map((departamento) => {
                                                                         if(departamento.id_pais == opcion_pais){
@@ -343,7 +285,7 @@ const AgregarEmpleado = () => {
                                                                 id="id_municipio"
                                                                 {...register('id_municipio')}
                                                                 value={id_municipio}
-                                                                onChange={e => setId_municipio(e.target.value)} >
+                                                                onChange={e => set_id_municipio(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                     {municipios.map((municipio) => {
                                                                         if(municipio.id_departamento == opcion_depto){
@@ -369,7 +311,7 @@ const AgregarEmpleado = () => {
                                                                     id="direccion_empleado"
                                                                     {...register('direccion_empleado')}
                                                                     value={direccion_empleado}
-                                                                    onChange={e => setDireccion_empleado(e.target.value)} />
+                                                                    onChange={e => set_direccion_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
@@ -387,7 +329,7 @@ const AgregarEmpleado = () => {
                                                                     id="telefono_empleado" 
                                                                     {...register('telefono_empleado')}
                                                                     value={telefono_empleado}
-                                                                    onChange={e => setTelefono_empleado(e.target.value)} />
+                                                                    onChange={e => set_telefono_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -405,37 +347,98 @@ const AgregarEmpleado = () => {
                                                                     id="correo_empleado" 
                                                                     {...register('correo_empleado')}
                                                                     value={correo_empleado}
-                                                                    onChange={e => setCorreo_empleado(e.target.value)} />
+                                                                    onChange={e => set_correo_empleado(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-envelope"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.correo_empleado?.message} </small>
                                                         </div>
-                                                    </div>                                                
+                                                    </div> 
+
+                                                    <h5>Información del lugar de trabajo</h5>
+                                                   
+
+                                                    <div className="col-md-12 mb-4">
+                                                        <label htmlFor="id_centro_medico">Centro médico (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_centro_medico" 
+                                                                id="id_centro_medico" 
+                                                                {...register('id_centro_medico')}
+                                                                value={id_centro_medico}
+                                                                onChange={e => set_id_centro_medico(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {centros_medicos.map((centro_medico) => (
+                                                                <option value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-12 mb-4">
+                                                        <label htmlFor="id_tipo_personal">Tipo Personal (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_tipo_personal" 
+                                                                id="id_tipo_personal" 
+                                                                {...register('id_tipo_personal')}
+                                                                value={id_tipo_personal}
+                                                                onChange={e => set_id_tipo_personal(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {tipo_personal.map((personal) => (
+                                                                <option value={personal.id_tipo_personal}>{personal.cargo}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_tipo_personal?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    {id_medico == id_tipo_personal &&
+                                                    <div className="row">
+                                                    <div className="col-md-12 mb-4" >
+                                                        <label htmlFor="especialidad">Especialidad(*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select" 
+                                                                name="especialidad" 
+                                                                id="especialidad" 
+                                                                value={id_especialidad}
+                                                                onChange={e => set_id_especialidad(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {especialidades.map((especialidad) => (
+                                                                <option value={especialidad.id_especialidad}>{especialidad.nombre_especialidad}</option>
+                                                                ))}
+                                                            </select>
+                                                           
+                                                        </div>
+                                                    </div> 
+
 
                                                     <div className="col-12">
-                                                        <div className="form-group has-icon-left">
-                                                        <label htmlFor="cargo_empleado">Cargo empleado (*)</label>
-                                                            <div className="position-relative">
-                                                                <input type="text" className="form-control"
-                                                                    name="cargo_empleado" 
-                                                                    id="cargo_empleado" 
-                                                                    {...register('cargo_empleado')}
-                                                                    value={cargo_empleado}
-                                                                    onChange={e => setCargo_empleado(e.target.value)} />
-                                                                <div className="form-control-icon">
-                                                                    <i className="bi bi-briefcase"></i>
-                                                                </div>
+                                                    <div className="form-group has-icon-left">
+                                                        <label htmlFor="area_atencion">Área de atención</label>
+                                                        <div className="position-relative">
+                                                            <textarea type="text" className="form-control" rows="4"
+                                                                name="area_atencion" 
+                                                                id="area_atencion" 
+                                                                value={area_atencion}
+                                                                onChange={e => set_area_atencion(e.target.value)} />
+                                                            <div className="form-control-icon">
+                                                                <i className="bi bi-clipboard-check"></i>
                                                             </div>
-                                                            <small className="text-danger"> {errors.cargo_empleado?.message} </small>
                                                         </div>
-                                                    </div>  
-                                                   
+                                                        
+                                                    </div>
+
+                                                    </div>
+                                                    </div>
+                                                 }
 
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Guardar</button>
-                                                    </div>   
+                                                    </div>  
+                                                  
 
                                                 </div>
                                             </div>
@@ -444,7 +447,7 @@ const AgregarEmpleado = () => {
                                 </div>
                             </div>
                         </div>
-                   
+                
                     </div>
                 </div>   
             </div>

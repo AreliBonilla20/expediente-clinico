@@ -38,6 +38,7 @@ const RecetaMedica = () => {
             <div className="card-header">
                 <Link to={`/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/asignar_receta_medica`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
             </div>
+        {receta_medica.length > 0 &&
         <section className="section">
             <br />
         <h4>Historial de medicamentos</h4>
@@ -47,14 +48,14 @@ const RecetaMedica = () => {
             <div className="card-body">
                  <div className="alert alert-secondary">
                     <h4 className="alert-heading">Medicamento {i + 1 } : {medicamento.codigo_medicamento} - {medicamento.nombre_medicamento} </h4>
-                    <h6>Fecha: {medicamento.fecha_atencion_medica} Hora: {medicamento.hora_atencion_medica}</h6>
+                    <h6>Emisión : {medicamento.fecha_atencion_medica} - {medicamento.hora_atencion_medica}</h6>
                  </div>
               
                 <p className="card-text">
                     <p>Clasificación: {medicamento.tipo_medicamento}</p>
                     <p>Administración: {medicamento.via_administracion}</p>
-                    <p>Dósis: {medicamento.dosis}</p>
-                    <p>Indicaciones: {medicamento.indicaciones}</p> 
+                    <p>Dósis: {medicamento.dosis_medicamento}</p>
+                    <p>Indicaciones: {medicamento.indicaciones_medicamento}</p> 
                 </p>
            
                 <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
@@ -68,6 +69,7 @@ const RecetaMedica = () => {
     </div>
 
      </section>
+      }
 
     </div>
     </div>

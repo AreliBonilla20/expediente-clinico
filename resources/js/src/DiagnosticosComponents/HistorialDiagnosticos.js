@@ -42,6 +42,8 @@ const HistorialDiagnosticos = () => {
             <div className="card-header">
                 <Link to={`/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/asignar_diagnosticos`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
             </div>
+
+        {historial_diagnosticos.length > 0 &&
         <section className="section">
             <br />
         <h4>Historial de diagnósticos</h4>
@@ -51,7 +53,7 @@ const HistorialDiagnosticos = () => {
             <div className="card-body">
                  <div className="alert alert-secondary">
                     <h4 className="alert-heading">Diagnóstico {i + 1 } : {diagnostico.codigo_diagnostico} - {diagnostico.nombre_diagnostico} </h4>
-                    <h6>Fecha: {diagnostico.fecha_atencion_medica} Hora: {diagnostico.hora_atencion_medica}</h6>
+                    <h6>Emisión : {diagnostico.fecha_atencion_medica} - {diagnostico.hora_atencion_medica}</h6>
                  </div>
               
                 <p className="card-text">
@@ -71,6 +73,7 @@ const HistorialDiagnosticos = () => {
     </div>
 
      </section>
+     }
 
     </div>
     </div>

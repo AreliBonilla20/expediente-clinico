@@ -132,4 +132,12 @@ class CentroMedicoController extends Controller
         return CentroMedicoResource::collection($centros_medicos);
 
     }
+    
+    public function centro_medico_empleados($id_centro_medico)
+    {
+       $empleados_centro_medico = DB::select('select * from empleados inner join tipo_personal on tipo_personal.id_tipo_personal = empleados.id_tipo_personal
+                                              where id_centro_medico = ? order by id_empleado', [$id_centro_medico]);
+
+       return response()->json($empleados_centro_medico);    
+    }
 }

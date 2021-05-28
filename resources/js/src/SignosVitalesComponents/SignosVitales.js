@@ -226,6 +226,7 @@ const SignosVitales = () => {
         </div>
     
         </div>
+        {signos_vitales.length > 0 && 
         <section className="section">
         
 
@@ -308,9 +309,12 @@ const SignosVitales = () => {
          </div>
         
          </div>
-
+         <SignosVitalesGraficos/>
      </section>
-        <SignosVitalesGraficos/>
+    }
+        
+
+    
      
      </div>
 

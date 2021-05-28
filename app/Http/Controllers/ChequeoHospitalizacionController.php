@@ -17,9 +17,10 @@ class ChequeoHospitalizacionController extends Controller
     public function store(Request $request, $id_hospitalizacion)
     {   
 
-        DB::insert('insert into chequeos_hospitalizaciones (id_hospitalizacion, fecha_chequeo, hora_chequeo, observacion_chequeo) 
-                    values (?, current_date, current_time, ?)', 
+        DB::insert('insert into chequeos_hospitalizaciones (id_hospitalizacion, fecha_chequeo, hora_chequeo, sintomas_chequeo, observacion_chequeo) 
+                    values (?, current_date, current_time, ?, ?)', 
                     [$id_hospitalizacion, 
+                    $request->sintomas_chequeo,
                      $request->observacion_chequeo
                     ]);
         

@@ -52,7 +52,7 @@ Route::post('/historial_diagnosticos/{id_hospitalizacion}/guardar', 'HistorialDi
 Route::get('/recetas_medicas/{id_hospitalizacion}', 'RecetaMedicaController@index');
 Route::post('/recetas_medicas/{id_hospitalizacion}/guardar', 'RecetaMedicaController@store');
 
-//Rutas para el historial de diagnósticos del paciente
+//Rutas para el historial de tratamientos del paciente
 Route::get('/historial_tratamientos/{id_hospitalizacion}', 'HistorialTratamientosController@index');
 Route::post('/historial_tratamientos/{id_hospitalizacion}/guardar', 'HistorialTratamientosController@store');
 
@@ -74,6 +74,7 @@ Route::get('/centros_medicos/{id_centro_medico}/ver', 'CentroMedicoController@sh
 Route::get('/centros_medicos/{id_centro_medico}/editar', 'CentroMedicoController@edit');
 Route::put('/centros_medicos/{id_centro_medico}/actualizar', 'CentroMedicoController@update');
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
+Route::get('/centro_medico_empleados/{id_centro_medico}', 'CentroMedicoController@centro_medico_empleados');
 
 //Rutas para tratamientos medicos
 Route::get('/tratamientos_medicos', 'TratamientosMedicosController@index');
@@ -112,7 +113,7 @@ Route::get('/empleados/{id_empleado}/editar', 'EmpleadoController@edit');
 Route::put('/empleados/{id_empleado}/actualizar', 'EmpleadoController@update');
 Route::get('/empleados/{param_busqueda}/buscar', 'EmpleadoController@buscar');
 
-//Rutas para consultorios-centrosm medicos
+//Rutas para consultorios-centros medicos
 Route::get('/consultorios/{id_centro_medico}', 'ConsultorioController@index');
 Route::post('/consultorios/{id_centro_medico}/guardar', 'ConsultorioController@store');
 
@@ -128,3 +129,13 @@ Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaControlle
 Route::get('/quirofanos/{id_centro_medico}', 'QuirofanoController@index');
 Route::post('/quirofanos/{id_centro_medico}/guardar', 'QuirofanoController@store');
 
+//Rutas para médicos
+Route::get('/centro_medico_doctores/{id_centro_medico}', 'DoctorController@centro_medico_doctores');
+Route::get('/doctores/crear', 'DoctorController@create');
+Route::post('/doctores/{id_empleado}/guardar', 'DoctorController@store');
+Route::post('/doctores/horarios/asignar', 'DoctorController@horarios');
+
+//Rutas para horarios
+Route::post('/horarios/{id_centro_medico}/guardar', 'HorarioController@store');
+Route::get('/horarios/{id_centro_medico}/', 'HorarioController@index');
+Route::get('/horarios/{id_centro_medico}/doctores', 'HorarioController@doctores_horarios');

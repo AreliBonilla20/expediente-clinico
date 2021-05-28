@@ -19,7 +19,7 @@ function AsignarTratamientos() {
 
   const codigo = id_hospitalizacion.substr(0,7);
 
-  const [inputList, setInputList] = useState([{ codigo_tratamiento: "", indicaciones: ""}]);
+  const [inputList, setInputList] = useState([{ codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
   const [tratamientos,set_tratamientos] = useState([]);
 
   const [tipos_tratamientos, set_tipos_tratamientos] = useState([]);
@@ -42,7 +42,7 @@ function AsignarTratamientos() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { codigo_tratamiento: "", indicaciones: ""}]);
+    setInputList([...inputList, { codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ function AsignarTratamientos() {
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Tratamiendos</h3>
+                                <h3>Tratamientos</h3>
                               
                                 <p className="text-subtitle text-muted">Asignar tratamientos</p>
                             </div>
@@ -129,8 +129,8 @@ function AsignarTratamientos() {
                                                     <select className="form-select"
                                                         name="id_tipo_tratamiento" 
                                                         id="id_tipo_tratamiento" 
-                                                        value={set_id_tipo_tratamiento} 
-                                                        onChange={e => setId_tipo_tratamiento(e.target.value)} >
+                                                        value={id_tipo_tratamiento} 
+                                                        onChange={e => set_id_tipo_tratamiento(e.target.value)} >
                                                         <option value="">--Seleccione una opción--</option>
                                                         {tipos_tratamientos.map((tipo_tratamiento) => (
                                                         <option value={tipo_tratamiento.id_tipo_tratamiento}>{tipo_tratamiento.tipo_tratamiento}</option>
@@ -197,7 +197,7 @@ function AsignarTratamientos() {
                                 </div>
                             </div>
                         </div>
-                        
+                        {JSON.stringify(inputList)}
                     </div>
                 </div>   
             </div>

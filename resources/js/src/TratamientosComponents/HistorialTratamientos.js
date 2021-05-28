@@ -38,6 +38,7 @@ const HistorialTratamientos = () => {
             <div className="card-header">
                 <Link to={`/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/asignar_tratamientos`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
             </div>
+        {historial_tratamientos.length > 0 &&
         <section className="section">
             <br />
         <h4>Historial de medicamentos</h4>
@@ -47,12 +48,13 @@ const HistorialTratamientos = () => {
             <div className="card-body">
                  <div className="alert alert-secondary">
                     <h4 className="alert-heading">tratamiento {i + 1 } : {tratamiento.codigo_tratamiento} - {tratamiento.nombre_tratamiento} </h4>
-                    <h6>Fecha: {tratamiento.fecha_atencion_medica} Hora: {tratamiento.hora_atencion_medica}</h6>
+                    <h6>Emisión : {tratamiento.fecha_atencion_medica} - {tratamiento.hora_atencion_medica}</h6>
                  </div>
               
                 <p className="card-text">
                     <p>Clasificación: {tratamiento.tipo_tratamiento}</p>
-                    <p>Dósis: {tratamiento.descripción}</p>
+                    <p>Descripción: {tratamiento.descripcion_tratamiento}</p>
+                    <p>Indicaciones: {tratamiento.indicaciones_tratamiento}</p>
                 </p>
            
                 <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
@@ -66,6 +68,7 @@ const HistorialTratamientos = () => {
     </div>
 
      </section>
+     }
 
     </div>
     </div>

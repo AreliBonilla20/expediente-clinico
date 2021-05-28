@@ -110,10 +110,10 @@ const ConsultarExpediente = () => {
                                             <td>{paciente.fecha_nacimiento}</td>
                                             <td>{paciente.estado_paciente}</td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

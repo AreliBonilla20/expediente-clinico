@@ -62,6 +62,10 @@ import VerEmpleado from './EmpleadosComponents/VerEmpleado';
 
 import ConsultarExamenHemograma from './ExamenesHemogramasComponents/ConsultarExamenHemograma';
 import AgregarExamenHemograma from './ExamenesHemogramasComponents/AgregarExamenHemograma';
+import AsignarHorarios from './DoctoresComponents/AsignarHorarios';
+
+import PruebaCalendario from './Prueba/PruebaMostrar';
+
 
 import NotFound from './LayoutComponents/NotFound';
 
@@ -107,7 +111,9 @@ const App = () => {
                 <Route exact path="/centros_medicos/:id_centro_medico/editar" component={EditarCentroMedico} />
                 <Route exact path="/centros_medicos/:id_centro_medico/ver" component={VerCentroMedico} />
                 <Route exact path="/centros_medicos/:param_busqueda/buscar" component={BuscarCentroMedico} />
-                                
+                <Route exact path="/centros_medicos/:id_centro_medico/empleados/:id_empleado/ver" component={VerEmpleado} />
+                <Route exact path="/centros_medicos/:id_centro_medico/empleados/:id_empleado/editar" component={EditarEmpleado} />
+                           
                 <Route exact path="/tratamientos_medicos" component={ConsultarTratamiento} />
                 <Route exact path="/tratamientos_medicos/crear" component={AgregarTratamiento} />
                 <Route exact path="/tratamientos_medicos/:codigo/editar" component={EditarTratamiento} />
@@ -128,6 +134,10 @@ const App = () => {
                 
                 <Route exact path="/examenes_hemogramas" component={ConsultarExamenHemograma} />
                 <Route exact path="/examenes_hemogramas/crear" component={AgregarExamenHemograma} />
+
+                <Route exact path="/prueba" component={PruebaCalendario} />
+
+      
 
                 <Route component={NotFound} />
             </Switch>

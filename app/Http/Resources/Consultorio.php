@@ -18,6 +18,7 @@ class Consultorio extends JsonResource
             'id_consultorio'=> $this->id_consultorio,
             'id_centro_medico'=> $this->id_centro_medico,
             'consultorio'=>$this->consultorio,
+            'area'=>$this->area
         ];
     }
 }

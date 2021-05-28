@@ -12,13 +12,14 @@ const Consultorio = () => {
     const API_URL = API.API_URL;
 
     const {id_centro_medico} = useParams();
-    const [consultorios, setConsultorios] = useState([]);
-    const [consultorio, setConsultorio] = useState('');
+    const [consultorios, set_consultorios] = useState([]);
+    const [consultorio, set_consultorio] = useState('');
+    const [area, set_area] = useState('');
 
     useEffect(() => {
         API.consultorios(id_centro_medico).then(res => {
            const result = res.data;
-           setConsultorios(result.data);
+           set_consultorios(result.data);
        })
      }, []);
 
@@ -30,7 +31,7 @@ const Consultorio = () => {
     const agregarConsultorio = async e => {
         e.preventDefault();
         try {
-          const body = { consultorio };
+          const body = { consultorio, area };
           const response = await fetch(`${API_URL}/consultorios/${id_centro_medico}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -68,8 +69,6 @@ const Consultorio = () => {
                 <div className="form-body">
                     <div className="row">
                     
-
-
                         <div className="col-12">
                             <div className="form-group has-icon-left">
                                 <label htmlFor="consultorio">Consultorio (*)</label>
@@ -79,7 +78,7 @@ const Consultorio = () => {
                                         id="consultorio"
                                         {...register('consultorio')}
                                         value={consultorio}
-                                        onChange={e => setConsultorio(e.target.value)} 
+                                        onChange={e => set_consultorio(e.target.value)} 
                                             />
                                     <div className="form-control-icon">
                                         <i className="bi bi-card-text"></i>
@@ -88,8 +87,35 @@ const Consultorio = () => {
                                 <small className="text-danger"> {errors.consultorio?.message} </small>
                             </div>
                         </div>
-                    </div>
-                </div>
+                 
+                        <div className="col-md-12 mb-4">
+                        <label htmlFor="area">Área (*)</label>
+                            <div className="form-group">
+                                <select className="form-select"
+                                    name="area" 
+                                    id="area" 
+                                    {...register('area')}
+                                    value={area}
+                                    onChange={e => set_area(e.target.value)} >
+                                    <option value="">--Seleccione una opción--</option>
+                                    <option value="Medicina general">Medicina general</option>
+                                    <option value="Pediatría">Pediatría</option>
+                                    <option value="Ginecología">Ginecología</option>
+                                    <option value="Psicología">Psicología</option>
+                                    <option value="Neurología">Neurología</option>
+                                    <option value="Oftamología">Oftamología</option>
+                                    <option value="Odontología">Odontología</option>
+                                    <option value="Cardiología">Cardiología</option>
+                                    <option value="Dermatología">Dermatología</option>
+
+                                    
+                                </select>
+                                <small className="text-danger"> {errors.area?.message} </small>
+                            </div>
+                        </div>
+
+                        </div>
+                        </div>
                 
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -104,23 +130,28 @@ const Consultorio = () => {
     
         </div>
 
-           
-           <div className="card">
+        <div className="container" >
+        <div className="row">
+        <div className="col-6">
+        <div className="card">
          <div className="card-content">
              <div className="card-body">
+
                  <div className="table-responsive">
-                <table className="table mb-0">
+                <table className="table lg">
                     <thead>
-                        <tr>                           
-			             <th>Id cosultorio</th>
-                         <th>Consultorio</th>
+                        <tr>                     
+			             <th>ID quirófano</th>
+                         <th>Quirófano</th>
+                         <th>Área</th>
                         </tr>
                     </thead>
                     <tbody>
                     {consultorios.map((consultorio)=>(
-                        <tr>                          
+                        <tr>                  
                             <td>{consultorio.id_consultorio}</td>
                             <td>{consultorio.consultorio}</td>
+                            <td>{consultorio.area}</td>
                         </tr>
                         ))}
                     </tbody>
@@ -129,13 +160,12 @@ const Consultorio = () => {
             </div>
          </div>
     </div>
-        
-  
-  
-    
-    
-       
     </div>
+    </div>
+    </div>
+   
+    </div>
+        
 
     
     );

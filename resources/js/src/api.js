@@ -56,7 +56,7 @@ export default {
     recetas_medicas: (id_hospitalizacion) =>
     axios.get(`${API_URL}/recetas_medicas/${id_hospitalizacion}`),
 
-     //Historial recetas médicas
+     //Historial tratamientos
     historial_tratamientos: (id_hospitalizacion) =>
      axios.get(`${API_URL}/historial_tratamientos/${id_hospitalizacion}`),
 
@@ -91,6 +91,9 @@ export default {
  
      centro_medico_ver: (id_centro_medico) =>
      axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/ver`),
+
+     centro_medico_empleados: (id_centro_medico) =>
+     axios.get(`${API_URL}/centro_medico_empleados/${id_centro_medico}`),
 
     //Tratamientos
     tratamientos_medicos: () =>
@@ -171,6 +174,20 @@ export default {
     //Quirófanos
     quirofanos: (id_centro_medico) =>
     axios.get(`${API_URL}/quirofanos/${id_centro_medico}`),
+
+    //Médicos
+    especialidades: () =>
+    axios.get(`${API_URL}/doctores/crear`),
+
+    centro_medico_doctores: (id_centro_medico) =>
+    axios.get(`${API_URL}/centro_medico_doctores/${id_centro_medico}`),
+
+    //Horarios
+    horarios: (id_centro_medico) =>
+    axios.get(`${API_URL}/horarios/${id_centro_medico}`),
+
+    horarios_doctores: (id_centro_medico) =>
+    axios.get(`${API_URL}/horarios/${id_centro_medico}/doctores`),
 
     API_URL,
 

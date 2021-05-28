@@ -48,8 +48,7 @@ const EditarEmpleado = () => {
     const [direccion_empleado, setDireccion_empleado] = useState('');
     const [telefono_empleado, setTelefono_empleado] = useState('');
     const [correo_empleado, setCorreo_empleado] = useState('');
-    const [cargo_empleado, setCargo_empleado] = useState('');
-
+    
     //Función para traer los datos que se ven en el formulario
 
     useEffect(() => {
@@ -80,7 +79,7 @@ const EditarEmpleado = () => {
             setDireccion_empleado(result.direccion_empleado);
             setTelefono_empleado(result.telefono_empleado);
             setCorreo_empleado(result.correo_empleado);
-            setCargo_empleado(result.cargo_empleado);
+          
 
             setOpcion_pais(result.id_pais);
             setOpcion_depto(result.id_departamento);
@@ -103,7 +102,7 @@ const EditarEmpleado = () => {
         try {
           const body = { id_empleado, id_genero, id_tipo_personal, id_centro_medico, id_pais, id_departamento, id_municipio, 
           nombre_empleado, apellido_empleado, identificacion_empleado, fecha_nacimiento_empleado, direccion_empleado, telefono_empleado, 
-          correo_empleado, cargo_empleado
+          correo_empleado
          };
           const response = await fetch(`${API_URL}/empleados/${id_empleado}/actualizar`, {
             method: "PUT",
@@ -111,7 +110,7 @@ const EditarEmpleado = () => {
             body: JSON.stringify(body)
             
           });
-         //Regresa luego de guardar. Misma ruta de api.php
+         
           window.location = "/empleados";
         } catch (err) {
           console.error(err.message);
@@ -162,7 +161,33 @@ const EditarEmpleado = () => {
                                                 
                                                 <h5>Datos generales</h5>
 
-                                    
+                                                <div className="col-12">
+                                                    <div className="form-group has-icon-left">
+                                                        <label htmlFor="id_empleado">Código del empleado (*)</label>
+                                                        <div className="position-relative">
+                                                            <input type="text" className="form-control"
+                                                                name="id_empleado"
+                                                                id="id_empleado"
+                                                                {...register('id_empleado')}
+                                                                value={id_empleado}
+                                                                onChange={e => setId_empleado(e.target.value)} 
+                                                                />
+                                                            <div className="form-control-icon">
+                                                            <i className="bi bi-person"></i>
+                                                            </div>
+                                                        </div>
+                                                        <small className="text-danger"> {errors.id_empleado?.message} </small>
+                                                        {
+                                                                                empleados.map((empleados) => {
+                                                                                if(empleados.id_empleado === id_empleado){
+                                                                                    return(
+                                                                                        <small className="text-danger">Ya existe un registro con este mismo identificador, debe ser distinto</small>
+                                                                                    )
+                                                                                }
+                                                                            })
+                                                                        }
+                                                         </div>
+                                                    </div>
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
@@ -256,42 +281,7 @@ const EditarEmpleado = () => {
                                                         </div>
                                                     </div>
  
-                                                    <div className="col-md-12 mb-4">
-                                                        <label htmlFor="id_tipo_personal">Tipo Personal (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="form-select"
-                                                                name="id_tipo_personal" 
-                                                                id="id_tipo_personal" 
-                                                                {...register('id_tipo_personal')}
-                                                                value={id_tipo_personal}
-                                                                onChange={e => setId_tipo_personal(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {tipo_personal.map((personal) => (
-                                                                <option value={personal.id_tipo_personal}>{personal.tipo_personal}</option>
-                                                                ))}
-                                                            </select>
-                                                            <small className="text-danger"> {errors.id_tipo_personal?.message} </small>
-                                                        </div>
-                                                    </div> 
-
-                                                    <div className="col-md-12 mb-4">
-                                                        <label htmlFor="id_centro_medico">Centro médico (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="form-select"
-                                                                name="id_centro_medico" 
-                                                                id="id_centro_medico" 
-                                                                {...register('id_centro_medico')}
-                                                                value={id_centro_medico}
-                                                                onChange={e => setId_centro_medico(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {centros_medicos.map((centro_medico) => (
-                                                                <option value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
-                                                                ))}
-                                                            </select>
-                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
-                                                        </div>
-                                                    </div>
-
+                                                   
                                                    
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_pais">País (*)</label>
@@ -414,26 +404,45 @@ const EditarEmpleado = () => {
                                                             </div>
                                                             <small className="text-danger"> {errors.correo_empleado?.message} </small>
                                                         </div>
-                                                    </div>                                                
+                                                    </div> 
 
-                                                    <div className="col-12">
-                                                        <div className="form-group has-icon-left">
-                                                        <label htmlFor="cargo_empleado">Cargo empleado (*)</label>
-                                                            <div className="position-relative">
-                                                                <input type="text" className="form-control"
-                                                                    name="cargo_empleado" 
-                                                                    id="cargo_empleado" 
-                                                                    {...register('cargo_empleado')}
-                                                                    value={cargo_empleado}
-                                                                    onChange={e => setCargo_empleado(e.target.value)} />
-                                                                <div className="form-control-icon">
-                                                                    <i className="bi bi-briefcase"></i>
-                                                                </div>
-                                                            </div>
-                                                            <small className="text-danger"> {errors.cargo_empleado?.message} </small>
+                                                    <h5>Información del lugar de trabajo</h5>
+                                                    <div className="col-md-12 mb-4">
+                                                        <label htmlFor="id_tipo_personal">Tipo Personal (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_tipo_personal" 
+                                                                id="id_tipo_personal" 
+                                                                {...register('id_tipo_personal')}
+                                                                value={id_tipo_personal}
+                                                                onChange={e => setId_tipo_personal(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {tipo_personal.map((personal) => (
+                                                                <option value={personal.id_tipo_personal}>{personal.cargo}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_tipo_personal?.message} </small>
                                                         </div>
-                                                    </div>  
-                                                   
+                                                    </div> 
+
+                                                    <div className="col-md-12 mb-4">
+                                                        <label htmlFor="id_centro_medico">Centro médico (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_centro_medico" 
+                                                                id="id_centro_medico" 
+                                                                {...register('id_centro_medico')}
+                                                                value={id_centro_medico}
+                                                                onChange={e => setId_centro_medico(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {centros_medicos.map((centro_medico) => (
+                                                                <option value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
+                                                        </div>
+                                                    </div>
+                                                
 
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Guardar</button>

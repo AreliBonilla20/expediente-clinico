@@ -24,9 +24,9 @@ const VerEmpleado = () => {
     const [direccion_empleado, setDireccion_empleado] = useState('');
     const [telefono_empleado, setTelefono_empleado] = useState('');
     const [correo_empleado, setCorreo_empleado] = useState('');
-    const [cargo_empleado, setCargo_empleado] = useState('');
+    const [area, set_area] = useState('');
     const [centro_medico, setCentro_medico] = useState('');
-    const [tipo_personal, setTipo_personal] = useState('');
+    const [cargo, set_cargo] = useState('');
     const [pais, setPais] = useState('');
     const [departamento, setDepartamento] = useState('');
     const [municipio, setMunicipio] = useState('');
@@ -44,9 +44,9 @@ const VerEmpleado = () => {
            setDireccion_empleado(empleado.direccion_empleado);
            setTelefono_empleado(empleado.telefono_empleado);
            setCorreo_empleado(empleado.correo_empleado);
-           setCargo_empleado(empleado.cargo_empleado);
+           set_area(empleado.area);
            setCentro_medico(empleado.nombre_centro_medico);
-           setTipo_personal(empleado.tipo_personal);
+           set_cargo(empleado.cargo);
            setPais(empleado.nombre_pais);
            setDepartamento(empleado.nombre_departamento);
            setMunicipio(empleado.nombre_municipio);
@@ -106,6 +106,19 @@ const VerEmpleado = () => {
 
                             <div className="row">
                                 <div className="col-md-4">
+                                        <div className="form-group">
+                                        <p>Identificación</p>
+                                        </div>
+                                </div>
+                                <div className="col-md-8">
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{identificacion_empleado}</p>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-4">
                                             <div className="form-group">
                                             {nombre_empleado||apellido_empleado ? (
                                             <p>Empleado</p>
@@ -152,21 +165,6 @@ const VerEmpleado = () => {
                                 </div>
                             </div>
 
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Tipo personal</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{tipo_personal}</p>
-                                        </div>
-                                </div>
-                            </div>
- 
-
                             <div className="row">
                                 <div className="col-md-4">
                                         <div className="form-group">
@@ -176,20 +174,6 @@ const VerEmpleado = () => {
                                 <div className="col-md-8">
                                         <div className="form-group">
                                         <p style={{fontWeight: "bold"}}>{centro_medico}</p>
-                                        </div>
-                                </div>
-                            </div>
- 
-
-                            <div className="row">
-                                <div className="col-md-4">
-                                        <div className="form-group">
-                                        <p>Identificación</p>
-                                        </div>
-                                </div>
-                                <div className="col-md-8">
-                                        <div className="form-group">
-                                        <p style={{fontWeight: "bold"}}>{identificacion_empleado}</p>
                                         </div>
                                 </div>
                             </div>
@@ -235,21 +219,33 @@ const VerEmpleado = () => {
 
                             <div className="row">
                                 <div className="col-md-4">
-                                            <div className="form-group">
-                                            <p>Cargo</p>
-                                            </div>
-                            </div>
+                                        <div className="form-group">
+                                        <p>Área de trabajo</p>
+                                        </div>
+                                </div>
                                 <div className="col-md-8">
-                                            <div className="form-group">
-                                            <p style={{fontWeight: "bold"}}>{cargo_empleado}</p>
-                                            </div>
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{area}</p>
+                                        </div>
                                 </div>
                             </div>
 
-                            
+
+                            <div className="row">
+                                <div className="col-md-4">
+                                        <div className="form-group">
+                                        <p>Cargo</p>
+                                        </div>
+                                </div>
+                                <div className="col-md-8">
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{cargo}</p>
+                                        </div>
+                                </div>
+                            </div>
 
                             <div className="col-12 d-flex justify-content-end">
-                                <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                             </div>
                         </div>
                         </div>

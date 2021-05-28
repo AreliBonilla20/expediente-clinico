@@ -19,7 +19,7 @@ function AsignarMedicamento() {
 
   const codigo = id_hospitalizacion.substr(0,7);
 
-  const [inputList, setInputList] = useState([{ codigo_medicamento: "", dosis: "", indicaciones: ""}]);
+  const [inputList, setInputList] = useState([{ codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
   const [medicamentos,set_medicamentos] = useState([]);
 
   const [tipos_medicamentos, set_tipos_medicamentos] = useState([]);
@@ -42,7 +42,7 @@ function AsignarMedicamento() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { codigo_medicamento: "", dosis: "", indicaciones: ""}]);
+    setInputList([...inputList, { codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
   };
 
   useEffect(() => {
@@ -165,11 +165,11 @@ function AsignarMedicamento() {
 
                                             <div className="col-6">
                                             <div className="form-group has-icon-left">
-                                                <label htmlFor="dosis">Dosis</label>
+                                                <label htmlFor="dosis_medicamento">Dósis</label>
                                                 <div className="position-relative">
                                                     <textarea type="text" className="form-control" rows="4"
-                                                        name="dosis"
-                                                        value={x.dosis}
+                                                        name="dosis_medicamento"
+                                                        value={x.dosis_medicamento}
                                                         onChange={e => handleInputChange(e, i)} />
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
@@ -180,11 +180,11 @@ function AsignarMedicamento() {
 
                                             <div className="col-6">
                                             <div className="form-group has-icon-left">
-                                                <label htmlFor="indicaciones">Indicaciones</label>
+                                                <label htmlFor="indicaciones_medicamento">Indicaciones</label>
                                                 <div className="position-relative">
                                                     <textarea type="text" className="form-control" rows="4"
-                                                        name="indicaciones"
-                                                        value={x.indicaciones}
+                                                        name="indicaciones_medicamento"
+                                                        value={x.indicaciones_medicamento}
                                                         onChange={e => handleInputChange(e, i)} />
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>

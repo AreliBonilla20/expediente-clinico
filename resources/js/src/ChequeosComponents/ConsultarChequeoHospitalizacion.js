@@ -38,7 +38,8 @@ const ConsultarChequeoHospitalizacion = () => {
                 </div>
             
                 <p className="card-text">
-                    <p>Observaciones: {chequeo.observaciones}</p>
+                    <p>Sintomatología: {chequeo.sintomas_chequeo}</p>
+                    <p>Observaciones: {chequeo.observacion_chequeo}</p>
                 </p>
         
                 <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>

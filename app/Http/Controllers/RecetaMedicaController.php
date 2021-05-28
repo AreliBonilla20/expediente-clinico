@@ -29,12 +29,12 @@ class RecetaMedicaController extends Controller
                 ]);
 
        for($i=0; $i<count($request->inputList); $i++){
-            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis, indicaciones, created_at) 
+            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis_medicamento, indicaciones_medicamento, created_at) 
                 values (?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->inputList[$i]['codigo_medicamento'],
-                $request->inputList[$i]['dosis'],
-                $request->inputList[$i]['indicaciones']
+                $request->inputList[$i]['dosis_medicamento'],
+                $request->inputList[$i]['indicaciones_medicamento']
             ]);
        }
       

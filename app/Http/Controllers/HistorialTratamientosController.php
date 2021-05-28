@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistorialTratamientosController extends Controller
 {
@@ -12,6 +13,7 @@ class HistorialTratamientosController extends Controller
        inner join tratamientos_medicos on tratamientos_medicos.codigo_tratamiento=historial_tratamientos_medicos.codigo_tratamiento join tipo_tratamiento on 
        tipo_tratamiento.id_tipo_tratamiento=tratamientos_medicos.id_tipo_tratamiento
        where atenciones_medicas.id_hospitalizacion = ?', [$id_hospitalizacion]);
+
        return response()->json($historial_tratamientos_medicos);    
     }
 
@@ -28,8 +30,8 @@ class HistorialTratamientosController extends Controller
 
 
         for($i=0; $i<count($request->inputList); $i++){
-            DB::insert('insert into historial_tratamientos_medicos (id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, created_at) 
-                values (?, ?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into historial_tratamientos_medicos (id_historial_tratamiento, id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, created_at) 
+                values (1, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->inputList[$i]['codigo_tratamiento'],
                 $request->inputList[$i]['indicaciones_tratamiento']

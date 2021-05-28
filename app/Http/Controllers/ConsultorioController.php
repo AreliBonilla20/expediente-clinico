@@ -10,7 +10,7 @@ class ConsultorioController extends Controller
 {
     public function index($id_centro_medico)
     {  
-       $consultorios = DB::select('select * from consultorios where id_centro_medico = ?', [$id_centro_medico]);
+       $consultorios = DB::select('select * from consultorios where id_centro_medico = ? order by area', [$id_centro_medico]);
        return ConsultorioResource::collection($consultorios);
       
     }
@@ -20,11 +20,12 @@ class ConsultorioController extends Controller
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
         $codigo_calculado = $this->id_consultorio($id_centro_medico);
 
-        DB::insert('insert into consultorios (id_consultorio, id_centro_medico, consultorio, created_at) 
-                    values (?, ?, ?, ?)', 
+        DB::insert('insert into consultorios (id_consultorio, id_centro_medico, consultorio, area, created_at) 
+                    values (?, ?, ?, ?, ?)', 
                     [$codigo_calculado,
                      $id_centro_medico,
-                     $request->consultorio, 
+                     $request->consultorio,
+                     $request->area,  
                      $fecha_actual
                     ]);
         

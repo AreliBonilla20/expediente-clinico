@@ -13,13 +13,14 @@ const ChequeoHospitalizacion = () => {
 
     const {id_hospitalizacion} = useParams();
     const codigo = id_hospitalizacion.substr(0,7);
-    const [chequeos, setChequeos] = useState([]);
-    const [observacion_chequeo, setObservacion_chequeo] = useState('');
+    const [chequeos, set_chequeos] = useState([]);
+    const [observacion_chequeo, set_observacion_chequeo] = useState('');
+    const [sintomas_chequeo, set_sintomas_chequeo] = useState('');
 
     useEffect(() => {
         API.chequeos_hospitalizacion(id_hospitalizacion).then(res => {
            const result = res.data;
-           setChequeos(result.data);
+           set_chequeos(result.data);
        })
      }, []);
 
@@ -32,7 +33,7 @@ const ChequeoHospitalizacion = () => {
     const agregarChequeo = async (data) => {
        
         try {
-          const body = { observacion_chequeo };
+          const body = { observacion_chequeo, sintomas_chequeo };
           const response = await fetch(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -69,6 +70,25 @@ const ChequeoHospitalizacion = () => {
             <form className="form form-vertical" onSubmit={handleSubmit(agregarChequeo)}>
                 <div className="form-body">
                     <div className="row">
+
+                    <div className="col-12">
+                            <div className="form-group has-icon-left">
+                                <label htmlFor="sintomas_chequeo">Sintomatología (*)</label>
+                                <div className="position-relative">
+                                    <textarea type="text" className="form-control" rows="8"
+                                        name="sintomas_chequeo"
+                                        id="sintomas_chequeo"
+                                        {...register('sintomas_chequeo')}
+                                        value={sintomas_chequeo}
+                                        onChange={e => set_sintomas_chequeo(e.target.value)} 
+                                            />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-card-text"></i>
+                                    </div>
+                                </div>
+                                <small className="text-danger"> {errors.sintomas_chequeo?.message} </small>
+                            </div>
+                        </div>
                 
 
                         <div className="col-12">
@@ -80,7 +100,7 @@ const ChequeoHospitalizacion = () => {
                                         id="observacion_chequeo"
                                         {...register('observacion_chequeo')}
                                         value={observacion_chequeo}
-                                        onChange={e => setObservacion_chequeo(e.target.value)} 
+                                        onChange={e => set_observacion_chequeo(e.target.value)} 
                                             />
                                     <div className="form-control-icon">
                                         <i className="bi bi-card-text"></i>
@@ -105,7 +125,7 @@ const ChequeoHospitalizacion = () => {
     
         </div>
 
-        
+        {chequeos.length>0 &&
         <section className="section">
         <br />
         <h4>Historial de chequeos</h4>
@@ -119,6 +139,7 @@ const ChequeoHospitalizacion = () => {
                 </div>
             
                 <p className="card-text">
+                    <p>Sintomatología: {chequeo.sintomas_chequeo}</p>
                     <p>Observaciones: {chequeo.observacion_chequeo}</p>
                 </p>
         
@@ -133,6 +154,7 @@ const ChequeoHospitalizacion = () => {
 </div>
 
  </section>
+ }
 
     </div>
 
