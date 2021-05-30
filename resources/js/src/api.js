@@ -182,12 +182,28 @@ export default {
     centro_medico_doctores: (id_centro_medico) =>
     axios.get(`${API_URL}/centro_medico_doctores/${id_centro_medico}`),
 
+    doctor_horario: () =>
+    axios.get(`${API_URL}/doctores/doctor_horario`),
+
     //Horarios
     horarios: (id_centro_medico) =>
     axios.get(`${API_URL}/horarios/${id_centro_medico}`),
 
     horarios_doctores: (id_centro_medico) =>
     axios.get(`${API_URL}/horarios/${id_centro_medico}/doctores`),
+
+    //Citas
+    citas: () => 
+    axios.get(`${API_URL}/citas`),
+
+    cita_editar: (id_cita) =>
+    axios.get(`${API_URL}/citas/${id_cita}/editar`),
+
+    cita_ver: (id_cita) =>
+    axios.get(`${API_URL}/citas/${id_cita}/ver`),
+
+    datos_formulario_cita: () =>
+    axios.get(`${API_URL}/citas/crear`),
 
     API_URL,
 

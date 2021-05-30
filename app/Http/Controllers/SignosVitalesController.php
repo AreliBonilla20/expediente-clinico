@@ -46,10 +46,10 @@ class SignosVitalesController extends Controller
     public function graficos($id_hospitalizacion)
     {  
   
-      $signos = DB::select('select fecha_atencion_medica, hora_atencion_medica, estatura_paciente, presion_arterial_sistolica,  
+      $signos = DB::select("select fecha_atencion_medica|| '  ' || to_char(hora_atencion_medica, 'HH12:MI') as fecha, estatura_paciente, presion_arterial_sistolica,  
       presion_arterial_diastolica, peso_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente from signos_vitales inner join atenciones_medicas 
       on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica inner join hospitalizaciones on
-      hospitalizaciones.id_hospitalizacion=atenciones_medicas.id_hospitalizacion');
+      hospitalizaciones.id_hospitalizacion=atenciones_medicas.id_hospitalizacion where atenciones_medicas.id_hospitalizacion = ?", [$id_hospitalizacion]);
 
       $estatura_array = [];
       $peso_array = [];
@@ -70,7 +70,7 @@ class SignosVitalesController extends Controller
           $temperatura_array [] = $signo->temperatura_paciente;
           $ritmo_cardiaco_array [] = $signo->ritmo_cardiaco_paciente;
           $respiracion_array [] = $signo->respiracion_paciente;
-          $fecha_array [] = $signo->fecha_atencion_medica;
+          $fecha_array [] = $signo->fecha;
         }
 
         $data = [

@@ -18,6 +18,7 @@ const ConsultarDoctor = () => {
     const [horarios, set_horarios] = useState([]);
    
     const [id_horario, set_id_horario] = useState('');
+    const [doctor_hor, set_doctor_hor] = useState([]);
     const [id_doctor, set_id_doctor] = useState('');
    
     useEffect(() => {
@@ -29,7 +30,12 @@ const ConsultarDoctor = () => {
             const result = res.data;
             set_horarios(result);
             document.getElementById('id_doctor').click();
-    })
+        })
+        API.doctor_horario().then(res => {
+            const result = res.data;
+            set_doctor_hor(result);
+        })
+        
      }, []);
       
 
@@ -67,9 +73,8 @@ const ConsultarDoctor = () => {
                          <th>Doctor</th>
                          <th>Especialidad</th>
                          <th>Área de atención</th>
-                         <th>Asignar / editar horarios</th>
-                         
-                         
+                         <th>Horarios</th>
+                                         
                         </tr>
                     </thead>
                     <tbody>
@@ -80,111 +85,36 @@ const ConsultarDoctor = () => {
                             <td>{doctor.nombre_empleado} {doctor.apellido_empleado}</td>
                             <td>{doctor.nombre_especialidad}</td>
                             <td>{doctor.area_atencion}</td>
-                            <td>
-                            <button type="button" className="btn btn-sm btn-primary" data-toggle="modal" data-target="#chequeosModal">
-                            <i className="bi bi-pencil"> </i>
-                             Asignar / editar horarios
-                            </button>
-
-                            <div className="modal fade" id="chequeosModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Agregar chequeo</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-
-                                </div>
-                                <div className="modal-body">
-                                <form className="form form-vertical" >
-                                    <div className="form-body">
-                                        <div className="row">
-
-                                        <div className="col-12">
-                                            <div className="form-group has-icon-left">
-                                                <label htmlFor="id_doctor">ID doctor</label>
-                                                <div className="position-relative">
-                                                    <input type="text" className="form-control" readOnly
-                                                        name="id_doctor"
-                                                        id="id_doctor"
-                                                        value={doctor.id_doctor}
-                                                        onClick={e => set_id_doctor(e.target.value)}
-                                                       />
-                                                    <div className="form-control-icon">
-                                                        <i className="bi bi-person"></i>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-
-                                        <div className="col-12">
-                                            <div className="form-group has-icon-left">
-                                                <label htmlFor="id_doc">Doctor</label>
-                                                <div className="position-relative">
-                                                    <input type="text" className="form-control" readOnly
-                                                        name="id_doc"
-                                                        id="id_doc"
-                                                        value={doctor.nombre_empleado + ' ' + doctor.apellido_empleado}
-                                                       />
-                                                    <div className="form-control-icon">
-                                                        <i className="bi bi-person"></i>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <div className="col-md-12 mb-4">
-                                        <label htmlFor="horario_doctor">Tipo diagnóstico (*)</label>
-                                            <div className="form-group">
-                                                <select className="form-select"
-                                                    name="horario_doctor" 
-                                                    id="horario_doctor" 
-                                                    value={id_horario}
-                                                    onChange={e => set_id_horario(e.target.value)} >
-                                                    <option value="">--Seleccione una opción--</option>
-                                                    {horarios.map((horario) => (
-                                                    <option  value={horario.id_horario}>{horario.dia_inicio} a {horario.dia_final} de {horario.hora_inicio} a {horario.hora_final}</option>
-                                                    ))}
-                                                </select>
-                                               
-                                            </div>
-                                        </div>
-
-
-
-                                    
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" className="btn btn-secondary" onClick={asignarHorario} >Guardar</button>
-                                    </div>
+                
+                            {doctor_hor.map((horario) => {
+                                if(horario.id_doctor == doctor.id_doctor){
+                                    return (
+                                    <td>{horario.dia_inicio} a {horario.dia_final} <br />{horario.hora_inicio} de {horario.hora_final}</td>
+                                    )
+                                }
+                               
+                            })}
                             
-                                </form>
-                                </div>
-                            
-                                </div>
-                            </div>
                         
-                            </div>
-                            </td>
                          
                         </tr>
                         ))}
                     </tbody>
-                   {JSON.stringify(id_doctor)}
-                   {JSON.stringify(id_horario)}
+                
                 </table>
-                </div>             
+
+               
+
+                
+                </div>   
+                     
             </div>
          </div>
     </div>
                 
-    
+    <div className="col-12 d-flex justify-content-end">
+        <Link to={`doctores/horario`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Asignar / editar horario</Link>
+    </div>     
     </div>
     );
 }

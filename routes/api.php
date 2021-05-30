@@ -134,8 +134,18 @@ Route::get('/centro_medico_doctores/{id_centro_medico}', 'DoctorController@centr
 Route::get('/doctores/crear', 'DoctorController@create');
 Route::post('/doctores/{id_empleado}/guardar', 'DoctorController@store');
 Route::post('/doctores/horarios/asignar', 'DoctorController@horarios');
+Route::get('/doctores/doctor_horario', 'DoctorController@doctor_horario');
 
 //Rutas para horarios
 Route::post('/horarios/{id_centro_medico}/guardar', 'HorarioController@store');
 Route::get('/horarios/{id_centro_medico}/', 'HorarioController@index');
 Route::get('/horarios/{id_centro_medico}/doctores', 'HorarioController@doctores_horarios');
+
+//Rutas para citas
+Route::get('/citas', 'CitaController@index');
+Route::get('/citas/crear', 'CitaController@create');
+Route::post('/citas/guardar', 'CitaController@store');
+Route::get('/citas/{id_cita}/ver', 'CitaController@show');
+Route::get('/citas/{id_cita}/editar', 'CitaController@edit');
+Route::put('/citas/{id_cita}/actualizar', 'CitaController@update');
+//Route::get('/citas/{param_busqueda}/buscar', 'CitaController@buscar');

@@ -49,16 +49,16 @@ const Consultorio = () => {
     return(
         <div className="card-body">
              
-        <button type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" className="btn btn-success" data-toggle="modal" data-target="#consultorio_modal">
         <i className="bi bi-plus"></i>
         Agregar
         </button>
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+        <div className="modal fade" id="consultorio_modal" tabIndex="-1" role="dialog" aria-labelledby="consultorio_modalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content">
             <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Agregar consultorio</h5>
+                <h5 className="modal-title" id="consultorio_modalLabel">Agregar consultorio</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

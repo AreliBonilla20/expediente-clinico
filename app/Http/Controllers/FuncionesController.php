@@ -74,17 +74,17 @@ class FuncionesController extends Controller
     }
 
     public function get_id_empleado($nombre, $apellidos)
-    {
+    {   
         $nombre_inicial = strtoupper(substr($nombre, 0, 1));
         $apellido_inicial = strtoupper(substr($apellidos, 0, 1));
         $anyo = substr((string) date("Y"), 2, 2);
-        $cod = 'E-'.$nombre_inicial.$apellido_inicial.$anyo;
+        $cod = $nombre_inicial.$apellido_inicial.$anyo;
         
         $empleados = DB::select('select * from empleados');
         
         if(count($empleados)>0){
             foreach($empleados as $empleado){
-                if(substr($empleado->id_empleado, 0, 5)===$cod){
+                if(substr($empleado->id_empleado, 0, 4)===$cod){
                     $numeracion = (int)substr($empleado->id_empleado, 4, 3);
                     $correlativo = (string) $numeracion + 1; 
                     
@@ -104,7 +104,7 @@ class FuncionesController extends Controller
             $correlativo = '001';
         }
 
-        $cod = 'E-'.$nombre_inicial.$apellido_inicial.$anyo.$correlativo;
+        $cod = $nombre_inicial.$apellido_inicial.$anyo.$correlativo.'-EM';
 
         return $cod;
     }
@@ -173,6 +173,30 @@ class FuncionesController extends Controller
         }
         
         return $id_doc;
+    }
+
+    public function get_id_cita($codigo)
+    {   
+        $citas = DB::select('select * from citas');
+        
+        if(count($citas)>0){
+            foreach($citas as $cita){
+                if(substr($cita->codigo_paciente)===$codigo){
+                    $numeracion = (int)substr($cita->codigo_paciente, 4, 3);
+                    $correlativo = (string) $numeracion + 1; 
+                }
+                else{
+                    $correlativo = '1';
+                }
+            }
+        }
+        else{
+            $correlativo = '1';
+        }
+
+        $cod = $codigo.'C'.$correlativo;
+
+        return $cod;
     }
 
     

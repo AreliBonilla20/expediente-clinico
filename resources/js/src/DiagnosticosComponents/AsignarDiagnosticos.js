@@ -19,7 +19,7 @@ function AsignarDiagnosticos() {
 
   const codigo = id_hospitalizacion.substr(0,7);
 
-  const [inputList, setInputList] = useState([{ codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
+  const [input_list, setinput_list] = useState([{ codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
   const [diagnosticos,setDiagnosticos] = useState([]);
 
   const [tipos_diagnosticos, setTipos_diagnosticos] = useState([]);
@@ -28,21 +28,21 @@ function AsignarDiagnosticos() {
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...inputList];
+    const list = [...input_list];
     list[index][name] = value;
-    setInputList(list);
+    setinput_list(list);
   };
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
-    const list = [...inputList];
+    const list = [...input_list];
     list.splice(index, 1);
-    setInputList(list);
+    setinput_list(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
+    setinput_list([...input_list, { codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
   };
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function AsignarDiagnosticos() {
     const asignarDiagnosticos = async (e) => {
     e.preventDefault();
     try {
-      const body = { inputList };
+      const body = { input_list };
       const response = await fetch(`${API_URL}/historial_diagnosticos/${id_hospitalizacion}/guardar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -115,7 +115,7 @@ function AsignarDiagnosticos() {
                                 <div className="card-content">
                                     <div className="card-body">
                                     <form  onSubmit={asignarDiagnosticos}>
-                                    {inputList.map((x, i) => {
+                                    {input_list.map((x, i) => {
                                         return (    
                                     
                                         <div className="row">
@@ -194,10 +194,10 @@ function AsignarDiagnosticos() {
                                             </div>
 
                                             <div className="btn-box">
-                                            {inputList.length !== 1 && <button
-                                                className="btn btn-danger rounded-pill"
-                                                onClick={() => handleRemoveClick(i)}> <i className="bi bi-dash"></i> Eliminar </button>}
-                                            {inputList.length - 1 === i && <button className="btn btn-primary rounded-pill" onClick={handleAddClick}><i className="bi bi-plus"></i>Agregar</button>}
+                                            {input_list.length !== 1 && <button
+                                                className="btn btn-sm btn-danger rounded-pill"
+                                                onClick={() => handleRemoveClick(i)}> <i className="bi bi-dash"></i>  </button>}
+                                            {input_list.length - 1 === i && <button className="btn btn-sm btn-primary rounded-pill" onClick={handleAddClick}><i className="bi bi-plus"></i></button>}
                                             </div>
                                         
                                         </div>

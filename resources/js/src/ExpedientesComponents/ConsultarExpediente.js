@@ -98,6 +98,7 @@ const ConsultarExpediente = () => {
                                             <th>Estado paciente</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
+                                            <th>Asignar cita</th>
                                         
                                         </tr>
                                     </thead>
@@ -114,6 +115,9 @@ const ConsultarExpediente = () => {
                                             </td>
                                             <td>
                                             <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            </td>
+                                            <td>
+                                            <Link to={`expedientes/${paciente.codigo}/agregar_cita`} className="btn btn-sm btn-success"><i className="bi bi-calendar-event"></i> Crear cita</Link>
                                             </td>
                                              
                                           </tr>

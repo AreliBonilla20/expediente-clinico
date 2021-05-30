@@ -40,15 +40,22 @@ class DoctorController extends Controller
     }
 
     public function horarios(Request $request){
-    
-           
-        DB::insert('insert into doctores_horarios (id_doctor, id_horario, created_at) 
-        values (?, ?, current_date + current_time )', 
-        [   
-            $request->id_doctor,
-            $request->id_horario    
-        ]);
+
+        for($i=0; $i<count($request->input_list); $i++){
+            DB::insert('insert into doctores_horarios (id_doctor, id_horario, created_at) 
+            values (?, ?, current_date + current_time )', 
+            [   
+                $request->input_list[$i]['id_doctor'],
+                $request->input_list[$i]['id_horario']   
+            ]);
+        }
     
         return response()->json('Horario asignado!');    
+    }
+
+    public function doctor_horario()
+    {
+        $doctores_horarios = DB::select('select * from horarios inner join doctores_horarios on doctores_horarios.id_doctor = doctores_horarios.id_doctor');
+        return response()->json($doctores_horarios);   
     }
 }

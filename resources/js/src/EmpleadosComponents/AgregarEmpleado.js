@@ -58,8 +58,8 @@ const AgregarEmpleado = () => {
            set_municipios(result.municipios);
            set_centros_medicos(result.centros_medicos);
            set_id_medico(result.id_medico);
-           set_especialidad(0);
-           set_area_atencion(" ");
+           //set_id_especialidad();
+           //set_area_atencion(" ");
            
         })
         API.especialidades().then(res => {
