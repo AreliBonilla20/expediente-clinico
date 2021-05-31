@@ -313,6 +313,7 @@ const VerCentroMedico = () => {
 
             </div>
             </div>   
+
             </div>
         </div>
         <Footer />

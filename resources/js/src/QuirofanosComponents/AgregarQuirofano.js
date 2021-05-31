@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import swal from 'sweetalert';
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from '../Validaciones/QuirofanoValidacion';
@@ -35,10 +36,28 @@ const AgregarQuirofano = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
-            
+          
+            //Recibe respuesta del servidor(Laravel)  
+          }).then((response) => response.json())
+          .then((responseJson) => {
+            swal({
+                title: "Guardado",
+                text: responseJson,
+                icon: "success",
+                button: "Ok",
+              });
+            //Oculta el modal
+           $("#quirofanoModal").hide();
+            //Recarga la página
+           setTimeout(function(){
+            window.location.reload(1);
+         }, 2000);
+
+          })
+          .catch((error) => {
+            console.error(error);
           });
           
-          window.location = `/centros_medicos/${id_centro_medico}/ver`;
         } catch (err) {
           console.error(err.message);
         }
@@ -64,6 +83,7 @@ const AgregarQuirofano = () => {
                 </button>
 
             </div>
+            
             <div className="modal-body">
             <form className="form form-vertical" onSubmit={handleSubmit(agregarQuirofano)}>
                 <div className="form-body">

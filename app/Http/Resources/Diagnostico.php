@@ -21,4 +21,5 @@ class Diagnostico extends JsonResource
             'descripcion_diagnostico'=> $this->descripcion_diagnostico,
         ];
     }
+
 }

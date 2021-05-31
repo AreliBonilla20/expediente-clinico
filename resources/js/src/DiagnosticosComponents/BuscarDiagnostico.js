@@ -79,8 +79,8 @@ const BuscarDiagnostico = () => {
                                     <tbody>
                                     {diagnosticos.map((diagnostico) => 
                                           <tr>
-                                            <td>{diagnostico.codigo_diagnostico}</td>
-                                            <td>{diagnostico.nombre_diagnostico}</td>
+                                            <td>{diagnostico.codigo_dx}</td>
+                                            <td>{diagnostico.nombre_dx}</td>
                                            
                                             <td>
                                             <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>

@@ -44,7 +44,7 @@ const VerExamen = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Ver</h3>
-                                <h4>Medicamento: {codigo_examen} - {nombre_examen}</h4>
+                                <h4>Examen: {codigo_examen} - {nombre_examen}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">

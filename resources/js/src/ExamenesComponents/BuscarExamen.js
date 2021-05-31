@@ -77,8 +77,8 @@ const BuscarExamen = () => {
                                     <tbody>
                                     {examenes.map((examen) => 
                                           <tr>
-                                            <td>{examen.codigo_examen}</td>
-                                            <td>{examen.nombre_examen}</td>
+                                            <td>{examen.codigo_exam}</td>
+                                            <td>{examen.nombre_exam}</td>
                                            
                                             <td>
                                             <Link to={`editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>

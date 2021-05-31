@@ -11,14 +11,14 @@ class DiagnosticoController extends Controller
 {
     public function index()
     {  
-       $diagnosticos = DB::select('select * from diagnosticos order by created_at asc limit 10');
+       $diagnosticos = DB::select('select * from index_diagnostico');
        return DiagnosticoResource::collection($diagnosticos);
       
     }
 
     public function create()
     {
-        $tipos_diagnosticos = DB::select('select * from tipo_diagnostico order by tipo_diagnostico asc');
+        $tipos_diagnosticos = DB::select('select * from create_diagnostico');
         
         $data = [
             "tipos_diagnosticos" => $tipos_diagnosticos,
@@ -29,47 +29,41 @@ class DiagnosticoController extends Controller
 
     public function store(Request $request)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
-        DB::insert('insert into diagnosticos (codigo_diagnostico, id_tipo_diagnostico, nombre_diagnostico, descripcion_diagnostico, created_at) 
-                    values (?, ?, ?, ?, ?)', 
-                    [$request->codigo_diagnostico, 
-                     $request->id_tipo_diagnostico,
-                     $request->nombre_diagnostico,
-                     $request->descripcion_diagnostico, 
-                     $fecha_actual
-                    ]);
+        DB::select('call public."add_diagnostico_proce"(:codigo_diagnostico, :id_tipo_diagnostico, :nombre_diagnostico, :descripcion_diagnostico, current_date)', 
+        ["codigo_diagnostico" => $request -> codigo_diagnostico,
+        "id_tipo_diagnostico" => $request -> id_tipo_diagnostico,
+        "nombre_diagnostico" => $request -> nombre_diagnostico,
+        "descripcion_diagnostico" => $request -> descripcion_diagnostico
+        ]);
         
         return response()->json('Diagnóstico creado!');    
     }
 
     public function edit($codigo)
     {
-        $diagnostico_editar = DB::select('select * from diagnosticos where codigo_diagnostico = ?', [$codigo]); 
+        $diagnostico_editar = DB::select('SELECT v_codigo  as codigo_diagnostico, v_id_tipo  as id_tipo_diagnostico,
+        v_nombre as nombre_diagnostico, v_descripcion as descripcion_diagnostico from public."edit_diagnostico"(:codigo)', 
+         ["codigo" =>$codigo]); 
 
         return response()->json($diagnostico_editar[0]);    
     }
 
     public function show($codigo)
     {
-        $diagnostico_ver = DB::select('select * from diagnosticos inner join tipo_diagnostico on diagnosticos.id_tipo_diagnostico = tipo_diagnostico.id_tipo_diagnostico
-        where codigo_diagnostico = ?', [$codigo]); 
+        $diagnostico_ver = DB::select('SELECT v_codigo  as codigo_diagnostico, v_nombre_tipo  as tipo_diagnostico,
+        v_nombre as nombre_diagnostico, v_descripcion as descripcion_diagnostico from public."get_by_codigo_diagnostico"(:codigo)', 
+        ["codigo" =>$codigo]); 
 
         return response()->json($diagnostico_ver[0]);    
     }
 
     public function update(Request $request, $codigo)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-        
-        DB::update('update diagnosticos set codigo_diagnostico = ?, id_tipo_diagnostico = ?, nombre_diagnostico = ?,  descripcion_diagnostico = ?, updated_at = ?
-                    where codigo_diagnostico = ?', 
-                    [$request->codigo_diagnostico, 
-                     $request->id_tipo_diagnostico,
-                     $request->nombre_diagnostico,
-                     $request->descripcion_diagnostico,
-                     $fecha_actual,
-                     $codigo
+        DB::select('call public."udp_diagnostico_proce"(:codigo_diagnostico, :id_tipo_diagnostico, :nombre_diagnostico, :descripcion_diagnostico, current_date)', 
+                    ["codigo_diagnostico" => $codigo,
+                    "id_tipo_diagnostico" => $request->id_tipo_diagnostico,
+                    "nombre_diagnostico" => $request->nombre_diagnostico,
+                    "descripcion_diagnostico" => $request->descripcion_diagnostico
                     ]);
 
         return response()->json('Diagnóstico actualizado!');    
@@ -82,10 +76,11 @@ class DiagnosticoController extends Controller
         $codigo_diagnostico = '%'.$param_busqueda.'%';
         $nombre_diagnostico = '%'.$param_busqueda.'%';
         
-        $diagnosticos = DB::select('select * from diagnosticos where UNACCENT(lower(codigo_diagnostico)) LIKE ? or UNACCENT(lower(nombre_diagnostico)) LIKE ?', 
-        [strtolower($codigo_diagnostico), strtolower($nombre_diagnostico)]);
+        $diagnosticos = DB::select('SELECT * from public."buscar_diagnostico"(:codigo_diagnostico, :nombre_diagnostico)', 
+        ["codigo_diagnostico" => strtolower($codigo_diagnostico), 
+        'nombre_diagnostico'=> strtolower($nombre_diagnostico)]);
 
-        return DiagnosticoResource::collection($diagnosticos);
+        return response()->json(array('data' => $diagnosticos), 200);
     }
 
     
