@@ -353,42 +353,5 @@ insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
 (12, 'Antipirético'),
 (13, 'Antifúngico');
 
-INSERT INTO tipo_personal (id_tipo_personal, cargo, area) VALUES
-	(1, 'Director', 'Administrativo'),
-	(2, 'Médico', 'Salud'),
-	(3, 'Enfermera', 'Salud'),
-	(4, 'Laboratorista', 'Salud'),
-	(5, 'Anestesiólogo', 'Salud');
 
-
-INSERT INTO especialidades (id_especialidad, nombre_especialidad) VALUES
-	(1, 'Alergología'),
-	(2, 'Anestesiología'),
-	(3, 'Dermatología'),
-	(4, 'Cardiología'),
-	(5, 'Diabetólogos'),
-	(6, 'Electrofisiología'),
-	(7, 'Endocrinología'),
-	(8, 'Fisiatría'),
-	(9, 'Gastroenterología'),
-	(10, 'Genética'),
-	(11, 'Geriatría'),
-	(12, 'Hematología'),
-	(13, 'Infectólogos'),
-	(14, 'Medicina crítica y cuidados intensivos'),
-	(15, 'Medicina familiar'),
-	(16, 'Medicina general'),
-	(17, 'Medicina interna'),
-	(18, 'Medicina preventiva'),
-	(19, 'Nefrólogos'),
-	(20, 'Neumología'),
-	(21, 'Neurofisiólogos'),
-	(22, 'Neurólogos'),
-	(23, 'Nutriólogos'),
-	(24, 'Oncólogos'),
-	(25, 'Oncólogos Radioterapéutas'),
-	(26, 'Patólogos'),
-	(27, 'Psiquiatras'),
-	(28, 'Radiólogos'),
-	(29, 'Reumatólogos');
 
