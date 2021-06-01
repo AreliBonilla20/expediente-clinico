@@ -141,8 +141,8 @@ const AgregarQuirofano = () => {
                     <tbody>
                     {quirofanos.map((quirofano)=>(
                         <tr>                          
-                            <td>{quirofano.id_quirofano}</td>
-                            <td>{quirofano.quirofano}</td>
+                            <td>{quirofano.v_codigo}</td>
+                            <td>{quirofano.v_nombre}</td>
                         </tr>
                         ))}
                     </tbody>

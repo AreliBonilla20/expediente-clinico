@@ -11,9 +11,9 @@ class QuirofanoController extends Controller
 {
     public function index($id_centro_medico)
     {  
-        $quirofanos = DB::select('select * from quirofanos where id_centro_medico = ?', [$id_centro_medico]);
+        $quirofanos = DB::select('SELECT * from public."index_quirofano"(:id_centro_medico)', [$id_centro_medico]);
 
-       return QuirofanoResource::collection($quirofanos);
+        return response()->json(array('data' => $quirofanos), 200);
 
     }
 
