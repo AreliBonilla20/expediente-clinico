@@ -81,10 +81,10 @@ const BuscarEmpleado = () => {
                                             <td>{empleado.id_empleado}</td>
                                             <td>{empleado.nombre_empleado}</td>                                           
                                             <td>
-                                            <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to="ver" className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to="ver" className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

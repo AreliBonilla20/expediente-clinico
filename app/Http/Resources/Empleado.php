@@ -28,8 +28,7 @@ class Empleado extends JsonResource
             'fecha_nacimiento_empleado'=> $this->fecha_nacimiento_empleado,
             'direccion_empleado'=> $this->direccion_empleado,
             'telefono_empleado'=> $this->telefono_empleado,
-            'correo_empleado'=> $this->correo_empleado,
-            'cargo_empleado'=> $this->cargo_empleado,
+            'correo_empleado'=> $this->correo_empleado
         ];
     }
 }

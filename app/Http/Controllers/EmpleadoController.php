@@ -18,13 +18,20 @@ class EmpleadoController extends Controller
 
 
     public function create()
-    {
-        $tipo_personal = DB::select('select * from tipo_personal order by tipo_personal asc');
+    {   
+        $id_medico = '';
+        $tipo_personal = DB::select('select * from tipo_personal order by cargo asc');
         $paises = DB::select('select * from paises order by nombre_pais asc');
         $departamentos = DB::select('select * from departamentos order by nombre_departamento asc');
         $municipios = DB::select('select * from municipios order by nombre_municipio asc');
         $generos = DB::select('select * from generos order by genero asc');
         $centros_medicos = DB::select('select * from centros_medicos order by centros_medicos asc');
+
+        foreach($tipo_personal as $personal){
+            if($personal->cargo == 'Médico'){
+                $id_medico = $personal->id_tipo_personal;
+            }
+        }
         
         $data = [
             "tipo_personal" => $tipo_personal,
@@ -32,7 +39,8 @@ class EmpleadoController extends Controller
             "departamentos" => $departamentos,
             "municipios" => $municipios,
             "generos" => $generos,
-            "centros_medicos" => $centros_medicos,   
+            "centros_medicos" => $centros_medicos,
+            "id_medico" => $id_medico 
         ];
 
         return response()->json($data);    
@@ -41,14 +49,17 @@ class EmpleadoController extends Controller
 
     public function store(Request $request)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
+        $nombres = $request->nombre_empleado;
+        $apellidos = $request->apellido_empleado;
+        
+        $id_empleado = app('App\Http\Controllers\FuncionesController')->get_id_empleado($nombres, $apellidos);
+        
         DB::insert('insert into empleados (id_empleado, id_genero, id_tipo_personal, id_centro_medico, id_pais, id_departamento, id_municipio, 
                     nombre_empleado, apellido_empleado, identificacion_empleado, fecha_nacimiento_empleado, direccion_empleado, telefono_empleado, 
-                    correo_empleado, cargo_empleado, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    correo_empleado, created_at) 
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_date + current_time )', 
                     [   
-                        $request->id_empleado,
+                        $id_empleado,
                         $request->id_genero,
                         $request->id_tipo_personal,
                         $request->id_centro_medico,
@@ -61,11 +72,12 @@ class EmpleadoController extends Controller
                         $request->fecha_nacimiento_empleado, 
                         $request->direccion_empleado, 
                         $request->telefono_empleado, 
-                        $request->correo_empleado,
-                        $request->cargo_empleado, 
-                        $fecha_actual
+                        $request->correo_empleado
+                       
                     ]);
-        
+
+        app('App\Http\Controllers\DoctorController')->store($request, $id_empleado);
+
         return response()->json('Empleado creado!');    
     }
 
@@ -98,7 +110,7 @@ class EmpleadoController extends Controller
         
         DB::update('update empleados set id_empleado = ?, id_genero = ?, id_tipo_personal = ?, id_centro_medico = ?, id_pais = ?, id_departamento = ?,
                     id_municipio = ?, nombre_empleado = ?, apellido_empleado = ?, identificacion_empleado = ?, fecha_nacimiento_empleado = ?, direccion_empleado = ?, telefono_empleado = ?,
-                    correo_empleado = ?, cargo_empleado = ?, updated_at = ? where id_empleado = ?',
+                    correo_empleado = ?, updated_at = current_date + current_time where id_empleado = ?',
                     [
                     $id_empleado,
                     $request->id_genero,
@@ -114,8 +126,6 @@ class EmpleadoController extends Controller
                     $request->direccion_empleado, 
                     $request->telefono_empleado, 
                     $request->correo_empleado, 
-                    $request->cargo_empleado,
-                    $fecha_actual,
                     $id_empleado
                     ]);
 

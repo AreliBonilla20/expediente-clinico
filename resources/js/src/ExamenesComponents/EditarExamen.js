@@ -188,7 +188,7 @@ const EditarExamen = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_tipo_examen">Tipo examen (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                        <select className="form-select"
                                                                 name="id_tipo_examen" 
                                                                 id="id_tipo_examen" 
                                                                 {...register('id_tipo_examen')}

@@ -156,7 +156,7 @@ const AgregarMedicamento = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_tipo_medicamento">Tipo medicamento (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="id_tipo_medicamento" 
                                                                 id="id_tipo_medicamento" 
                                                                 {...register('id_tipo_medicamento')}
@@ -174,7 +174,7 @@ const AgregarMedicamento = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="via_administracion">Vía de administración (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="via_administracion" 
                                                                 id="via_administracion" 
                                                                 {...register('via_administracion')}
@@ -257,7 +257,7 @@ const AgregarMedicamento = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="existencia_medicamento">Existencia medicamento (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="existencia_medicamento" 
                                                                 id="existencia_medicamento" 
                                                                 {...register('existencia_medicamento')}

@@ -269,7 +269,7 @@ const EditarExpediente = () => {
                                                     <div className="col-md-6 mb-4">
                                                     <label htmlFor="id_genero">Género (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" 
+                                                                <select className="form-select" 
                                                                 name="id_genero" 
                                                                 id="id_genero" 
                                                                 {...register('id_genero')}
@@ -291,7 +291,7 @@ const EditarExpediente = () => {
                                                     <div className="col-md-6 mb-4">
                                                     <label htmlFor="estado_civil">Estado civil (*)</label>
                                                         <div className="form-group">
-                                                                <select className="choices form-select" 
+                                                                <select className="form-select"
                                                                 name="estado_civil" 
                                                                 id="estado_civil" 
                                                                 {...register('estado_civil')}
@@ -394,7 +394,7 @@ const EditarExpediente = () => {
                                                    
                                                     <label htmlFor="id_pais">País (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select" 
+                                                                <select className="form-select"
                                                                 name="id_pais" 
                                                                 id="id_pais" 
                                                                 {...register('id_pais')}
@@ -415,7 +415,7 @@ const EditarExpediente = () => {
                                                     <div className="col-md-4 mb-4">
                                                     <label htmlFor="id_departamento">Departamento/Estado (*)</label>
                                                         <div className="form-group">
-                                                                <select className="choices form-select" 
+                                                                <select className="form-select"
                                                                 name="id_departamento" 
                                                                 id="id_departamento" 
                                                                 value={id_departamento}
@@ -442,7 +442,7 @@ const EditarExpediente = () => {
                                                     <div className="col-md-4 mb-4">
                                                     <label htmlFor="id_municipio">Municipio/Ciudad (*)</label>
                                                         <div className="form-group">
-                                                                <select className="choices form-select" 
+                                                                <select className="form-select"
                                                                 name="id_municipio" 
                                                                 id="id_municipio"
                                                                 {...register('id_municipio')}

@@ -13,7 +13,7 @@ import API from '../api';
 const ConsultarEmpleado = () => {
     
     
-    const [empleados, setEmpleados] =useState([]);
+    const [empleados, set_empleados] =useState([]);
     const [param_busqueda, setParam_busqueda] = useState('');
    
 
@@ -21,7 +21,7 @@ const ConsultarEmpleado = () => {
     useEffect(() => {
          API.empleados().then(res => {
             const result = res.data;
-            setEmpleados(result.data);
+            set_empleados(result.data);
         })
       }, []);
 
@@ -105,10 +105,10 @@ const ConsultarEmpleado = () => {
                                             <td>{empleado.nombre_empleado}</td>
                                             <td>{empleado.apellido_empleado}</td>
                                             <td>
-                                            <Link to={`empleados/${empleado.id_empleado}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`empleados/${empleado.id_empleado}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`empleados/${empleado.id_empleado}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`empleados/${empleado.id_empleado}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

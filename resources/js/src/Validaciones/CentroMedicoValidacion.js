@@ -5,7 +5,7 @@ const schema = yup.object().shape({
     id_centro_medico: yup
     .string()
     .required("El campo identificador es obligatorio")
-    .max(10, "El máximo de caracteres es 10"),
+    .max(25, "El máximo de caracteres es 25"),
     
     nombre_centro_medico: yup
     .string()

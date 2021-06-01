@@ -14,7 +14,7 @@ class CreateCirugiasTable extends Migration
     public function up()
     {
         Schema::create('cirugias', function (Blueprint $table) {
-            $table->string('codigo_cirugia', 10)->unique()->primary();
+            $table->string('codigo_cirugia', 25)->unique()->primary();
             
             $table->string('nombre_cirugia', 250);
             $table->string('descripcion_cirugia', 500);

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import {
     BrowserRouter as Router,
     Link
@@ -8,16 +9,20 @@ import {
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
-import Empleado from '../EmpleadosComponents/ConsultarEmpleado';
+import EmpleadosCentroMedico from '../EmpleadosComponents/EmpleadosCentroMedico';
+
+import Consultorio from '../ConsultoriosComponents/Consultorio';
+import AgregarQuirofano from '../QuirofanosComponents/AgregarQuirofano';
+import Doctores from '../DoctoresComponents/ConsultarDoctor';
+import Horarios from './Horarios';
 
 import API from '../api';
 
 const VerCentroMedico = () => {
 
-    const { codigo } = useParams();
+    const { id_centro_medico } = useParams();
    
-    
-    const [id_centro_medico, setId_centro_medico] = useState('');
+
     const [nombre_centro_medico, setNombre_centro_medico] = useState('');
     const [direccion_centro_medico, setDireccion_centro_medico] = useState('');
     const [director, setDirector] = useState('');
@@ -34,9 +39,8 @@ const VerCentroMedico = () => {
 
     
     useEffect(() => {
-        API.centro_medico_ver(codigo).then(res => {
-           const centro_medico = res.data;
-            setId_centro_medico(centro_medico.id_centro_medico);  
+        API.centro_medico_ver(id_centro_medico).then(res => {
+           const centro_medico = res.data; 
             setNombre_centro_medico(centro_medico.nombre_centro_medico);
             setDireccion_centro_medico(centro_medico.direccion_centro_medico);
             setDirector(centro_medico.director);
@@ -99,6 +103,14 @@ const VerCentroMedico = () => {
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="empleados-tab" data-bs-toggle="tab" href="#empleados"
                                                 role="tab" aria-controls="empleados" aria-selected="false">Empleados</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="doctores-tab" data-bs-toggle="tab" href="#doctores"
+                                                role="tab" aria-controls="doctores" aria-selected="false">Doctores</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="horarios-tab" data-bs-toggle="tab" href="#horarios"
+                                                role="tab" aria-controls="horarios" aria-selected="false">Horarios</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="consultorios-tab" data-bs-toggle="tab" href="#consultorios"
@@ -261,7 +273,7 @@ const VerCentroMedico = () => {
 
                                         
                                                 <div className="col-12 d-flex justify-content-end">
-                                                    <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                                    <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                                 </div>
                                             </div>
                                             </div>
@@ -276,7 +288,31 @@ const VerCentroMedico = () => {
                                                     
                                                     <section className="section">
                                                         <div className="card">
-                                                        <Empleado />
+                                                        <EmpleadosCentroMedico />
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="doctores" role="tabpanel"
+                                                aria-labelledby="doctores-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                       
+                                                        < Doctores />     
+                                                       
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="horarios" role="tabpanel"
+                                                aria-labelledby="horarios-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                       
+                                                        < Horarios />     
+                                                       
                                                         </div>
                                                     </section>
                                             </div>
@@ -286,8 +322,7 @@ const VerCentroMedico = () => {
                                                     
                                                     <section className="section">
                                                         <div className="card">
-                                                        
-
+                                                        <Consultorio />
                                                         </div>
                                                     </section>
                                             </div>
@@ -298,11 +333,12 @@ const VerCentroMedico = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                        
-
+                                                        < AgregarQuirofano />     
                                                        
                                                         </div>
                                                     </section>
                                             </div>
+                                            
                                     </div>
                                 </div>
                             </div>

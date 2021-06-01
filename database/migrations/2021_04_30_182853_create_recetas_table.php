@@ -22,8 +22,8 @@ class CreateRecetasTable extends Migration
             $table->string('codigo_medicamento');
             $table->foreign('codigo_medicamento')->references('codigo_medicamento')->on('medicamentos');
             
-            $table->string('dosis', 150);
-            $table->string('indicaciones', 150);
+            $table->string('dosis_medicamento', 150);
+            $table->string('indicaciones_medicamento', 150);
             $table->timestamps();
         });
     }

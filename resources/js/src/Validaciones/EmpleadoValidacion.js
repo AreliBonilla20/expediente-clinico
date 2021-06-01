@@ -43,12 +43,7 @@ const schema = yup.object().shape({
     .nullable()
     .email("La dirección de correo debe ser válida")
     .max(150, "El máximo de caracteres es 150"),
-    
-    cargo_empleado: yup
-    .string()
-    .max(30, "El máximo de caracteres es 30")
-    .required("El campo cargo de empleado es obligatorio"),
-
+  
     id_genero: yup
     .string()
     .required("El campo genéro es obligatorio"),
@@ -72,7 +67,7 @@ const schema = yup.object().shape({
     id_centro_medico: yup
     .string()
     .required("El campo centro médico es obligatorio"),
-    
+ 
   });
 
 

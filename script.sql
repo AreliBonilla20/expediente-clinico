@@ -353,9 +353,12 @@ insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
 (12, 'Antipirético'),
 (13, 'Antifúngico');
 
-INSERT INTO tipo_personal (id_tipo_personal, tipo_personal) VALUES
-	(1, 'Administrativo'),
-	(2, 'Salud');
+INSERT INTO tipo_personal (id_tipo_personal, cargo, area) VALUES
+	(1, 'Director', 'Administrativo'),
+	(2, 'Médico', 'Salud'),
+	(3, 'Enfermera', 'Salud'),
+	(4, 'Laboratorista', 'Salud'),
+	(5, 'Anestesiólogo', 'Salud');
 
 INSERT INTO tratamientos_medicos (codigo_tratamiento, id_tipo_tratamiento, nombre_tratamiento, descripcion_tratamiento, costo_tratamiento) VALUES
 	('CG1E1', 1, 'Extirpación de tumor en la cabeza', 'Extracción del tumor, reconstrucción del defecto.', 10000.00),
@@ -790,4 +793,35 @@ INSERT INTO diagnosticos (codigo_diagnostico, id_tipo_diagnostico, nombre_diagno
 	('Z31', 20, 'Atención para la procreación', 'Requiere un enfoque positivo y respetuoso de la sexualidad y de las relaciones sexuales, así como la posibilidad de tener experiencias sexuales placenteras y seguras'),
 	('Z34', 20, 'Supervisión de embarazo normal', 'Vigilar la evolución de éste y preparar a la madre para lo que viene. Desde la primera entrevista, todo lo que se hace durante el embarazo es simplemente ejercer vigilancia; sólo cuando se detecta alguna alteración se interviene para corregirla.'),
 	('Z40', 20, 'Cirugía profiláctica', 'En cuanto al manejo quirúrgico, se cuenta con mastectomía profiláctica (MP) y la salpingooforectomía (SO), siendo la primera efectiva para reducir solo el riesgo de cáncer de mama, mientras que la SO reduce tanto el riesgo de cáncer de mama como de ovario.');
+
+INSERT INTO especialidades (id_especialidad, nombre_especialidad) VALUES
+	(1, 'Alergología'),
+	(2, 'Anestesiología'),
+	(3, 'Dermatología'),
+	(4, 'Cardiología'),
+	(5, 'Diabetólogos'),
+	(6, 'Electrofisiología'),
+	(7, 'Endocrinología'),
+	(8, 'Fisiatría'),
+	(9, 'Gastroenterología'),
+	(10, 'Genética'),
+	(11, 'Geriatría'),
+	(12, 'Hematología'),
+	(13, 'Infectólogos'),
+	(14, 'Medicina crítica y cuidados intensivos'),
+	(15, 'Medicina familiar'),
+	(16, 'Medicina general'),
+	(17, 'Medicina interna'),
+	(18, 'Medicina preventiva'),
+	(19, 'Nefrólogos'),
+	(20, 'Neumología'),
+	(21, 'Neurofisiólogos'),
+	(22, 'Neurólogos'),
+	(23, 'Nutriólogos'),
+	(24, 'Oncólogos'),
+	(25, 'Oncólogos Radioterapéutas'),
+	(26, 'Patólogos'),
+	(27, 'Psiquiatras'),
+	(28, 'Radiólogos'),
+	(29, 'Reumatólogos');
 
