@@ -84,4 +84,5 @@ class DiagnosticoController extends Controller
     }
 
     
+    
 }

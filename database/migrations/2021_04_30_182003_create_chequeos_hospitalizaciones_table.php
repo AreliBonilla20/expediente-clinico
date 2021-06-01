@@ -19,6 +19,7 @@ class CreateChequeosHospitalizacionesTable extends Migration
             $table->string('id_hospitalizacion');
             $table->foreign('id_hospitalizacion')->references('id_hospitalizacion')->on('hospitalizaciones');
 
+            $table->string('sintomas_chequeo', 500);
             $table->string('observacion_chequeo', 500);
             $table->date('fecha_chequeo');
             $table->time('hora_chequeo');

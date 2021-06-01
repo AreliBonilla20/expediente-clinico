@@ -100,10 +100,10 @@ const ConsultarTratamiento = () => {
                                             <td>{tratamiento.nombre_tratamiento}</td>
                                            
                                             <td>
-                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`tratamientos_medicos/${tratamiento.codigo_tratamiento}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

@@ -126,21 +126,26 @@ const AgregarQuirofano = () => {
     
         </div>
 
-        
+
+
+        <div className="container" >
+        <div className="row">
+        <div className="col-5">
         <div className="card">
          <div className="card-content">
              <div className="card-body">
+
                  <div className="table-responsive">
-                <table className="table mb-0">
+                <table className="table lg">
                     <thead>
-                        <tr>                           
-			             <th>Id quirófano</th>
+                        <tr>                     
+			             <th>ID quirófano</th>
                          <th>Quirófano</th>
                         </tr>
                     </thead>
                     <tbody>
                     {quirofanos.map((quirofano)=>(
-                        <tr>                          
+                        <tr>                  
                             <td>{quirofano.id_quirofano}</td>
                             <td>{quirofano.quirofano}</td>
                         </tr>
@@ -152,6 +157,10 @@ const AgregarQuirofano = () => {
          </div>
     </div>
     </div>
+    </div>
+    </div>
+     </div>
+   
     );
 }
 
