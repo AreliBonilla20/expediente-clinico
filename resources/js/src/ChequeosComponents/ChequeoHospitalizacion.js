@@ -1,9 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import schema from '../Validaciones/ChequeoValidacion';
 
 import API from '../api';
 
@@ -13,27 +9,24 @@ const ChequeoHospitalizacion = () => {
 
     const {id_hospitalizacion} = useParams();
     const codigo = id_hospitalizacion.substr(0,7);
-    const [chequeos, set_chequeos] = useState([]);
-    const [observacion_chequeo, set_observacion_chequeo] = useState('');
-    const [sintomas_chequeo, set_sintomas_chequeo] = useState('');
+    const [chequeos, setChequeos] = useState([]);
+    const [fecha_chequeo, setFecha_chequeo] = useState('');
+    const [hora_chequeo, setHora_chequeo] = useState('');
+    const [observacion_chequeo, setObservacion_chequeo] = useState('');
 
     useEffect(() => {
         API.chequeos_hospitalizacion(id_hospitalizacion).then(res => {
            const result = res.data;
-           set_chequeos(result.data);
+           setChequeos(result.data);
        })
      }, []);
 
-     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-      });
-
    
 
-    const agregarChequeo = async (data) => {
-       
+    const agregarChequeo = async e => {
+        e.preventDefault();
         try {
-          const body = { observacion_chequeo, sintomas_chequeo };
+          const body = { fecha_chequeo, hora_chequeo, observacion_chequeo};
           const response = await fetch(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -67,29 +60,44 @@ const ChequeoHospitalizacion = () => {
 
             </div>
             <div className="modal-body">
-            <form className="form form-vertical" onSubmit={handleSubmit(agregarChequeo)}>
+            <form className="form form-vertical">
                 <div className="form-body">
                     <div className="row">
-
-                    <div className="col-12">
+                    
+                        
+                        <div className="col-6">
                             <div className="form-group has-icon-left">
-                                <label htmlFor="sintomas_chequeo">Sintomatología (*)</label>
+                                <label htmlFor="fecha_chequeo">Fecha del chequeo (*)</label>
                                 <div className="position-relative">
-                                    <textarea type="text" className="form-control" rows="8"
-                                        name="sintomas_chequeo"
-                                        id="sintomas_chequeo"
-                                        {...register('sintomas_chequeo')}
-                                        value={sintomas_chequeo}
-                                        onChange={e => set_sintomas_chequeo(e.target.value)} 
-                                            />
+                                    <input type="date" className="form-control"
+                                        name="fecha_chequeo"
+                                        id="fecha_chequeo"
+                                        value={fecha_chequeo}
+                                        onChange={e => setFecha_chequeo(e.target.value)} />
                                     <div className="form-control-icon">
-                                        <i className="bi bi-card-text"></i>
+                                        <i className="bi bi-calendar"></i>
                                     </div>
                                 </div>
-                                <small className="text-danger"> {errors.sintomas_chequeo?.message} </small>
                             </div>
                         </div>
-                
+
+
+                        <div className="col-6">
+                            <div className="form-group has-icon-left">
+                                <label htmlFor="hora_chequeo">Hora del chequeo (*)</label>
+                                <div className="position-relative">
+                                    <input type="time" className="form-control"
+                                        name="hora_chequeo"
+                                        id="hora_chequeo"
+                                        value={hora_chequeo}
+                                        onChange={e => setHora_chequeo(e.target.value)} />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-alarm"></i>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
 
                         <div className="col-12">
                             <div className="form-group has-icon-left">
@@ -98,15 +106,14 @@ const ChequeoHospitalizacion = () => {
                                     <textarea type="text" className="form-control" rows="8"
                                         name="observacion_chequeo"
                                         id="observacion_chequeo"
-                                        {...register('observacion_chequeo')}
                                         value={observacion_chequeo}
-                                        onChange={e => set_observacion_chequeo(e.target.value)} 
+                                        onChange={e => setObservacion_chequeo(e.target.value)} 
                                             />
                                     <div className="form-control-icon">
                                         <i className="bi bi-card-text"></i>
                                     </div>
                                 </div>
-                                <small className="text-danger"> {errors.observacion_chequeo?.message} </small>
+                                
                             </div>
                         </div>
                     </div>
@@ -114,7 +121,7 @@ const ChequeoHospitalizacion = () => {
                 
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" className="btn btn-secondary" >Guardar</button>
+                    <button type="button" className="btn btn-secondary" onClick={agregarChequeo}>Guardar</button>
                 </div>
            
             </form>
@@ -125,36 +132,28 @@ const ChequeoHospitalizacion = () => {
     
         </div>
 
-        {chequeos.length>0 &&
-        <section className="section">
-        <br />
-        <h4>Historial de chequeos</h4>
-        <div className="card">
-        <div className="card-content">
-        {chequeos.map((chequeo, i) =>
-            <div className="card-body">
-                <div className="alert alert-secondary">
-                    <h4 className="alert-heading">Chequeo {i + 1 } </h4>
-                    <h6>Fecha: {chequeo.fecha_chequeo} Hora: {chequeo.hora_chequeo}</h6>
-                </div>
-            
-                <p className="card-text">
-                    <p>Sintomatología: {chequeo.sintomas_chequeo}</p>
-                    <p>Observaciones: {chequeo.observacion_chequeo}</p>
-                </p>
         
-                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
-            </div>
-        )}
-
-        <hr />
-    </div>
-
-  
-</div>
-
- </section>
- }
+        {chequeos.map((chequeo)=>(
+        <section className="section">
+           
+         <div className="card">
+         <div className="card-content">
+             <div className="card-body">
+                 <h4 className="card-title">Chequeo - {chequeo.id_chequeo_hospitalizacion}</h4>
+                 <h6>Fecha - {chequeo.fecha_chequeo}</h6>
+                 <h6>Hora - {chequeo.hora_chequeo}</h6>
+                 <p className="card-text">
+                     Observaciones: {chequeo.observacion_chequeo}
+                 </p>
+             </div>
+         </div>
+         <div className="card-footer d-flex justify-content-between">
+             <span>Registrado por:</span>
+         </div>
+         </div>
+        
+     </section>
+        ))}
 
     </div>
 

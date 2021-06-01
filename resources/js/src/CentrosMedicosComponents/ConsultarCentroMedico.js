@@ -107,10 +107,10 @@ const ConsultarCentroMedico = () => {
                                             <td>{centro_medico.telefono1_centro_medico}</td>
                                             <td>{centro_medico.correo_centro_medico}</td>
                                             <td>
-                                            <Link to={`centros_medicos/${centro_medico.id_centro_medico}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`centros_medicos/${centro_medico.id_centro_medico}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`centros_medicos/${centro_medico.id_centro_medico}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`centros_medicos/${centro_medico.id_centro_medico}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

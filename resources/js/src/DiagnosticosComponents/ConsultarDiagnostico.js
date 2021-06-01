@@ -99,10 +99,10 @@ const ConsultarDiagnostico = () => {
                                             <td>{diagnostico.nombre_diagnostico}</td>
                                            
                                             <td>
-                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`diagnosticos/${diagnostico.codigo_diagnostico}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
                                              
                                           </tr>

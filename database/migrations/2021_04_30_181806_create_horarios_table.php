@@ -15,12 +15,8 @@ class CreateHorariosTable extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->bigIncrements('id_horario');
-
-            $table->string('id_centro_medico');
-            $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');
-
-            $table->string('dia_inicio', 25);
-            $table->string('dia_final', 25);
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
             $table->time('hora_inicio');
             $table->time('hora_final');
             $table->timestamps();

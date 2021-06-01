@@ -5,26 +5,26 @@ import API from '../api';
 
 const GraficosSignosVitales = () => {
 
-    const [fechas, set_fechas] = useState([]);
-    const [peso, set_peso] = useState([]);
-    const [estatura, set_estatura] = useState([]);
-    const [temperatura, set_temperatura] = useState([]);
-    const [presion_diastolica, set_presion_diastolica] = useState([]);
-    const [presion_sistolica, set_presion_sistolica] = useState([]);
-    const [ritmo_cardiaco, set_ritmo_cardiaco] = useState([]);
-    const [respiracion, set_respiracion] = useState([]);
+    const [fechas, setFechas] = useState([]);
+    const [peso, setPeso] = useState([]);
+    const [estatura, setEstatura] = useState([]);
+    const [temperatura, setTemperatura] = useState([]);
+    const [presion_diastolica, setPresion_diastolica] = useState([]);
+    const [presion_sistolica, setpresionSistolica] = useState([]);
+    const [ritmo_cardiaco, setRitmo_cardiaco] = useState([]);
+    const [respiracion, setRespiracion] = useState([]);
 
     useEffect(() => {
         API.signos_vitales_graficos('EB21001H1').then(res => {
            const result = res.data;
-           set_fechas(result.fecha_array);
-           set_peso(result.peso_array);
-           set_estatura(result.estatura_array);
-           set_temperatura(result.temperatura_array);
-           set_presion_diastolica(result.presion_diastolica_array);
-           set_presion_sistolica(result.presion_sistolica_array);
-           set_ritmo_cardiaco(result.ritmo_cardiaco_array);
-           set_respiracion(result.respiracion_array);
+           setFechas(result.fecha_array);
+           setPeso(result.peso_array);
+           setEstatura(result.estatura_array);
+           setTemperatura(result.temperatura_array);
+           setPresion_diastolica(result.presion_diastolica_array);
+           setpresionSistolica(result.presion_sistolica_array);
+           setRitmo_cardiaco(result.ritmo_cardiaco_array);
+           setRespiracion(result.respiracion_array);
        })
      }, []);
 
@@ -78,8 +78,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-estatura" role="tabpanel"
@@ -95,8 +95,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-temperatura" role="tabpanel"
@@ -112,8 +112,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-presion_sistolica" role="tabpanel"
@@ -129,8 +129,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-presion_diastolica" role="tabpanel"
@@ -146,8 +146,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-ritmo_cardiaco" role="tabpanel"
@@ -163,8 +163,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                             <div className="tab-pane fade" id="v-pills-respiracion" role="tabpanel"
@@ -180,8 +180,8 @@ const GraficosSignosVitales = () => {
                                         }
                                         ]
                                     }}
-                                    height={150}
-                                    width={300}
+                                    height={250}
+                                    width={400}
                                     />
                             </div>
                         </div>

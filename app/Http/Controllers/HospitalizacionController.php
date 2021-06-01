@@ -31,7 +31,7 @@ class HospitalizacionController extends Controller
                      $request->motivo_ingreso,
                      $request->sala, 
                      $request->camilla, 
-                     $request->estado_paciente,
+                     $request->estado_paciente, 
                      $fecha_actual
                     ]);
         
@@ -57,12 +57,8 @@ class HospitalizacionController extends Controller
     public function update(Request $request, $id_hospitalizacion)
     {
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
-        if($request->alta_paciente){
-            $fecha_alta = 'current_date';
-        }
         
-        DB::update('update hospitalizaciones set fecha_ingreso = ?, hora_ingreso = ?, motivo_ingreso = ?, sala = ?, camilla = ?,
+        DB::update('update hospitalizaciones set fecha_ingreso = ?, hora_ingreso = ?, motivo_ingreso = ?, sala = ?, camilla = ?, estado_paciente = ?,
                     dias_ingreso = ?, fecha_alta = ?, costo = ?, updated_at = ?
                     where id_hospitalizacion = ?', 
                     [
@@ -71,6 +67,7 @@ class HospitalizacionController extends Controller
                     $request->motivo_ingreso,
                     $request->sala, 
                     $request->camilla, 
+                    $request->estado_paciente,
                     $request->dias_ingreso, 
                     $request->fecha_alta, 
                     $request->costo, 

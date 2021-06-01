@@ -14,7 +14,7 @@ class CreateHistorialTratamientosMedicosTable extends Migration
     public function up()
     {
         Schema::create('historial_tratamientos_medicos', function (Blueprint $table) {
-            $table->bigIncrements('id_historial_tratamiento');
+            $table->integer('id_historial_tratamiento')->unique()->primary();
             
             $table->string('id_atencion_medica');
             $table->foreign('id_atencion_medica')->references('id_atencion_medica')->on('atenciones_medicas');
@@ -22,8 +22,9 @@ class CreateHistorialTratamientosMedicosTable extends Migration
             $table->string('codigo_tratamiento');
             $table->foreign('codigo_tratamiento')->references('codigo_tratamiento')->on('tratamientos_medicos');
 
-            $table->string('indicaciones_tratamiento', 250);
+            $table->string('id_consulta');
 
+            $table->foreign('id_consulta')->references('id_consulta')->on('consultas');
             $table->timestamps();
         });
     }

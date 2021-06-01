@@ -4,18 +4,19 @@ import {useParams} from 'react-router-dom';
 import API from '../api';
 import SignosVitalesGraficos from './GraficoSignosVitales';
 
-
 const SignosVitales = () => {
     
     const API_URL = API.API_URL;
 
     const {id_hospitalizacion} = useParams();
+    const [prueba, setPrueba] = useState('');
 
     const codigo = id_hospitalizacion.substr(0,7);
 
     const [signos_vitales, setSignos_vitales] = useState([]);
 
-
+    const [fecha_atencion_medica, setFecha_atencion_medica] = useState('');
+    const [hora_atencion_medica, setHora_atencion_medica] = useState('');
     const [presion_arterial_sistolica, setPresion_arterial_sistolica] = useState('');
     const [presion_arterial_diastolica, setPresion_arterial_diastolica] = useState('');
     const [peso_paciente, setPeso_paciente] = useState('');
@@ -28,20 +29,19 @@ const SignosVitales = () => {
         API.signos_vitales(id_hospitalizacion).then(res => {
            const result = res.data;
            setSignos_vitales(result);
-  
+           setPrueba(signos_vitales.length)
        })
      }, []);
 
-   
 
-    const agregarSignosvitales = async (e) => {
-     e.preventDefault();
+    const agregarSignosvitales = async e => {
+        e.preventDefault();
         try {
-          const body = {id_hospitalizacion, codigo, presion_arterial_sistolica,
+          const body = {id_hospitalizacion, codigo, fecha_atencion_medica, hora_atencion_medica, presion_arterial_sistolica,
                         presion_arterial_diastolica, peso_paciente, estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente };
-          const response = await fetch(`${API_URL}/signos_vitales/${id_hospitalizacion}/guardar`, {
+          const response = await fetch(`${API_URL}/signos_vitales/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"  },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
             
           });
@@ -71,15 +71,50 @@ const SignosVitales = () => {
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-               
+
             </div>
             <div className="modal-body">
-            <p>* Ingrese al menos uno de los signos vitales</p>
-            <form className="form form-vertical" onSubmit={agregarSignosvitales}>
+            <form className="form form-vertical">
                 <div className="form-body">
-               
                     <div className="row">
-                   
+                    
+                        
+                        <div className="col-6">
+                            <div className="form-group has-icon-left">
+                                <label htmlFor="fecha_atencion_medica">Fecha (*)</label>
+                                <div className="position-relative">
+                                    <input type="date" className="form-control"
+                                        name="fecha_atencion_medica"
+                                        id="fecha_atencion_medica"
+                                        value={fecha_atencion_medica}
+                                        onChange={e => setFecha_atencion_medica(e.target.value)} />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-6">
+                            <div className="form-group has-icon-left">
+                                <label htmlFor="hora_atencion_medica">Hora(*)</label>
+                                <div className="position-relative">
+                                    <input type="time" className="form-control"
+                                        name="hora_atencion_medica"
+                                        id="hora_atencion_medica"
+                                        value={hora_atencion_medica}
+                                        onChange={e => setHora_atencion_medica(e.target.value)} />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-alarm"></i>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        
+
                         <div className="col-12">
                             <div className="form-group has-icon-left">
                                 <label htmlFor="peso_paciente">Peso (kg)</label>
@@ -94,7 +129,7 @@ const SignosVitales = () => {
                                         <i className="bi bi-card-text"></i>
                                     </div>
                                 </div>
-                              
+                                
                             </div>
                         </div>
 
@@ -123,6 +158,7 @@ const SignosVitales = () => {
                                     <input type="number" className="form-control" step="0.01" min="0"
                                         name="temperatura_paciente"
                                         id="temperatura_paciente"
+                                        value={temperatura_paciente}
                                         onChange={e => setTemperatura_paciente(e.target.value)} 
                                             />
                                     <div className="form-control-icon">
@@ -211,12 +247,7 @@ const SignosVitales = () => {
                 
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    {!estatura_paciente && !peso_paciente && !temperatura_paciente && 
-                     !presion_arterial_sistolica && !presion_arterial_diastolica && !ritmo_cardiaco_paciente && !respiracion_paciente ?
-                        <button type="submit" className="btn btn-secondary" disabled>Guardar</button>
-                    :   <button type="submit" className="btn btn-secondary" >Guardar</button>
-                }
-                    
+                    <button type="button" className="btn btn-secondary" onClick={agregarSignosvitales}>Guardar</button>
                 </div>
            
             </form>
@@ -226,7 +257,6 @@ const SignosVitales = () => {
         </div>
     
         </div>
-        {signos_vitales.length > 0 && 
         <section className="section">
         
 
@@ -234,8 +264,8 @@ const SignosVitales = () => {
          <div className="card">
          <div className="card-content">
              <div className="card-body">
-                 <div className="table-responsive">
-                <table className="table mb-0">
+                 <div class="table-responsive">
+                <table class="table mb-0">
                     <thead>
                         <tr>
                             <th>Fecha</th>
@@ -252,53 +282,15 @@ const SignosVitales = () => {
                     <tbody>
                     {signos_vitales.map((signo_vital)=>(
                         <tr>
-                           
                             <td>{signo_vital.fecha_atencion_medica}</td>
-                            
                             <td>{signo_vital.hora_atencion_medica}</td>
-
-                            {signo_vital.peso_paciente ? (
-                                <td>{signo_vital.peso_paciente} kg</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.estatura_paciente ? (
-                                <td>{signo_vital.estatura_paciente} cm</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.temperatura_paciente ? (
-                                <td>{signo_vital.temperatura_paciente} °C</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.presion_arterial_sistolica ? (
-                                  <td>{signo_vital.presion_arterial_sistolica} mmHg</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.presion_arterial_diastolica ? (
-                                 <td>{signo_vital.presion_arterial_diastolica} mmHg</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.ritmo_cardiaco_paciente ? (
-                                  <td>{signo_vital.ritmo_cardiaco_paciente} x min</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-
-                            {signo_vital.respiracion_paciente ? (
-                                  <td>{signo_vital.respiracion_paciente} x min</td>
-                            ) : (
-                                <td>--</td>
-                            )}
-                            
+                            <td>{signo_vital.peso_paciente} kg</td>
+                            <td>{signo_vital.estatura_paciente} cm</td>
+                            <td>{signo_vital.temperatura_paciente} °C</td>
+                            <td>{signo_vital.presion_arterial_sistolica} mmHg</td>
+                            <td>{signo_vital.presion_arterial_diastolica} mmHg</td>
+                            <td>{signo_vital.ritmo_cardiaco_paciente} x min</td>
+                            <td>{signo_vital.respiracion_paciente} x min</td>
                         </tr>
                         ))}
                     </tbody>
@@ -309,12 +301,9 @@ const SignosVitales = () => {
          </div>
         
          </div>
-         <SignosVitalesGraficos/>
-     </section>
-    }
-        
 
-    
+     </section>
+        <SignosVitalesGraficos/>
      
      </div>
 

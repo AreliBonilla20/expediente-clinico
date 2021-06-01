@@ -42,19 +42,8 @@ Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'Chequeo
 //Rutas para signos vitales
 Route::get('/signos_vitales/{id_hospitalizacion}', 'SignosVitalesController@index');
 Route::get('/signos_vitales/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
-Route::post('/signos_vitales/{id_hospitalizacion}/guardar', 'SignosVitalesController@store');
+Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
 
-//Rutas para el historial de diagnósticos del paciente
-Route::get('/historial_diagnosticos/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
-Route::post('/historial_diagnosticos/{id_hospitalizacion}/guardar', 'HistorialDiagnosticosController@store');
-
-//Rutas para el historial de recetas médicas del paciente
-Route::get('/recetas_medicas/{id_hospitalizacion}', 'RecetaMedicaController@index');
-Route::post('/recetas_medicas/{id_hospitalizacion}/guardar', 'RecetaMedicaController@store');
-
-//Rutas para el historial de tratamientos del paciente
-Route::get('/historial_tratamientos/{id_hospitalizacion}', 'HistorialTratamientosController@index');
-Route::post('/historial_tratamientos/{id_hospitalizacion}/guardar', 'HistorialTratamientosController@store');
 
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
@@ -65,7 +54,6 @@ Route::get('/diagnosticos/{codigo}/editar', 'DiagnosticoController@edit');
 Route::put('/diagnosticos/{codigo}/actualizar', 'DiagnosticoController@update');
 Route::get('/diagnosticos/{param_busqueda}/buscar', 'DiagnosticoController@buscar');
 
-
 //Rutas para centrosMedicos
 Route::get('/centros_medicos', 'CentroMedicoController@index');
 Route::get('/centros_medicos/crear', 'CentroMedicoController@create');
@@ -74,7 +62,6 @@ Route::get('/centros_medicos/{id_centro_medico}/ver', 'CentroMedicoController@sh
 Route::get('/centros_medicos/{id_centro_medico}/editar', 'CentroMedicoController@edit');
 Route::put('/centros_medicos/{id_centro_medico}/actualizar', 'CentroMedicoController@update');
 Route::get('/centros_medicos/{param_busqueda}/buscar', 'CentroMedicoController@buscar');
-Route::get('/centro_medico_empleados/{id_centro_medico}', 'CentroMedicoController@centro_medico_empleados');
 
 //Rutas para tratamientos medicos
 Route::get('/tratamientos_medicos', 'TratamientosMedicosController@index');
@@ -103,49 +90,7 @@ Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
 
-
-//Rutas para empleados
-Route::get('/empleados', 'EmpleadoController@index');
-Route::get('/empleados/crear', 'EmpleadoController@create');
-Route::post('/empleados/guardar', 'EmpleadoController@store');
-Route::get('/empleados/{id_empleado}/ver', 'EmpleadoController@show');
-Route::get('/empleados/{id_empleado}/editar', 'EmpleadoController@edit');
-Route::put('/empleados/{id_empleado}/actualizar', 'EmpleadoController@update');
-Route::get('/empleados/{param_busqueda}/buscar', 'EmpleadoController@buscar');
-
-//Rutas para consultorios-centros medicos
-Route::get('/consultorios/{id_centro_medico}', 'ConsultorioController@index');
-Route::post('/consultorios/{id_centro_medico}/guardar', 'ConsultorioController@store');
-
-//Rutas para hemogramas
-Route::get('/examenes_hemogramas', 'ExamenHemogramaController@index');
-Route::get('/examenes_hemogramas/crear', 'ExamenHemogramaController@create');
-Route::post('/examenes_hemogramas/guardar', 'ExamenHemogramaController@store');
-Route::get('/examenes_hemogramas/{codigo}/ver', 'ExamenHemogramaController@show');
-Route::get('/examenes_hemogramas/{codigo}/editar', 'ExamenHemogramaController@edit');
-Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaController@update');
-
 //Rutas para quirofanos
 Route::get('/quirofanos/{id_centro_medico}', 'QuirofanoController@index');
 Route::post('/quirofanos/{id_centro_medico}/guardar', 'QuirofanoController@store');
 
-//Rutas para médicos
-Route::get('/centro_medico_doctores/{id_centro_medico}', 'DoctorController@centro_medico_doctores');
-Route::get('/doctores/crear', 'DoctorController@create');
-Route::post('/doctores/{id_empleado}/guardar', 'DoctorController@store');
-Route::post('/doctores/horarios/asignar', 'DoctorController@horarios');
-Route::get('/doctores/doctor_horario', 'DoctorController@doctor_horario');
-
-//Rutas para horarios
-Route::post('/horarios/{id_centro_medico}/guardar', 'HorarioController@store');
-Route::get('/horarios/{id_centro_medico}/', 'HorarioController@index');
-Route::get('/horarios/{id_centro_medico}/doctores', 'HorarioController@doctores_horarios');
-
-//Rutas para citas
-Route::get('/citas', 'CitaController@index');
-Route::get('/citas/crear', 'CitaController@create');
-Route::post('/citas/guardar', 'CitaController@store');
-Route::get('/citas/{id_cita}/ver', 'CitaController@show');
-Route::get('/citas/{id_cita}/editar', 'CitaController@edit');
-Route::put('/citas/{id_cita}/actualizar', 'CitaController@update');
-//Route::get('/citas/{param_busqueda}/buscar', 'CitaController@buscar');

@@ -68,7 +68,7 @@ class CentroMedicoController extends Controller
         return response()->json('Centro médico creado!');    
     }
     
-    public function show($id_centro_medico)
+    public function show($codigo)
     {   
     
         $centro_medico = DB::select("select * from centros_medicos 
@@ -76,20 +76,20 @@ class CentroMedicoController extends Controller
                     inner join paises on paises.id_pais=centros_medicos.id_pais 
                     inner join departamentos on departamentos.id_departamento=centros_medicos.id_departamento
                     inner join municipios on municipios.id_municipio=centros_medicos.id_municipio 
-                    where id_centro_medico = ? ", [$id_centro_medico]);
+                    where id_centro_medico = ? ", [$codigo]);
 
         return response()->json($centro_medico[0]);    
     }
 
-    public function edit($id_centro_medico)
+    public function edit($codigo)
     {
-        $centro_medico_editar = DB::select('select * from centros_medicos where id_centro_medico = ?', [$id_centro_medico]); 
+        $centro_medico_editar = DB::select('select * from centros_medicos where id_centro_medico = ?', [$codigo]); 
 
         return response()->json($centro_medico_editar[0]);    
     }
 
 
-    public function update($id_centro_medico, Request $request)
+    public function update($codigo, Request $request)
     {
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
@@ -112,7 +112,7 @@ class CentroMedicoController extends Controller
                                  $request->id_departamento, 
                                  $request->id_municipio, 
                                  $fecha_actual,
-                                 $id_centro_medico
+                                 $codigo
                                 ]);
 
 
@@ -131,13 +131,5 @@ class CentroMedicoController extends Controller
 
         return CentroMedicoResource::collection($centros_medicos);
 
-    }
-    
-    public function centro_medico_empleados($id_centro_medico)
-    {
-       $empleados_centro_medico = DB::select('select * from empleados inner join tipo_personal on tipo_personal.id_tipo_personal = empleados.id_tipo_personal
-                                              where id_centro_medico = ? order by id_empleado', [$id_centro_medico]);
-
-       return response()->json($empleados_centro_medico);    
     }
 }

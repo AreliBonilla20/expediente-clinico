@@ -175,7 +175,7 @@ const AgregarCentroMedico = () => {
                                                     <div className="col-md-12 mb-4">
                                                         <label htmlFor="id_tipo_centro_medico">Tipo de centro médico (*)</label>
                                                         <div className="form-group">
-                                                                <select className="form-select"
+                                                            <select className="choices form-select"
                                                                 name="id_tipo_centro_medico" 
                                                                 id="id_tipo_centro_medico" 
                                                                 {...register('id_tipo_centro_medico')}
@@ -194,7 +194,7 @@ const AgregarCentroMedico = () => {
                                                         
                                                         <label htmlFor="id_pais">País (*)</label>
                                                             <div className="form-group">
-                                                                    <select className="form-select"
+                                                                <select className="choices form-select" 
                                                                     name="id_pais" 
                                                                     id="id_pais" 
                                                                         {...register('id_pais')}
@@ -213,7 +213,7 @@ const AgregarCentroMedico = () => {
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_departamento">Departamento/Estado (*)</label>
                                                             <div className="form-group">
-                                                                    <select className="form-select"
+                                                                <select className="choices form-select" 
                                                                         name="id_departamento" 
                                                                         id="id_departamento" 
                                                                         value={id_departamento}
@@ -238,7 +238,7 @@ const AgregarCentroMedico = () => {
                                                     <div className="col-md-4 mb-4">
                                                         <label htmlFor="id_municipio">Municipio/Ciudad (*)</label>
                                                             <div className="form-group">
-                                                                    <select className="form-select"
+                                                                <select className="choices form-select" 
                                                                     name="id_municipio" 
                                                                     id="id_municipio"
                                                                     {...register('id_municipio')}

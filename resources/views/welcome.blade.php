@@ -12,7 +12,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
         
          <!-- Estilos -->
-         <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -33,8 +32,7 @@
         <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script> 
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>     
 
     </body>
     

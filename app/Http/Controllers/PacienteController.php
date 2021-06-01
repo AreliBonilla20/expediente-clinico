@@ -43,7 +43,7 @@ class PacienteController extends Controller
     {   
         $nombre = $request->nombres;
         $apellidos = $request->apellidos;
-        $codigo_calculado = app('App\Http\Controllers\FuncionesController')->get_codigo($nombre, $apellidos);
+        $codigo_calculado = $this->get_codigo($nombre, $apellidos);
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
         DB::insert('insert into pacientes (codigo, identificacion, nombres, apellidos, fecha_nacimiento, estado_paciente, direccion,
@@ -146,6 +146,40 @@ class PacienteController extends Controller
     }
 
 
-   
+    public function get_codigo($nombre, $apellidos)
+    {
+        $nombre_inicial = strtoupper(substr($nombre, 0, 1));
+        $apellido_inicial = strtoupper(substr($apellidos, 0, 1));
+        $anyo = substr((string) date("Y"), 2, 2);
+        $cod = $nombre_inicial.$apellido_inicial.$anyo;
+        
+        $pacientes = Paciente::all();
+        
+        if(count($pacientes)>0){
+            foreach($pacientes as $paciente){
+                if(substr($paciente->codigo, 0, 4)===$cod){
+                    $numeracion = (int)substr($paciente->codigo, 4, 3);
+                    $correlativo = (string) $numeracion + 1; 
+                    
+                    if(strlen($correlativo)===1){
+                        $correlativo = '00'.$correlativo;
+                    }
+                    if(strlen($correlativo)===2){
+                        $correlativo = '0'.$correlativo;
+                    }
+                }
+                else{
+                    $correlativo = '001';
+                }
+            }
+        }
+        else{
+            $correlativo = '001';
+        }
+
+        $cod = $nombre_inicial.$apellido_inicial.$anyo.$correlativo;
+
+        return $cod;
+    }
 }
 

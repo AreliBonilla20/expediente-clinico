@@ -37,103 +37,30 @@ class FuncionesController extends Controller
         return $cadena;
     }
 
-    public function get_codigo($nombre, $apellidos)
-    {
-        $nombre_inicial = strtoupper(substr($nombre, 0, 1));
-        $apellido_inicial = strtoupper(substr($apellidos, 0, 1));
-        $anyo = substr((string) date("Y"), 2, 2);
-        $cod = $nombre_inicial.$apellido_inicial.$anyo;
-        
-        $pacientes = DB::select('select * from pacientes');
-        
-        if(count($pacientes)>0){
-            foreach($pacientes as $paciente){
-                if(substr($paciente->codigo, 0, 4)===$cod){
-                    $numeracion = (int)substr($paciente->codigo, 4, 3);
-                    $correlativo = (string) $numeracion + 1; 
-                    
-                    if(strlen($correlativo)===1){
-                        $correlativo = '00'.$correlativo;
-                    }
-                    if(strlen($correlativo)===2){
-                        $correlativo = '0'.$correlativo;
-                    }
-                }
-                else{
-                    $correlativo = '001';
-                }
-            }
-        }
-        else{
-            $correlativo = '001';
-        }
-
-        $cod = $nombre_inicial.$apellido_inicial.$anyo.$correlativo;
-
-        return $cod;
-    }
-
-    public function get_id_empleado($nombre, $apellidos)
-    {   
-        $nombre_inicial = strtoupper(substr($nombre, 0, 1));
-        $apellido_inicial = strtoupper(substr($apellidos, 0, 1));
-        $anyo = substr((string) date("Y"), 2, 2);
-        $cod = $nombre_inicial.$apellido_inicial.$anyo;
-        
-        $empleados = DB::select('select * from empleados');
-        
-        if(count($empleados)>0){
-            foreach($empleados as $empleado){
-                if(substr($empleado->id_empleado, 0, 4)===$cod){
-                    $numeracion = (int)substr($empleado->id_empleado, 4, 3);
-                    $correlativo = (string) $numeracion + 1; 
-                    
-                    if(strlen($correlativo)===1){
-                        $correlativo = '00'.$correlativo;
-                    }
-                    if(strlen($correlativo)===2){
-                        $correlativo = '0'.$correlativo;
-                    }
-                }
-                else{
-                    $correlativo = '001';
-                }
-            }
-        }
-        else{
-            $correlativo = '001';
-        }
-
-        $cod = $nombre_inicial.$apellido_inicial.$anyo.$correlativo.'-EM';
-
-        return $cod;
-    }
-
-    public function codigo_atencion_medica($id_hospitalizacion)
+    public function codigo_atencion_medica($request)
     {   
         $cont = 0;
-        $codigo = substr($id_hospitalizacion, 0, 7);
         $atenciones_medicas = DB::select('select* from atenciones_medicas');
 
         if(count($atenciones_medicas)>0)
         {
             foreach($atenciones_medicas as $atencion_medica)
             {
-                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $codigo)
+                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $request->codigo)
                 $cont++;    
             }   
 
             $correlativo = (string) $cont + 1;
-            $id_atencion = $codigo.'A'.$correlativo;
+            $id_atencion = $request->codigo.'A'.$correlativo;
         }
         else {
-            $id_atencion = $codigo.'A1';
+            $id_atencion = $request->codigo.'A1';
         }
         
         return $id_atencion;
     }
 
-    public function id_quirofano($id_centro_medico)
+public function id_quirofano($id_centro_medico)
     {   
         $cont = 0;
         $quirofanos = DB::select('select* from quirofanos');
@@ -155,49 +82,5 @@ class FuncionesController extends Controller
         
         return $id_quirofano;
     }
-
-    public function get_id_doctor()
-    {   
-        $cont = 0;
-      
-        $doctores = DB::select('select * from doctores');
-
-        if(count($doctores)>0)
-        {
-            $cont = count($doctores);
-            $correlativo = $cont + 1;
-            $id_doc = 'DOC-0'.$correlativo;
-        }
-        else {
-            $id_doc = 'DOC-01';
-        }
-        
-        return $id_doc;
-    }
-
-    public function get_id_cita($codigo)
-    {   
-        $citas = DB::select('select * from citas');
-        
-        if(count($citas)>0){
-            foreach($citas as $cita){
-                if(substr($cita->codigo_paciente)===$codigo){
-                    $numeracion = (int)substr($cita->codigo_paciente, 4, 3);
-                    $correlativo = (string) $numeracion + 1; 
-                }
-                else{
-                    $correlativo = '1';
-                }
-            }
-        }
-        else{
-            $correlativo = '1';
-        }
-
-        $cod = $codigo.'C'.$correlativo;
-
-        return $cod;
-    }
-
     
 }

@@ -254,7 +254,7 @@ const VerExpediente = () => {
             
             {antecedente.id_antecedentes_paciente &&
             <div className="col-12 d-flex justify-content-end">
-                <Link to="antecedentes/editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                <Link to="antecedentes/editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
             </div>
             }
 

@@ -14,7 +14,7 @@ class CreateQuirofanosTable extends Migration
     public function up()
     {
         Schema::create('quirofanos', function (Blueprint $table) {
-            $table->string('id_quirofano', 25)->unique()->primary();
+            $table->string('id_quirofano', 10)->unique()->primary();
 
             $table->string('id_centro_medico');
             $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');

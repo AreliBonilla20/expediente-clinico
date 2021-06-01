@@ -26,17 +26,13 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^2.4.0",
-        "@material-ui/core": "^4.11.4",
         "chart.js": "^3.2.1",
         "cors": "^2.8.5",
-        "material-ui-icons": "^1.0.0-beta.36",
         "react-chartjs-2": "^3.0.3",
         "react-google-charts": "^2.0.29",
         "react-hook-form": "^7.4.2",
-        "react-multi-select-component": "^4.0.2",
         "react-router-dom": "^5.2.0",
         "sweetalert": "^2.1.2",
-        "scheduler-calendar": "^3.1.0",
         "yup": "^0.32.9"
     }
 }

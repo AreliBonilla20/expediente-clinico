@@ -183,7 +183,7 @@ const EditarMedicamento = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_tipo_medicamento">Tipo Medicamento (*)</label>
                                                         <div className="form-group">
-                                                            <select className="form-select"
+                                                            <select className="choices form-select"
                                                                 name="id_tipo_medicamento" 
                                                                 id="id_tipo_medicamento" 
                                                                 {...register('id_tipo_medicamento')}
@@ -201,7 +201,7 @@ const EditarMedicamento = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="via_administracion">Vía de administración (*)</label>
                                                         <div className="form-group">
-                                                            <select className="form-select"
+                                                            <select className="choices form-select"
                                                                 name="via_administracion" 
                                                                 id="via_administracion" 
                                                                 {...register('via_administracion')}
@@ -281,19 +281,21 @@ const EditarMedicamento = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-md-12 mb-4">
-                                                    <label htmlFor="existencia_medicamento">Existencia medicamento (*)</label>
-                                                        <div className="form-group">
-                                                            <select className="form-select"
-                                                                name="existencia_medicamento" 
-                                                                id="existencia_medicamento" 
-                                                                {...register('existencia_medicamento')}
-                                                                value={existencia_medicamento}
-                                                                onChange={e => setExistencia_medicamento(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                <option value="En existencia">En existencia</option>
-                                                                <option value="Agotado">Agotado</option>
-                                                            </select>
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="existencia_medicamento">Existencia Medicamento (*)</label>
+                                                            <div className="position-relative">
+                                                                <input type="text" className="form-control"
+                                                                    name="existencia_medicamento"
+                                                                    id="existencia_medicamento"
+                                                                    {...register('existencia_medicamento')}
+                                                                    value={existencia_medicamento}
+                                                                    onChange={e => setExistencia_medicamento(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                    <i className="bi bi-clipboard-check"></i>
+                                                                </div>
+                                                            </div>
                                                             <small className="text-danger"> {errors.existencia_medicamento?.message} </small>
                                                         </div>
                                                     </div>

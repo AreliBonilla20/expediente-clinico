@@ -16,6 +16,9 @@ class CreateUsuariosTable extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->string('id_usuario', 25)->unique()->primary();
 
+            $table->string('id_tipo_usuario');
+            $table->foreign('id_tipo_usuario')->references('id_tipo_usuario')->on('tipo_usuario');
+
             $table->string('id_empleado')->nullable();
             $table->foreign('id_empleado')->references('id_empleado')->on('empleados');
 

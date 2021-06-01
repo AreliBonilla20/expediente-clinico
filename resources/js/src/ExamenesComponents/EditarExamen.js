@@ -13,7 +13,7 @@ import ClickLabel from '../Funciones/ClickLabel';
 
 import API from '../api';
 
-const EditarExamen = () => {
+const AgregarExamen = () => {
 
     //Aqui se guardar el codigo de examen que viene como parámetro 
     const { codigo } = useParams();
@@ -25,33 +25,31 @@ const EditarExamen = () => {
     const [examenes, setExamenes] = useState([]);
     const [codigo_inicial, setCodigo_inicial] = useState('');
 
-    //Datos para el formulario
-    const [tipos_examenes, setTipos_examenes] = useState([]);
+   //Datos para el formulario
+   const [tipos_examenes, setTipos_examenes] = useState([]);
 
-    //Datos para la tabla
-    const [codigo_examen, setCodigo_examen] = useState('');
-    const [nombre_examen, setNombre_examen] = useState('');
-    const [id_tipo_examen, setId_tipo_examen] = useState('');
-    const [indicaciones_examen, setIndicaciones_examen] = useState('');
-    const [costo, setCosto] = useState('');
-
-    //Función para traer los datos que se ven en el formulario
-    useEffect(() => {
-        API.datos_formulario_examen().then(res => {
-            const result = res.data;
-            setTipos_examenes(result.tipos_examenes);
-
-            ClickLabel(labels);
-       })
-
-        API.examenes().then(res => {
-            const result = res.data;
-            setExamenes(result.data);
-
-            ClickLabel(labels);
-
-            })
-     }, []);
+   //Datos para la tabla
+   const [codigo_examen, setCodigo_examen] = useState('');
+   const [nombre_examen, setNombre_examen] = useState('');
+   const [id_tipo_examen, setId_tipo_examen] = useState('');
+   const [indicaciones_examen, setIndicaciones_examen] = useState('');
+   const [costo, setCosto] = useState('');
+   
+   //Función para traer los datos que se ven en el formulario
+   useEffect(() => {
+       API.datos_formulario_examen().then(res => {
+          const result = res.data;
+          setTipos_examenes(result.tipos_examenes);
+          
+          ClickLabel(labels);
+        })
+       
+       API.examenes().then(res => {
+          const result = res.data;
+          setExamenes(result.data);
+          ClickLabel(labels);
+        })
+    }, []);
 
 
      //Función para cargar los datos del examen que se va a editar
@@ -64,7 +62,6 @@ const EditarExamen = () => {
            setIndicaciones_examen(examen.indicaciones_examen);
            setCosto(examen.costo);
            setCodigo_inicial(examen.codigo_examen);
-           
            ClickLabel(labels);
        })
      }, []);
@@ -105,8 +102,7 @@ const EditarExamen = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Editar</h3>
-                                <h4>Examen: {codigo_examen} - {nombre_examen}</h4>
-                                
+                                <h4>Medicamento: {codigo_examen} - {nombre_examen}</h4>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
@@ -136,7 +132,7 @@ const EditarExamen = () => {
                                                 
                                                 <h5>Datos generales</h5>
 
-                                                    <div className="col-12">
+                                                <div className="col-12">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="codigo_examen">Código de examen</label>
                                                             <div className="position-relative">
@@ -148,25 +144,25 @@ const EditarExamen = () => {
                                                                     onChange={e => setCodigo_examen(e.target.value)} 
                                                                      />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-upc-scan"></i>
+                                                                    <i class="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.codigo_examen?.message} </small>
-                                                            {   
-                                                                  examenes.map((examen) => {
-                                                                      if(examen.codigo_examen !== codigo_inicial){
-                                                                        if(examen.codigo_examen === codigo_examen){
-                                                                            return(
-                                                                                <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
-                                                                            )
-                                                                          }
-                                                                      }
-                                                                  })
-                                                              }
+                                                                {
+                                                                   examenes.map((examen) => {
+                                                                    if(examen.codigo_examen !== codigo_inicial){
+                                                                      if(examen.codigo_examen === codigo_examen){
+                                                                          return(
+                                                                              <small className="text-danger">Ya existe un registro con este mismo código, debe ser distinto</small>
+                                                                          )
+                                                                        }
+                                                                    }
+                                                                })
+                                                                }
                                                         </div>
-                                                    </div>
+                                                </div>
                                            
-                                                    <div className="col-md-12 mb-4">
+                                                    <div className="col-6">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="nombre_examen">Nombre examen (*)</label>
                                                             <div className="position-relative">
@@ -177,7 +173,7 @@ const EditarExamen = () => {
                                                                     value={nombre_examen}
                                                                     onChange={e => setNombre_examen(e.target.value)} />
                                                                 <div className="form-control-icon">
-                                                                    <i className="bi bi-clipboard-check"></i>
+                                                                    <i class="bi bi-clipboard-check"></i>
                                                                 </div>
                                                             </div>
                                                             <small className="text-danger"> {errors.nombre_examen?.message} </small>
@@ -188,7 +184,7 @@ const EditarExamen = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_tipo_examen">Tipo examen (*)</label>
                                                         <div className="form-group">
-                                                        <select className="form-select"
+                                                            <select className="choices form-select"
                                                                 name="id_tipo_examen" 
                                                                 id="id_tipo_examen" 
                                                                 {...register('id_tipo_examen')}
@@ -221,7 +217,6 @@ const EditarExamen = () => {
                                                         </div>
                                                         <small className="text-danger"> {errors.indicaciones_examen?.message} </small>
                                                     </div>
-
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
@@ -264,4 +259,4 @@ const EditarExamen = () => {
     );
 }
 
-export default EditarExamen;
+export default AgregarExamen;

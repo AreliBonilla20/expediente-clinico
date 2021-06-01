@@ -14,14 +14,12 @@ class CreateConsultoriosTable extends Migration
     public function up()
     {
         Schema::create('consultorios', function (Blueprint $table) {
-            $table->string('id_consultorio', 25)->unique()->primary();
+            $table->string('id_consultorio', 10)->unique()->primary();
 
             $table->string('id_centro_medico');
             $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');
            
             $table->string('consultorio', 100);
-            $table->string('area', 100);
-            
             $table->timestamps();
         });
     }

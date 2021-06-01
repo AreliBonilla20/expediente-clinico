@@ -6,7 +6,7 @@ const schema = yup.object().shape({
     codigo_tratamiento: yup
     .string()
     .required("El campo código de tratamiento es obligatorio")
-    .max(25, "El máximo de caracteres es 25"),
+    .max(10, "El máximo de caracteres es 10"),
     
     nombre_tratamiento: yup
     .string()

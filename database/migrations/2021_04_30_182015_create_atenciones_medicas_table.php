@@ -14,7 +14,7 @@ class CreateAtencionesMedicasTable extends Migration
     public function up()
     {
         Schema::create('atenciones_medicas', function (Blueprint $table) {
-            $table->string('id_atencion_medica', 25)->unique()->primary();
+            $table->string('id_atencion_medica', 15)->unique()->primary();
 
             $table->string('id_consulta')->nullable();
             $table->foreign('id_consulta')->references('id_consulta')->on('consultas');

@@ -14,7 +14,7 @@ class CreateMedicamentosTable extends Migration
     public function up()
     {
         Schema::create('medicamentos', function (Blueprint $table) {
-            $table->string('codigo_medicamento', 25)->unique()->primary();
+            $table->string('codigo_medicamento', 10)->unique()->primary();
 
             $table->unsignedBigInteger('id_tipo_medicamento');
             $table->foreign('id_tipo_medicamento')->references('id_tipo_medicamento')->on('tipo_medicamento');

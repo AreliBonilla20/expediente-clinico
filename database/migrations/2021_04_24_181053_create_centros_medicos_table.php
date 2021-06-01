@@ -14,7 +14,7 @@ class CreateCentrosMedicosTable extends Migration
     public function up()
     {
         Schema::create('centros_medicos', function (Blueprint $table) {
-            $table->string('id_centro_medico', 25)->unique()->primary();
+            $table->string('id_centro_medico', 10)->unique()->primary();
 
             $table->unsignedBigInteger('id_tipo_centro_medico');
             $table->foreign('id_tipo_centro_medico')->references('id_tipo_centro_medico')->on('tipo_centro_medico');

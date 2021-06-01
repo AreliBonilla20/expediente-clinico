@@ -28,7 +28,6 @@ const EditarHospitalizacion = () => {
     const [sala, setSala] = useState('');
     const [camilla, setCamilla] = useState('');
     const [estado_paciente, setEstado_paciente] = useState('');
-    const [alta_paciente, setAlta_paciente] = useState();
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -44,7 +43,6 @@ const EditarHospitalizacion = () => {
             setSala(hospitalizacion.sala);
             setCamilla(hospitalizacion.camilla);
             setEstado_paciente(hospitalizacion.estado_paciente);
-            setAlta_paciente(hospitalizacion.alta_paciente);
             
             ClickLabel(labels);
        })
@@ -63,7 +61,7 @@ const EditarHospitalizacion = () => {
             
           });
           
-          window.location = `/expedientes/${codigo_paciente}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          window.location = `/expedientes/${codigo_paciente}/ver`;
         } catch (err) {
           console.error(err.message);
         }
@@ -111,13 +109,13 @@ const EditarHospitalizacion = () => {
                                         <form className="form form-vertical" onSubmit={handleSubmit(editarHospitalizacion)}>
                                             <div className="form-body">
                                                 <div className="row">
-
-                                            
+                                                
+                                                   
                                                     <div className="col-6">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="fecha_ingreso">Fecha de ingreso (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="date" className="form-control" readOnly
+                                                                <input type="date" className="form-control"
                                                                     name="fecha_ingreso"
                                                                     id="fecha_ingreso"
                                                                     {...register('fecha_ingreso')}
@@ -136,7 +134,7 @@ const EditarHospitalizacion = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="hora_ingreso">Hora de ingreso (*)</label>
                                                             <div className="position-relative">
-                                                                <input type="time" className="form-control" readOnly
+                                                                <input type="time" className="form-control"
                                                                     name="hora_ingreso"
                                                                     id="hora_ingreso"
                                                                     {...register('hora_ingreso')}
@@ -154,7 +152,7 @@ const EditarHospitalizacion = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="motivo_ingreso">Motivo de ingreso (*)</label>
                                                             <div className="position-relative">
-                                                                <textarea type="text" className="form-control" rows="4" readOnly
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="motivo_ingreso"
                                                                     id="motivo_ingreso"
                                                                     {...register('motivo_ingreso')}
@@ -171,7 +169,7 @@ const EditarHospitalizacion = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="sala">Sala (*)</label>
+                                                            <label htmlFor="sala">Sala de ingreso (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
                                                                     name="sala"
@@ -211,7 +209,7 @@ const EditarHospitalizacion = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="estado_paciente">Estado paciente (*)</label>
                                                             <div className="position-relative">
-                                                                <textarea type="text" className="form-control" rows="4" readOnly
+                                                                <textarea type="text" className="form-control" rows="4"
                                                                     name="estado_paciente"
                                                                     id="estado_paciente"
                                                                     {...register('estado_paciente')}
@@ -225,13 +223,12 @@ const EditarHospitalizacion = () => {
                                                             <small className="text-danger"> {errors.estado_paciente?.message} </small>
                                                         </div>
                                                     </div>
-                                                    <br />
-                                                   
-                                                
+
+
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Actualizar</button>
                                                     </div>
-                                                    {JSON.stringify(alta_paciente)}
+
                                                     
                                                 </div>
                                             </div>
