@@ -11,10 +11,10 @@ class QuirofanoController extends Controller
 {
     public function index($id_centro_medico)
     {  
-       $quirofanos = DB::select('select * from quirofanos where id_centro_medico = ?', [$id_centro_medico]);
+        $quirofanos = DB::select('select * from quirofanos where id_centro_medico = ?', [$id_centro_medico]);
 
        return QuirofanoResource::collection($quirofanos);
-      
+
     }
 
     public function store(Request $request, $id_centro_medico)
