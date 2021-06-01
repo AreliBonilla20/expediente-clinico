@@ -11,14 +11,14 @@ class MedicamentoController extends Controller
 {
     public function index()
     {  
-       $medicamentos = DB::select('select * from medicamentos order by codigo_medicamento');
+       $medicamentos = DB::select('select * from index_medicamento');
        return MedicamentoResource::collection($medicamentos);
       
     }
 
     public function create()
     {
-        $tipos_medicamentos = DB::select('select * from tipo_medicamento order by id_tipo_medicamento asc');
+        $tipos_medicamentos = DB::select('select * from create_medicamento');
         
         $data = [
             "tipos_medicamentos" => $tipos_medicamentos, 
@@ -29,60 +29,58 @@ class MedicamentoController extends Controller
 
     public function store(Request $request)
     { 
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::insert('insert into medicamentos (codigo_medicamento, id_tipo_medicamento, nombre_medicamento, via_administracion, descripcion_medicamento, presentacion_medicamento,
-                    costo_medicamento, existencia_medicamento, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                    [$request->codigo_medicamento, 
-                    $request->id_tipo_medicamento,
-                    $request->nombre_medicamento,
-                    $request->via_administracion, 
-                    $request->descripcion_medicamento, 
-                    $request->presentacion_medicamento, 
-                    round($request->costo_medicamento, 2), 
-                    $request->existencia_medicamento, 
-                    $fecha_actual
+        DB::select('call public."add_medicamento_proce" (:codigo_medicamento, :id_tipo_medicamento, :nombre_medicamento, :via_administracion, :descripcion_medicamento, :presentacion_medicamento,
+                    :costo_medicamento, :existencia_medicamento, current_date)', 
+                    ["codigo_medicamento" => $request->codigo_medicamento, 
+                    "id_tipo_medicamento" => $request->id_tipo_medicamento,
+                    "nombre_medicamento" => $request->nombre_medicamento,
+                    "via_administracion" => $request->via_administracion, 
+                    "descripcion_medicamento" => $request->descripcion_medicamento, 
+                    "presentacion_medicamento"=> $request->presentacion_medicamento, 
+                    "costo_medicamento" => $request->costo_medicamento, 
+                    "existencia_medicamento" => $request->existencia_medicamento
                     ]);
-      
+                    
        
         return response()->json('Medicamento creado!');    
     }
 
     public function edit($codigo)
     {
-        $medicamento_editar = DB::select('select * from medicamentos where codigo_medicamento = ?', [$codigo]); 
+        $medicamento_editar = DB::select('SELECT  v_codigo as codigo_medicamento, v_id_tipo  as id_tipo_medicamento, v_nombre as nombre_medicamento, v_descripcion as descripcion_medicamento, 
+        v_via_administracion as via_administracion, v_presentacion as presentacion_medicamento, v_costo as costo_medicamento,  v_existencia as existencia_medicamento from public."edit_medicamento"(:codigo)', 
+        ["codigo" => $codigo]);
 
         return response()->json($medicamento_editar[0]);    
     }
 
     public function show($codigo)
     {
-        $medicamento_ver = DB::select('select * from medicamentos inner join tipo_medicamento on medicamentos.id_tipo_medicamento = tipo_medicamento.id_tipo_medicamento
-                                        where codigo_medicamento = ?', [$codigo]); 
+        $medicamento_ver = DB::select('SELECT  v_codigo as codigo_medicamento, v_nombre_tipo  as tipo_medicamento, v_nombre as nombre_medicamento, v_descripcion as descripcion_medicamento, 
+        v_via_administracion as via_administracion, v_presentacion as presentacion_medicamento, v_costo as costo_medicamento,  v_existencia as existencia_medicamento from public."get_by_codigo_medicamento"(:codigo)', 
+        ["codigo" => $codigo]); 
 
         return response()->json($medicamento_ver[0]);    
     }
+
 
     public function update($codigo, Request $request)
     {   
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
         
-        DB::update('update medicamentos set codigo_medicamento = ?, id_tipo_medicamento = ?, nombre_medicamento = ?, via_administracion = ?, descripcion_medicamento = ?, 
-                    presentacion_medicamento = ?, costo_medicamento = ?, existencia_medicamento = ?, updated_at = ? where codigo_medicamento = ?', 
-                    [$request->codigo_medicamento, 
-                     $request->id_tipo_medicamento,
-                     $request->nombre_medicamento,
-                     $request->via_administracion,
-                     $request->descripcion_medicamento,
-                     $request->descripcion_medicamento,
-                     round($request->costo_medicamento, 2),
-                     $request->existencia_medicamento,
-                     $fecha_actual,
-                     $codigo
+        DB::select('call public."udp_medicamento_proce" (:codigo_medicamento, :id_tipo_medicamento, :nombre_medicamento, :via_administracion, :descripcion_medicamento, :presentacion_medicamento,
+                    :costo_medicamento, :existencia_medicamento, current_date)', 
+                    ["codigo_medicamento" => $request->codigo_medicamento, 
+                    "id_tipo_medicamento" => $request->id_tipo_medicamento,
+                    "nombre_medicamento" => $request->nombre_medicamento,
+                    "via_administracion" => $request->via_administracion, 
+                    "descripcion_medicamento" => $request->descripcion_medicamento, 
+                    "presentacion_medicamento"=> $request->presentacion_medicamento, 
+                    "costo_medicamento" => $request->costo_medicamento, 
+                    "existencia_medicamento" => $request->existencia_medicamento
                     ]);
-
-
+                    
         return response()->json('Medicamento  actualizado!');    
     }
 
@@ -93,10 +91,11 @@ class MedicamentoController extends Controller
         $codigo_medicamento = '%'.$param_busqueda.'%';
         $nombre_medicamento = '%'.$param_busqueda.'%';
         
-        $medicamentos = DB::select('select * from medicamentos where UNACCENT(lower(codigo_medicamento)) LIKE ? or UNACCENT(lower(nombre_medicamento)) LIKE ?', 
-        [strtolower($codigo_medicamento), strtolower($nombre_medicamento)]);
-        
-        return MedicamentoResource::collection($medicamentos);
+        $medicamentos = DB::select('SELECT * from public."buscar_medicamento"(:codigo_medicamento, :nombre_medicamento)', 
+        ["codigo_medicamento" => strtolower($codigo_medicamento), 
+        "nombre_medicamento" => strtolower($nombre_medicamento)]);
+       
+        return response()->json(array('data' => $medicamentos), 200);
 
     }
 }
