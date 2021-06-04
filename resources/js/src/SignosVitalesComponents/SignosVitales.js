@@ -9,12 +9,8 @@ const SignosVitales = () => {
     
     const API_URL = API.API_URL;
 
-    const {id_hospitalizacion} = useParams();
-
-    const codigo = id_hospitalizacion.substr(0,7);
-
+    const {id_hospitalizacion, id_consulta } = useParams();
     const [signos_vitales, setSignos_vitales] = useState([]);
-
 
     const [presion_arterial_sistolica, setPresion_arterial_sistolica] = useState('');
     const [presion_arterial_diastolica, setPresion_arterial_diastolica] = useState('');
@@ -24,8 +20,9 @@ const SignosVitales = () => {
     const [ritmo_cardiaco_paciente, setRitmo_cardiaco_paciente] = useState('');
     const [respiracion_paciente, setRespiracion_paciente] = useState('');
 
+
     useEffect(() => {
-        API.signos_vitales(id_hospitalizacion).then(res => {
+        API.signos_vitales(id_consulta, id_hospitalizacion).then(res => {
            const result = res.data;
            setSignos_vitales(result);
   
@@ -37,16 +34,26 @@ const SignosVitales = () => {
     const agregarSignosvitales = async (e) => {
      e.preventDefault();
         try {
-          const body = {id_hospitalizacion, codigo, presion_arterial_sistolica,
+          const body = {id_hospitalizacion, id_consulta, presion_arterial_sistolica,
                         presion_arterial_diastolica, peso_paciente, estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente };
-          const response = await fetch(`${API_URL}/signos_vitales/${id_hospitalizacion}/guardar`, {
+          const response = await fetch(`${API_URL}/signos_vitales/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json"  },
             body: JSON.stringify(body)
             
           });
           
-          window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          if(id_hospitalizacion){
+            const codigo = id_hospitalizacion.substring(0,7);
+            window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          }
+
+          if(id_consulta){
+            const codigo = id_consulta.substring(0,7);
+            window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+          }
+          
+         
         } catch (err) {
           console.error(err.message);
         }
@@ -62,7 +69,7 @@ const SignosVitales = () => {
         <i className="bi bi-plus"></i>
         Agregar
         </button>
-
+        
         <div className="modal fade" id="signosModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content">

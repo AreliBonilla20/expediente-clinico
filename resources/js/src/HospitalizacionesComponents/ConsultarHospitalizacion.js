@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {
     BrowserRouter as Router,
-    Link
+    Link,
+    useParams
 } from 'react-router-dom';
 
 import Menu from '../LayoutComponents/Menu';
@@ -14,11 +15,12 @@ const ConsultarHospitalizacion = () => {
     
     
     const [hospitalizaciones, setHospitalizaciones] =useState([]);
+    const { codigo } = useParams();
 
     useEffect(() => {
-         API.hospitalizaciones().then(res => {
+         API.hospitalizaciones_paciente(codigo).then(res => {
             const result = res.data;
-            setHospitalizaciones(result.data);
+            setHospitalizaciones(result);
         })
       }, []);
 
@@ -29,7 +31,7 @@ const ConsultarHospitalizacion = () => {
             <div className="card-header">
                 <Link to="hospitalizaciones/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
             </div>
-            
+           
             <br />
             {hospitalizaciones.length > 0 &&
             <div className="card-body">

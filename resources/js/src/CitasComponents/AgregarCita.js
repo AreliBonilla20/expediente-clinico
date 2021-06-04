@@ -186,7 +186,7 @@ const AgregarCita = () => {
                                 </div>
                             </div>
                         </div>
-                     
+                     {JSON.stringify(codigo)}
                     </div>
                 </div>   
             </div>

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import API from '../api';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,45 +14,51 @@ import Footer from '../LayoutComponents/Footer';
 function AsignarDiagnosticos() {
   const API_URL = API.API_URL;
 
-  const {id_hospitalizacion} = useParams();
+  var {id_consulta, id_hospitalizacion} = useParams();
 
-  const codigo = id_hospitalizacion.substr(0,7);
+  if(id_consulta == undefined){
+        id_consulta = 'null';
+  }
 
-  const [input_list, setinput_list] = useState([{ codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
-  const [diagnosticos,setDiagnosticos] = useState([]);
+  if(id_hospitalizacion == undefined){
+    id_hospitalizacion = 'null';
+  }
 
-  const [tipos_diagnosticos, setTipos_diagnosticos] = useState([]);
-  const [id_tipo_diagnostico, setId_tipo_diagnostico] = useState('');
+  const [input_list, set_input_list] = useState([{ codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
+  const [diagnosticos, set_diagnosticos] = useState([]);
+
+  const [tipos_diagnosticos, set_tipos_diagnosticos] = useState([]);
+  const [id_tipo_diagnostico, set_id_tipo_diagnostico] = useState('');
 
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...input_list];
     list.splice(index, 1);
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setinput_list([...input_list, { codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
+    set_input_list([...input_list, { codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
   };
 
   useEffect(() => {
     API.datos_formulario_diagnostico().then(res => {
         const result = res.data;
-        setTipos_diagnosticos(result.tipos_diagnosticos);
+        set_tipos_diagnosticos(result.tipos_diagnosticos);
    })
 
    API.diagnosticos().then( res => {
        const result = res.data;
-       setDiagnosticos(result.data);
+       set_diagnosticos(result.data);
    })
 },[]);
 
@@ -63,14 +68,23 @@ function AsignarDiagnosticos() {
     e.preventDefault();
     try {
       const body = { input_list };
-      const response = await fetch(`${API_URL}/historial_diagnosticos/${id_hospitalizacion}/guardar`, {
+      const response = await fetch(`${API_URL}/historial_diagnosticos/${id_consulta}/${id_hospitalizacion}/guardar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
         
       });
       
-      window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      if(id_hospitalizacion !== 'null'){
+        const codigo = id_hospitalizacion.substring(0,7);
+        window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      }
+
+      if(id_consulta !== 'null'){
+        const codigo = id_consulta.substring(0,7);
+        window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+      }
+      
     } catch (err) {
       console.error(err.message);
     }
@@ -83,13 +97,15 @@ function AsignarDiagnosticos() {
         <div id="main" className='layout-navbar'>
         <Header />
             <div id="main-content">
+                
 
                 <div className="page-heading">
                     <div className="page-title">
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Diagnósticos</h3>
-                              
+                              {JSON.stringify(input_list)}
+            
                                 <p className="text-subtitle text-muted">Agregar diagnóstico</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">
@@ -130,7 +146,7 @@ function AsignarDiagnosticos() {
                                                         name="id_tipo_diagnostico" 
                                                         id="id_tipo_diagnostico" 
                                                         value={id_tipo_diagnostico} 
-                                                        onChange={e => setId_tipo_diagnostico(e.target.value)} >
+                                                        onChange={e => set_id_tipo_diagnostico(e.target.value)} >
                                                         <option value="">--Seleccione una opción--</option>
                                                         {tipos_diagnosticos.map((tipo_diagnostico) => (
                                                         <option value={tipo_diagnostico.id_tipo_diagnostico}>{tipo_diagnostico.tipo_diagnostico}</option>

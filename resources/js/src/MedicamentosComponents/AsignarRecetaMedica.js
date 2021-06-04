@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import API from '../api';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,11 +14,17 @@ import Footer from '../LayoutComponents/Footer';
 function AsignarMedicamento() {
   const API_URL = API.API_URL;
 
-  const {id_hospitalizacion} = useParams();
+  var {id_consulta, id_hospitalizacion} = useParams();
 
-  const codigo = id_hospitalizacion.substr(0,7);
+  if(id_consulta == undefined){
+        id_consulta = 'null';
+  }
 
-  const [input_list, setinput_list] = useState([{ codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
+  if(id_hospitalizacion == undefined){
+    id_hospitalizacion = 'null';
+  }
+
+  const [input_list, set_input_list] = useState([{ codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
   const [medicamentos,set_medicamentos] = useState([]);
 
   const [tipos_medicamentos, set_tipos_medicamentos] = useState([]);
@@ -30,19 +35,19 @@ function AsignarMedicamento() {
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...input_list];
     list.splice(index, 1);
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setinput_list([...input_list, { codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
+    set_input_list([...input_list, { codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
   };
 
   useEffect(() => {
@@ -63,14 +68,23 @@ function AsignarMedicamento() {
     e.preventDefault();
     try {
       const body = { input_list };
-      const response = await fetch(`${API_URL}/recetas_medicas/${id_hospitalizacion}/guardar`, {
+      const response = await fetch(`${API_URL}/recetas_medicas/${id_consulta}/${id_hospitalizacion}/guardar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
         
       });
       
-      window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      if(id_hospitalizacion !== 'null'){
+        const codigo = id_hospitalizacion.substring(0,7);
+        window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      }
+
+      if(id_consulta !== 'null'){
+        const codigo = id_consulta.substring(0,7);
+        window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+      }
+
     } catch (err) {
       console.error(err.message);
     }
@@ -89,7 +103,7 @@ function AsignarMedicamento() {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Medicamentos</h3>
-                              
+                                {JSON.stringify(input_list)}
                                 <p className="text-subtitle text-muted">Asignar medicamentos</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">

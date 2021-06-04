@@ -69,6 +69,9 @@ import AgregarCita from './CitasComponents/AgregarCita';
 import EditarCita from './CitasComponents/EditarCita';
 import VerCita from './CitasComponents/VerCita';
 
+import AgregarConsulta from './ConsultasComponents/AgregarConsulta';
+import VerDetallesConsulta from './ConsultasComponents/VerDetallesConsulta';
+
 import PruebaCalendario from './Prueba/PruebaMostrar';
 
 
@@ -97,6 +100,10 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_diagnosticos" component={AsignarDiagnosticos} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_receta_medica" component={AsignarRecetaMedica} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_tratamientos" component={AsignarTratamientos} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/ver" component={VerDetallesConsulta} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_diagnosticos" component={AsignarDiagnosticos} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_receta_medica" component={AsignarRecetaMedica} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_tratamientos" component={AsignarTratamientos} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
@@ -144,6 +151,9 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/agregar_cita" component={AgregarCita} />
                 <Route exact path="/citas/:id_cita/editar" component={EditarCita} />
                 <Route exact path="/citas/:id_cita/ver" component={VerCita} />
+
+                <Route exact path="/consultas/:codigo_paciente/:id_cita/crear" component={AgregarConsulta} />
+               
                 
                 <Route exact path="/prueba" component={PruebaCalendario} />
 

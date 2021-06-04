@@ -10,7 +10,7 @@ class CitaController extends Controller
 {
     public function index()
     {  
-       $citas_hoy = DB::select('select id_cita, fecha_cita, hora_cita, id_doctor, codigo_paciente, nombres, apellidos from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente where fecha_cita = current_date order by hora_cita');
+       $citas_hoy = DB::select('select id_cita, fecha_cita, hora_cita, id_doctor, codigo_paciente, nombres, apellidos from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente ');
        return response()->json($citas_hoy);   
       
     }
@@ -81,6 +81,13 @@ class CitaController extends Controller
                     ]);
 
         return response()->json('Cita actualizada!');    
+    }
+
+    public function citas_paciente($codigo_paciente)
+    {
+        $citas_paciente = DB::select('select * from citas where codigo_paciente = ?', [$codigo_paciente]);
+
+        return response()->json($citas_paciente);
     }
 
     /*public function buscar($param_busqueda)

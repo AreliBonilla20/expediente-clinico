@@ -12,18 +12,23 @@ const HistorialTratamientos = () => {
     
     const API_URL = API.API_URL;
 
-    const {id_hospitalizacion} = useParams();
+    const {id_consulta, id_hospitalizacion} = useParams();
 
-    const codigo = id_hospitalizacion.substr(0,7);
+    var codigo;
+
+    if(id_hospitalizacion){
+        codigo = id_hospitalizacion.substr(0,7);
+    }
+
+    if(id_consulta){
+        codigo = id_consulta.substr(0,7);
+    }
 
     const [historial_tratamientos, set_historial_tratamientos] = useState([]);
-   
-
-   
 
     useEffect(() => {
        
-        API.historial_tratamientos(id_hospitalizacion).then(res => {
+        API.historial_tratamientos(id_consulta, id_hospitalizacion).then(res => {
             const result = res.data;
             set_historial_tratamientos(result);
         })
@@ -36,7 +41,12 @@ const HistorialTratamientos = () => {
         <div className="card-body">
         <div className="card">
             <div className="card-header">
+            {id_hospitalizacion &&
                 <Link to={`/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/asignar_tratamientos`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                }
+                {id_consulta &&
+                <Link to={`/expedientes/${codigo}/consultas/${id_consulta}/asignar_tratamientos`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                }
             </div>
         {historial_tratamientos.length > 0 &&
         <section className="section">

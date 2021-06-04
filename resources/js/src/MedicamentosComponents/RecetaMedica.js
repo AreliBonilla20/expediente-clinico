@@ -12,18 +12,24 @@ const RecetaMedica = () => {
     
     const API_URL = API.API_URL;
 
-    const {id_hospitalizacion} = useParams();
+    const {id_consulta, id_hospitalizacion} = useParams();
 
-    const codigo = id_hospitalizacion.substr(0,7);
+    var codigo;
+
+    if(id_hospitalizacion){
+        codigo = id_hospitalizacion.substr(0,7);
+    }
+
+    if(id_consulta){
+        codigo = id_consulta.substr(0,7);
+    }
 
     const [receta_medica, set_receta_medica] = useState([]);
    
 
-   
-
     useEffect(() => {
        
-        API.recetas_medicas(id_hospitalizacion).then(res => {
+        API.recetas_medicas(id_consulta, id_hospitalizacion).then(res => {
             const result = res.data;
             set_receta_medica(result);
         })
@@ -31,12 +37,16 @@ const RecetaMedica = () => {
      }, []);
 
     
-    
       return(
         <div className="card-body">
         <div className="card">
             <div className="card-header">
+                {id_hospitalizacion &&
                 <Link to={`/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/asignar_receta_medica`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                }
+                {id_consulta &&
+                <Link to={`/expedientes/${codigo}/consultas/${id_consulta}/asignar_receta_medica`} className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                }
             </div>
         {receta_medica.length > 0 &&
         <section className="section">

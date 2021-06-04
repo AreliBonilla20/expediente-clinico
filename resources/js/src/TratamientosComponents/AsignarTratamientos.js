@@ -15,11 +15,17 @@ import Footer from '../LayoutComponents/Footer';
 function AsignarTratamientos() {
   const API_URL = API.API_URL;
 
-  const {id_hospitalizacion} = useParams();
+  var {id_consulta, id_hospitalizacion} = useParams();
 
-  const codigo = id_hospitalizacion.substr(0,7);
+  if(id_consulta == undefined){
+        id_consulta = 'null';
+  }
 
-  const [input_list, setinput_list] = useState([{ codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
+  if(id_hospitalizacion == undefined){
+    id_hospitalizacion = 'null';
+  }
+
+  const [input_list, set_input_list] = useState([{ codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
   const [tratamientos,set_tratamientos] = useState([]);
 
   const [tipos_tratamientos, set_tipos_tratamientos] = useState([]);
@@ -30,19 +36,19 @@ function AsignarTratamientos() {
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...input_list];
     list.splice(index, 1);
-    setinput_list(list);
+    set_input_list(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setinput_list([...input_list, { codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
+    set_input_list([...input_list, { codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
   };
 
   useEffect(() => {
@@ -63,14 +69,22 @@ function AsignarTratamientos() {
     e.preventDefault();
     try {
       const body = { input_list };
-      const response = await fetch(`${API_URL}/historial_tratamientos/${id_hospitalizacion}/guardar`, {
+      const response = await fetch(`${API_URL}/historial_tratamientos/${id_consulta}/${id_hospitalizacion}/guardar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
         
       });
       
-      window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      if(id_hospitalizacion !== 'null'){
+        const codigo = id_hospitalizacion.substring(0,7);
+        window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+      }
+
+      if(id_consulta !== 'null'){
+        const codigo = id_consulta.substring(0,7);
+        window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -89,7 +103,7 @@ function AsignarTratamientos() {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Tratamientos</h3>
-                              
+                             
                                 <p className="text-subtitle text-muted">Asignar tratamientos</p>
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">

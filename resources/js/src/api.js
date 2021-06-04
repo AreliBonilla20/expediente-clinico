@@ -31,6 +31,9 @@ export default {
     hospitalizaciones: () =>
     axios.get(`${API_URL}/hospitalizaciones`),
 
+    hospitalizaciones_paciente: (codigo) =>
+    axios.get(`${API_URL}/hospitalizaciones_paciente/${codigo}`),
+
     hospitalizacion_editar: (id_hospitalizacion) =>
     axios.get(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/editar`),
 
@@ -42,23 +45,23 @@ export default {
     axios.get(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}`),
 
     //Signos vitales
-    signos_vitales: (id_hospitalizacion) =>
-    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}`),
+    signos_vitales: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_consulta}/${id_hospitalizacion}`),
 
-    signos_vitales_graficos: (id_hospitalizacion) =>
-    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}/graficos`),
+    signos_vitales_graficos: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_consulta}/${id_hospitalizacion}/graficos`),
 
     //Historial diagnosticos
-    historial_diagnosticos: (id_hospitalizacion) =>
-    axios.get(`${API_URL}/historial_diagnosticos/${id_hospitalizacion}`),
+    historial_diagnosticos: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/historial_diagnosticos/${id_consulta}/${id_hospitalizacion}`),
 
      //Historial recetas médicas
-    recetas_medicas: (id_hospitalizacion) =>
-    axios.get(`${API_URL}/recetas_medicas/${id_hospitalizacion}`),
+    recetas_medicas: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/recetas_medicas/${id_consulta}/${id_hospitalizacion}`),
 
      //Historial tratamientos
-    historial_tratamientos: (id_hospitalizacion) =>
-     axios.get(`${API_URL}/historial_tratamientos/${id_hospitalizacion}`),
+    historial_tratamientos: (id_consulta, id_hospitalizacion) =>
+     axios.get(`${API_URL}/historial_tratamientos/${id_consulta}/${id_hospitalizacion}`),
 
     //Diagnósticos
     diagnosticos: () =>
@@ -204,6 +207,16 @@ export default {
 
     datos_formulario_cita: () =>
     axios.get(`${API_URL}/citas/crear`),
+
+    citas_paciente: (codigo_paciente) => 
+    axios.get(`${API_URL}/citas/${codigo_paciente}/citas_paciente`),
+
+    //Consultas
+    consulta_ver: (id_consulta) =>
+    axios.get(`${API_URL}/consultas/${id_consulta}/ver`),
+
+    consultas_paciente: (codigo) => 
+    axios.get(`${API_URL}/consultas/${codigo}`),
 
     API_URL,
 

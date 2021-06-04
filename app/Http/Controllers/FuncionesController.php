@@ -109,25 +109,25 @@ class FuncionesController extends Controller
         return $cod;
     }
 
-    public function codigo_atencion_medica($id_hospitalizacion)
+    public function codigo_atencion_medica($codigo_paciente)
     {   
         $cont = 0;
-        $codigo = substr($id_hospitalizacion, 0, 7);
+
         $atenciones_medicas = DB::select('select* from atenciones_medicas');
 
         if(count($atenciones_medicas)>0)
         {
             foreach($atenciones_medicas as $atencion_medica)
             {
-                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $codigo)
+                if(substr($atencion_medica->id_atencion_medica, 0, 7) == $codigo_paciente)
                 $cont++;    
             }   
 
             $correlativo = (string) $cont + 1;
-            $id_atencion = $codigo.'A'.$correlativo;
+            $id_atencion = $codigo_paciente.'A'.$correlativo;
         }
         else {
-            $id_atencion = $codigo.'A1';
+            $id_atencion = $codigo_paciente.'A1';
         }
         
         return $id_atencion;
@@ -175,13 +175,37 @@ class FuncionesController extends Controller
         return $id_doc;
     }
 
+    public function get_id_consulta($id_cita, $codigo_paciente)
+    {   
+        $consultas = DB::select('select * from consultas');
+        
+        if(count($consultas)>0){
+            foreach($consultas as $consulta){
+                if($consulta->id_cita===$id_cita){
+                    $numeracion = (int)substr($consulta->id_cita, 4, 3);
+                    $correlativo = (string) $numeracion + 1; 
+                }
+                else{
+                    $correlativo = '1';
+                }
+            }
+        }
+        else{
+            $correlativo = '1';
+        }
+
+        $cod = $codigo_paciente.'CM'.$correlativo;
+
+        return $cod;
+    }
+
     public function get_id_cita($codigo)
     {   
         $citas = DB::select('select * from citas');
         
         if(count($citas)>0){
             foreach($citas as $cita){
-                if(substr($cita->codigo_paciente)===$codigo){
+                if($cita->codigo_paciente===$codigo){
                     $numeracion = (int)substr($cita->codigo_paciente, 4, 3);
                     $correlativo = (string) $numeracion + 1; 
                 }

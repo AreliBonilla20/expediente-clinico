@@ -10,6 +10,8 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 import Antecedentes from '../AntecedentesComponents/VerAntecedente';
 import Hospitalizacion from '../HospitalizacionesComponents/ConsultarHospitalizacion';
+import Citas from '../CitasComponents/CitasPaciente';
+import Consultas from '../ConsultasComponents/VerConsultas';
 
 import API from '../api';
 
@@ -128,6 +130,14 @@ const VerExpediente = () => {
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="profile-tab" data-bs-toggle="tab" href="#antecedentes"
                                                 role="tab" aria-controls="antecedentes" aria-selected="false">Antecedentes</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="citas-tab" data-bs-toggle="tab" href="#citas"
+                                                role="tab" aria-controls="citas" aria-selected="false">Citas</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="consultas-tab" data-bs-toggle="tab" href="#consultas"
+                                                role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="home-tab" data-bs-toggle="tab" href="#hospitalizaciones"
@@ -366,6 +376,28 @@ const VerExpediente = () => {
                                                     </section>
                                             </div>
 
+                                            <div className="tab-pane fade" id="citas" role="tabpanel"
+                                                aria-labelledby="citas-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                        <Citas />
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="consultas" role="tabpanel"
+                                                aria-labelledby="consultas-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                        <Consultas />
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+  
+                                           
                                             <div className="tab-pane fade" id="hospitalizaciones" role="tabpanel"
                                                 aria-labelledby="hospitalizaciones-tab">
                                                     

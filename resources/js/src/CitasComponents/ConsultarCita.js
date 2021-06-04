@@ -111,6 +111,9 @@ const ConsultarDiagnostico = () => {
                                             <td>
                                             <Link to={`citas/${cita.id_cita}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
                                             </td>
+                                            <td>
+                                            <Link to={`consultas/${cita.codigo_paciente}/${cita.id_cita}/crear`} className="btn btn-sm btn-success"><i className="bi bi-play"></i> Iniciar consulta</Link>
+                                            </td>
                                              
                                           </tr>
                                     )}

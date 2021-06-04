@@ -15,6 +15,13 @@ class HospitalizacionController extends Controller
        return HospitalizacionResource::collection($hospitalizacion);
     }
 
+    public function hospitalizaciones_paciente($codigo) 
+    {
+        $hospitalizaciones_paciente = DB::select('select * from hospitalizaciones where codigo_paciente = ?', [$codigo]);
+
+        return response()->json($hospitalizaciones_paciente);
+    }
+
 
     public function store(Request $request, $codigo)
     {   

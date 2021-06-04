@@ -7,25 +7,43 @@ use Illuminate\Support\Facades\DB;
 
 class SignosVitalesController extends Controller
 {   
-    public function index($id_hospitalizacion)
+    public function index($id_consulta, $id_hospitalizacion)
     {  
       $signos_vitales = DB::select('select * from signos_vitales inner join atenciones_medicas 
-      on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica inner join hospitalizaciones on
-      hospitalizaciones.id_hospitalizacion=atenciones_medicas.id_hospitalizacion');
+      on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica
+      where id_consulta = ? or id_hospitalizacion = ?', [$id_consulta, $id_hospitalizacion]);
 
       return response()->json($signos_vitales);  
     }
 
-    public function store(Request $request, $id_hospitalizacion)
+    public function store(Request $request)
     {   
-        $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica($id_hospitalizacion);
-  
-        DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica) 
-                    values (?, ?, ?, current_date, current_time)', 
-                    [$id_atencion_medica, 
-                     null,
-                     $request->id_hospitalizacion
-                    ]);
+        $id_atencion_medica = '';
+    
+        if($request->id_consulta){
+
+          $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica(substr($request->id_consulta, 0, 7));
+          
+          DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica) 
+                      values (?, ?, ?, current_date, current_time)', 
+                      [$id_atencion_medica,
+                      $request->id_consulta, 
+                      null
+          ]);
+        }
+
+        if($request->id_hospitalizacion){
+
+          $id_atencion_medica = app('App\Http\Controllers\FuncionesController')->codigo_atencion_medica(substr($request->id_hospitalizacion, 0, 7));
+
+          DB::insert('insert into atenciones_medicas (id_atencion_medica, id_consulta, id_hospitalizacion, fecha_atencion_medica, hora_atencion_medica) 
+                      values (?, ?, ?, current_date, current_time)', 
+                      [$id_atencion_medica,
+                      null,
+                      $request->id_hospitalizacion
+          ]);
+        } 
+          
 
         DB::insert('insert into signos_vitales (id_atencion_medica, presion_arterial_sistolica, presion_arterial_diastolica, peso_paciente, 
         estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente) 
@@ -43,13 +61,13 @@ class SignosVitalesController extends Controller
         return response()->json('Signos vitales registrados!');    
     }
 
-    public function graficos($id_hospitalizacion)
+    public function graficos($id_consulta, $id_hospitalizacion)
     {  
   
       $signos = DB::select("select fecha_atencion_medica|| '  ' || to_char(hora_atencion_medica, 'HH12:MI') as fecha, estatura_paciente, presion_arterial_sistolica,  
       presion_arterial_diastolica, peso_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente from signos_vitales inner join atenciones_medicas 
-      on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica inner join hospitalizaciones on
-      hospitalizaciones.id_hospitalizacion=atenciones_medicas.id_hospitalizacion where atenciones_medicas.id_hospitalizacion = ?", [$id_hospitalizacion]);
+      on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica
+      where atenciones_medicas.id_hospitalizacion = ? or atenciones_medicas.id_consulta = ?", [$id_hospitalizacion, $id_consulta]);
 
       $estatura_array = [];
       $peso_array = [];

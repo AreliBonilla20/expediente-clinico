@@ -30,6 +30,7 @@ Route::put('/antecedentes/{codigo}/actualizar', 'AntecedentePacienteController@u
 
 //Rutas para hospitalizaciones
 Route::get('/hospitalizaciones', 'HospitalizacionController@index');
+Route::get('/hospitalizaciones_paciente/{codigo}', 'HospitalizacionController@hospitalizaciones_paciente');
 Route::post('/hospitalizaciones/{id_hospitalizacion}/guardar', 'HospitalizacionController@store');
 Route::get('/hospitalizaciones/{id_hospitalizacion}/ver', 'HospitalizacionController@show');
 Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionController@edit');
@@ -40,21 +41,21 @@ Route::get('/chequeos_hospitalizaciones/{id_hospitalizacion}', 'ChequeoHospitali
 Route::post('/chequeos_hospitalizaciones/{id_hospitalizacion}/guardar', 'ChequeoHospitalizacionController@store');
 
 //Rutas para signos vitales
-Route::get('/signos_vitales/{id_hospitalizacion}', 'SignosVitalesController@index');
-Route::get('/signos_vitales/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
-Route::post('/signos_vitales/{id_hospitalizacion}/guardar', 'SignosVitalesController@store');
+Route::get('/signos_vitales/{id_consulta}/{id_hospitalizacion}', 'SignosVitalesController@index');
+Route::get('/signos_vitales/{id_consulta}/{id_hospitalizacion}/graficos', 'SignosVitalesController@graficos');
+Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
 
 //Rutas para el historial de diagnósticos del paciente
-Route::get('/historial_diagnosticos/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
-Route::post('/historial_diagnosticos/{id_hospitalizacion}/guardar', 'HistorialDiagnosticosController@store');
+Route::get('/historial_diagnosticos/{id_consulta}/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
+Route::post('/historial_diagnosticos/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialDiagnosticosController@store');
 
 //Rutas para el historial de recetas médicas del paciente
-Route::get('/recetas_medicas/{id_hospitalizacion}', 'RecetaMedicaController@index');
-Route::post('/recetas_medicas/{id_hospitalizacion}/guardar', 'RecetaMedicaController@store');
+Route::get('/recetas_medicas/{id_consulta}/{id_hospitalizacion}', 'RecetaMedicaController@index');
+Route::post('/recetas_medicas/{id_consulta}/{id_hospitalizacion}/guardar', 'RecetaMedicaController@store');
 
 //Rutas para el historial de tratamientos del paciente
-Route::get('/historial_tratamientos/{id_hospitalizacion}', 'HistorialTratamientosController@index');
-Route::post('/historial_tratamientos/{id_hospitalizacion}/guardar', 'HistorialTratamientosController@store');
+Route::get('/historial_tratamientos/{id_consulta}/{id_hospitalizacion}', 'HistorialTratamientosController@index');
+Route::post('/historial_tratamientos/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialTratamientosController@store');
 
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
@@ -149,3 +150,10 @@ Route::get('/citas/{id_cita}/ver', 'CitaController@show');
 Route::get('/citas/{id_cita}/editar', 'CitaController@edit');
 Route::put('/citas/{id_cita}/actualizar', 'CitaController@update');
 //Route::get('/citas/{param_busqueda}/buscar', 'CitaController@buscar');
+Route::get('/citas/{codigo_paciente}/citas_paciente', 'CitaController@citas_paciente');
+
+//Rutas para consultas
+Route::get('/consultas/{codigo}', 'ConsultaController@index');
+Route::get('/consultas/crear', 'ConsultaController@create');
+Route::post('/consultas/guardar', 'ConsultaController@store');
+Route::get('/consultas/{id_consulta}/ver', 'ConsultaController@show');

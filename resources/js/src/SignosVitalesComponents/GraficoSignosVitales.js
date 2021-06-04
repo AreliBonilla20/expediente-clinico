@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Line } from "react-chartjs-2";
+import { useParams } from 'react-router';
 
 import API from '../api';
 
 const GraficosSignosVitales = () => {
+
+    const {id_hospitalizacion, id_consulta} = useParams();
 
     const [fechas, set_fechas] = useState([]);
     const [peso, set_peso] = useState([]);
@@ -15,7 +18,7 @@ const GraficosSignosVitales = () => {
     const [respiracion, set_respiracion] = useState([]);
 
     useEffect(() => {
-        API.signos_vitales_graficos('EB21001H1').then(res => {
+        API.signos_vitales_graficos(id_consulta, id_hospitalizacion).then(res => {
            const result = res.data;
            set_fechas(result.fecha_array);
            set_peso(result.peso_array);
@@ -34,6 +37,7 @@ const GraficosSignosVitales = () => {
         <div className="card">
             <div className="card-header">
                 <h4 className="card-title">Gráficos</h4>
+                {id_hospitalizacion}
             </div>
             <div className="card-body">
                 <div className="row">
