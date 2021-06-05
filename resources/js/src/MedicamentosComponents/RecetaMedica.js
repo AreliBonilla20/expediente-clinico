@@ -62,17 +62,23 @@ const RecetaMedica = () => {
                  </div>
               
                 <p className="card-text">
-                    <p>Clasificación: {medicamento.tipo_medicamento}</p>
-                    <p>Administración: {medicamento.via_administracion}</p>
-                    <p>Dósis: {medicamento.dosis_medicamento}</p>
-                    <p>Indicaciones: {medicamento.indicaciones_medicamento}</p> 
+                    <p><b>Clasificación: </b>{medicamento.tipo_medicamento}</p>
+                    <p><b>Administración: </b>{medicamento.via_administracion}</p>
+                    <p><b>Dósis: </b>{medicamento.dosis_medicamento}</p>
+                    <p><b>Indicaciones: </b>{medicamento.indicaciones_medicamento}</p>
+                    {medicamento.estado_medicamento == 'Vigente' &&
+                    <p><b>Estado medicamento: </b><span class="badge bg-light-success">{medicamento.estado_medicamento}</span></p>
+                    }
+                    {medicamento.estado_medicamento == 'Suspendido' &&
+                    <p><b>Estado medicamento: </b><span class="badge bg-light-danger">{medicamento.estado_medicamento}</span></p>
+                    }
                 </p>
            
-                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
+                <p className="card-footer" style={{fontWeight: "bold"}}>Prescrito por: </p>
             </div>
         )}
    
-        <hr />
+       
         </div>
     
       

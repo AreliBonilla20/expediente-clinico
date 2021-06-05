@@ -31,10 +31,11 @@ Route::put('/antecedentes/{codigo}/actualizar', 'AntecedentePacienteController@u
 //Rutas para hospitalizaciones
 Route::get('/hospitalizaciones', 'HospitalizacionController@index');
 Route::get('/hospitalizaciones_paciente/{codigo}', 'HospitalizacionController@hospitalizaciones_paciente');
-Route::post('/hospitalizaciones/{id_hospitalizacion}/guardar', 'HospitalizacionController@store');
+Route::post('/hospitalizaciones/{codigo}/guardar', 'HospitalizacionController@store');
 Route::get('/hospitalizaciones/{id_hospitalizacion}/ver', 'HospitalizacionController@show');
 Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionController@edit');
 Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'HospitalizacionController@update');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/facturacion', 'HospitalizacionController@hospitalizacion_facturacion');
 
 //Rutas para chequeos - hospitalizaciones
 Route::get('/chequeos_hospitalizaciones/{id_hospitalizacion}', 'ChequeoHospitalizacionController@index');

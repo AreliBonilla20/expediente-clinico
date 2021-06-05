@@ -25,13 +25,17 @@ class HospitalizacionController extends Controller
 
     public function store(Request $request, $codigo)
     {   
-        $codigo_calculado = $this->get_codigo($codigo);
+        $id_hospitalizacion = $this->get_codigo($codigo);
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::insert('insert into hospitalizaciones (id_hospitalizacion, codigo_paciente, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla,
+        $costo_hospitalizacion = DB::select('select * from centros_medicos where id_centro_medico = ?', [$request->id_centro_medico]);
+
+    
+        DB::insert('insert into hospitalizaciones (id_hospitalizacion, id_centro_medico, codigo_paciente, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla,
         estado_paciente, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                    [$codigo_calculado,
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    [$id_hospitalizacion,
+                     $request->id_centro_medico,
                      $codigo,
                      $request->fecha_ingreso,
                      $request->hora_ingreso,
@@ -42,6 +46,14 @@ class HospitalizacionController extends Controller
                      $fecha_actual
                     ]);
         
+        DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_hospitalizacion, costo_hospitalizacion, created_at)
+                    values (?, ?, ?, ?, current_date + current_time)',
+                    [$codigo,
+                    $request->id_centro_medico,
+                    $id_hospitalizacion,
+                    $costo_hospitalizacion[0]->costo_dia_hospitalizacion
+                    ]);
+
         return response()->json('Hospitalización creada!');    
     }
 
@@ -55,7 +67,18 @@ class HospitalizacionController extends Controller
 
     public function show($id_hospitalizacion)
     {
-        $hospitalizacion_ver = DB::select('select * from hospitalizaciones where id_hospitalizacion = ?', [$id_hospitalizacion]); 
+        
+        $hospitalizacion_ver = DB::select('select * from hospitalizaciones inner join centros_medicos on centros_medicos.id_centro_medico = hospitalizaciones.id_centro_medico 
+        where id_hospitalizacion = ?', [$id_hospitalizacion]); 
+
+        $dias_ingreso = $hospitalizacion_ver[0]->dias_ingreso;
+        $costo_dia_hospitalizacion = $hospitalizacion_ver[0]->costo_dia_hospitalizacion;
+        $costo_hospitalizacion = $dias_ingreso * $costo_dia_hospitalizacion;
+
+        DB::update('update hospitalizaciones set dias_ingreso = current_date - fecha_ingreso where id_hospitalizacion = ?', [$id_hospitalizacion]);
+
+
+        DB::update('update costo_servicios set costo_hospitalizacion = ? where id_hospitalizacion = ?', [$costo_hospitalizacion, $id_hospitalizacion]);
 
         return response()->json($hospitalizacion_ver[0]);    
     }
@@ -107,5 +130,18 @@ class HospitalizacionController extends Controller
         }
         
         return $id_hosp;
+    }
+
+    public function hospitalizacion_facturacion($id_hospitalizacion)
+    {
+        $costo_hospitalizacion = DB::select('select * from costo_servicios 
+        inner join centros_medicos on centros_medicos.id_centro_medico = costo_servicios.id_centro_medico
+        inner join departamentos on departamentos.id_departamento = centros_medicos.id_departamento
+        inner join municipios on municipios.id_municipio = centros_medicos.id_municipio
+        inner join pacientes on pacientes.codigo = costo_servicios.codigo_paciente
+        inner join hospitalizaciones on hospitalizaciones.id_hospitalizacion = costo_servicios.id_hospitalizacion
+        where costo_servicios.id_hospitalizacion = ?', [$id_hospitalizacion]);
+
+        return response()->json($costo_hospitalizacion[0]);    
     }
 }

@@ -18,6 +18,7 @@ class HistorialDiagnosticosController extends Controller
 
     public function store(Request $request, $id_consulta, $id_hospitalizacion)
     {   
+        $estado_diagnostico = 'Vigente';
 
         $id_atencion_medica = '';
     
@@ -47,12 +48,13 @@ class HistorialDiagnosticosController extends Controller
 
        
           for($i=0; $i<count($request->input_list); $i++){
-            DB::insert('insert into historial_diagnosticos (id_atencion_medica, codigo_diagnostico, observaciones_diagnostico, indicaciones_diagnostico, created_at) 
-                values (?, ?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into historial_diagnosticos (id_atencion_medica, codigo_diagnostico, observaciones_diagnostico, indicaciones_diagnostico, estado_diagnostico, created_at) 
+                values (?, ?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->input_list[$i]['codigo_diagnostico'],
                 $request->input_list[$i]['observaciones_diagnostico'],
-                $request->input_list[$i]['indicaciones_diagnostico']
+                $request->input_list[$i]['indicaciones_diagnostico'],
+                $estado_diagnostico
             ]);
       
           }

@@ -17,6 +17,14 @@ const schema = yup.object().shape({
     hora_cita: yup
     .string()
     .required("El campo hora es obligatorio"),
+
+    id_centro_medico: yup
+    .string()
+    .required("El campo centro médico es obligatorio"),
+
+    id_especialidad: yup
+    .string()
+    .required("El campo especialidad es obligatorio"),
     
   });
 

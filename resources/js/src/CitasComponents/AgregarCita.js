@@ -19,20 +19,28 @@ const AgregarCita = () => {
 
     const [doctores, set_doctores] = useState([]);
     const [consultorios, set_consultorios] = useState([]);
+    const [especialidades, set_especialidades] = useState([]);
+    const [centros_medicos, set_centros_medicos] = useState([]);
 
     const [id_doctor, set_id_doctor] = useState('');
     const [id_consultorio, set_id_consultorio] = useState('');
     const [fecha_cita, set_fecha_cita] = useState('');
     const [hora_cita, set_hora_cita] = useState('');
+    const [id_especialidad, set_id_especialidad] = useState('');
+    const [id_centro_medico, set_id_centro_medico] = useState('');
+    const [opcion_centro_medico, set_opcion_centro_medico] = useState('');
+    const [opcion_especialidad, set_opcion_especialidad] = useState('');
     
     useEffect(() => {
         API.datos_formulario_cita().then(res => {
            const result = res.data;
            set_doctores(result.doctores);
            set_consultorios(result.consultorios);
+           set_especialidades(result.especialidades);
+           set_centros_medicos(result.centros_medicos);
+
        })
 
-     
      }, []);
 
 
@@ -42,7 +50,7 @@ const AgregarCita = () => {
 
     const agregarCita = async (data) => {
         try {
-          const body = { codigo, id_consultorio, id_doctor, fecha_cita, hora_cita };
+          const body = { codigo, id_centro_medico, id_especialidad, id_consultorio, id_doctor, fecha_cita, hora_cita };
           const response = await fetch(`${API_URL}/citas/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -97,9 +105,46 @@ const AgregarCita = () => {
                                         <form className="form form-vertical" onSubmit={handleSubmit(agregarCita)}>
                                             <div className="form-body">
                                                 <div className="row">
-                                                
 
                                                     <div className="col-md-12 mb-4">
+                                                    <label htmlFor="id_centro_medico">Centro médico (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_centro_medico" 
+                                                                id="id_centro_medico" 
+                                                                {...register('id_centro_medico')}
+                                                                value={id_centro_medico}
+                                                                onChange={e => set_id_centro_medico(e.target.value)}
+                                                                onClick={e => set_opcion_centro_medico(e.target.value)}  >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {centros_medicos.map((centro_medico) => (
+                                                                <option  value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-6 mb-4">
+                                                    <label htmlFor="id_especialidad">Especialidad (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_especialidad" 
+                                                                id="id_especialidad" 
+                                                                {...register('id_especialidad')}
+                                                                value={id_especialidad}
+                                                                onChange={e => set_id_especialidad(e.target.value)}
+                                                                onClick={e => set_opcion_especialidad(e.target.value)} >
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {especialidades.map((especialidad) => (
+                                                                <option  value={especialidad.id_especialidad}>{especialidad.nombre_especialidad}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_especialidad?.message} </small>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-md-6 mb-4">
                                                     <label htmlFor="id_doctor">Doctor (*)</label>
                                                         <div className="form-group">
                                                             <select className="form-select"
@@ -108,17 +153,23 @@ const AgregarCita = () => {
                                                                 {...register('id_doctor')}
                                                                 value={id_doctor}
                                                                 onChange={e => set_id_doctor(e.target.value)} >
-                                                                <option value="">--Seleccione una opción--</option>
-                                                                {doctores.map((doctor) => (
-                                                                <option  value={doctor.id_doctor}>{doctor.nombre_empleado} {doctor.apellido_empleado}</option>
-                                                                ))}
+                                                               <option value="">--Seleccione una opción--</option>
+                                                                    {doctores.map((doctor) => {
+                                                                        if(doctor.id_centro_medico == opcion_centro_medico && doctor.id_especialidad == opcion_especialidad){
+                                                                            return (
+                                                                            <option key={doctor.id_doctor} 
+                                                                            value={doctor.id_doctor}>{doctor.nombre_empleado}
+                                                                            </option>
+                                                                            )
+                                                                        }
+                                                                    })}
                                                             </select>
                                                             <small className="text-danger"> {errors.id_doctor?.message} </small>
                                                         </div>
                                                     </div>
 
 
-                                                    <div className="col-md-12 mb-4">
+                                                    <div className="col-md-4 mb-4">
                                                     <label htmlFor="id_consultorio">Consultorio (*)</label>
                                                         <div className="form-group">
                                                             <select className="form-select"
@@ -128,15 +179,21 @@ const AgregarCita = () => {
                                                                 value={id_consultorio}
                                                                 onChange={e => set_id_consultorio(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
-                                                                {consultorios.map((consultorio) => (
-                                                                <option  value={consultorio.id_consultorio}>{consultorio.consultorio}</option>
-                                                                ))}
+                                                                    {consultorios.map((consultorio) => {
+                                                                        if(consultorio.id_centro_medico == opcion_centro_medico){
+                                                                            return (
+                                                                            <option key={consultorio.id_consultorio} 
+                                                                            value={consultorio.id_consultorio}>{consultorio.consultorio}
+                                                                            </option>
+                                                                            )
+                                                                        }
+                                                                    })}
                                                             </select>
                                                             <small className="text-danger"> {errors.id_consultorio?.message} </small>
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="fecha_cita">Fecha (*)</label>
                                                             <div className="position-relative">
@@ -154,7 +211,7 @@ const AgregarCita = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="hora_cita">Fecha (*)</label>
                                                             <div className="position-relative">
@@ -186,7 +243,7 @@ const AgregarCita = () => {
                                 </div>
                             </div>
                         </div>
-                     {JSON.stringify(codigo)}
+
                     </div>
                 </div>   
             </div>

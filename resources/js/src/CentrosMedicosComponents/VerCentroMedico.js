@@ -36,6 +36,10 @@ const VerCentroMedico = () => {
     const [pais, setPais] = useState('');
     const [municipio, setMunicipio] = useState('');
     const [departamento, setDepartamento] = useState('');
+    const [costo_dia_hospitalizacion, set_costo_dia_hospitalizacion] = useState('');
+    const [costo_consulta_general, set_costo_consulta_general] = useState('');
+    const [costo_consulta_especialidad, set_costo_consulta_especialidad] = useState('');
+    
 
     
     useEffect(() => {
@@ -51,7 +55,10 @@ const VerCentroMedico = () => {
             setCorreo_centro_medico(centro_medico.correo_centro_medico);
             setTiempo_consulta_medica(centro_medico.tiempo_consulta_medica);
             setTipo_centro(centro_medico.tipo_centro_medico);
-
+            set_costo_dia_hospitalizacion(centro_medico.costo_dia_hospitalizacion);
+            set_costo_consulta_general(centro_medico.costo_consulta_general);
+            set_costo_consulta_especialidad(centro_medico.costo_consulta_especialidad);
+  
             setPais(centro_medico.nombre_pais);
             setMunicipio(centro_medico.nombre_municipio);
             setDepartamento(centro_medico.nombre_departamento);
@@ -267,6 +274,72 @@ const VerCentroMedico = () => {
                                                     <div className="col-md-8">
                                                             <div className="form-group">
                                                             <p style={{fontWeight: "bold"}}>{correo_director}</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                               
+                                                <h5>Costo por servicios</h5>
+                                                <hr />
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            {costo_dia_hospitalizacion ? (
+                                                                <p>Costo por día de hospitalización</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            {costo_dia_hospitalizacion ? (
+                                                                <p style={{fontWeight: "bold"}}> $ {costo_dia_hospitalizacion}</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            {costo_consulta_general ? (
+                                                                <p>Costo por consulta general</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            {costo_consulta_general ? (
+                                                                <p style={{fontWeight: "bold"}}> $ {costo_consulta_general}</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                            <div className="form-group">
+                                                            {costo_consulta_especialidad ? (
+                                                                <p>Costo por consulta de especialidad</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
+                                                            </div>
+                                                    </div>
+                                                    <div className="col-md-8">
+                                                            <div className="form-group">
+                                                            {costo_consulta_especialidad ? (
+                                                                <p style={{fontWeight: "bold"}}> $ {costo_consulta_especialidad}</p>
+                                                            ) : (
+                                                                <p></p>
+                                                            )}
                                                             </div>
                                                     </div>
                                                 </div>

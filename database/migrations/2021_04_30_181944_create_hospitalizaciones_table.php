@@ -19,6 +19,9 @@ class CreateHospitalizacionesTable extends Migration
             $table->string('codigo_paciente');
             $table->foreign('codigo_paciente')->references('codigo')->on('pacientes');
 
+            $table->string('id_centro_medico');
+            $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');
+
             $table->date('fecha_ingreso');
             $table->time('hora_ingreso');
             $table->string('motivo_ingreso', 500);
@@ -27,7 +30,7 @@ class CreateHospitalizacionesTable extends Migration
             $table->string('estado_paciente', 500);
             $table->integer('dias_ingreso')->nullable();
             $table->date('fecha_alta')->nullable();
-            $table->float('costo', 8,2)->nullable();
+    
             $table->timestamps();
         });
     }

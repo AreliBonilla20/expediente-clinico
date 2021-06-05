@@ -15,44 +15,47 @@ const AgregarCentroMedico = () => {
     const API_URL = API.API_URL;
     
 
-    const [centros_medicos, setCentros_medicos]=useState([]);
+    const [centros_medicos, set_centros_medicos]=useState([]);
 
-    const [tipo_centro_medico, setTipo_centro_medico] =useState([]);
-    const [paises, setPaises] =useState([]);
-    const [municipios, setMunicipios] =useState([]);
-    const [departamentos, setDepartamentos] =useState([]);
+    const [tipo_centro_medico, set_tipo_centro_medico] =useState([]);
+    const [paises, set_paises] =useState([]);
+    const [municipios, set_municipios] =useState([]);
+    const [departamentos, set_departamentos] =useState([]);
 
-    const [opcion_pais, setOpcion_pais] = useState();
-    const [opcion_depto, setOpcion_depto] = useState();
+    const [opcion_pais, set_opcion_pais] = useState();
+    const [opcion_depto, set_opcion_depto] = useState();
     
-    const [id_centro_medico, setId_centro_medico] = useState('');
-    const [nombre_centro_medico, setNombre_centro_medico] = useState('');
-    const [direccion_centro_medico, setDireccion_centro_medico] = useState('');
-    const [director, setDirector] = useState('');
-    const [telefono_director, setTelefono_director] = useState('');
-    const [correo_director, setCorreo_director] = useState('');
-    const [telefono1_centro_medico, setTelefono1_centro_medico] = useState('');
-    const [telefono2_centro_medico, setTelefono2_centro_medico] = useState('');
-    const [correo_centro_medico, setCorreo_centro_medico] = useState('');
-    const [tiempo_consulta_medica, setTiempo_consulta_medica] = useState('');
-    const [id_tipo_centro_medico, setId_tipo_centro_medico] = useState('');
-    const [id_pais, setId_pais] = useState('');
-    const [id_departamento, setId_departamento] = useState('');
-    const [id_municipio, setId_municipio] = useState('');
+    const [id_centro_medico, set_id_centro_medico] = useState('');
+    const [nombre_centro_medico, set_nombre_centro_medico] = useState('');
+    const [direccion_centro_medico, set_direccion_centro_medico] = useState('');
+    const [director, set_director] = useState('');
+    const [telefono_director, set_telefono_director] = useState('');
+    const [correo_director, set_correo_director] = useState('');
+    const [telefono1_centro_medico, set_telefono1_centro_medico] = useState('');
+    const [telefono2_centro_medico, set_telefono2_centro_medico] = useState('');
+    const [correo_centro_medico, set_correo_centro_medico] = useState('');
+    const [tiempo_consulta_medica, set_tiempo_consulta_medica] = useState('');
+    const [id_tipo_centro_medico, set_id_tipo_centro_medico] = useState('');
+    const [id_pais, set_id_pais] = useState('');
+    const [id_departamento, set_id_departamento] = useState('');
+    const [id_municipio, set_id_municipio] = useState('');
+    const [costo_dia_hospitalizacion, set_costo_dia_hospitalizacion] = useState('');
+    const [costo_consulta_general, set_costo_consulta_general] = useState('');
+    const [costo_consulta_especialidad, set_costo_consulta_especialidad] = useState('');
   
 
     useEffect(() => {
         API.datos_formulario_centro_medico().then(res => {
            const result = res.data;
-           setTipo_centro_medico(result.tipos_centros_medicos);
-           setPaises(result.paises);
-           setDepartamentos(result.departamentos);
-           setMunicipios(result.municipios);
+           set_tipo_centro_medico(result.tipos_centros_medicos);
+           set_paises(result.paises);
+           set_departamentos(result.departamentos);
+           set_municipios(result.municipios);
         })
 
         API.centros_medicos().then(res => {
             const result = res.data;
-            setCentros_medicos(result.data);
+            set_centros_medicos(result.data);
         }) 
 
      }, []);
@@ -67,7 +70,7 @@ const AgregarCentroMedico = () => {
         try {
           const body = { id_centro_medico, nombre_centro_medico, direccion_centro_medico, director, telefono_director, 
             correo_director, telefono1_centro_medico, telefono2_centro_medico, correo_centro_medico, tiempo_consulta_medica,
-            id_tipo_centro_medico, id_pais, id_departamento, id_municipio
+            id_tipo_centro_medico, id_pais, id_departamento, id_municipio, costo_dia_hospitalizacion, costo_consulta_general, costo_consulta_especialidad
          };
           const response = await fetch(`${API_URL}/centros_medicos/guardar`, {
             method: "POST",
@@ -135,7 +138,7 @@ const AgregarCentroMedico = () => {
                                                                 id="id_centro_medico"
                                                                 {...register('id_centro_medico')}
                                                                 value={id_centro_medico}
-                                                                onChange={e => setId_centro_medico(e.target.value)} 
+                                                                onChange={e => set_id_centro_medico(e.target.value)} 
                                                                 />
                                                             <div className="form-control-icon">
                                                             <i className="bi bi-upc-scan"></i>
@@ -163,7 +166,7 @@ const AgregarCentroMedico = () => {
                                                                     id="nombre_centro_medico"
                                                                     {...register('nombre_centro_medico')}
                                                                     value={nombre_centro_medico}
-                                                                    onChange={e => setNombre_centro_medico(e.target.value)} />
+                                                                    onChange={e => set_nombre_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-building"></i>
                                                                 </div>
@@ -180,7 +183,7 @@ const AgregarCentroMedico = () => {
                                                                 id="id_tipo_centro_medico" 
                                                                 {...register('id_tipo_centro_medico')}
                                                                 value={id_tipo_centro_medico}
-                                                                onChange={e => setId_tipo_centro_medico(e.target.value)} >
+                                                                onChange={e => set_id_tipo_centro_medico(e.target.value)} >
                                                                 <option value="">--Seleccione una opción--</option>
                                                                 {tipo_centro_medico.map((tipo_centro) => (
                                                                 <option value={tipo_centro.id_tipo_centro_medico}>{tipo_centro.tipo_centro_medico}</option>
@@ -199,8 +202,8 @@ const AgregarCentroMedico = () => {
                                                                     id="id_pais" 
                                                                         {...register('id_pais')}
                                                                         value={id_pais}
-                                                                        onChange={e => setId_pais(e.target.value)} 
-                                                                        onClick={e => setOpcion_pais(e.target.value)} >
+                                                                        onChange={e => set_id_pais(e.target.value)} 
+                                                                        onClick={e => set_opcion_pais(e.target.value)} >
                                                                         <option value={-1}>--Seleccione una opción--</option>
                                                                         {paises.map((pais) => (
                                                                         <option key={pais.id_pais} value={pais.id_pais}>{pais.nombre_pais}</option>
@@ -218,8 +221,8 @@ const AgregarCentroMedico = () => {
                                                                         id="id_departamento" 
                                                                         value={id_departamento}
                                                                         {...register('id_departamento')}
-                                                                        onChange={e => setId_departamento(e.target.value)} 
-                                                                        onClick={e => setOpcion_depto(e.target.value)} >
+                                                                        onChange={e => set_id_departamento(e.target.value)} 
+                                                                        onClick={e => set_opcion_depto(e.target.value)} >
                                                                         <option value="">--Seleccione una opción--</option>
                                                                         {departamentos.map((departamento) => {
                                                                                 if(departamento.id_pais == opcion_pais){
@@ -243,7 +246,7 @@ const AgregarCentroMedico = () => {
                                                                     id="id_municipio"
                                                                     {...register('id_municipio')}
                                                                     value={id_municipio}
-                                                                    onChange={e => setId_municipio(e.target.value)}>
+                                                                    onChange={e => set_id_municipio(e.target.value)}>
                                                                     <option value="">--Seleccione una opción--</option>
                                                                         {municipios.map((municipio) => {
                                                                             if(municipio.id_departamento == opcion_depto){
@@ -268,7 +271,7 @@ const AgregarCentroMedico = () => {
                                                                     id="direccion_centro_medico"
                                                                     {...register('direccion_centro_medico')}
                                                                     value={direccion_centro_medico}
-                                                                    onChange={e => setDireccion_centro_medico(e.target.value)} />
+                                                                    onChange={e => set_direccion_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-house"></i>
                                                                 </div>
@@ -286,7 +289,7 @@ const AgregarCentroMedico = () => {
                                                                     id="telefono1_centro_medico" 
                                                                     {...register('telefono1_centro_medico')}
                                                                     value={telefono1_centro_medico}
-                                                                    onChange={e => setTelefono1_centro_medico(e.target.value)} />
+                                                                    onChange={e => set_telefono1_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -304,7 +307,7 @@ const AgregarCentroMedico = () => {
                                                                     id="telefono2_centro_medico" 
                                                                     {...register('telefono2_centro_medico')}
                                                                     value={telefono2_centro_medico}
-                                                                    onChange={e => setTelefono2_centro_medico(e.target.value)} />
+                                                                    onChange={e => set_telefono2_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -322,7 +325,7 @@ const AgregarCentroMedico = () => {
                                                                     id="correo_centro_medico" 
                                                                     {...register('correo_centro_medico')}
                                                                     value={correo_centro_medico}
-                                                                    onChange={e => setCorreo_centro_medico(e.target.value)} />
+                                                                    onChange={e => set_correo_centro_medico(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-envelope"></i>
                                                                 </div>
@@ -340,7 +343,7 @@ const AgregarCentroMedico = () => {
                                                                     id="director" 
                                                                     {...register('director')}
                                                                     value={director}
-                                                                    onChange={e => setDirector(e.target.value)} />
+                                                                    onChange={e => set_director(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-person"></i>
                                                                 </div>
@@ -358,7 +361,7 @@ const AgregarCentroMedico = () => {
                                                                     id="telefono_director" 
                                                                     {...register('telefono_director')}
                                                                     value={telefono_director}
-                                                                    onChange={e => setTelefono_director(e.target.value)} />
+                                                                    onChange={e => set_telefono_director(e.target.value)} />
                                                                 <div className="form-control-icon">
                                                                     <i className="bi bi-phone"></i>
                                                                 </div>
@@ -376,7 +379,7 @@ const AgregarCentroMedico = () => {
                                                                 id="correo_director" 
                                                                 {...register('correo_director')}
                                                                 value={correo_director}
-                                                                onChange={e => setCorreo_director(e.target.value)} />
+                                                                onChange={e => set_correo_director(e.target.value)} />
                                                             <div className="form-control-icon">
                                                                 <i className="bi bi-envelope"></i>
                                                             </div>
@@ -395,13 +398,70 @@ const AgregarCentroMedico = () => {
                                                                 id="tiempo_consulta_medica" 
                                                                 {...register('tiempo_consulta_medica')}
                                                                 value={tiempo_consulta_medica}
-                                                                onChange={e => setTiempo_consulta_medica(e.target.value)} />
+                                                                onChange={e => set_tiempo_consulta_medica(e.target.value)} />
                                                             <div className="form-control-icon">
                                                                 <i className="bi bi-alarm"></i>
                                                             </div>
                                                         </div>
                                                         <small className="text-danger"> {errors.tiempo_consulta_medica?.message} </small>
                                                     </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_dia_hospitalizacion">Costo por día de hospitalización ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_dia_hospitalizacion"
+                                                                    id="costo_dia_hospitalizacion"
+                                                                    {...register('costo_dia_hospitalizacion')}
+                                                                    value={costo_dia_hospitalizacion}
+                                                                    onChange={e => set_costo_dia_hospitalizacion(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_consulta_general">Costo de consulta general ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_consulta_general"
+                                                                    id="costo_consulta_general"
+                                                                    {...register('costo_consulta_general')}
+                                                                    value={costo_consulta_general}
+                                                                    onChange={e => set_costo_consulta_general(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_consulta_especialidad">Costo de consulta especialidad ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_consulta_especialidad"
+                                                                    id="costo_consulta_especialidad"
+                                                                    {...register('costo_consulta_especialidad')}
+                                                                    value={costo_consulta_especialidad}
+                                                                    onChange={e => set_costo_consulta_especialidad(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     </div>
 
                                                     <div className="col-12 d-flex justify-content-end">

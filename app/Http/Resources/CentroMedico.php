@@ -29,6 +29,9 @@ class CentroMedico extends JsonResource
         'id_pais'=> $this->id_pais,
         'id_municipio'=> $this->id_municipio,
         'id_departamento'=> $this->id_departamento,
+        'costo_dia_hospitalizacion'=> $this->costo_dia_hospitalizacion,
+        'costo_consulta_general'=> $this->costo_consulta_general,
+        'costo_consulta_especialidad'=> $this->costo_consulta_especialidad
         ];
     }
 }

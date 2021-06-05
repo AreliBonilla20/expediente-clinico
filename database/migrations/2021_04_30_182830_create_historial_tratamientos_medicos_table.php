@@ -24,6 +24,8 @@ class CreateHistorialTratamientosMedicosTable extends Migration
 
             $table->string('indicaciones_tratamiento', 250);
 
+            $table->string('estado_tratamiento', 100);
+
             $table->timestamps();
         });
     }

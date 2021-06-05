@@ -20,6 +20,7 @@ class HistorialTratamientosController extends Controller
     public function store(Request $request, $id_consulta, $id_hospitalizacion)
     {   
         $id_atencion_medica = '';
+        $estado_tratamiento = 'Vigente';
     
         if($id_consulta !== 'null'){
 
@@ -47,11 +48,12 @@ class HistorialTratamientosController extends Controller
 
 
         for($i=0; $i<count($request->input_list); $i++){
-            DB::insert('insert into historial_tratamientos_medicos (id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, created_at) 
-                values (?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into historial_tratamientos_medicos (id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, estado_tratamiento, created_at) 
+                values (?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->input_list[$i]['codigo_tratamiento'],
-                $request->input_list[$i]['indicaciones_tratamiento']
+                $request->input_list[$i]['indicaciones_tratamiento'],
+                $estado_tratamiento
             ]);
         }
 

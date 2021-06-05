@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -16,7 +15,7 @@ import API from '../api';
 const EditarCentroMedico = () => {
 
     //Aqui se guardar el codigo de diganostico que viene como parámetro 
-    const { codigo } = useParams();
+    const { id_centro_medico } = useParams();
 
     const API_URL = API.API_URL;
 
@@ -34,7 +33,6 @@ const EditarCentroMedico = () => {
     const [opcion_pais, setOpcion_pais] = useState();
     const [opcion_depto, setOpcion_depto] = useState();
     
-    const [id_centro_medico, setId_centro_medico] = useState('');
     const [nombre_centro_medico, setNombre_centro_medico] = useState('');
     const [direccion_centro_medico, setDireccion_centro_medico] = useState('');
     const [director, setDirector] = useState('');
@@ -48,6 +46,9 @@ const EditarCentroMedico = () => {
     const [id_pais, setId_pais] = useState('');
     const [id_departamento, setId_departamento] = useState('');
     const [id_municipio, setId_municipio] = useState('');
+    const [costo_dia_hospitalizacion, set_costo_dia_hospitalizacion] = useState('');
+    const [costo_consulta_general, set_costo_consulta_general] = useState('');
+    const [costo_consulta_especialidad, set_costo_consulta_especialidad] = useState('');
     
     //Función para traer los datos que se ven en el formulario
     useEffect(() => {
@@ -71,10 +72,9 @@ const EditarCentroMedico = () => {
 
      //Función para cargar los datos del centro médico que se va a editar
      useEffect(() => {
-        API.centro_medico_editar(codigo).then(res => {
+        API.centro_medico_editar(id_centro_medico).then(res => {
            const centro_medico = res.data;
-           
-           setId_centro_medico(centro_medico.id_centro_medico);  
+        
            setNombre_centro_medico(centro_medico.nombre_centro_medico);
            setDireccion_centro_medico(centro_medico.direccion_centro_medico);
            setDirector(centro_medico.director);
@@ -91,6 +91,9 @@ const EditarCentroMedico = () => {
            setId_pais(centro_medico.id_pais);
            setId_municipio(centro_medico.id_municipio);
            setId_departamento(centro_medico.id_departamento);
+           set_costo_dia_hospitalizacion(centro_medico.costo_dia_hospitalizacion);
+           set_costo_consulta_general(centro_medico.costo_consulta_general);
+           set_costo_consulta_especialidad(centro_medico.costo_consulta_especialidad);
  
            setOpcion_pais(centro_medico.id_pais);
            setOpcion_depto(centro_medico.id_departamento);
@@ -109,9 +112,9 @@ const EditarCentroMedico = () => {
         try {
           const body = { id_centro_medico, nombre_centro_medico, direccion_centro_medico, director, telefono_director, 
             correo_director, telefono1_centro_medico, telefono2_centro_medico, correo_centro_medico, tiempo_consulta_medica,
-            id_tipo_centro_medico, id_pais, id_departamento, id_municipio
+            id_tipo_centro_medico, id_pais, id_departamento, id_municipio, costo_dia_hospitalizacion, costo_consulta_general, costo_consulta_especialidad
          };
-          const response = await fetch(`${API_URL}/centros_medicos/${codigo}/actualizar`, {
+          const response = await fetch(`${API_URL}/centros_medicos/${id_centro_medico}/actualizar`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -171,7 +174,7 @@ const EditarCentroMedico = () => {
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="id_centro_medico">Código del centro médico</label>
                                                             <div className="position-relative">
-                                                                <input type="text" className="form-control"
+                                                                <input type="text" className="form-control" readOnly
                                                                     name="id_centro_medico"
                                                                     id="id_centro_medico"
                                                                     {...register('id_centro_medico')}
@@ -182,18 +185,7 @@ const EditarCentroMedico = () => {
                                                                 <i className="bi bi-upc-scan"></i>
                                                                 </div>
                                                             </div>
-                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
-                                                            {   
-                                                                  centros_medicos.map((centro) => {
-                                                                      if(centro.id_centro_medico!== codigo_inicial){
-                                                                        if(centro.id_centro_medico === id_centro_medico){
-                                                                            return(
-                                                                                <small className="text-danger">Ya existe un registro con este mismo identificador, debe ser distinto</small>
-                                                                            )
-                                                                          }
-                                                                      }
-                                                                  })
-                                                              }
+                                            
                                                         </div>
                                                     </div>
                                            
@@ -451,6 +443,61 @@ const EditarCentroMedico = () => {
                                                             <small className="text-danger"> {errors.tiempo_consulta_medica?.message} </small>
                                                         </div>
                                                     </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_dia_hospitalizacion">Costo por día de hospitalización ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_dia_hospitalizacion"
+                                                                    id="costo_dia_hospitalizacion"
+                                                                    value={costo_dia_hospitalizacion}
+                                                                    onChange={e => set_costo_dia_hospitalizacion(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_consulta_general">Costo de consulta general ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_consulta_general"
+                                                                    id="costo_consulta_general"
+                                                                    value={costo_consulta_general}
+                                                                    onChange={e => set_costo_consulta_general(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        <div className="form-group has-icon-left">
+                                                            <label htmlFor="costo_consulta_especialidad">Costo de consulta especialidad ($)</label>
+                                                            <div className="position-relative">
+                                                                <input type="number" className="form-control" step="0.01" min="0"
+                                                                    name="costo_consulta_especialidad"
+                                                                    id="costo_consulta_especialidad"
+                                                                    value={costo_consulta_especialidad}
+                                                                    onChange={e => set_costo_consulta_especialidad(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                <i className="bi bi-cash"></i>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Actualizar</button>
                                                     </div>

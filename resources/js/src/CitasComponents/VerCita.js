@@ -15,7 +15,8 @@ const VerCita = () => {
 
     const { id_cita } = useParams();
    
-    const [id_doctor, set_id_doctor] = useState('');
+    const [especialidad, set_especialidad] = useState('');
+    const [centro_medico, set_centro_medico] = useState('');
     const [consultorio, set_consultorio] = useState('');
     const [fecha_cita, set_fecha_cita] = useState('');
     const [hora_cita, set_hora_cita] = useState('');
@@ -26,13 +27,14 @@ const VerCita = () => {
     useEffect(() => {
         API.cita_ver(id_cita).then(res => {
             const cita = res.data;
-            set_id_doctor(cita.id_doctor);
             set_fecha_cita(cita.fecha_cita);
             set_hora_cita(cita.hora_cita);
             set_paciente(cita.codigo_paciente + ' - ' + cita.nombres + ' ' + cita.apellidos);
             set_doctor(cita.id_doctor + ' - ' + cita.nombre_empleado + ' ' + cita.apellido_empleado);
             set_consultorio(cita.consultorio);
             set_estado_cita(cita.estado_cita);
+            set_especialidad(cita.nombre_especialidad);
+            set_centro_medico(cita.id_centro_medico + ' - ' + cita.nombre_centro_medico);
        })
     }, []);
 
@@ -99,12 +101,38 @@ const VerCita = () => {
                                 </div>
                             </div>
 
+                            <div className="row">
+                                <div className="col-md-4">
+                                        <div className="form-group">
+                                        <p>Centro médico</p>
+                                        </div>
+                                </div>
+                                <div className="col-md-8">
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{centro_medico}</p>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-4">
+                                        <div className="form-group">
+                                        <p>Especialidad</p>
+                                        </div>
+                                </div>
+                                <div className="col-md-8">
+                                        <div className="form-group">
+                                        <p style={{fontWeight: "bold"}}>{especialidad}</p>
+                                        </div>
+                                </div>
+                            </div>
+
                             
 
                             <div className="row">
                                 <div className="col-md-4">
                                         <div className="form-group">
-                                        <p>ID doctor</p>
+                                        <p>Doctor</p>
                                         </div>
                                 </div>
                                 <div className="col-md-8">

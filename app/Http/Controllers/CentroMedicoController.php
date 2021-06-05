@@ -45,8 +45,9 @@ class CentroMedicoController extends Controller
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
         DB::insert('insert into centros_medicos (id_centro_medico, nombre_centro_medico, direccion_centro_medico, director, telefono_director, correo_director, telefono1_centro_medico,
-        telefono2_centro_medico, correo_centro_medico, tiempo_consulta_medica, id_tipo_centro_medico, id_pais, id_departamento, id_municipio, created_at) 
-        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        telefono2_centro_medico, correo_centro_medico, tiempo_consulta_medica, id_tipo_centro_medico, id_pais, id_departamento, id_municipio, 
+        costo_dia_hospitalizacion, costo_consulta_general, costo_consulta_especialidad, created_at) 
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
                 [
                  $request->id_centro_medico,
                  $request->nombre_centro_medico,
@@ -61,7 +62,10 @@ class CentroMedicoController extends Controller
                  $request->id_tipo_centro_medico, 
                  $request->id_pais, 
                  $request->id_departamento, 
-                 $request->id_municipio, 
+                 $request->id_municipio,
+                 round($request->costo_dia_hospitalizacion, 2), 
+                 round($request->costo_consulta_general, 2),
+                 round($request->costo_consulta_especialidad, 2), 
                  $fecha_actual
                 ]);
         
@@ -93,11 +97,10 @@ class CentroMedicoController extends Controller
     {
         $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::update('update centros_medicos set id_centro_medico = ?, nombre_centro_medico = ?, direccion_centro_medico = ?, director = ?, telefono_director = ?, correo_director = ?, telefono1_centro_medico = ?,
-                    telefono2_centro_medico = ?, correo_centro_medico = ?, tiempo_consulta_medica = ?, id_tipo_centro_medico = ?, id_pais = ?, id_departamento = ?, id_municipio = ?, created_at = ? 
-                    where id_centro_medico = ?', 
+        DB::update('update centros_medicos set nombre_centro_medico = ?, direccion_centro_medico = ?, director = ?, telefono_director = ?, correo_director = ?, telefono1_centro_medico = ?,
+                    telefono2_centro_medico = ?, correo_centro_medico = ?, tiempo_consulta_medica = ?, id_tipo_centro_medico = ?, id_pais = ?, id_departamento = ?, id_municipio = ?, 
+                    costo_dia_hospitalizacion = ?, costo_consulta_general = ?, costo_consulta_especialidad = ?,  created_at = ? where id_centro_medico = ?', 
                                 [
-                                 $request->id_centro_medico,
                                  $request->nombre_centro_medico,
                                  $request->direccion_centro_medico,
                                  $request->director,
@@ -110,7 +113,10 @@ class CentroMedicoController extends Controller
                                  $request->id_tipo_centro_medico, 
                                  $request->id_pais, 
                                  $request->id_departamento, 
-                                 $request->id_municipio, 
+                                 $request->id_municipio,
+                                 round($request->costo_dia_hospitalizacion, 2), 
+                                 round($request->costo_consulta_general, 2),
+                                 round($request->costo_consulta_especialidad, 2), 
                                  $fecha_actual,
                                  $id_centro_medico
                                 ]);

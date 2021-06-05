@@ -51,9 +51,9 @@ const schema = yup.object().shape({
     .nullable()
     .max(25, "El máximo de caracteres es 25"),
 
-    /* tiempo_consulta_medica: yup
-     .string("El formato es HH:MM:SS"),
-    */
+    tiempo_consulta_medica: yup
+    .string()
+    .required("El campo tiempo de consulta médica es obligatorio"),
     
     id_tipo_centro_medico: yup
     .string()

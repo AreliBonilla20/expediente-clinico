@@ -18,23 +18,32 @@ const AgregarHospitalizacion = () => {
 
     const { codigo } = useParams();
 
+    const [id_centro_medico, set_id_centro_medico] = useState('');
     const [fecha_ingreso, setFecha_ingreso] = useState('');
     const [hora_ingreso, setHora_ingreso] = useState('');
     const [motivo_ingreso, setMotivo_ingreso] = useState('');
     const [sala, setSala] = useState('');
     const [camilla, setCamilla] = useState('');
     const [estado_paciente, setEstado_paciente] = useState('');
+    const [centros_medicos, setCentros_medicos] =useState([]);
     
 
      const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
       });
+  
+      useEffect(() => {
+           API.centros_medicos().then(res => {
+              const result = res.data;
+              setCentros_medicos(result.data);
+          })
+        }, []);
 
 
     const agregarHospitalizacion = async (data) => {
     
         try {
-          const body = { codigo, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla, estado_paciente};
+          const body = { codigo, id_centro_medico, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla, estado_paciente};
           const response = await fetch(`${API_URL}/hospitalizaciones/${codigo}/guardar`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -90,6 +99,25 @@ const AgregarHospitalizacion = () => {
                                         <form className="form form-vertical" onSubmit={handleSubmit(agregarHospitalizacion)}>
                                             <div className="form-body">
                                                 <div className="row">
+
+                                                    <div className="col-md-12 mb-4">
+                                                    <label htmlFor="id_centro_medico">Centro médico (*)</label>
+                                                        <div className="form-group">
+                                                            <select className="form-select"
+                                                                name="id_centro_medico" 
+                                                                id="id_centro_medico" 
+                                                                {...register('id_centro_medico')}
+                                                                value={id_centro_medico}
+                                                                onChange={e => set_id_centro_medico(e.target.value)}>
+                                                                <option value="">--Seleccione una opción--</option>
+                                                                {centros_medicos.map((centro_medico) => (
+                                                                <option  value={centro_medico.id_centro_medico}>{centro_medico.nombre_centro_medico}</option>
+                                                                ))}
+                                                            </select>
+                                                            <small className="text-danger"> {errors.id_centro_medico?.message} </small>
+                                                        </div>
+                                                    </div>
+
                                                 
                                                    
                                                     <div className="col-6">

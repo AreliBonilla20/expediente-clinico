@@ -104,7 +104,7 @@ function AsignarDiagnosticos() {
                         <div className="row">
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Diagnósticos</h3>
-                              {JSON.stringify(input_list)}
+                             
             
                                 <p className="text-subtitle text-muted">Agregar diagnóstico</p>
                             </div>

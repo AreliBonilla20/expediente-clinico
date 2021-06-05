@@ -20,6 +20,7 @@ class RecetaMedicaController extends Controller
     public function store(Request $request, $id_consulta, $id_hospitalizacion)
     {   
         $id_atencion_medica = '';
+        $estado_medicamento = 'Vigente';
     
         if($id_consulta !== 'null'){
 
@@ -47,12 +48,13 @@ class RecetaMedicaController extends Controller
 
 
        for($i=0; $i<count($request->input_list); $i++){
-            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis_medicamento, indicaciones_medicamento, created_at) 
-                values (?, ?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis_medicamento, indicaciones_medicamento, estado_medicamento, created_at) 
+                values (?, ?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->input_list[$i]['codigo_medicamento'],
                 $request->input_list[$i]['dosis_medicamento'],
-                $request->input_list[$i]['indicaciones_medicamento']
+                $request->input_list[$i]['indicaciones_medicamento'],
+                $estado_medicamento
             ]);
        }
       

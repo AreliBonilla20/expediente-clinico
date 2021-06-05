@@ -248,8 +248,6 @@ const VerExpediente = () => {
                 </div>
                 </div>
             }
-            <br />
-
            
             
             {antecedente.id_antecedentes_paciente &&

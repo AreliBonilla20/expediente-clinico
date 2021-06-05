@@ -57,17 +57,23 @@ const HistorialTratamientos = () => {
         {historial_tratamientos.map((tratamiento, i) =>
             <div className="card-body">
                  <div className="alert alert-secondary">
-                    <h4 className="alert-heading">tratamiento {i + 1 } : {tratamiento.codigo_tratamiento} - {tratamiento.nombre_tratamiento} </h4>
+                    <h4 className="alert-heading">Tratamiento {i + 1 } : {tratamiento.codigo_tratamiento} - {tratamiento.nombre_tratamiento} </h4>
                     <h6>Emisión : {tratamiento.fecha_atencion_medica} - {tratamiento.hora_atencion_medica}</h6>
                  </div>
               
                 <p className="card-text">
-                    <p>Clasificación: {tratamiento.tipo_tratamiento}</p>
-                    <p>Descripción: {tratamiento.descripcion_tratamiento}</p>
-                    <p>Indicaciones: {tratamiento.indicaciones_tratamiento}</p>
+                    <p><b>Clasificación: </b>{tratamiento.tipo_tratamiento}</p>
+                    <p><b>Descripción: </b>{tratamiento.descripcion_tratamiento}</p>
+                    <p><b>Indicaciones: </b>{tratamiento.indicaciones_tratamiento}</p>
+                    {tratamiento.estado_tratamiento == 'Vigente' &&
+                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-success">{tratamiento.estado_tratamiento}</span></p>
+                    }
+                    {tratamiento.estado_tratamiento == 'Superado' &&
+                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-danger">{tratamiento.estado_tratamiento}</span></p>
+                    }
                 </p>
            
-                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
+                <p className="card-footer" style={{fontWeight: "bold"}}>Prescrito por: </p>
             </div>
         )}
    

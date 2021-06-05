@@ -26,36 +26,18 @@ const ConsultarDiagnostico = () => {
     return(
        
             <div id="main-content">
-
+                 <h5>Citas</h5>
+                                <hr />
                 <div className="page-heading">
-                    <div className="page-title">
-                        <div className="row">
-                            <div className="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Citas del paciente</h3>
-                                
-                            </div>
-                            <div className="col-12 col-md-6 order-md-2 order-first">
-                                <nav aria-label="breadcrumb" className="breadcrumb-header float-start float-lg-end">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/citas">Consulta citas</Link>
-                                        </li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="page-heading">
-                   
                     <section className="section">
+               
+
                         <div className="card">
+                        
                             
-                            
-                            <br />
-                            {citas.length > 0 &&
                             <div className="card-body">
-                    
+                               
+                                {citas.length > 0 &&
                                 <table className="table table-striped" id="table1">
                                     
                                     <thead>
@@ -90,13 +72,14 @@ const ConsultarDiagnostico = () => {
                                     )}
                                     </tbody>
                                 </table>
+                                  }
                             </div>
-                            }
+                          
                         </div>
                     </section>
             </div>
             </div>   
-            </div>
+          
 
     );
 }

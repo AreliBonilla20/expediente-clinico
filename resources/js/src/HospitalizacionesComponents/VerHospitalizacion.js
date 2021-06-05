@@ -14,6 +14,7 @@ import SignosVitales from '../SignosVitalesComponents/SignosVitales';
 import HistorialDiagnosticos from '../DiagnosticosComponents/HistorialDiagnosticos';
 import RecetaMedica from '../MedicamentosComponents/RecetaMedica';
 import HistorialTratamientos from '../TratamientosComponents/HistorialTratamientos';
+import FacturacionHospitalizacion  from './FacturacionHospitalizacion';
 
 
 import API from '../api';
@@ -29,6 +30,8 @@ const VerExpediente = () => {
     const [sala, setSala] = useState('');
     const [camilla, setCamilla] = useState('');
     const [estado_paciente, setEstado_paciente] = useState('');
+    const [centro_medico, set_centro_medico] = useState('');
+    const [dias_ingreso, set_dias_ingreso] = useState('');
    
 
     useEffect(() => {
@@ -42,6 +45,8 @@ const VerExpediente = () => {
             setSala(hospitalizacion.sala);
             setCamilla(hospitalizacion.camilla);
             setEstado_paciente(hospitalizacion.estado_paciente);
+            set_centro_medico(hospitalizacion.nombre_centro_medico);
+            set_dias_ingreso(hospitalizacion.dias_ingreso);
             
        })
 
@@ -110,6 +115,10 @@ const VerExpediente = () => {
                                             <a className="nav-link" id="tratamientos-tab" data-bs-toggle="tab" href="#tratamientos"
                                                 role="tab" aria-controls="tratamientos" aria-selected="false">Tratamientos</a>
                                         </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="facturacion-tab" data-bs-toggle="tab" href="#facturacion"
+                                                role="tab" aria-controls="facturacion" aria-selected="false">Facturación</a>
+                                        </li>
                                        
                                     </ul>
 
@@ -132,6 +141,19 @@ const VerExpediente = () => {
                                                         <div className="col-md-8">
                                                                 <div className="form-group">
                                                                 <p style={{fontWeight: "bold"}}>{id_hospitalizacion}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Centro médico</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{centro_medico}</p>
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -212,6 +234,19 @@ const VerExpediente = () => {
                                                                 </div>
                                                         </div>
                                                     </div>
+
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Días de hospitalización</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{dias_ingreso}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
                                             
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
@@ -268,6 +303,16 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <HistorialTratamientos/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="facturacion" role="tabpanel"
+                                                aria-labelledby="facturacion-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <FacturacionHospitalizacion/>
                                                         </div>
                                                     </section>
                                             </div>

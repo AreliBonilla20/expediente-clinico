@@ -16,6 +16,12 @@ class CreateCitasTable extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->string('id_cita', 10)->unique()->primary();
 
+            $table->string('id_centro_medico');
+            $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');
+
+            $table->string('id_especialidad');
+            $table->foreign('id_especialidad')->references('id_especialidad')->on('especialidades');
+
             $table->string('codigo_paciente');
             $table->foreign('codigo_paciente')->references('codigo')->on('pacientes');
 

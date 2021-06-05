@@ -68,16 +68,22 @@ const HistorialDiagnosticos = () => {
                  </div>
               
                 <p className="card-text">
-                    <p>Clasificación: {diagnostico.tipo_diagnostico}</p>
-                    <p>Observaciones: {diagnostico.observaciones_diagnostico}</p>
-                    <p>Indicaciones: {diagnostico.indicaciones_diagnostico}</p> 
+                    <p><b>Clasificación: </b>{diagnostico.tipo_diagnostico}</p>
+                    <p><b>Observaciones: </b>{diagnostico.observaciones_diagnostico}</p>
+                    <p><b>Indicaciones: </b>{diagnostico.indicaciones_diagnostico}</p>
+                    {diagnostico.estado_diagnostico == 'Vigente' &&
+                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-success">{diagnostico.estado_diagnostico}</span></p>
+                    }
+                    {diagnostico.estado_diagnostico == 'Superado' &&
+                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-danger">{diagnostico.estado_diagnostico}</span></p>
+                    }
                 </p>
            
-                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
+                <p className="card-footer" style={{fontWeight: "bold"}}>Diagnosticado por: </p>
             </div>
         )}
    
-        <hr />
+        
         </div>
     
       

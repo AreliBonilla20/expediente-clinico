@@ -37,7 +37,10 @@ class CreateCentrosMedicosTable extends Migration
             $table->string('telefono2_centro_medico', 25)->nullable();
             $table->string('correo_centro_medico', 150);
             $table->time('tiempo_consulta_medica');
-
+            $table->float('costo_consulta_general', 8, 2)->nullable();
+            $table->float('costo_consulta_especialidad', 8, 2)->nullable();
+            $table->float('costo_dia_hospitalizacion', 8, 2)->nullable();
+            
             $table->timestamps();
         });
     }

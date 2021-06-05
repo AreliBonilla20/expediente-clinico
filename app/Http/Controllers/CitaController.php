@@ -16,13 +16,18 @@ class CitaController extends Controller
     }
 
     public function create()
-    {
+    {   
+        $centros_medicos = DB::select('select * from centros_medicos order by nombre_centro_medico');
         $consultorios = DB::select('select * from consultorios order by consultorio');
+        $especialidades = DB::select('select * from especialidades order by nombre_especialidad');
         $doctores = DB::select('select * from doctores inner join empleados on doctores.id_empleado = empleados.id_empleado order by nombre_empleado');
         
         $data = [
             "consultorios" => $consultorios,
-            "doctores" => $doctores
+            "doctores" => $doctores,
+            "centros_medicos" => $centros_medicos,
+            "especialidades" => $especialidades
+
         ];
 
         return response()->json($data);   
@@ -34,9 +39,11 @@ class CitaController extends Controller
         $codigo = $request->codigo;
         $id_cita = app('App\Http\Controllers\FuncionesController')->get_id_cita($codigo);
         
-        DB::insert('insert into citas (id_cita, codigo_paciente, id_doctor, id_consultorio, fecha_cita, hora_cita, estado_cita, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, current_date + current_time)', 
-                    [$id_cita, 
+        DB::insert('insert into citas (id_cita, id_centro_medico, id_especialidad, codigo_paciente, id_doctor, id_consultorio, fecha_cita, hora_cita, estado_cita, created_at) 
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, current_date + current_time)', 
+                    [$id_cita,
+                     $request->id_centro_medico,
+                     $request->id_especialidad,  
                      $codigo,
                      $request->id_doctor,
                      $request->id_consultorio, 
@@ -58,6 +65,8 @@ class CitaController extends Controller
     public function show($id_cita)
     {
         $cita_ver = DB::select('select * from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente
+        inner join centros_medicos on centros_medicos.id_centro_medico = citas.id_centro_medico
+        inner join especialidades on especialidades.id_especialidad = citas.id_especialidad
         inner join doctores on doctores.id_doctor = citas.id_doctor
         inner join consultorios on consultorios.id_consultorio = citas.id_consultorio
         inner join empleados on empleados.id_empleado = doctores.id_empleado where id_cita = ?', [$id_cita]); 
@@ -67,16 +76,17 @@ class CitaController extends Controller
 
     public function update(Request $request, $id_cita)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+      
         
-        DB::update('update citas set id_cita = ?, id_doctor = ?,  id_consultorio = ?, fecha_cita = ?, hora_cita = ?, estado_cita = ?
+        DB::update('update citas set id_centro_medico = ?, id_especialidad = ?, id_doctor = ?,  id_consultorio = ?, fecha_cita = ?, hora_cita = ?, updated_at = current_date + current_time
                     where id_cita = ?', 
-                    [$id_cita, 
+                    [
+                     $request->id_centro_medico,
+                     $request->id_especialidad,
                      $request->id_doctor,
                      $request->id_consultorio,
                      $request->fecha_cita,
                      $request->hora_cita,
-                    'dasd',
                      $id_cita
                     ]);
 

@@ -24,6 +24,7 @@ class CreateHistorialDiagnosticosTable extends Migration
 
             $table->string('observaciones_diagnostico', 250);
             $table->string('indicaciones_diagnostico', 250);
+            $table->string('estado_diagnostico', 100);
             $table->timestamps();
         });
     }
