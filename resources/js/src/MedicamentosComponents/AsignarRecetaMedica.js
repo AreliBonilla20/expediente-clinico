@@ -24,7 +24,7 @@ function AsignarMedicamento() {
     id_hospitalizacion = 'null';
   }
 
-  const [input_list, set_input_list] = useState([{ codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
+  const [input_list, set_input_list] = useState([{ codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: "", cantidad_medicamento: 1}]);
   const [medicamentos,set_medicamentos] = useState([]);
 
   const [tipos_medicamentos, set_tipos_medicamentos] = useState([]);
@@ -47,7 +47,7 @@ function AsignarMedicamento() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    set_input_list([...input_list, { codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: ""}]);
+    set_input_list([...input_list, { codigo_medicamento: "", dosis_medicamento: "", indicaciones_medicamento: "", cantidad_medicamento: 1}]);
   };
 
   useEffect(() => {
@@ -118,6 +118,7 @@ function AsignarMedicamento() {
                             </div>
                         </div>
                     </div>
+                   
                     
                     <div className="page-heading">
                     <div className="col-md-12 col-12">
@@ -155,8 +156,8 @@ function AsignarMedicamento() {
 
                                         
 
-                                            <div className="col-12">
-                                            <label htmlFor="id_tipo_medicamento">Diagnóstico (*)</label>
+                                            <div className="col-10">
+                                            <label htmlFor="id_tipo_medicamento">Medicamento (*)</label>
                                                 <div className="form-group">
                                                     <select className="form-select"
                                                         name="codigo_medicamento"
@@ -177,6 +178,23 @@ function AsignarMedicamento() {
                                                 </div>
                                             </div>
 
+                                           
+                                            <div className="col-2">
+                                            <div className="form-group has-icon-left">
+                                                <label htmlFor="cantidad_medicamento">Cantidad</label>
+                                                <div className="position-relative">
+                                                <input type="number" className="form-control" min="1"
+                                                name="cantidad_medicamento"
+                                                value={x.cantidad_medicamento}
+                                                onChange={e => handleInputChange(e, i)}  />
+                                               
+                                                <div className="form-control-icon">
+                                                <i class="bi bi-sort-numeric-up"></i>
+                                                    </div>
+                                                    </div>
+                                            </div>
+                                            </div>
+
                                             <div className="col-6">
                                             <div className="form-group has-icon-left">
                                                 <label htmlFor="dosis_medicamento">Dósis</label>
@@ -191,6 +209,8 @@ function AsignarMedicamento() {
                                                 </div>
                                             </div>
                                             </div>
+
+                                           
 
                                             <div className="col-6">
                                             <div className="form-group has-icon-left">

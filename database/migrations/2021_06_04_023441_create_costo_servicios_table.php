@@ -28,12 +28,12 @@ class CreateCostoServiciosTable extends Migration
             $table->string('id_centro_medico');
             $table->foreign('id_centro_medico')->references('id_centro_medico')->on('centros_medicos');
 
-            $table->float('costo_consulta', 8, 2)->nullable();
-            $table->float('costo_hospitalizacion', 8, 2)->nullable();
-            $table->float('costo_medicamentos', 8, 2)->nullable();
-            $table->float('costo_tratamientos', 8, 2)->nullable();
-            $table->float('costo_examenes', 8, 2)->nullable();
-            $table->float('costo_total', 8, 2)->nullable();
+            $table->float('costo_consulta', 8, 2)->default(0)->nullable();
+            $table->float('costo_hospitalizacion', 8, 2)->default(0)->nullable();
+            $table->float('costo_medicamentos', 8, 2)->default(0)->nullable();
+            $table->float('costo_tratamientos', 8, 2)->default(0)->nullable();
+            $table->float('costo_examenes', 8, 2)->default(0)->nullable();
+            $table->float('costo_total', 8, 2)->default(0)->nullable();
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/HospitalizacionValidacion';
-import ClickLabel from '../Funciones/ClickLabel';
+import {ClickLabel} from '../Funciones/FuncionesAuxiliares';
 
 import API from '../api';
 

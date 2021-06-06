@@ -48,16 +48,28 @@ class HistorialTratamientosController extends Controller
 
 
         for($i=0; $i<count($request->input_list); $i++){
-            DB::insert('insert into historial_tratamientos_medicos (id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, estado_tratamiento, created_at) 
-                values (?, ?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into historial_tratamientos_medicos (id_atencion_medica, codigo_tratamiento, indicaciones_tratamiento, cantidad_tratamiento, estado_tratamiento, created_at) 
+                values (?, ?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->input_list[$i]['codigo_tratamiento'],
                 $request->input_list[$i]['indicaciones_tratamiento'],
+                $request->input_list[$i]['cantidad_tratamiento'],
                 $estado_tratamiento
             ]);
-        }
 
-    
+              $codigo_tratamiento = $request->input_list[$i]['codigo_tratamiento'];
+              $cantidad_tratamiento = $request->input_list[$i]['cantidad_tratamiento'];
+              $tratamiento = DB::select('select * from tratamientos_medicos where codigo_tratamiento = ?', [$codigo_tratamiento]);
+              $costo_tratamientos = $tratamiento[0]->costo_tratamiento * $cantidad_tratamiento;
+
+            if($id_consulta !== 'null'){
+              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + costo_tratamientos where id_consulta = ?', [$costo_tratamientos, $id_consulta]);
+            }
+
+            if($id_hospitalizacion !== 'null'){
+              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + costo_tratamientos where id_hospitalizacion = ?', [$costo_tratamientos, $id_hospitalizacion]);
+            } 
+        }
 
         return response()->json($request);   
     }

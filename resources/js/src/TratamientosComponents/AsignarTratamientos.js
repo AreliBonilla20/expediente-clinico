@@ -25,7 +25,7 @@ function AsignarTratamientos() {
     id_hospitalizacion = 'null';
   }
 
-  const [input_list, set_input_list] = useState([{ codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
+  const [input_list, set_input_list] = useState([{ codigo_tratamiento: "", indicaciones_tratamiento: "", cantidad_tratamiento: 1}]);
   const [tratamientos,set_tratamientos] = useState([]);
 
   const [tipos_tratamientos, set_tipos_tratamientos] = useState([]);
@@ -48,7 +48,7 @@ function AsignarTratamientos() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    set_input_list([...input_list, { codigo_tratamiento: "", indicaciones_tratamiento: ""}]);
+    set_input_list([...input_list, { codigo_tratamiento: "", indicaciones_tratamiento: "", cantidad_tratamiento: 1}]);
   };
 
   useEffect(() => {
@@ -155,7 +155,7 @@ function AsignarTratamientos() {
 
                                         
 
-                                            <div className="col-12">
+                                            <div className="col-10">
                                             <label htmlFor="id_tipo_tratamiento">Tratamiento (*)</label>
                                                 <div className="form-group">
                                                     <select className="form-select"
@@ -175,6 +175,22 @@ function AsignarTratamientos() {
                                                         })}
                                                     </select>
                                                 </div>
+                                            </div>
+
+                                            <div className="col-2">
+                                            <div className="form-group has-icon-left">
+                                                <label htmlFor="cantidad_tratamiento">Cantidad</label>
+                                                <div className="position-relative">
+                                                <input type="number" className="form-control" min="1"
+                                                name="cantidad_tratamiento"
+                                                value={x.cantidad_tratamiento}
+                                                onChange={e => handleInputChange(e, i)}  />
+                                               
+                                                <div className="form-control-icon">
+                                                <i class="bi bi-sort-numeric-up"></i>
+                                                    </div>
+                                                    </div>
+                                            </div>
                                             </div>
 
                                             <div className="col-12">

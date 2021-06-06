@@ -46,11 +46,12 @@ class HospitalizacionController extends Controller
                      $fecha_actual
                     ]);
         
-        DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_hospitalizacion, costo_hospitalizacion, created_at)
-                    values (?, ?, ?, ?, current_date + current_time)',
+        DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_hospitalizacion, costo_hospitalizacion, costo_total, created_at)
+                    values (?, ?, ?, ?, ?, current_date + current_time)',
                     [$codigo,
                     $request->id_centro_medico,
                     $id_hospitalizacion,
+                    $costo_hospitalizacion[0]->costo_dia_hospitalizacion,
                     $costo_hospitalizacion[0]->costo_dia_hospitalizacion
                     ]);
 
@@ -132,7 +133,7 @@ class HospitalizacionController extends Controller
         return $id_hosp;
     }
 
-    public function hospitalizacion_facturacion($id_hospitalizacion)
+    public function hospitalizacion_factura($id_hospitalizacion)
     {
         $costo_hospitalizacion = DB::select('select * from costo_servicios 
         inner join centros_medicos on centros_medicos.id_centro_medico = costo_servicios.id_centro_medico
@@ -142,6 +143,17 @@ class HospitalizacionController extends Controller
         inner join hospitalizaciones on hospitalizaciones.id_hospitalizacion = costo_servicios.id_hospitalizacion
         where costo_servicios.id_hospitalizacion = ?', [$id_hospitalizacion]);
 
-        return response()->json($costo_hospitalizacion[0]);    
+        $medicamentos = DB::select('select * from recetas inner join medicamentos on medicamentos.codigo_medicamento = recetas.codigo_medicamento 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_hospitalizacion = ?)', [$id_hospitalizacion]);
+        $tratamientos = DB::select('select * from historial_tratamientos_medicos inner join tratamientos_medicos on tratamientos_medicos.codigo_tratamiento = historial_tratamientos_medicos.codigo_tratamiento 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_hospitalizacion = ?)', [$id_hospitalizacion]);
+
+        $data = [
+            "costo_hospitalizacion" => $costo_hospitalizacion[0],
+            "medicamentos" => $medicamentos,
+            "tratamientos" => $tratamientos
+        ];
+        
+        return response()->json($data);    
     }
 }

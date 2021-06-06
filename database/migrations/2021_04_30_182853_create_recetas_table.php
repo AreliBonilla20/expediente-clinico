@@ -24,6 +24,7 @@ class CreateRecetasTable extends Migration
             
             $table->string('dosis_medicamento', 150);
             $table->string('indicaciones_medicamento', 150);
+            $table->integer('cantidad_medicamento');
             $table->string('estado_medicamento', 100);
             $table->timestamps();
         });

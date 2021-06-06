@@ -37,7 +37,6 @@ const GraficosSignosVitales = () => {
         <div className="card">
             <div className="card-header">
                 <h4 className="card-title">Gráficos</h4>
-                {id_hospitalizacion}
             </div>
             <div className="card-body">
                 <div className="row">

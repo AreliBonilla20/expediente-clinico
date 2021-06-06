@@ -72,7 +72,7 @@ import VerCita from './CitasComponents/VerCita';
 import AgregarConsulta from './ConsultasComponents/AgregarConsulta';
 import VerDetallesConsulta from './ConsultasComponents/VerDetallesConsulta';
 
-import PruebaCalendario from './Prueba/PruebaMostrar';
+import Prueba from './Prueba/PruebaMostrar';
 
 
 import NotFound from './LayoutComponents/NotFound';
@@ -155,7 +155,7 @@ const App = () => {
                 <Route exact path="/consultas/:codigo_paciente/:id_cita/crear" component={AgregarConsulta} />
                
                 
-                <Route exact path="/prueba" component={PruebaCalendario} />
+               
 
       
 

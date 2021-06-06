@@ -11,7 +11,7 @@ import Footer from '../LayoutComponents/Footer';
 import API from '../api';
 
 import schema from '../Validaciones/TratamientoValidacion';
-import ClickLabel from '../Funciones/ClickLabel';
+import {ClickLabel} from '../Funciones/FuncionesAuxiliares';
 
 const AgregarTratamiento = () => {
 

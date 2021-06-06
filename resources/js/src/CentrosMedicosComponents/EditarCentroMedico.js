@@ -8,7 +8,7 @@ import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
 
 import schema from '../Validaciones/CentroMedicoValidacion';
-import ClickLabel from '../Funciones/ClickLabel';
+import {ClickLabel} from '../Funciones/FuncionesAuxiliares';
 
 import API from '../api';
 

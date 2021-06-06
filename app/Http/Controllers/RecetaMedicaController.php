@@ -48,15 +48,30 @@ class RecetaMedicaController extends Controller
 
 
        for($i=0; $i<count($request->input_list); $i++){
-            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis_medicamento, indicaciones_medicamento, estado_medicamento, created_at) 
-                values (?, ?, ?, ?, ?, current_date + current_time)', 
+            DB::insert('insert into recetas (id_atencion_medica, codigo_medicamento, dosis_medicamento, indicaciones_medicamento, cantidad_medicamento, estado_medicamento, created_at) 
+                values (?, ?, ?, ?, ?, ?, current_date + current_time)', 
                 [$id_atencion_medica, 
                 $request->input_list[$i]['codigo_medicamento'],
                 $request->input_list[$i]['dosis_medicamento'],
                 $request->input_list[$i]['indicaciones_medicamento'],
+                $request->input_list[$i]['cantidad_medicamento'],
                 $estado_medicamento
             ]);
-       }
+
+              $codigo_medicamento = $request->input_list[$i]['codigo_medicamento'];
+              $cantidad_medicamento = $request->input_list[$i]['cantidad_medicamento'];
+              $medicamento = DB::select('select * from medicamentos where codigo_medicamento = ?', [$codigo_medicamento]);
+              $costo_medicamentos = $medicamento[0]->costo_medicamento * $cantidad_medicamento;
+
+            if($id_consulta !== 'null'){
+              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + costo_medicamentos where id_consulta = ?', [$costo_medicamentos, $id_consulta]);
+            }
+
+            if($id_hospitalizacion !== 'null'){
+              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + costo_medicamentos where id_hospitalizacion = ?', [$costo_medicamentos, $id_hospitalizacion]);
+            } 
+
+        }
       
     }
 }

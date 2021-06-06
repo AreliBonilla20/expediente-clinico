@@ -51,7 +51,7 @@ const HistorialTratamientos = () => {
         {historial_tratamientos.length > 0 &&
         <section className="section">
             <br />
-        <h4>Historial de medicamentos</h4>
+        <h4>Historial de tratamientos</h4>
         <div className="card">
         <div className="card-content">
         {historial_tratamientos.map((tratamiento, i) =>

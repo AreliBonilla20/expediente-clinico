@@ -23,7 +23,7 @@ class CreateHistorialTratamientosMedicosTable extends Migration
             $table->foreign('codigo_tratamiento')->references('codigo_tratamiento')->on('tratamientos_medicos');
 
             $table->string('indicaciones_tratamiento', 250);
-
+            $table->integer('cantidad_tratamiento');
             $table->string('estado_tratamiento', 100);
 
             $table->timestamps();

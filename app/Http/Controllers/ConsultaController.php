@@ -41,11 +41,12 @@ class ConsultaController extends Controller
                     ]);
 
 
-        DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_consulta, costo_consulta, created_at)
-        values (?, ?, ?, ?, current_date + current_time)',
+        DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_consulta, costo_consulta, costo_total, created_at)
+        values (?, ?, ?, ?, ?, current_date + current_time)',
             [$codigo_paciente,
             $cita[0]->id_centro_medico,
             $id_consulta,
+            $costo_consulta,
             $costo_consulta
             ]);
         
@@ -59,5 +60,30 @@ class ConsultaController extends Controller
         inner join empleados on empleados.id_empleado = doctores.id_empleado where id_consulta = ?', [$id_consulta]);
         return response()->json($consulta_ver[0]);
 
+    }
+
+    public function consulta_factura($id_consulta)
+    {
+        $costo_de_consulta = DB::select('select * from costo_servicios 
+        inner join centros_medicos on centros_medicos.id_centro_medico = costo_servicios.id_centro_medico
+        inner join departamentos on departamentos.id_departamento = centros_medicos.id_departamento
+        inner join municipios on municipios.id_municipio = centros_medicos.id_municipio
+        inner join pacientes on pacientes.codigo = costo_servicios.codigo_paciente
+        inner join consultas on consultas.id_consulta = costo_servicios.id_consulta
+        inner join citas on citas.id_cita = consultas.id_cita
+        where costo_servicios.id_consulta = ?', [$id_consulta]);
+
+        $medicamentos = DB::select('select * from recetas inner join medicamentos on medicamentos.codigo_medicamento = recetas.codigo_medicamento 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_consulta = ?)', [$id_consulta]);
+        $tratamientos = DB::select('select * from historial_tratamientos_medicos inner join tratamientos_medicos on tratamientos_medicos.codigo_tratamiento = historial_tratamientos_medicos.codigo_tratamiento 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_consulta = ?)', [$id_consulta]);
+
+        $data = [
+            "costo_de_consulta" => $costo_de_consulta[0],
+            "medicamentos" => $medicamentos,
+            "tratamientos" => $tratamientos
+        ];
+        
+        return response()->json($data);    
     }
 }

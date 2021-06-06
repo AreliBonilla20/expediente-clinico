@@ -13,7 +13,7 @@ import SignosVitales from '../SignosVitalesComponents/SignosVitales';
 import HistorialDiagnosticos from '../DiagnosticosComponents/HistorialDiagnosticos';
 import RecetaMedica from '../MedicamentosComponents/RecetaMedica';
 import HistorialTratamientos from '../TratamientosComponents/HistorialTratamientos';
-
+import FacturaConsulta from './FacturacionConsulta';
 
 import API from '../api';
 
@@ -103,6 +103,10 @@ const VerExpediente = () => {
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="tratamientos-tab" data-bs-toggle="tab" href="#tratamientos"
                                                 role="tab" aria-controls="tratamientos" aria-selected="false">Tratamientos</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="factura_consulta-tab" data-bs-toggle="tab" href="#factura_consulta"
+                                                role="tab" aria-controls="factura_consulta" aria-selected="false">Facturación</a>
                                         </li>
                                        
                                     </ul>
@@ -242,6 +246,16 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <HistorialTratamientos />
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="factura_consulta" role="tabpanel"
+                                                aria-labelledby="factura_consulta-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <FacturaConsulta />
                                                         </div>
                                                     </section>
                                             </div>

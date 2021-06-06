@@ -35,7 +35,7 @@ Route::post('/hospitalizaciones/{codigo}/guardar', 'HospitalizacionController@st
 Route::get('/hospitalizaciones/{id_hospitalizacion}/ver', 'HospitalizacionController@show');
 Route::get('/hospitalizaciones/{id_hospitalizacion}/editar', 'HospitalizacionController@edit');
 Route::put('/hospitalizaciones/{id_hospitalizacion}/actualizar', 'HospitalizacionController@update');
-Route::get('/hospitalizaciones/{id_hospitalizacion}/facturacion', 'HospitalizacionController@hospitalizacion_facturacion');
+Route::get('/hospitalizaciones/{id_hospitalizacion}/factura', 'HospitalizacionController@hospitalizacion_factura');
 
 //Rutas para chequeos - hospitalizaciones
 Route::get('/chequeos_hospitalizaciones/{id_hospitalizacion}', 'ChequeoHospitalizacionController@index');
@@ -158,3 +158,4 @@ Route::get('/consultas/{codigo}', 'ConsultaController@index');
 Route::get('/consultas/crear', 'ConsultaController@create');
 Route::post('/consultas/guardar', 'ConsultaController@store');
 Route::get('/consultas/{id_consulta}/ver', 'ConsultaController@show');
+Route::get('/consultas/{id_consulta}/factura', 'ConsultaController@consulta_factura');
