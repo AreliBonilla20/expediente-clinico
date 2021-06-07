@@ -14,11 +14,11 @@ class CreateExamenesTable extends Migration
     public function up()
     {
         Schema::create('examenes', function (Blueprint $table) {
-            $table->string('codigo_examen', 5)->unique()->primary();
+            $table->string('codigo_examen', 25)->unique()->primary();
 
-            $table->string('id_tipo_examen');
+            $table->unsignedBigInteger('id_tipo_examen');
             $table->foreign('id_tipo_examen')->references('id_tipo_examen')->on('tipo_examen');
-            
+
             $table->string('nombre_examen', 150);
             $table->string('indicaciones_examen', 150);
             $table->float('costo', 8,2)->nullable();

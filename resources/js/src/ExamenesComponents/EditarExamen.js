@@ -86,7 +86,7 @@ const EditarExamen = () => {
             
           });
           
-          window.location = "/examenes";
+          window.location = `examenes/${codigo}/ver`;
         } catch (err) {
           console.error(err.message);
         }
@@ -106,6 +106,7 @@ const EditarExamen = () => {
                             <div className="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Editar</h3>
                                 <h4>Examen: {codigo_examen} - {nombre_examen}</h4>
+                                
                                 
                             </div>
                             <div className="col-12 col-md-6 order-md-2 order-first">

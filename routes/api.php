@@ -58,6 +58,10 @@ Route::post('/recetas_medicas/{id_consulta}/{id_hospitalizacion}/guardar', 'Rece
 Route::get('/historial_tratamientos/{id_consulta}/{id_hospitalizacion}', 'HistorialTratamientosController@index');
 Route::post('/historial_tratamientos/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialTratamientosController@store');
 
+//Rutas para el historial de examenes del paciente
+//Route::get('/historial_examenes/{id_consulta}/{id_hospitalizacion}', 'HistorialExamenesController@index');
+Route::post('/historial_examenes/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialExamenesController@store');
+
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
 Route::get('/diagnosticos/crear', 'DiagnosticoController@create');
@@ -104,6 +108,8 @@ Route::get('/examenes/{codigo}/ver', 'ExamenController@show');
 Route::get('/examenes/{codigo}/editar', 'ExamenController@edit');
 Route::put('/examenes/{codigo}/actualizar', 'ExamenController@update');
 Route::get('/examenes/{param_busqueda}/buscar', 'ExamenController@buscar');
+Route::post('/examenes/{codigo}/agregar_parametros', 'ExamenController@agregar_parametros');
+Route::get('/examenes/{codigo}/ver_parametros_examen', 'ExamenController@ver_parametros_examen');
 
 
 //Rutas para empleados

@@ -14,7 +14,7 @@ class CreateTipoExamenTable extends Migration
     public function up()
     {
         Schema::create('tipo_examen', function (Blueprint $table) {
-            $table->string('id_tipo_examen', 5)->unique()->primary();
+            $table->bigIncrements('id_tipo_examen');
             $table->string('nombre_tipo_examen', 150);
             $table->timestamps();
         });

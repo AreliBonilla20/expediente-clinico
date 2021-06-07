@@ -29,16 +29,14 @@ class ExamenController extends Controller
 
     public function store(Request $request)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
         DB::insert('insert into examenes (codigo_examen, id_tipo_examen, nombre_examen, indicaciones_examen, costo, created_at) 
-                    values (?, ?, ?, ?, ?, ?)', 
+                    values (?, ?, ?, ?, ?, current_date + current_time)', 
                     [$request->codigo_examen,
                      $request->id_tipo_examen,
                      $request->nombre_examen,
                      $request->indicaciones_examen, 
-                     round($request->costo, 2), 
-                     $fecha_actual
+                     round($request->costo, 2)
                     ]);
         
         return response()->json('Examen creado!');    
@@ -60,15 +58,14 @@ class ExamenController extends Controller
 
     public function update(Request $request, $codigo)
     {
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-        DB::update('update examenes set codigo_examen = ?, id_tipo_examen = ?, nombre_examen = ?, indicaciones_examen = ?, costo = ?, updated_at = ?
+        
+        DB::update('update examenes set codigo_examen = ?, id_tipo_examen = ?, nombre_examen = ?, indicaciones_examen = ?, costo = ?, updated_at = current_date + current_time
         where codigo_examen = ?', 
         [$request->codigo_examen,
          $request->id_tipo_examen,
          $request->nombre_examen,
          $request->indicaciones_examen, 
          round($request->costo, 2), 
-         $fecha_actual,
          $codigo
         ]);
         
@@ -87,5 +84,33 @@ class ExamenController extends Controller
         
         return ExamenResource::collection($examenes);
 
+    }
+
+    public function agregar_parametros(Request $request, $codigo)
+    {
+        
+        for($i=0; $i<count($request->input_list); $i++){
+            DB::insert('insert into examenes_parametros (codigo_examen, parametro, unidad_medida, valor_min, valor_max, created_at) 
+                values (?, ?, ?, ?, ?, current_date + current_time)', 
+                [$codigo,
+                $request->input_list[$i]['parametro'],
+                $request->input_list[$i]['unidad_medida'],
+                $request->input_list[$i]['valor_min'],
+                $request->input_list[$i]['valor_max']
+            ]);
+      
+          }
+        
+        
+        return response()->json('Parámetros ingresados!');    
+    }
+
+    
+    public function ver_parametros_examen($codigo)
+    {
+        
+        $parametros_examen = DB::select('select * from examenes_parametros where codigo_examen = ? order by parametro', [$codigo]);
+        
+        return response()->json($parametros_examen);    
     }
 }

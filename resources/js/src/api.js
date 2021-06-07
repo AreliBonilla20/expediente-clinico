@@ -149,6 +149,9 @@ export default {
     examen_buscar: (param_busqueda) =>
     axios.get(`${API_URL}/examenes/${param_busqueda}/buscar`),
 
+    ver_parametros_examen: (codigo) =>
+    axios.get(`${API_URL}/examenes/${codigo}/ver_parametros_examen`),
+
 
     //Empleados
     empleados: () =>

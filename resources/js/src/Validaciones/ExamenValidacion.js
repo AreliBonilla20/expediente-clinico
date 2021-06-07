@@ -20,9 +20,6 @@ const schema = yup.object().shape({
     .string()
     .max(500, "El máximo de caracteres es 500"),
 
-    costo: yup
-    .number()
-    .required("El campo costo de examen es obligatorio."),
 
   });
 

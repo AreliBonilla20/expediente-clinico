@@ -8,6 +8,7 @@ import {
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
+import VerParametros from '../ExamenesComponents/VerParametrosExamen';
 
 import API from '../api';
 
@@ -75,13 +76,10 @@ const VerExamen = () => {
                                                 role="tab" aria-controls="datos_generales" aria-selected="true">Datos generales</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
-                                            <a className="nav-link" id="examenes_fisicos-tab" data-bs-toggle="tab" href="#examenes_fisicos"
-                                                role="tab" aria-controls="examenes_fisicos" aria-selected="false">Exámenes físicos</a>
+                                            <a className="nav-link" id="parametros_examen-tab" data-bs-toggle="tab" href="#parametros_examen"
+                                                role="tab" aria-controls="parametros_examen" aria-selected="false">Parámetros</a>
                                         </li>
-                                        <li className="nav-item" role="presentation">
-                                            <a className="nav-link" id="examenes_quimicos-tab" data-bs-toggle="tab" href="#examenes_quimicos"
-                                                role="tab" aria-controls="examenes_quimicos" aria-selected="false">Exámenes químicos</a>
-                                        </li>
+                                        
                                       
                                     </ul>
 
@@ -177,7 +175,7 @@ const VerExamen = () => {
                                                 </div>
 
                                                 <div className="col-12 d-flex justify-content-end">
-                                                    <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                                    <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                                 </div>
                                             </div>
                                             </div>
@@ -187,28 +185,19 @@ const VerExamen = () => {
                                         </div>
                                             
 
-                                            <div className="tab-pane fade" id="examenes_fisicos" role="tabpanel"
-                                                aria-labelledby="examenes_fisicos-tab">
+                                            <div className="tab-pane fade" id="parametros_examen" role="tabpanel"
+                                                aria-labelledby="parametros_examen-tab">
                                                     
                                                     <section className="section">
                                                         <div className="card">
                                                        
-
+                                                            <VerParametros />
                                                        
                                                         </div>
                                                     </section>
                                             </div>
 
-                                            <div className="tab-pane fade" id="examenes_quimicos" role="tabpanel"
-                                                aria-labelledby="examenes_quimicos-tab">
-                                                    
-                                                    <section className="section">
-                                                        <div className="card">
-                                                        
-
-                                                        </div>
-                                                    </section>
-                                            </div>
+                                          
 
                                     </div>
                                 </div>

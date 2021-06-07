@@ -53,6 +53,8 @@ import AgregarExamen from './ExamenesComponents/AgregarExamen';
 import EditarExamen from './ExamenesComponents/EditarExamen';
 import BuscarExamen from './ExamenesComponents/BuscarExamen';
 import VerExamen from './ExamenesComponents/VerExamen';
+import AgregarParametroExamen from './ExamenesComponents/AgregarParametrosExamen';
+import AsignarExamenes from './ExamenesComponents/AsignarExamen';
 
 import ConsultarEmpleado from './EmpleadosComponents/ConsultarEmpleado';
 import AgregarEmpleado from './EmpleadosComponents/AgregarEmpleado';
@@ -100,10 +102,12 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_diagnosticos" component={AsignarDiagnosticos} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_receta_medica" component={AsignarRecetaMedica} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_tratamientos" component={AsignarTratamientos} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_examenes" component={AsignarExamenes} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/ver" component={VerDetallesConsulta} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_diagnosticos" component={AsignarDiagnosticos} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_receta_medica" component={AsignarRecetaMedica} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_tratamientos" component={AsignarTratamientos} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_examenes" component={AsignarExamenes} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
@@ -116,6 +120,7 @@ const App = () => {
                 <Route exact path="/examenes/:codigo/editar" component={EditarExamen} />
                 <Route exact path="/examenes/:codigo/ver" component={VerExamen} />
                 <Route exact path="/examenes/:param_busqueda/buscar" component={BuscarExamen} />
+                <Route exact path="/examenes/:codigo/agregar_parametros" component={AgregarParametroExamen} />
 
                 <Route exact path="/centros_medicos" component={ConsultarCentroMedico} />
                 <Route exact path="/centros_medicos/crear" component={AgregarCentroMedico} />
@@ -153,6 +158,8 @@ const App = () => {
                 <Route exact path="/citas/:id_cita/ver" component={VerCita} />
 
                 <Route exact path="/consultas/:codigo_paciente/:id_cita/crear" component={AgregarConsulta} />
+
+               
                
                 
                
