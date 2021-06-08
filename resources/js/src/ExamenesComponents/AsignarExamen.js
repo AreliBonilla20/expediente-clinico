@@ -197,7 +197,7 @@ function AsignarExamen() {
                                         </div>
                                     </form>
                                     </div>
-                                    {JSON.stringify(input_list)}
+                                  
                                 </div>
                             </div>
                         </div>

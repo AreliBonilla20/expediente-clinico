@@ -55,6 +55,8 @@ import BuscarExamen from './ExamenesComponents/BuscarExamen';
 import VerExamen from './ExamenesComponents/VerExamen';
 import AgregarParametroExamen from './ExamenesComponents/AgregarParametrosExamen';
 import AsignarExamenes from './ExamenesComponents/AsignarExamen';
+import AgregarResultadoExamen from './ExamenesComponents/AgregarResultadoExamen';
+import VerResultadoExamen from './ExamenesComponents/VerResultadoExamen';
 
 import ConsultarEmpleado from './EmpleadosComponents/ConsultarEmpleado';
 import AgregarEmpleado from './EmpleadosComponents/AgregarEmpleado';
@@ -103,11 +105,16 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_receta_medica" component={AsignarRecetaMedica} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_tratamientos" component={AsignarTratamientos} />
                 <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/asignar_examenes" component={AsignarExamenes} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/examenes/:id_atencion_medica/agregar_resultado" component={AgregarResultadoExamen} />
+                <Route exact path="/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/examenes/:id_atencion_medica/ver_resultado" component={VerResultadoExamen} />
+                
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/ver" component={VerDetallesConsulta} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_diagnosticos" component={AsignarDiagnosticos} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_receta_medica" component={AsignarRecetaMedica} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_tratamientos" component={AsignarTratamientos} />
                 <Route exact path="/expedientes/:codigo/consultas/:id_consulta/asignar_examenes" component={AsignarExamenes} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/examenes/:id_atencion_medica/agregar_resultado" component={AgregarResultadoExamen} />
+                <Route exact path="/expedientes/:codigo/consultas/:id_consulta/examenes/:id_atencion_medica/ver_resultado" component={VerResultadoExamen} />
 
                 <Route exact path="/diagnosticos" component={ConsultarDiagnostico} />
                 <Route exact path="/diagnosticos/crear" component={AgregarDiagnostico} />
@@ -159,7 +166,7 @@ const App = () => {
 
                 <Route exact path="/consultas/:codigo_paciente/:id_cita/crear" component={AgregarConsulta} />
 
-               
+                <Route exact path="/prueba" component={Prueba} />
                
                 
                

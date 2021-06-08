@@ -23,15 +23,14 @@ const HistorialExamenes = () => {
         codigo = id_consulta.substr(0,7);
     }
 
-   
 
-    const [historial_diagnosticos, setHistorial_diagnosticos] = useState([]);
-
+    const [examenes_asignados, set_examenes_asignados] = useState([]);
+    
     useEffect(() => {
        
-        API.historial_diagnosticos(id_consulta, id_hospitalizacion).then(res => {
+        API.historial_examenes(id_consulta, id_hospitalizacion).then(res => {
             const result = res.data;
-            setHistorial_diagnosticos(result);
+            set_examenes_asignados(result.examenes_asignados);
         })
 
      }, []);
@@ -49,43 +48,46 @@ const HistorialExamenes = () => {
                 }
             </div>
 
-        {historial_diagnosticos.length > 0 &&
-        <section className="section">
-            <br />
-        <h4>Historial de diagnósticos</h4>
-        <div className="card">
-        <div className="card-content">
-        {historial_diagnosticos.map((diagnostico, i) =>
-            <div className="card-body">
-                 <div className="alert alert-secondary">
-                    <h4 className="alert-heading">Diagnóstico {i + 1 } : {diagnostico.codigo_diagnostico} - {diagnostico.nombre_diagnostico} </h4>
-                    <h6>Emisión : {diagnostico.fecha_atencion_medica} - {diagnostico.hora_atencion_medica}</h6>
-                 </div>
-              
-                <p className="card-text">
-                    <p><b>Clasificación: </b>{diagnostico.tipo_diagnostico}</p>
-                    <p><b>Observaciones: </b>{diagnostico.observaciones_diagnostico}</p>
-                    <p><b>Indicaciones: </b>{diagnostico.indicaciones_diagnostico}</p>
-                    {diagnostico.estado_diagnostico == 'Vigente' &&
-                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-success">{diagnostico.estado_diagnostico}</span></p>
-                    }
-                    {diagnostico.estado_diagnostico == 'Superado' &&
-                    <p><b>Estado diagnóstico: </b><span class="badge bg-light-danger">{diagnostico.estado_diagnostico}</span></p>
-                    }
-                </p>
-           
-                <p className="card-footer" style={{fontWeight: "bold"}}>Diagnosticado por: </p>
-            </div>
-        )}
-   
-        
-        </div>
-    
-      
-    </div>
 
-     </section>
-     }
+        {examenes_asignados.length > 0 &&
+        
+            <div className="table-responsive">
+                <h4>Examenes asignados</h4>
+            <table className="table lg">
+                <thead>
+                    <tr>                     
+                    <th>Código examen</th>
+                    <th>Nombre examen</th>
+                    <th>Tipo de examen</th>
+                    <th>Fecha de asignación</th>
+                    <th>Hora de asignación</th>
+                    <th>Agregar resultados</th>
+                    <th>Ver resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {examenes_asignados.map((examen_asignado)=>(
+                    <tr>                  
+                        <td>{examen_asignado.codigo_examen}</td>
+                        <td>{examen_asignado.nombre_examen}</td>
+                        <td>{examen_asignado.nombre_tipo_examen}</td>
+                        <td>{examen_asignado.fecha_atencion_medica}</td>
+                        <td>{examen_asignado.hora_atencion_medica}</td>
+                        <td>
+                        <Link to={`examenes/${examen_asignado.id_atencion_medica}/agregar_resultado`} className="btn btn-sm btn-primary"><i className="bi bi-plus"></i> Agregar resultados</Link>
+                        </td>
+                        <td>
+                        <Link to={`examenes/${examen_asignado.id_atencion_medica}/ver_resultado`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Ver resultados</Link>
+                        </td>
+                        
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
+            </div>          
+        }
+
+      
 
     </div>
     </div>

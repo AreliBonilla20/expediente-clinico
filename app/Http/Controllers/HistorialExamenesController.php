@@ -7,6 +7,21 @@ use Illuminate\Support\Facades\DB;
 
 class HistorialExamenesController extends Controller
 {
+
+  public function index($id_consulta, $id_hospitalizacion)
+  {  
+     $examenes_asignados = DB::select('select * from historial_examenes inner join atenciones_medicas on historial_examenes.id_atencion_medica=atenciones_medicas.id_atencion_medica
+     inner join examenes on examenes.codigo_examen=historial_examenes.codigo_examen join tipo_examen on 
+     tipo_examen.id_tipo_examen=examenes.id_tipo_examen
+     where atenciones_medicas.id_hospitalizacion = ? or atenciones_medicas.id_consulta = ?', [$id_hospitalizacion, $id_consulta]);
+    
+
+     $data = [
+       "examenes_asignados" => $examenes_asignados
+     ];
+     return response()->json($data);    
+  }
+
     public function store(Request $request, $id_consulta, $id_hospitalizacion)
     {   
 

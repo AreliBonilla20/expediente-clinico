@@ -66,6 +66,17 @@ export default {
     historial_tratamientos: (id_consulta, id_hospitalizacion) =>
      axios.get(`${API_URL}/historial_tratamientos/${id_consulta}/${id_hospitalizacion}`),
 
+    //Historial examenes
+    historial_examenes: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/historial_examenes/${id_consulta}/${id_hospitalizacion}`),
+
+    //Examen parámetros
+    examen_parametros: (id_atencion_medica) =>
+    axios.get(`${API_URL}/examenes_resultado/${id_atencion_medica}/crear`),
+
+    examen_resultado: (id_atencion_medica) =>
+    axios.get(`${API_URL}/examenes_resultado/${id_atencion_medica}/ver`),
+
     //Diagnósticos
     diagnosticos: () =>
     axios.get(`${API_URL}/diagnosticos`),
@@ -170,8 +181,8 @@ export default {
     axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
 
     //Consultorios - centro medico
-     consultorios : (id_centro_medico) =>
-     axios.get(`${API_URL}/consultorios/${id_centro_medico}`),
+    consultorios : (id_centro_medico) =>
+    axios.get(`${API_URL}/consultorios/${id_centro_medico}`),
 
     //Hemogramas
     examenes_hemogramas: () =>
