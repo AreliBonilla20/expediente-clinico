@@ -15,6 +15,7 @@ function AsignarMedicamento() {
   const API_URL = API.API_URL;
 
   var {id_consulta, id_hospitalizacion} = useParams();
+  var cont = 0 ;
 
   if(id_consulta == undefined){
         id_consulta = 'null';
@@ -29,15 +30,87 @@ function AsignarMedicamento() {
 
   const [tipos_medicamentos, set_tipos_medicamentos] = useState([]);
   const [id_tipo_medicamento, set_id_tipo_medicamento] = useState('');
+  const [error_medicamento, set_error_medicamento] = useState('');
+  const [error_dosis, set_error_dosis] = useState('');
+  const [error_indicaciones, set_error_indicaciones] = useState('');
 
-  // handle input change
-  const handleInputChange = (e, index) => {
+
+  const validar_medicamento = (e, index) => {
+    if(!e.target.value){
+        set_error_medicamento('El campo medicamento es obligatorio');
+    }
+    else{
+        set_error_medicamento('');
+        
+    }
+    
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
     set_input_list(list);
+  
+      
   };
 
+  const validar_dosis = (e, index) => {
+    if(e.target.value.length==0){
+        set_error_dosis('El campo dósis es obligatorio');
+    }
+    else if(e.target.value.length > 0 && e.target.value.length <150){
+        set_error_dosis('');
+    }
+
+    else if(e.target.value.length > 150){
+        set_error_dosis('No deben ser mas de 150 caracteres');
+    }
+    else{
+        set_error_dosis('');
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+  
+      
+  };
+
+  const validar_indicaciones = (e, index) => {
+    if(e.target.value.length==0){
+        set_error_indicaciones('El campo indicaciones es obligatorio');
+    }
+    else if(e.target.value.length > 0 && e.target.value.length <150){
+        set_error_indicaciones('');
+    }
+
+    else if(e.target.value.length > 150){
+        set_error_indicaciones('No deben ser mas de 150 caracteres');
+    }
+    else{
+        set_error_indicaciones('');
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+
+
+
+  };
+
+  
+    for(let i=0; i<input_list.length; i++){
+        if(input_list[i]['codigo_medicamento'] == ''){
+            cont++;
+        }
+        if(input_list[i]['indicaciones_medicamento'] == ''){
+            cont++;
+        }
+        if(input_list[i]['dosis_medicamento'] == ''){
+            cont++;
+        }
+    }
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...input_list];
@@ -163,7 +236,7 @@ function AsignarMedicamento() {
                                                         name="codigo_medicamento"
                                                         placeholder="Enter First Name"
                                                         value={x.codigo_medicamento}
-                                                        onChange={e => handleInputChange(e, i)} >
+                                                        onChange={e => validar_medicamento(e, i)}  >
                                                     <option value="">--Seleccione una opción--</option>
                                                         {medicamentos.map((medicamento) => {
                                                             if(medicamento.id_tipo_medicamento == id_tipo_medicamento){
@@ -175,6 +248,7 @@ function AsignarMedicamento() {
                                                             }
                                                         })}
                                                     </select>
+                                                    <small className="text-danger">{error_medicamento}</small>
                                                 </div>
                                             </div>
 
@@ -186,12 +260,12 @@ function AsignarMedicamento() {
                                                 <input type="number" className="form-control" min="1"
                                                 name="cantidad_medicamento"
                                                 value={x.cantidad_medicamento}
-                                                onChange={e => handleInputChange(e, i)}  />
-                                               
+                                                />
                                                 <div className="form-control-icon">
                                                 <i class="bi bi-sort-numeric-up"></i>
                                                     </div>
                                                     </div>
+                                                   
                                             </div>
                                             </div>
 
@@ -202,11 +276,12 @@ function AsignarMedicamento() {
                                                     <textarea type="text" className="form-control" rows="4"
                                                         name="dosis_medicamento"
                                                         value={x.dosis_medicamento}
-                                                        onChange={e => handleInputChange(e, i)} />
+                                                        onChange={e => validar_dosis(e, i)} />
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
                                                     </div>
                                                 </div>
+                                                <small className="text-danger">{error_dosis}</small>
                                             </div>
                                             </div>
 
@@ -219,11 +294,12 @@ function AsignarMedicamento() {
                                                     <textarea type="text" className="form-control" rows="4"
                                                         name="indicaciones_medicamento"
                                                         value={x.indicaciones_medicamento}
-                                                        onChange={e => handleInputChange(e, i)} />
+                                                        onChange={e => validar_indicaciones(e, i)}/>
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
                                                     </div>
                                                 </div>
+                                                <small className="text-danger">{error_indicaciones}</small>
                                             </div>
                                             </div>
 
@@ -238,15 +314,17 @@ function AsignarMedicamento() {
                                         
                                         );
                                     })}
+                                    {cont == 0 &&
                                     <div className="col-12 d-flex justify-content-end">
-                                            <button className="btn btn-secondary">Guardar</button>
-                                        </div>
+                                        <button className="btn btn-secondary" id="btn_guardar">Guardar</button>
+                                    </div>
+                                   }
                                     </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                     
                     </div>
                 </div>   
             </div>

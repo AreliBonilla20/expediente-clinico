@@ -13,6 +13,8 @@ import Footer from '../LayoutComponents/Footer';
 
 function AsignarExamen() {
   const API_URL = API.API_URL;
+  var cont = 0;
+
 
   var {id_consulta, id_hospitalizacion} = useParams();
 
@@ -26,17 +28,30 @@ function AsignarExamen() {
 
   const [input_list, set_input_list] = useState([{ codigo_examen: ""}]);
   const [examenes, set_examenes] = useState([]);
-
   const [tipo_examen, set_tipo_examen] = useState([]);
+  const [error_examen, set_error_examen] = useState('');
   const [id_tipo_examen, set_id_tipo_examen] = useState('');
 
-  // handle input change
-  const handleInputChange = (e, index) => {
+  const validar_examen = (e, index) => {
+    if(!e.target.value){
+        set_error_examen('El campo examen es obligatorio');
+    }
+    else{
+        set_error_examen('');
+        
+    }
+    
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
     set_input_list(list);
+  
   };
+  for(let i=0; i<input_list.length; i++){
+    if(input_list[i]['codigo_examen'] == ''){
+        cont++;
+    } 
+    }
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
@@ -164,7 +179,7 @@ function AsignarExamen() {
                                                         name="codigo_examen"
                                                         placeholder="Enter First Name"
                                                         value={x.codigo_examen}
-                                                        onChange={e => handleInputChange(e, i)} >
+                                                        onChange={e => validar_examen(e, i)}   >
                                                     <option value="">--Seleccione una opción--</option>
                                                         {examenes.map((examen) => {
                                                             if(examen.id_tipo_examen == id_tipo_examen){
@@ -176,6 +191,7 @@ function AsignarExamen() {
                                                             }
                                                         })}
                                                     </select>
+                                                    <small className="text-danger">{error_examen}</small>
                                                 </div>
                                             </div>
 
@@ -192,9 +208,11 @@ function AsignarExamen() {
                                         
                                         );
                                     })}
+                                    {cont == 0 &&
                                     <div className="col-12 d-flex justify-content-end">
-                                            <button className="btn btn-secondary">Guardar</button>
-                                        </div>
+                                        <button className="btn btn-secondary" id="btn_guardar">Guardar</button>
+                                    </div>
+                                   }
                                     </form>
                                     </div>
                                   

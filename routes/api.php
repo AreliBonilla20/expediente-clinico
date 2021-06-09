@@ -67,6 +67,7 @@ Route::get('/examenes_resultado/{id_atencion_medica}/crear', 'ExamenesResultadoC
 Route::post('/examenes_resultado/{id_atencion_medica}/guardar', 'ExamenesResultadoController@store');
 Route::get('/examenes_resultado/{id_atencion_medica}/ver', 'ExamenesResultadoController@examen_resultado');
 
+
 //Rutas para diagnosticos
 Route::get('/diagnosticos', 'DiagnosticoController@index');
 Route::get('/diagnosticos/crear', 'DiagnosticoController@create');

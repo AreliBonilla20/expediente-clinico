@@ -14,6 +14,7 @@ import Footer from '../LayoutComponents/Footer';
 
 function AsignarTratamientos() {
   const API_URL = API.API_URL;
+  var cont = 0;
 
   var {id_consulta, id_hospitalizacion} = useParams();
 
@@ -30,14 +31,60 @@ function AsignarTratamientos() {
 
   const [tipos_tratamientos, set_tipos_tratamientos] = useState([]);
   const [id_tipo_tratamiento, set_id_tipo_tratamiento] = useState('');
+  const [error_tratamiento, set_error_tratamiento] = useState('');
+  const [error_indicaciones, set_error_indicaciones] = useState('');
 
-  // handle input change
-  const handleInputChange = (e, index) => {
+
+  const validar_tratamiento = (e, index) => {
+    if(!e.target.value){
+        set_error_tratamiento('El campo tratamiento es obligatorio');
+    }
+    else{
+        set_error_tratamiento('');
+        
+    }
+    
     const { name, value } = e.target;
     const list = [...input_list];
     list[index][name] = value;
     set_input_list(list);
+  
+      
   };
+
+  const validar_indicaciones = (e, index) => {
+    if(e.target.value.length==0){
+        set_error_indicaciones('El campo indicaciones es obligatorio');
+    }
+    else if(e.target.value.length > 0 && e.target.value.length <250){
+        set_error_indicaciones('');
+    }
+
+    else if(e.target.value.length > 250){
+        set_error_indicaciones('No deben ser mas de 250 caracteres');
+    }
+    else{
+        set_error_indicaciones('');
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+  
+      
+  };
+
+  for(let i=0; i<input_list.length; i++){
+    if(input_list[i]['codigo_tratamiento'] == ''){
+        cont++;
+    }
+    if(input_list[i]['indicaciones_tratamiento'] == ''){
+        cont++;
+    }
+   
+}
+
 
   // handle click event of the Remove button
   const handleRemoveClick = index => {
@@ -162,7 +209,7 @@ function AsignarTratamientos() {
                                                         name="codigo_tratamiento"
                                                         placeholder="Enter First Name"
                                                         value={x.codigo_tratamiento}
-                                                        onChange={e => handleInputChange(e, i)} >
+                                                        onChange={e => validar_tratamiento(e, i)}  >
                                                     <option value="">--Seleccione una opción--</option>
                                                         {tratamientos.map((tratamiento) => {
                                                             if(tratamiento.id_tipo_tratamiento == id_tipo_tratamiento){
@@ -174,6 +221,7 @@ function AsignarTratamientos() {
                                                             }
                                                         })}
                                                     </select>
+                                                    <small className="text-danger">{error_tratamiento}</small>
                                                 </div>
                                             </div>
 
@@ -200,11 +248,12 @@ function AsignarTratamientos() {
                                                     <textarea type="text" className="form-control" rows="4"
                                                         name="indicaciones_tratamiento"
                                                         value={x.indicaciones_tratamiento}
-                                                        onChange={e => handleInputChange(e, i)} />
+                                                        onChange={e => validar_indicaciones(e, i)}/>
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
                                                     </div>
                                                 </div>
+                                                <small className="text-danger">{error_indicaciones}</small>
                                             </div>
                                             </div>
 
@@ -219,9 +268,11 @@ function AsignarTratamientos() {
                                         
                                         );
                                     })}
+                                   {cont == 0 &&
                                     <div className="col-12 d-flex justify-content-end">
-                                            <button className="btn btn-secondary">Guardar</button>
-                                        </div>
+                                        <button className="btn btn-secondary" id="btn_guardar">Guardar</button>
+                                    </div>
+                                   }
                                     </form>
                                     </div>
                                 </div>

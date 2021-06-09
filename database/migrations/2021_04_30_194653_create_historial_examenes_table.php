@@ -22,6 +22,8 @@ class CreateHistorialExamenesTable extends Migration
             $table->string('id_atencion_medica');
             $table->foreign('id_atencion_medica')->references('id_atencion_medica')->on('atenciones_medicas');
 
+            $table->string('archivo_resultado', 1000)->nullable();
+
             $table->timestamps();
         });
     }

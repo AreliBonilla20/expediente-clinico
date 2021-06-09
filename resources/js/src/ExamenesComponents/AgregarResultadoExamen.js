@@ -4,11 +4,10 @@ import API from '../api';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
 import Footer from '../LayoutComponents/Footer';
-import e from 'cors';
+
 
 
 
@@ -20,6 +19,9 @@ function AgregarResultadoExamen() {
   const [examen_parametros, set_examen_parametros] = useState([]);
 
   const [resultados, set_resultados] = useState("");
+  const [archivo_resultado, set_archivo_resultado] = useState();
+
+
   var resultado_parametros;
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function AgregarResultadoExamen() {
     const AgregarResultadoExamen = async (e) => {
     e.preventDefault();
     try {
-      const body = { resultado_parametros };
+      const body = { resultado_parametros, archivo_resultado };
       const response = await fetch(`${API_URL}/examenes_resultado/${id_atencion_medica}/guardar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -134,12 +136,25 @@ function AgregarResultadoExamen() {
                                              </tbody>
                                              </table>
                                              </div>             
-                                                
-                                                                       
-                                           
-
+                                        
                                           
                                         </div>
+
+                                            <hr />
+                                        <div className="row">
+                                            <p>Agregar archivo de resultados</p>
+                                             <div class="col-md-12 mb-1">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group mb-3">
+                                                        <label class="input-group-text" for="archivo_resultado"><i
+                                                                class="bi bi-upload"></i></label>
+                                                        <input type="file" class="form-control" id="archivo_resultado" 
+                                                        onChange={e => set_archivo_resultado(e.target.files[0])} />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            </div>                         
+                                           
                               
                                     <div className="col-12 d-flex justify-content-end">
                                             <button className="btn btn-secondary">Guardar</button>
@@ -148,7 +163,7 @@ function AgregarResultadoExamen() {
                                     </div>
 
                                     
-                                    {JSON.stringify(resultado_parametros[0])}
+                                    {JSON.stringify(archivo_resultado)}
                                 
                                 </div>
                             </div>

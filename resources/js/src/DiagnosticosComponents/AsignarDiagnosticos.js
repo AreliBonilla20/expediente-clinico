@@ -15,7 +15,7 @@ function AsignarDiagnosticos() {
   const API_URL = API.API_URL;
 
   var {id_consulta, id_hospitalizacion} = useParams();
-
+  var cont = 0 ;
   if(id_consulta == undefined){
         id_consulta = 'null';
   }
@@ -29,6 +29,90 @@ function AsignarDiagnosticos() {
 
   const [tipos_diagnosticos, set_tipos_diagnosticos] = useState([]);
   const [id_tipo_diagnostico, set_id_tipo_diagnostico] = useState('');
+  const [error_diagnostico, set_error_diagnostico] = useState('');
+  const [error_observaciones, set_error_observaciones] = useState('');
+  const [error_indicaciones, set_error_indicaciones] = useState('');
+
+
+  const validar_diagnostico = (e, index) => {
+    if(!e.target.value){
+        set_error_diagnostico('El campo diagnóstico es obligatorio');
+    }
+    else{
+        set_error_diagnostico('');
+        
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+  
+      
+  };
+
+  const validar_observaciones = (e, index) => {
+    if(e.target.value.length==0){
+        set_error_observaciones('El campo observaciones es obligatorio');
+    }
+    else if(e.target.value.length > 0 && e.target.value.length <250){
+        set_error_observaciones('');
+    }
+
+    else if(e.target.value.length > 250){
+        set_error_observaciones('No deben ser mas de 250 caracteres');
+    }
+    else{
+        set_error_observaciones('');
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+  
+      
+  };
+
+  const validar_indicaciones = (e, index) => {
+    if(e.target.value.length==0){
+        set_error_indicaciones('El campo indicaciones es obligatorio');
+    }
+    else if(e.target.value.length > 0 && e.target.value.length <250){
+        set_error_indicaciones('');
+    }
+
+    else if(e.target.value.length > 250){
+        set_error_indicaciones('No deben ser mas de 250 caracteres');
+    }
+    else{
+        set_error_indicaciones('');
+    }
+    
+    const { name, value } = e.target;
+    const list = [...input_list];
+    list[index][name] = value;
+    set_input_list(list);
+
+
+
+  };
+
+  
+    for(let i=0; i<input_list.length; i++){
+        if(input_list[i]['codigo_diagnostico'] == ''){
+            cont++;
+        }
+        if(input_list[i]['indicaciones_diagnostico'] == ''){
+            cont++;
+        }
+        if(input_list[i]['observaciones_diagnostico'] == ''){
+            cont++;
+        }
+    }
+
+   
+
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -47,6 +131,7 @@ function AsignarDiagnosticos() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
+    
     set_input_list([...input_list, { codigo_diagnostico: "", observaciones_diagnostico: "", indicaciones_diagnostico: ""}]);
   };
 
@@ -59,6 +144,7 @@ function AsignarDiagnosticos() {
    API.diagnosticos().then( res => {
        const result = res.data;
        set_diagnosticos(result.data);
+      
    })
 },[]);
 
@@ -164,7 +250,8 @@ function AsignarDiagnosticos() {
                                                         name="codigo_diagnostico"
                                                         placeholder="Enter First Name"
                                                         value={x.codigo_diagnostico}
-                                                        onChange={e => handleInputChange(e, i)} >
+                                                        onChange={e => validar_diagnostico(e, i)} 
+                                                      >
                                                     <option value="">--Seleccione una opción--</option>
                                                         {diagnosticos.map((diagnostico) => {
                                                             if(diagnostico.id_tipo_diagnostico == id_tipo_diagnostico){
@@ -176,6 +263,9 @@ function AsignarDiagnosticos() {
                                                             }
                                                         })}
                                                     </select>
+                                                   
+                                                      <small className="text-danger">{error_diagnostico}</small>
+                                                    
                                                 </div>
                                             </div>
 
@@ -186,11 +276,13 @@ function AsignarDiagnosticos() {
                                                     <textarea type="text" className="form-control" rows="4"
                                                         name="observaciones_diagnostico"
                                                         value={x.observaciones_diagnostico}
-                                                        onChange={e => handleInputChange(e, i)} />
+                                                        onChange={e => validar_observaciones(e, i)} 
+                                                       />
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
                                                     </div>
                                                 </div>
+                                                <small className="text-danger">{error_observaciones}</small>
                                             </div>
                                             </div>
 
@@ -201,11 +293,13 @@ function AsignarDiagnosticos() {
                                                     <textarea type="text" className="form-control" rows="4"
                                                         name="indicaciones_diagnostico"
                                                         value={x.indicaciones_diagnostico}
-                                                        onChange={e => handleInputChange(e, i)} />
+                                                        onChange={e => validar_indicaciones(e, i)} 
+                                                       />
                                                     <div className="form-control-icon">
                                                         <i className="bi bi-clipboard-check"></i>
                                                     </div>
                                                 </div>
+                                                <small className="text-danger">{error_indicaciones}</small>
                                             </div>
                                             </div>
 
@@ -220,15 +314,22 @@ function AsignarDiagnosticos() {
                                         
                                         );
                                     })}
+
+                                    
+                                    
+                                  {cont == 0 &&
                                     <div className="col-12 d-flex justify-content-end">
-                                            <button className="btn btn-secondary">Guardar</button>
-                                        </div>
+                                        <button className="btn btn-secondary" id="btn_guardar">Guardar</button>
+                                    </div>
+                                   }
+                                       
+                                      
                                     </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                       
                     </div>
                 </div>   
             </div>
