@@ -10,10 +10,17 @@ class ChequeoHospitalizacionController extends Controller
 {
     public function index($id_hospitalizacion)
     {  
-       $chequeos = DB::select('select * from chequeos_hospitalizaciones where id_hospitalizacion = ? order by created_at desc', [$id_hospitalizacion]);
-       return ChequeoHospitalizacionResource::collection($chequeos);
+       $chequeos = DB::select('select * from chequeos_hospitalizaciones where chequeos_hospitalizaciones.id_hospitalizacion = ? order by created_at desc', [$id_hospitalizacion]);
+       $alta = DB::select('select fecha_alta from hospitalizaciones where id_hospitalizacion = ?', [$id_hospitalizacion]);
+       
+       $data = [
+           "chequeos" => ChequeoHospitalizacionResource::collection($chequeos),
+           "alta" => $alta[0]
+       ];
+       
+       
+       return response()->json($data);    
     }
-
     public function store(Request $request, $id_hospitalizacion)
     {   
 

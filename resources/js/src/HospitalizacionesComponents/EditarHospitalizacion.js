@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import swal from 'sweetalert';
 
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
@@ -28,10 +29,12 @@ const EditarHospitalizacion = () => {
     const [sala, setSala] = useState('');
     const [camilla, setCamilla] = useState('');
     const [estado_paciente, setEstado_paciente] = useState('');
-    const [alta_paciente, setAlta_paciente] = useState();
+    const [alta_paciente, set_alta_paciente] = useState('Pendiente');
+    
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
+        
       });
 
     useEffect(() => {
@@ -50,12 +53,13 @@ const EditarHospitalizacion = () => {
        })
 
      }, []);
+     
 
-
+     
     const editarHospitalizacion = async (data) => {
     
         try {
-          const body = { fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla, estado_paciente};
+          const body = { fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla, estado_paciente, alta_paciente};
           const response = await fetch(`${API_URL}/hospitalizaciones/${id_hospitalizacion}/actualizar`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -64,6 +68,22 @@ const EditarHospitalizacion = () => {
           });
           
           window.location = `/expedientes/${codigo_paciente}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Hospitalización actualizada!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
         } catch (err) {
           console.error(err.message);
         }
@@ -171,6 +191,26 @@ const EditarHospitalizacion = () => {
 
                                                     <div className="col-12">
                                                         <div className="form-group has-icon-left">
+                                                            <label htmlFor="estado_paciente">Estado paciente (*)</label>
+                                                            <div className="position-relative">
+                                                                <textarea type="text" className="form-control" rows="4" readOnly
+                                                                    name="estado_paciente"
+                                                                    id="estado_paciente"
+                                                                    {...register('estado_paciente')}
+                                                                    value={estado_paciente}
+                                                                    onChange={e => setEstado_paciente(e.target.value)} 
+                                                                     />
+                                                                <div className="form-control-icon">
+                                                                    <i className="bi bi-person"></i>
+                                                                </div>
+                                                            </div>
+                                                            <small className="text-danger"> {errors.estado_paciente?.message} </small>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+
+                                                    <div className="col-4">
+                                                        <div className="form-group has-icon-left">
                                                             <label htmlFor="sala">Sala (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="text" className="form-control"
@@ -188,7 +228,7 @@ const EditarHospitalizacion = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-12">
+                                                    <div className="col-4">
                                                         <div className="form-group has-icon-left">
                                                             <label htmlFor="camilla">Camilla (*)</label>
                                                             <div className="position-relative">
@@ -207,31 +247,32 @@ const EditarHospitalizacion = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-12">
-                                                        <div className="form-group has-icon-left">
-                                                            <label htmlFor="estado_paciente">Estado paciente (*)</label>
-                                                            <div className="position-relative">
-                                                                <textarea type="text" className="form-control" rows="4" readOnly
-                                                                    name="estado_paciente"
-                                                                    id="estado_paciente"
-                                                                    {...register('estado_paciente')}
-                                                                    value={estado_paciente}
-                                                                    onChange={e => setEstado_paciente(e.target.value)} 
-                                                                     />
-                                                                <div className="form-control-icon">
-                                                                    <i className="bi bi-person"></i>
-                                                                </div>
-                                                            </div>
-                                                            <small className="text-danger"> {errors.estado_paciente?.message} </small>
+                                                    
+
+                                                    <div className="col-md-4 mb-4">
+                                                    <label htmlFor="alta_paciente">Estado de alta (*)</label>
+                                                        <div className="form-group">
+                                                                <select className="form-select"
+                                                                name="alta_paciente" 
+                                                                id="alta_paciente" 
+                                                               
+                                                                value={alta_paciente}
+                                                                onChange={e => set_alta_paciente(e.target.value)} >
+                                                            
+                                                                <option value="Pendiente">Pendiente</option>
+                                                                <option value="Aprobada">Aprobada</option>
+                                                            </select>
+                                                         
                                                         </div>
+                                                       
                                                     </div>
-                                                    <br />
+
                                                    
                                                 
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <button className="btn btn-secondary">Actualizar</button>
                                                     </div>
-                                                    {JSON.stringify(alta_paciente)}
+                                                    
                                                     
                                                 </div>
                                             </div>

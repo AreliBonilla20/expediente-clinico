@@ -29,6 +29,7 @@ const schema = yup.object().shape({
     .string()
     .required("El campo estado del paciente es obligatorio")
     .max(500, "El máximo de caracteres es 500"),
+  
     
   });
 

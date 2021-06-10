@@ -49,6 +49,7 @@ Route::post('/signos_vitales/guardar', 'SignosVitalesController@store');
 //Rutas para el historial de diagnósticos del paciente
 Route::get('/historial_diagnosticos/{id_consulta}/{id_hospitalizacion}', 'HistorialDiagnosticosController@index');
 Route::post('/historial_diagnosticos/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialDiagnosticosController@store');
+Route::post('/historial_diagnosticos/{codigo_diagnostico}/actualizar', 'HistorialDiagnosticosController@update');
 
 //Rutas para el historial de recetas médicas del paciente
 Route::get('/recetas_medicas/{id_consulta}/{id_hospitalizacion}', 'RecetaMedicaController@index');

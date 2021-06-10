@@ -86,7 +86,23 @@ const EditarExamen = () => {
             
           });
           
-          window.location = `examenes/${codigo}/ver`;
+          window.location = `/examenes/${codigo}/ver`;
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Examen actualizado!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
         } catch (err) {
           console.error(err.message);
         }

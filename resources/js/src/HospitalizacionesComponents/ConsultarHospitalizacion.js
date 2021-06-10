@@ -16,6 +16,7 @@ const ConsultarHospitalizacion = () => {
     
     const [hospitalizaciones, setHospitalizaciones] =useState([]);
     const { codigo } = useParams();
+    var cont = 0;
 
     useEffect(() => {
          API.hospitalizaciones_paciente(codigo).then(res => {
@@ -24,14 +25,23 @@ const ConsultarHospitalizacion = () => {
         })
       }, []);
 
+      for(let i=0; i<hospitalizaciones.length; i++){
+          if(!hospitalizaciones[i].fecha_alta){
+              cont ++;
+          }
+      }
+
 
     return(
         <section className="section">
         <div className="card">
+        {cont == 0 &&
             <div className="card-header">
                 <Link to="hospitalizaciones/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
             </div>
-           
+         }
+            
+       
             <br />
             {hospitalizaciones.length > 0 &&
             <div className="card-body">
@@ -67,9 +77,7 @@ const ConsultarHospitalizacion = () => {
                        }
 
                         {hospitalizacion.fecha_alta &&
-                         <td>
-                         <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/editar`} className="btn btn-sm btn-warning"><i className="bi bi-pencil"></i> Editar</Link>
-                         </td>
+                         <td>{hospitalizacion.fecha_alta}</td>
                        }
                         <td>
                         <Link to={`hospitalizaciones/${hospitalizacion.id_hospitalizacion}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
@@ -78,6 +86,7 @@ const ConsultarHospitalizacion = () => {
                         </tr>
                     )}
                     </tbody>
+                   
                 </table>
             </div>
             }

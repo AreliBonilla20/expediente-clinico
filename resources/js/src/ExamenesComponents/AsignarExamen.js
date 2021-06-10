@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import API from '../api';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
+import swal from 'sweetalert';
 
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
@@ -99,6 +97,23 @@ function AsignarExamen() {
         const codigo = id_consulta.substring(0,7);
         window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
       }
+      if(response.status === 200){
+        swal({
+            title: "Éxito",
+            text: "Examenes registrados!",
+            icon: "success",
+            button: "Aceptar",
+          });
+      }
+      else{
+        swal({
+            title: "Error",
+            text: "Ocurrió un error!",
+            icon: "error",
+            button: "Aceptar",
+          });
+      }
+      
       
     } catch (err) {
       console.error(err.message);

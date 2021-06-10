@@ -75,8 +75,10 @@ class EmpleadoController extends Controller
                         $request->correo_empleado
                        
                     ]);
-
-        app('App\Http\Controllers\DoctorController')->store($request, $id_empleado);
+        if($request->id_especialidad){
+            app('App\Http\Controllers\DoctorController')->store($request, $id_empleado);
+        }
+        
 
         return response()->json('Empleado creado!');    
     }
@@ -128,6 +130,9 @@ class EmpleadoController extends Controller
                     $request->correo_empleado, 
                     $id_empleado
                     ]);
+        if($request->id_especialidad){
+            app('App\Http\Controllers\DoctorController')->store($request, $id_empleado);
+        }
 
         return response()->json('Empleado actualizado!');    
     }

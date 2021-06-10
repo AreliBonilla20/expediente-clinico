@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import swal from 'sweetalert';
 
 import schema from '../Validaciones/ChequeoValidacion';
 
@@ -16,11 +17,13 @@ const ChequeoHospitalizacion = () => {
     const [chequeos, set_chequeos] = useState([]);
     const [observacion_chequeo, set_observacion_chequeo] = useState('');
     const [sintomas_chequeo, set_sintomas_chequeo] = useState('');
-
+    const [alta_aprobada, set_alta_aprobada] = useState('');
+  
     useEffect(() => {
         API.chequeos_hospitalizacion(id_hospitalizacion).then(res => {
            const result = res.data;
-           set_chequeos(result.data);
+           set_chequeos(result.chequeos);
+           set_alta_aprobada(result.alta.fecha_alta);
        })
      }, []);
 
@@ -42,6 +45,22 @@ const ChequeoHospitalizacion = () => {
           });
           
           window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Chequeo registrado!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
         } catch (err) {
           console.error(err.message);
         }
@@ -51,11 +70,13 @@ const ChequeoHospitalizacion = () => {
     return(
         <div className="card-body">
        
+       {!alta_aprobada &&    
         <button type="button" className="btn btn-success" data-toggle="modal" data-target="#chequeosModal">
         <i className="bi bi-plus"></i>
         Agregar
         </button>
-
+        }
+        
         <div className="modal fade" id="chequeosModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content">

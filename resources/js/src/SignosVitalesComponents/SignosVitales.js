@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import swal from 'sweetalert';
 
 import API from '../api';
 import SignosVitalesGraficos from './GraficoSignosVitales';
@@ -24,7 +25,7 @@ const SignosVitales = () => {
     useEffect(() => {
         API.signos_vitales(id_consulta, id_hospitalizacion).then(res => {
            const result = res.data;
-           setSignos_vitales(result);
+           setSignos_vitales(result.signos_vitales);
   
        })
      }, []);
@@ -51,6 +52,23 @@ const SignosVitales = () => {
           if(id_consulta){
             const codigo = id_consulta.substring(0,7);
             window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+          }
+
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Signos registrados!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
           }
           
          

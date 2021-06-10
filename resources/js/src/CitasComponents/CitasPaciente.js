@@ -26,18 +26,27 @@ const ConsultarDiagnostico = () => {
     return(
        
             <div id="main-content">
-                 <h5>Citas</h5>
-                                <hr />
+              
+                               
                 <div className="page-heading">
                     <section className="section">
                
 
                         <div className="card">
-                        
+
+                        {citas.length == 0 && 
+                            <div className="card-header">
+                                <Link to="agregar_cita" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                            </div>
                             
+                        }
+                        
+                        {citas.length > 0 &&
                             <div className="card-body">
+                            <h5>Citas</h5>
+                            <hr />
                                
-                                {citas.length > 0 &&
+                                
                                 <table className="table table-striped" id="table1">
                                     
                                     <thead>
@@ -72,9 +81,9 @@ const ConsultarDiagnostico = () => {
                                     )}
                                     </tbody>
                                 </table>
-                                  }
+                                  
                             </div>
-                          
+                          }
                         </div>
                     </section>
             </div>

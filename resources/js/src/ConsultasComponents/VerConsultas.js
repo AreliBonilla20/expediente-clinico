@@ -25,9 +25,14 @@ const VerConsultas = () => {
         <section className="section">
           
         <div className="card">
-          
+            
             
             <br />
+            {consultas.length == 0 &&
+            <div className="card-body">
+                <p>No hay consultas registradas</p>
+            </div>
+            }
             {consultas.length > 0 &&
             <div className="card-body">
             <h4>Consultas del paciente</h4>

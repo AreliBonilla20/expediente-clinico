@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import swal from 'sweetalert';
 
 import schema from '../Validaciones/ConsultorioValidacion';
 
@@ -40,6 +41,22 @@ const Consultorio = () => {
           });
           
           window.location = `/centros_medicos/${id_centro_medico}/ver`;
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Consultorio registrado!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
         } catch (err) {
           console.error(err.message);
         }
@@ -136,7 +153,7 @@ const Consultorio = () => {
         <div className="card">
          <div className="card-content">
              <div className="card-body">
-
+                {consultorios.length > 0 &&
                  <div className="table-responsive">
                 <table className="table lg">
                     <thead>
@@ -156,7 +173,8 @@ const Consultorio = () => {
                         ))}
                     </tbody>
                 </table>
-                </div>             
+                </div>   
+                }          
             </div>
          </div>
     </div>

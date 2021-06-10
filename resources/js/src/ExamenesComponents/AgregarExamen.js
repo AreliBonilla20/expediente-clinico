@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import swal from 'sweetalert';
 
 import Menu from '../LayoutComponents/Menu';
 import Header from '../LayoutComponents/Header';
@@ -58,6 +59,22 @@ const AgregarExamen = () => {
           });
           
           window.location = "/examenes";
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Exámen registrado!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
         } catch (err) {
           console.error(err.message);
         }

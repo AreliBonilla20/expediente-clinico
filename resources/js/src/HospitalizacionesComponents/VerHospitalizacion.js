@@ -19,6 +19,7 @@ import HistorialExamen from '../ExamenesComponents/HistorialExamenes';
 
 
 import API from '../api';
+import { fecha } from '../Funciones/FuncionesAuxiliares';
 
 
 const VerExpediente = () => {
@@ -33,6 +34,7 @@ const VerExpediente = () => {
     const [estado_paciente, setEstado_paciente] = useState('');
     const [centro_medico, set_centro_medico] = useState('');
     const [dias_ingreso, set_dias_ingreso] = useState('');
+    const [fecha_alta, set_fecha_alta] = useState('');
    
 
     useEffect(() => {
@@ -48,6 +50,7 @@ const VerExpediente = () => {
             setEstado_paciente(hospitalizacion.estado_paciente);
             set_centro_medico(hospitalizacion.nombre_centro_medico);
             set_dias_ingreso(hospitalizacion.dias_ingreso);
+            set_fecha_alta(hospitalizacion.fecha_alta);
             
        })
 
@@ -252,10 +255,26 @@ const VerExpediente = () => {
                                                                 </div>
                                                         </div>
                                                     </div>
-                                            
+                                                    {fecha_alta &&
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                                <div className="form-group">
+                                                                <p>Fecha de alta</p>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                                <div className="form-group">
+                                                                <p style={{fontWeight: "bold"}}>{fecha_alta}</p>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    }
+
+                                                    {!fecha_alta &&
                                                     <div className="col-12 d-flex justify-content-end">
                                                         <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                                     </div>
+                                                    }
                                                 </div>
                                                 </div>
                                             

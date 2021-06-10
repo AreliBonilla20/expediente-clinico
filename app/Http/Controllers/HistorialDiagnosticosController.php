@@ -62,4 +62,16 @@ class HistorialDiagnosticosController extends Controller
 
         return response()->json('Diagnósticos creados!');   
     }
+
+    public function update($codigo_diagnostico)
+    {
+      $estado = 'Suspendido';
+      DB::update('update into historial_diagnosticos set estado_diagnostico = ? where codigo_diagnostico = ?', 
+      [
+        $estado,
+        $codigo_diagnostico
+      ]);
+      
+      return response()->json('Diagnósticos actualizado!');   
+    }
 }

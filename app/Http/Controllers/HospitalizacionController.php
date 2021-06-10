@@ -11,13 +11,13 @@ class HospitalizacionController extends Controller
 {
     public function index()
     {  
-       $hospitalizacion = DB::select('select * from hospitalizaciones order by created_at desc');
+       $hospitalizacion = DB::select('select * from hospitalizaciones order by fecha_ingreso desc');
        return HospitalizacionResource::collection($hospitalizacion);
     }
 
     public function hospitalizaciones_paciente($codigo) 
     {
-        $hospitalizaciones_paciente = DB::select('select * from hospitalizaciones where codigo_paciente = ?', [$codigo]);
+        $hospitalizaciones_paciente = DB::select('select * from hospitalizaciones where codigo_paciente = ? order by fecha_ingreso desc', [$codigo]);
 
         return response()->json($hospitalizaciones_paciente);
     }
@@ -26,14 +26,13 @@ class HospitalizacionController extends Controller
     public function store(Request $request, $codigo)
     {   
         $id_hospitalizacion = $this->get_codigo($codigo);
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
+    
         $costo_hospitalizacion = DB::select('select * from centros_medicos where id_centro_medico = ?', [$request->id_centro_medico]);
 
     
         DB::insert('insert into hospitalizaciones (id_hospitalizacion, id_centro_medico, codigo_paciente, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla,
         estado_paciente, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, current_date + current_time)', 
                     [$id_hospitalizacion,
                      $request->id_centro_medico,
                      $codigo,
@@ -42,8 +41,7 @@ class HospitalizacionController extends Controller
                      $request->motivo_ingreso,
                      $request->sala, 
                      $request->camilla, 
-                     $request->estado_paciente,
-                     $fecha_actual
+                     $request->estado_paciente
                     ]);
         
         DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_hospitalizacion, costo_hospitalizacion, costo_total, created_at)
@@ -87,27 +85,22 @@ class HospitalizacionController extends Controller
 
     public function update(Request $request, $id_hospitalizacion)
     {
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-
-        if($request->alta_paciente){
-            $fecha_alta = 'current_date';
-        }
-        
-        DB::update('update hospitalizaciones set fecha_ingreso = ?, hora_ingreso = ?, motivo_ingreso = ?, sala = ?, camilla = ?,
-                    dias_ingreso = ?, fecha_alta = ?, costo = ?, updated_at = ?
+      
+        DB::update('update hospitalizaciones set sala = ?, camilla = ?, updated_at = current_date + current_time
                     where id_hospitalizacion = ?', 
                     [
-                    $request->fecha_ingreso,
-                    $request->hora_ingreso,
-                    $request->motivo_ingreso,
                     $request->sala, 
                     $request->camilla, 
-                    $request->dias_ingreso, 
-                    $request->fecha_alta, 
-                    $request->costo, 
-                    $fecha_actual,
                     $id_hospitalizacion
                     ]);
+
+        if($request->alta_paciente == 'Aprobada'){
+            DB::update('update hospitalizaciones set fecha_alta = current_date, updated_at = current_date + current_time
+            where id_hospitalizacion = ?', 
+            [
+            $id_hospitalizacion
+            ]);
+        }
 
         return response()->json('Hospitalización actualizada!');    
     }
@@ -121,7 +114,7 @@ class HospitalizacionController extends Controller
         {
             foreach($hospitalizaciones as $hospitalizacion)
             {
-                $correlativo = (int) substr($hospitalizacion->id_hospitalizacion, 9, 10) + 1;
+                $correlativo = (int) substr($hospitalizacion->id_hospitalizacion, 8, 9) + 1;
                 $id_hosp = $codigo.'H'.(string) $correlativo;
 
             }   

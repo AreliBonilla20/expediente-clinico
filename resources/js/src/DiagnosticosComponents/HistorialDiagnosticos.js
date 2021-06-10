@@ -28,8 +28,6 @@ const HistorialDiagnosticos = () => {
         codigo = id_consulta.substr(0,7);
     }
 
-   
-
     const [historial_diagnosticos, setHistorial_diagnosticos] = useState([]);
 
     useEffect(() => {
@@ -41,6 +39,47 @@ const HistorialDiagnosticos = () => {
 
      }, []);
 
+     function cambiar_estado(){
+        try {
+          const body = { codigo_diagnostico };
+          const response = fetch(`${API_URL}/historial_diagnosticos/${codigo_diagnostico}/actualizar`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+            
+          });
+          
+          if(id_hospitalizacion !== 'null'){
+            const codigo = id_hospitalizacion.substring(0,7);
+            window.location = `/expedientes/${codigo}/hospitalizaciones/${id_hospitalizacion}/ver`;
+          }
+    
+          if(id_consulta !== 'null'){
+            const codigo = id_consulta.substring(0,7);
+            window.location = `/expedientes/${codigo}/consultas/${id_consulta}/ver`;
+          }
+          if(response.status === 200){
+            swal({
+                title: "Éxito",
+                text: "Estado del diagnóstico actualizado!",
+                icon: "success",
+                button: "Aceptar",
+              });
+          }
+          else{
+            swal({
+                title: "Error",
+                text: "Ocurrió un error!",
+                icon: "danger",
+                button: "Aceptar",
+              });
+          }
+          
+        } catch (err) {
+          console.error(err.message);
+        }
+      };
+    
 
       return(
         <div className="card-body">
@@ -78,8 +117,9 @@ const HistorialDiagnosticos = () => {
                     <p><b>Estado diagnóstico: </b><span class="badge bg-light-danger">{diagnostico.estado_diagnostico}</span></p>
                     }
                 </p>
-           
+ 
                 <p className="card-footer" style={{fontWeight: "bold"}}>Diagnosticado por: </p>
+
             </div>
         )}
    

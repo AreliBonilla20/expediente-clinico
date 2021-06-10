@@ -23,11 +23,19 @@ const EmpleadosCentroMedico = () => {
     return(
         
         <div className="card-body">
-            <h4>Empleados</h4>
+            
         <div className="card">
          <div className="card-content">
              <div className="card-body">
+             {empleados.length == 0 &&
+                
+                <p>No hay empleados registrados</p>
+            
+            }   
+
+                {empleados.length > 0 &&
                  <div className="table-responsive">
+                     <h4>Empleados</h4>
                 <table className="table mb-0">
                     <thead>
                         <tr>                           
@@ -58,7 +66,8 @@ const EmpleadosCentroMedico = () => {
                         ))}
                     </tbody>
                 </table>
-                </div>             
+                </div>
+                }             
             </div>
          </div>
     </div>

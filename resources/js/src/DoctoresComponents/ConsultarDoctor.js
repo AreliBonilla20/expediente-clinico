@@ -60,11 +60,20 @@ const ConsultarDoctor = () => {
     return(
         
         <div className="card-body">
-            <h4>Médicos</h4>
+            
         <div className="card">
          <div className="card-content">
              <div className="card-body">
+                {doctores.length == 0 &&
+                
+                    <p>No hay doctores registrados</p>
+                
+                }
+
+                 {doctores.length > 0 &&
+                 
                  <div className="table-responsive">
+                     <h4>Médicos</h4>
                 <table className="table mb-0">
                     <thead>
                         <tr>                           
@@ -107,14 +116,15 @@ const ConsultarDoctor = () => {
 
                 
                 </div>   
-                     
+                     }
             </div>
          </div>
     </div>
-                
+    {doctores.length > 0 &&      
     <div className="col-12 d-flex justify-content-end">
         <Link to={`doctores/horario`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Asignar / editar horario</Link>
-    </div>     
+    </div>   
+    }  
     </div>
     );
 }
