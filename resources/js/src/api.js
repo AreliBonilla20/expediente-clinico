@@ -229,19 +229,29 @@ export default {
 
     //Empleados
     empleados: () =>
-    axios.get(`${API_URL}/empleados`),
+    axios.get(`${API_URL}/empleados`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     datos_formulario_empleado: () =>
-    axios.get(`${API_URL}/empleados/crear`),
+    axios.get(`${API_URL}/empleados/crear`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     empleado_editar: (id_empleado) =>
-    axios.get(`${API_URL}/empleados/${id_empleado}/editar`),
+    axios.get(`${API_URL}/empleados/${id_empleado}/editar`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     empleado_ver: (id_empleado) =>
-    axios.get(`${API_URL}/empleados/${id_empleado}/ver`),
+    axios.get(`${API_URL}/empleados/${id_empleado}/ver`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     empleado_buscar: (param_busqueda) =>
-    axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
+    axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),    
 
     //Consultorios - centro medico
      consultorios : (id_centro_medico) =>
@@ -251,44 +261,68 @@ export default {
 
     //Hemogramas
     examenes_hemogramas: () =>
-    axios.get(`${API_URL}/examenes_hemogramas`),
+    axios.get(`${API_URL}/examenes_hemogramas`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     datos_formulario_examen_hemograma: () =>
-    axios.get(`${API_URL}/examenes_hemogramas/crear`),
+    axios.get(`${API_URL}/examenes_hemogramas/crear`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
     
     //Quirófanos
     quirofanos: (id_centro_medico) =>
-    axios.get(`${API_URL}/quirofanos/${id_centro_medico}`),
+    axios.get(`${API_URL}/quirofanos/${id_centro_medico}`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     //Médicos
     especialidades: () =>
-    axios.get(`${API_URL}/doctores/crear`),
+    axios.get(`${API_URL}/doctores/crear`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     centro_medico_doctores: (id_centro_medico) =>
-    axios.get(`${API_URL}/centro_medico_doctores/${id_centro_medico}`),
+    axios.get(`${API_URL}/centro_medico_doctores/${id_centro_medico}`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     doctor_horario: () =>
-    axios.get(`${API_URL}/doctores/doctor_horario`),
+    axios.get(`${API_URL}/doctores/doctor_horario`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     //Horarios
     horarios: (id_centro_medico) =>
-    axios.get(`${API_URL}/horarios/${id_centro_medico}`),
+    axios.get(`${API_URL}/horarios/${id_centro_medico}`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     horarios_doctores: (id_centro_medico) =>
-    axios.get(`${API_URL}/horarios/${id_centro_medico}/doctores`),
+    axios.get(`${API_URL}/horarios/${id_centro_medico}/doctores`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     //Citas
     citas: () => 
-    axios.get(`${API_URL}/citas`),
+    axios.get(`${API_URL}/citas`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     cita_editar: (id_cita) =>
-    axios.get(`${API_URL}/citas/${id_cita}/editar`),
+    axios.get(`${API_URL}/citas/${id_cita}/editar`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     cita_ver: (id_cita) =>
-    axios.get(`${API_URL}/citas/${id_cita}/ver`),
+    axios.get(`${API_URL}/citas/${id_cita}/ver`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     datos_formulario_cita: () =>
-    axios.get(`${API_URL}/citas/crear`),
+    axios.get(`${API_URL}/citas/crear`, {
+        headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
+    }),
 
     API_URL,
 
