@@ -11,14 +11,14 @@ class TratamientosMedicosController extends Controller
 {
     public function index()
     {  
-       $tratamientos_medicos = DB::select('select * from tratamientos_medicos order by codigo_tratamiento');
+       $tratamientos_medicos = DB::select('select * from index_tratamiento');
        return TratamientosMedicosResource::collection($tratamientos_medicos);
       
     }
 
     public function create()
     {
-        $tipos_tratamientos = DB::select('select * from tipo_tratamiento order by tipo_tratamiento asc');
+        $tipos_tratamientos = DB::select('select * from create_tratamiento');
 
         $data = [
             "tipos_tratamientos"=> $tipos_tratamientos,
@@ -30,52 +30,48 @@ class TratamientosMedicosController extends Controller
 
     public function store(Request $request)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
 
-        DB::insert('insert into tratamientos_medicos (codigo_tratamiento, id_tipo_tratamiento, nombre_tratamiento, descripcion_tratamiento, costo_tratamiento, created_at) 
-                    values (?, ?, ?, ?, ?, ?)', 
-                    [$request->codigo_tratamiento, 
-                     $request->id_tipo_tratamiento,
-                     $request->nombre_tratamiento,
-                     $request->descripcion_tratamiento, 
-                     round($request->costo_tratamiento, 2),
-                     $fecha_actual
+        DB::insert('call public."add_tratamiento_proce"(:codigo_tratamiento, :id_tipo_tratamiento, :nombre_tratamiento, :descripcion_tratamiento, :costo_tratamiento, current_date)', 
+                    ["codigo_tratamiento" => $request->codigo_tratamiento, 
+                    "id_tipo_tratamiento" => $request->id_tipo_tratamiento,
+                    "nombre_tratamiento" => $request->nombre_tratamiento,
+                    "descripcion_tratamiento" => $request->descripcion_tratamiento, 
+                    "costo_tratamiento" => $request->costo_tratamiento
                     ]);
         
-        return response()->json('Tratamiento médico creado!');    
+        return response()->json('Tratamiento mÃ©dico creado!');    
     }
 
     public function edit($codigo)
     {
-        $tratamiento_editar = DB::select('select * from tratamientos_medicos where codigo_tratamiento = ?', [$codigo]); 
+        $tratamiento_editar = DB::select('SELECT v_codigo  as codigo_tratamiento, v_tipo as id_tipo_tratamiento, v_nombre as nombre_tratamiento, v_descripcion  as descripcion_tratamiento,
+        v_costo as costo_tratamiento from public."edit_tratamiento"(:codigo)', 
+        ["codigo" => $codigo]); 
 
         return response()->json($tratamiento_editar[0]);    
     }
 
     public function show($codigo)
     {
-        $tratamiento_ver = DB::select('select * from tratamientos_medicos inner join tipo_tratamiento on tratamientos_medicos.id_tipo_tratamiento = tipo_tratamiento.id_tipo_tratamiento 
-        where codigo_tratamiento = ?', [$codigo]); 
+        $tratamiento_ver = DB::select('SELECT v_codigo  as codigo_tratamiento, v_nombre_tipo  as tipo_tratamiento, v_nombre_tratamiento  as nombre_tratamiento, v_descripcion  as descripcion_tratamiento,
+        v_costo as costo_tratamiento from public."get_by_codigo_tratamiento"(:codigo)',     
+        ["codigo" => $codigo]); 
 
         return response()->json($tratamiento_ver[0]);    
     }
 
     public function update($codigo, Request $request)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
         
-        DB::update('update tratamientos_medicos set codigo_tratamiento = ?, id_tipo_tratamiento = ?, nombre_tratamiento = ?, descripcion_tratamiento = ?, costo_tratamiento = ?, updated_at = ?
-                    where codigo_tratamiento = ?', 
-                    [$request->codigo_tratamiento, 
-                     $request->id_tipo_tratamiento,
-                     $request->nombre_tratamiento,
-                     $request->descripcion_tratamiento,
-                     round($request->costo_tratamiento, 2),
-                     $fecha_actual,
-                     $codigo
-                    ]);
+        DB::select('call public."udp_tratamiento_proce"(:codigo_tratamiento, :id_tipo_tratamiento, :nombre_tratamiento, :descripcion_tratamiento, :costo_tratamiento, current_date)', 
+        ["codigo_tratamiento" => $request->codigo_tratamiento, 
+        "id_tipo_tratamiento" => $request->id_tipo_tratamiento,
+        "nombre_tratamiento" => $request->nombre_tratamiento,
+        "descripcion_tratamiento" => $request->descripcion_tratamiento, 
+        "costo_tratamiento" => $request->costo_tratamiento
+        ]);
 
-        return response()->json('Tratamiento médico actualizado!');    
+        return response()->json('Tratamiento mÃ©dico actualizado!');    
     }
 
     public function buscar($param_busqueda)
@@ -85,11 +81,11 @@ class TratamientosMedicosController extends Controller
         $codigo_tratamiento = '%'.$param_busqueda.'%';
         $nombre_tratamiento = '%'.$param_busqueda.'%';
         
-        $tratamientos_medicos = DB::select('select * from tratamientos_medicos where UNACCENT(lower(codigo_tratamiento)) LIKE ? or UNACCENT(lower(nombre_tratamiento)) LIKE ?', 
-        [strtolower($codigo_tratamiento), strtolower($nombre_tratamiento)]);
+        $tratamientos_medicos = DB::select('SELECT * from public."buscar_tratamiento"(:codigo_tratamiento, :nombre_tratamiento)', 
+        ["codigo_tratamiento" => strtolower($codigo_tratamiento), 
+        "nombre_tratamiento" => strtolower($nombre_tratamiento)]);
 
-        return TratamientosMedicosResource::collection($tratamientos_medicos);
-
+        return response()->json(array('data' => $tratamientos_medicos), 200);
     }
 
 

@@ -77,8 +77,8 @@ const BuscarTratamiento = () => {
                                     <tbody>
                                     {tratamientosmedicos.map((tratamiento) => 
                                           <tr>
-                                            <td>{tratamiento.codigo_tratamiento}</td>
-                                            <td>{tratamiento.nombre_tratamiento}</td>
+                                            <td>{tratamiento.codigo_tto}</td>
+                                            <td>{tratamiento.nombre_tto}</td>
                                            
                                             <td>
                                             <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
