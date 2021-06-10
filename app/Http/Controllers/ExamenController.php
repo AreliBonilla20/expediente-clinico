@@ -58,15 +58,18 @@ class ExamenController extends Controller
         return response()->json($examen_ver[0]);    
     }
 
-    public function update($codigo, Request $request)
+    public function update(Request $request, $codigo)
     {
-        DB::update('update examenes set codigo_examen = ?, id_tipo_examen = ?, nombre_examen = ?, indicaciones_examen = ?, costo = ?, updated_at = ?)', 
+        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
+        DB::update('update examenes set codigo_examen = ?, id_tipo_examen = ?, nombre_examen = ?, indicaciones_examen = ?, costo = ?, updated_at = ?
+        where codigo_examen = ?', 
         [$request->codigo_examen,
          $request->id_tipo_examen,
          $request->nombre_examen,
          $request->indicaciones_examen, 
          round($request->costo, 2), 
-         $fecha_actual
+         $fecha_actual,
+         $codigo
         ]);
         
         return response()->json('Examen actualizado!');    
@@ -82,7 +85,7 @@ class ExamenController extends Controller
         $examenes = DB::select('select * from examenes where UNACCENT(lower(codigo_examen)) LIKE ? or UNACCENT(lower(nombre_examen)) LIKE ?', 
         [strtolower($codigo_examen), strtolower($nombre_examen)]);
         
-        return ExamenResource::collection($centros_medicos);
+        return ExamenResource::collection($examenes);
 
     }
 }

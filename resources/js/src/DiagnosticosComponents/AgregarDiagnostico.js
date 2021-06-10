@@ -152,7 +152,7 @@ const AgregarDiagnostico = () => {
                                                     <div className="col-md-12 mb-4">
                                                     <label htmlFor="id_tipo_diagnostico">Tipo diagnóstico (*)</label>
                                                         <div className="form-group">
-                                                            <select className="choices form-select"
+                                                            <select className="form-select"
                                                                 name="id_tipo_diagnostico" 
                                                                 id="id_tipo_diagnostico" 
                                                                 {...register('id_tipo_diagnostico')}

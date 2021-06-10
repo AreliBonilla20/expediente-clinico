@@ -105,6 +105,7 @@ const ConsultarExpediente = () => {
                                             <th>Estado paciente</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
+                                            <th>Asignar cita</th>
                                         
                                         </tr>
                                     </thead>
@@ -117,10 +118,13 @@ const ConsultarExpediente = () => {
                                             <td>{paciente.fecha_nacimiento}</td>
                                             <td>{paciente.estado_paciente}</td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`expedientes/${paciente.codigo}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                                             </td>
                                             <td>
-                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            <Link to={`expedientes/${paciente.codigo}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            </td>
+                                            <td>
+                                            <Link to={`expedientes/${paciente.codigo}/agregar_cita`} className="btn btn-sm btn-success"><i className="bi bi-calendar-event"></i> Crear cita</Link>
                                             </td>
                                              
                                           </tr>

@@ -74,6 +74,25 @@ export default {
         headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
     }),
 
+    //Signos vitales
+    signos_vitales: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}`),
+
+    signos_vitales_graficos: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/signos_vitales/${id_hospitalizacion}/graficos`),
+
+    //Historial diagnosticos
+    historial_diagnosticos: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/historial_diagnosticos/${id_hospitalizacion}`),
+
+     //Historial recetas médicas
+    recetas_medicas: (id_hospitalizacion) =>
+    axios.get(`${API_URL}/recetas_medicas/${id_hospitalizacion}`),
+
+     //Historial tratamientos
+    historial_tratamientos: (id_hospitalizacion) =>
+     axios.get(`${API_URL}/historial_tratamientos/${id_hospitalizacion}`),
+
     //Diagnósticos
     diagnosticos: () =>
     axios.get(`${API_URL}/diagnosticos`, {
@@ -125,6 +144,9 @@ export default {
      axios.get(`${API_URL}/centros_medicos/${id_centro_medico}/ver`, {
         headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
     }),
+
+     centro_medico_empleados: (id_centro_medico) =>
+     axios.get(`${API_URL}/centro_medico_empleados/${id_centro_medico}`),
 
     //Tratamientos
     tratamientos_medicos: () =>
@@ -204,11 +226,69 @@ export default {
         headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
     }),
 
+
+    //Empleados
+    empleados: () =>
+    axios.get(`${API_URL}/empleados`),
+
+    datos_formulario_empleado: () =>
+    axios.get(`${API_URL}/empleados/crear`),
+
+    empleado_editar: (id_empleado) =>
+    axios.get(`${API_URL}/empleados/${id_empleado}/editar`),
+
+    empleado_ver: (id_empleado) =>
+    axios.get(`${API_URL}/empleados/${id_empleado}/ver`),
+
+    empleado_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/empleados/${param_busqueda}/buscar`),    
+
     //Consultorios - centro medico
      consultorios : (id_centro_medico) =>
      axios.get(`${API_URL}/consultorios/${id_centro_medico}`, {
         headers:{'Authorization':"Bearer " + window.localStorage.getItem('token')}
     }),
+
+    //Hemogramas
+    examenes_hemogramas: () =>
+    axios.get(`${API_URL}/examenes_hemogramas`),
+
+    datos_formulario_examen_hemograma: () =>
+    axios.get(`${API_URL}/examenes_hemogramas/crear`),
+    
+    //Quirófanos
+    quirofanos: (id_centro_medico) =>
+    axios.get(`${API_URL}/quirofanos/${id_centro_medico}`),
+
+    //Médicos
+    especialidades: () =>
+    axios.get(`${API_URL}/doctores/crear`),
+
+    centro_medico_doctores: (id_centro_medico) =>
+    axios.get(`${API_URL}/centro_medico_doctores/${id_centro_medico}`),
+
+    doctor_horario: () =>
+    axios.get(`${API_URL}/doctores/doctor_horario`),
+
+    //Horarios
+    horarios: (id_centro_medico) =>
+    axios.get(`${API_URL}/horarios/${id_centro_medico}`),
+
+    horarios_doctores: (id_centro_medico) =>
+    axios.get(`${API_URL}/horarios/${id_centro_medico}/doctores`),
+
+    //Citas
+    citas: () => 
+    axios.get(`${API_URL}/citas`),
+
+    cita_editar: (id_cita) =>
+    axios.get(`${API_URL}/citas/${id_cita}/editar`),
+
+    cita_ver: (id_cita) =>
+    axios.get(`${API_URL}/citas/${id_cita}/ver`),
+
+    datos_formulario_cita: () =>
+    axios.get(`${API_URL}/citas/crear`),
 
     API_URL,
 

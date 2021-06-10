@@ -190,7 +190,7 @@ const VerMedicamento = () => {
                             </div>
 
                             <div className="col-12 d-flex justify-content-end">
-                                <Link to="editar" className="btn btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                <Link to="editar" className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
                             </div>
                         </div>
                         </div>

@@ -391,6 +391,12 @@ INSERT INTO permisos(
 		    (27, 'Editar cita', 'Acceso a editar cita', null, null, null),
 		    (28, 'Consultar cita', 'Acceso a consultar cita', null, null, null),
 			(29, 'Ver cita', 'Acceso a ver los cita', null, null, null);
+INSERT INTO tipo_personal (id_tipo_personal, cargo, area) VALUES
+	(1, 'Director', 'Administrativo'),
+	(2, 'Médico', 'Salud'),
+	(3, 'Enfermera', 'Salud'),
+	(4, 'Laboratorista', 'Salud'),
+	(5, 'Anestesiólogo', 'Salud');
 
 	INSERT INTO roles(
 	id_rol, nombre_rol, descripcion_rol, created_at, updated_at)
@@ -401,4 +407,35 @@ INSERT INTO permisos(
 			(5, 'Anestesiólogo', 'Puede acceder a ciertas funcionalidades del sistema', null, null);
 
 	
+
+INSERT INTO especialidades (id_especialidad, nombre_especialidad) VALUES
+	(1, 'Alergología'),
+	(2, 'Anestesiología'),
+	(3, 'Dermatología'),
+	(4, 'Cardiología'),
+	(5, 'Diabetólogos'),
+	(6, 'Electrofisiología'),
+	(7, 'Endocrinología'),
+	(8, 'Fisiatría'),
+	(9, 'Gastroenterología'),
+	(10, 'Genética'),
+	(11, 'Geriatría'),
+	(12, 'Hematología'),
+	(13, 'Infectólogos'),
+	(14, 'Medicina crítica y cuidados intensivos'),
+	(15, 'Medicina familiar'),
+	(16, 'Medicina general'),
+	(17, 'Medicina interna'),
+	(18, 'Medicina preventiva'),
+	(19, 'Nefrólogos'),
+	(20, 'Neumología'),
+	(21, 'Neurofisiólogos'),
+	(22, 'Neurólogos'),
+	(23, 'Nutriólogos'),
+	(24, 'Oncólogos'),
+	(25, 'Oncólogos Radioterapéutas'),
+	(26, 'Patólogos'),
+	(27, 'Psiquiatras'),
+	(28, 'Radiólogos'),
+	(29, 'Reumatólogos');
 

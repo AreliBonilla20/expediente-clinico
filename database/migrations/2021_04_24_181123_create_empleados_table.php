@@ -34,7 +34,6 @@ class CreateEmpleadosTable extends Migration
             $table->unsignedBigInteger('id_municipio');
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
             
-
             $table->string('nombre_empleado', 150);
             $table->string('apellido_empleado', 150);
             $table->string('identificacion_empleado', 50);
@@ -42,7 +41,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('direccion_empleado', 250);
             $table->string('telefono_empleado', 25);
             $table->string('correo_empleado', 150);
-            $table->string('cargo_empleado', 100);
+       
             $table->timestamps();
         });
     }

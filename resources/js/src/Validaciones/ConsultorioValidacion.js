@@ -7,6 +7,10 @@ consultorio: yup
 .max(100, "El máximo de caracteres es 100")
 .required("El campo observaciones es obligatorio"),
 
+area: yup
+.string()
+.required("El campo área es obligatorio"),
+
 });
 
 
