@@ -39,6 +39,9 @@ const AgregarQuirofano = () => {
           });
           
           window.location = `/centros_medicos/${id_centro_medico}/ver`;
+          setTimeout(function(){
+            window.location.reload(1);
+         }, 2000);
         } catch (err) {
           console.error(err.message);
         }
@@ -126,8 +129,8 @@ const AgregarQuirofano = () => {
                     <tbody>
                     {quirofanos.map((quirofano)=>(
                         <tr>                  
-                            <td>{quirofano.id_quirofano}</td>
-                            <td>{quirofano.quirofano}</td>
+                            <td>{quirofano.v_codigo}</td>
+                            <td>{quirofano.v_nombre}</td>
                         </tr>
                         ))}
                     </tbody>

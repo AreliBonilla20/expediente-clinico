@@ -10,50 +10,24 @@ class ConsultorioController extends Controller
 {
     public function index($id_centro_medico)
     {  
-       $consultorios = DB::select('select * from consultorios where id_centro_medico = ? order by area', [$id_centro_medico]);
-       return ConsultorioResource::collection($consultorios);
+       $consultorios = DB::select('SELECT * from public."index_consultorio"(:id_centro_medico)', [$id_centro_medico]);
+       return response()->json(array('data' => $consultorios), 200);
       
     }
-
+   
     public function store(Request $request, $id_centro_medico)
     {   
-        $fecha_actual = date_create('now')->format('Y-m-d H:i:s');
-        $codigo_calculado = $this->id_consultorio($id_centro_medico);
-
-        DB::insert('insert into consultorios (id_consultorio, id_centro_medico, consultorio, area, created_at) 
-                    values (?, ?, ?, ?, ?)', 
-                    [$codigo_calculado,
-                     $id_centro_medico,
-                     $request->consultorio,
-                     $request->area,  
-                     $fecha_actual
+        $id_consultorio= DB::select('SELECT public."generar_codigo_consultorio"(:id_centro_medico)', 
+        ["id_centro_medico" => $id_centro_medico
+        ]);
+        
+        DB::select('call public."add_consultorio_proce"(:id_consultorio, :id_centro_medico, :consultorio, :area, current_date)', 
+                    ["id_consultorio" => $id_consultorio[0]->generar_codigo_consultorio, 
+                    "id_centro_medico" => $id_centro_medico,
+                    "consultorio" => $request->consultorio,
+                    "area" => $request->area 
                     ]);
         
-        return response()->json('Consultorio creado!');    
-    }
-
-
-    public function id_consultorio($id_centro_medico)
-    {   
-        $cont = 0;
-        $consultorios = DB::select('select* from consultorios');
-
-        if(count($consultorios)>0)
-        {
-            foreach($consultorios as $consultorio)
-            {
-                if($consultorio->id_centro_medico == $id_centro_medico)
-                {
-                    $cont++;
-                }    
-            }
-            $correlativo = (string) $cont + 1;
-            $id_consultorio = $id_centro_medico.'C'.$correlativo;
-        }
-        else {
-            $id_consultorio = $id_centro_medico.'C1';
-        }
-        
-        return $id_consultorio;
+         return response()->json('Consultorio creado!');    
     }
 }

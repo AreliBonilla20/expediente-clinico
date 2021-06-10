@@ -35,7 +35,7 @@ const AgregarConsulta = () => {
             
           });
           
-          window.location = "/diagnosticos";
+          window.location = "/citas";
         } catch (err) {
           console.error(err.message);
         }
@@ -62,7 +62,7 @@ const AgregarConsulta = () => {
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Inicio</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                        <Link to="/diagnostico/crear">Agregar diagnóstico</Link>
+                                        <Link to="/expedientes/crear">Agregar expediente</Link>
                                         </li>
                                     </ol>
                                 </nav>

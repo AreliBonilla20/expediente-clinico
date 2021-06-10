@@ -40,7 +40,6 @@ class ConsultaController extends Controller
                      
                     ]);
 
-
         DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_consulta, costo_consulta, created_at)
         values (?, ?, ?, ?, current_date + current_time)',
             [$codigo_paciente,
@@ -48,7 +47,7 @@ class ConsultaController extends Controller
             $id_consulta,
             $costo_consulta
             ]);
-        
+     
         return response()->json('Consulta iniciada');    
     }
 

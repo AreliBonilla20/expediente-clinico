@@ -10,7 +10,7 @@ class CitaController extends Controller
 {
     public function index()
     {  
-       $citas_hoy = DB::select('select id_cita, fecha_cita, hora_cita, id_doctor, codigo_paciente, nombres, apellidos from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente ');
+       $citas_hoy = DB::select('select id_cita, fecha_cita, hora_cita, id_doctor, codigo_paciente, nombres, apellidos from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente');
        return response()->json($citas_hoy);   
       
     }
@@ -37,19 +37,19 @@ class CitaController extends Controller
     {   
         $estado_cita = 'Pendiente';
         $codigo = $request->codigo;
-        $id_cita = app('App\Http\Controllers\FuncionesController')->get_id_cita($codigo);
-        
-        DB::insert('insert into citas (id_cita, id_centro_medico, id_especialidad, codigo_paciente, id_doctor, id_consultorio, fecha_cita, hora_cita, estado_cita, created_at) 
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, current_date + current_time)', 
-                    [$id_cita,
-                     $request->id_centro_medico,
-                     $request->id_especialidad,  
-                     $codigo,
-                     $request->id_doctor,
-                     $request->id_consultorio, 
-                     $request->fecha_cita, 
-                     $request->hora_cita, 
-                     $estado_cita
+        $id_cita = DB::select('SELECT public."generar_codigo_cita"(:codigo)', 
+        ["codigo" => $codigo]);
+
+        DB::select('call public."add_cita_proce"(:id_cita, :id_centro_medico, :id_especialidad, :codigo_paciente, :id_doctor, :id_consultorio, :fecha_cita, :hora_cita, :estado_cita, current_date)', 
+                    ["id_cita" => $id_cita[0]->generar_codigo_cita,
+                    "id_centro_medico" => $request->id_centro_medico,
+                    "id_especialidad" => $request->id_especialidad,  
+                    "codigo_paciente" => $codigo,
+                    "id_doctor" => $request->id_doctor,
+                    "id_consultorio" => $request->id_consultorio, 
+                    "fecha_cita" => $request->fecha_cita, 
+                    "hora_cita" => $request->hora_cita, 
+                    "estado_cita" =>  $estado_cita
                     ]);
         
         return response()->json('Cita creada!');    
@@ -76,19 +76,16 @@ class CitaController extends Controller
 
     public function update(Request $request, $id_cita)
     {   
-      
-        
-        DB::update('update citas set id_centro_medico = ?, id_especialidad = ?, id_doctor = ?,  id_consultorio = ?, fecha_cita = ?, hora_cita = ?, updated_at = current_date + current_time
-                    where id_cita = ?', 
-                    [
-                     $request->id_centro_medico,
-                     $request->id_especialidad,
-                     $request->id_doctor,
-                     $request->id_consultorio,
-                     $request->fecha_cita,
-                     $request->hora_cita,
-                     $id_cita
-                    ]);
+          
+        DB::select('call public."udp_cita_proce"(:id_cita, :id_centro_medico, :id_especialidad, :id_doctor, :id_consultorio, :fecha_cita, :hora_cita, current_date)', 
+        ["id_cita" => $id_cita,
+        "id_centro_medico" => $request->id_centro_medico,
+        "id_especialidad" => $request->id_especialidad,  
+        "id_doctor" => $request->id_doctor,
+        "id_consultorio" => $request->id_consultorio, 
+        "fecha_cita" => $request->fecha_cita, 
+        "hora_cita" => $request->hora_cita, 
+        ]);
 
         return response()->json('Cita actualizada!');    
     }
