@@ -37,7 +37,7 @@ const AgregarHospitalizacion = () => {
           const body = { codigo, fecha_ingreso, hora_ingreso, motivo_ingreso, sala, camilla, estado_paciente};
           const response = await fetch(`${API_URL}/hospitalizaciones/${codigo}/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

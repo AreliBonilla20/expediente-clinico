@@ -52,7 +52,7 @@ const AgregarExamen = () => {
           const body = { codigo_examen, nombre_examen, id_tipo_examen, indicaciones_examen, costo};
           const response = await fetch(`${API_URL}/examenes/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

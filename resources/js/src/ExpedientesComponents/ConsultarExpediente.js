@@ -22,6 +22,9 @@ const ConsultarExpediente = () => {
          API.pacientes().then(res => {
             const result = res.data;
             setPacientes(result.data);
+        }).catch((error)=>{
+            window.location='/login';
+            
         })
       }, []);
 
@@ -58,11 +61,15 @@ const ConsultarExpediente = () => {
                     <section className="section">
                         <div className="card">
                             <div className="card-header">
-                                <Link to="/expedientes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link>
+                                
+                                    
+                                    <Link to="/expedientes/crear" className="btn btn-success"><i className="bi bi-plus"></i> Agregar </Link> : <div></div> 
+                                
+                                
                             </div>
                             
                             <br />
-                            {pacientes.length > 0 && 
+                            {pacientes.length > 0 &&
                             <div className="card-body">
                            
                             <h4>Buscar expediente</h4>

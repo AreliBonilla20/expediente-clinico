@@ -42,7 +42,7 @@ const AgregarAntecedente = () => {
 
           const response = await fetch(`${API_URL}/antecedentes/${codigo}/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

@@ -79,7 +79,7 @@ const EditarDiagnostico = () => {
           const body = { codigo_diagnostico, nombre_diagnostico, id_tipo_diagnostico, descripcion_diagnostico};
           const response = await fetch(`${API_URL}/diagnosticos/${codigo}/actualizar`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

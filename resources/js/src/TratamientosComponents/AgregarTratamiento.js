@@ -50,7 +50,7 @@ const AgregarTratamiento = () => {
           const body = { codigo_tratamiento, nombre_tratamiento, id_tipo_tratamiento, descripcion_tratamiento, costo_tratamiento};
           const response = await fetch(`${API_URL}/tratamientos_medicos/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

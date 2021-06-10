@@ -79,7 +79,7 @@ const EditarMedicamento = () => {
          };
           const response = await fetch(`${API_URL}/medicamentos/${codigo}/actualizar`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

@@ -13,3 +13,5 @@
 Route::get('{slug}', function () {
     return view('welcome');
 })->where('slug', '^(?!api).*$');
+
+Auth::routes(['verify' => true]);

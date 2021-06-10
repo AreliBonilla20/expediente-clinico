@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/vendors/simple-datatables/style.css') }}">
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">

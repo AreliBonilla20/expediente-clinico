@@ -71,7 +71,7 @@ const AgregarCentroMedico = () => {
          };
           const response = await fetch(`${API_URL}/centros_medicos/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

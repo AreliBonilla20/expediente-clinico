@@ -254,6 +254,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
+var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
 var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
@@ -274,7 +275,7 @@ module.exports = function xhrAdapter(config) {
     // HTTP basic authentication
     if (config.auth) {
       var username = config.auth.username || '';
-      var password = config.auth.password || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
@@ -355,8 +356,6 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
-
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
@@ -422,7 +421,7 @@ module.exports = function xhrAdapter(config) {
       });
     }
 
-    if (requestData === undefined) {
+    if (!requestData) {
       requestData = null;
     }
 
@@ -490,6 +489,9 @@ axios.all = function all(promises) {
   return Promise.all(promises);
 };
 axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
+
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
 
 module.exports = axios;
 
@@ -699,9 +701,10 @@ Axios.prototype.getUri = function getUri(config) {
 utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
   /*eslint func-names:0*/
   Axios.prototype[method] = function(url, config) {
-    return this.request(utils.merge(config || {}, {
+    return this.request(mergeConfig(config || {}, {
       method: method,
-      url: url
+      url: url,
+      data: (config || {}).data
     }));
   };
 });
@@ -709,7 +712,7 @@ utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData
 utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
   /*eslint func-names:0*/
   Axios.prototype[method] = function(url, data, config) {
-    return this.request(utils.merge(config || {}, {
+    return this.request(mergeConfig(config || {}, {
       method: method,
       url: url,
       data: data
@@ -969,7 +972,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   error.response = response;
   error.isAxiosError = true;
 
-  error.toJSON = function() {
+  error.toJSON = function toJSON() {
     return {
       // Standard
       message: this.message,
@@ -1018,59 +1021,73 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
-  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
   var defaultToConfig2Keys = [
-    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
-    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
-    'httpsAgent', 'cancelToken', 'socketPath'
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
   ];
+  var directMergeKeys = ['validateStatus'];
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  }
 
   utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
     }
   });
 
-  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
-    if (utils.isObject(config2[prop])) {
-      config[prop] = utils.deepMerge(config1[prop], config2[prop]);
-    } else if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (utils.isObject(config1[prop])) {
-      config[prop] = utils.deepMerge(config1[prop]);
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
 
   utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
     }
   });
 
   var axiosKeys = valueFromConfig2Keys
     .concat(mergeDeepPropertiesKeys)
-    .concat(defaultToConfig2Keys);
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
 
   var otherKeys = Object
-    .keys(config2)
+    .keys(config1)
+    .concat(Object.keys(config2))
     .filter(function filterAxiosKeys(key) {
       return axiosKeys.indexOf(key) === -1;
     });
 
-  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
+  utils.forEach(otherKeys, mergeDeepProperties);
 
   return config;
 };
@@ -1099,7 +1116,7 @@ var createError = __webpack_require__(/*! ./createError */ "./node_modules/axios
  */
 module.exports = function settle(resolve, reject, response) {
   var validateStatus = response.config.validateStatus;
-  if (!validateStatus || validateStatus(response.status)) {
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
     resolve(response);
   } else {
     reject(createError(
@@ -1231,6 +1248,7 @@ var defaults = {
   xsrfHeaderName: 'X-XSRF-TOKEN',
 
   maxContentLength: -1,
+  maxBodyLength: -1,
 
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
@@ -1294,7 +1312,6 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 
 function encode(val) {
   return encodeURIComponent(val).
-    replace(/%40/gi, '@').
     replace(/%3A/gi, ':').
     replace(/%24/g, '$').
     replace(/%2C/gi, ',').
@@ -1475,6 +1492,29 @@ module.exports = function isAbsoluteURL(url) {
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
   // by any combination of letters, digits, plus, period, or hyphen.
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
 
@@ -1804,6 +1844,21 @@ function isObject(val) {
 }
 
 /**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
  * Determine if a value is a Date
  *
  * @param {Object} val The value to test
@@ -1959,34 +2014,12 @@ function forEach(obj, fn) {
 function merge(/* obj1, obj2, obj3, ... */) {
   var result = {};
   function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
       result[key] = merge(result[key], val);
-    } else {
-      result[key] = val;
-    }
-  }
-
-  for (var i = 0, l = arguments.length; i < l; i++) {
-    forEach(arguments[i], assignValue);
-  }
-  return result;
-}
-
-/**
- * Function equal to merge with the difference being that no reference
- * to original objects is kept.
- *
- * @see merge
- * @param {Object} obj1 Object to merge
- * @returns {Object} Result of all merge properties
- */
-function deepMerge(/* obj1, obj2, obj3, ... */) {
-  var result = {};
-  function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = deepMerge(result[key], val);
-    } else if (typeof val === 'object') {
-      result[key] = deepMerge({}, val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
     } else {
       result[key] = val;
     }
@@ -2017,6 +2050,19 @@ function extend(a, b, thisArg) {
   return a;
 }
 
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
 module.exports = {
   isArray: isArray,
   isArrayBuffer: isArrayBuffer,
@@ -2026,6 +2072,7 @@ module.exports = {
   isString: isString,
   isNumber: isNumber,
   isObject: isObject,
+  isPlainObject: isPlainObject,
   isUndefined: isUndefined,
   isDate: isDate,
   isFile: isFile,
@@ -2036,9 +2083,9 @@ module.exports = {
   isStandardBrowserEnv: isStandardBrowserEnv,
   forEach: forEach,
   merge: merge,
-  deepMerge: deepMerge,
   extend: extend,
-  trim: trim
+  trim: trim,
+  stripBOM: stripBOM
 };
 
 
@@ -81347,7 +81394,8 @@ var AgregarAntecedente = function AgregarAntecedente() {
               return fetch("".concat(API_URL, "/antecedentes/").concat(codigo, "/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -81914,7 +81962,8 @@ var AgregarAntecedente = function AgregarAntecedente() {
               return fetch("".concat(API_URL, "/antecedentes/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -82619,42 +82668,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _src_LayoutComponents_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/LayoutComponents/Home */ "./resources/js/src/LayoutComponents/Home.js");
-/* harmony import */ var _ExpedientesComponents_ConsultarExpediente__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExpedientesComponents/ConsultarExpediente */ "./resources/js/src/ExpedientesComponents/ConsultarExpediente.js");
-/* harmony import */ var _ExpedientesComponents_AgregarExpediente__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ExpedientesComponents/AgregarExpediente */ "./resources/js/src/ExpedientesComponents/AgregarExpediente.js");
-/* harmony import */ var _ExpedientesComponents_EditarExpediente__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ExpedientesComponents/EditarExpediente */ "./resources/js/src/ExpedientesComponents/EditarExpediente.js");
-/* harmony import */ var _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ExpedientesComponents/BuscarExpediente */ "./resources/js/src/ExpedientesComponents/BuscarExpediente.js");
-/* harmony import */ var _ExpedientesComponents_VerExpediente__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ExpedientesComponents/VerExpediente */ "./resources/js/src/ExpedientesComponents/VerExpediente.js");
-/* harmony import */ var _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AntecedentesComponents/AgregarAntecedente */ "./resources/js/src/AntecedentesComponents/AgregarAntecedente.js");
-/* harmony import */ var _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AntecedentesComponents/EditarAntecedente */ "./resources/js/src/AntecedentesComponents/EditarAntecedente.js");
-/* harmony import */ var _HospitalizacionesComponents_AgregarHospitalizacion__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./HospitalizacionesComponents/AgregarHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/AgregarHospitalizacion.js");
-/* harmony import */ var _HospitalizacionesComponents_EditarHospitalizacion__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./HospitalizacionesComponents/EditarHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/EditarHospitalizacion.js");
-/* harmony import */ var _HospitalizacionesComponents_VerHospitalizacion__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! .//HospitalizacionesComponents/VerHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/VerHospitalizacion.js");
-/* harmony import */ var _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DiagnosticosComponents/ConsultarDiagnostico */ "./resources/js/src/DiagnosticosComponents/ConsultarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DiagnosticosComponents/AgregarDiagnostico */ "./resources/js/src/DiagnosticosComponents/AgregarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DiagnosticosComponents/EditarDiagnostico */ "./resources/js/src/DiagnosticosComponents/EditarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DiagnosticosComponents/BuscarDiagnostico */ "./resources/js/src/DiagnosticosComponents/BuscarDiagnostico.js");
-/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DiagnosticosComponents/VerDiagnostico */ "./resources/js/src/DiagnosticosComponents/VerDiagnostico.js");
-/* harmony import */ var _CentrosMedicosComponents_ConsultarCentroMedico__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./CentrosMedicosComponents/ConsultarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/ConsultarCentroMedico.js");
-/* harmony import */ var _CentrosMedicosComponents_AgregarCentroMedico__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./CentrosMedicosComponents/AgregarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/AgregarCentroMedico.js");
-/* harmony import */ var _CentrosMedicosComponents_EditarCentroMedico__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./CentrosMedicosComponents/EditarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/EditarCentroMedico.js");
-/* harmony import */ var _CentrosMedicosComponents_BuscarCentroMedico__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./CentrosMedicosComponents/BuscarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/BuscarCentroMedico.js");
-/* harmony import */ var _CentrosMedicosComponents_VerCentroMedico__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./CentrosMedicosComponents/VerCentroMedico */ "./resources/js/src/CentrosMedicosComponents/VerCentroMedico.js");
-/* harmony import */ var _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./TratamientosComponents/ConsultarTratamiento */ "./resources/js/src/TratamientosComponents/ConsultarTratamiento.js");
-/* harmony import */ var _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./TratamientosComponents/AgregarTratamiento */ "./resources/js/src/TratamientosComponents/AgregarTratamiento.js");
-/* harmony import */ var _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./TratamientosComponents/EditarTratamiento */ "./resources/js/src/TratamientosComponents/EditarTratamiento.js");
-/* harmony import */ var _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./TratamientosComponents/BuscarTratamiento */ "./resources/js/src/TratamientosComponents/BuscarTratamiento.js");
-/* harmony import */ var _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./TratamientosComponents/VerTratamiento */ "./resources/js/src/TratamientosComponents/VerTratamiento.js");
-/* harmony import */ var _MedicamentosComponents_ConsultarMedicamento__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./MedicamentosComponents/ConsultarMedicamento */ "./resources/js/src/MedicamentosComponents/ConsultarMedicamento.js");
-/* harmony import */ var _MedicamentosComponents_AgregarMedicamento__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./MedicamentosComponents/AgregarMedicamento */ "./resources/js/src/MedicamentosComponents/AgregarMedicamento.js");
-/* harmony import */ var _MedicamentosComponents_EditarMedicamento__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./MedicamentosComponents/EditarMedicamento */ "./resources/js/src/MedicamentosComponents/EditarMedicamento.js");
-/* harmony import */ var _MedicamentosComponents_BuscarMedicamento__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./MedicamentosComponents/BuscarMedicamento */ "./resources/js/src/MedicamentosComponents/BuscarMedicamento.js");
-/* harmony import */ var _MedicamentosComponents_VerMedicamento__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./MedicamentosComponents/VerMedicamento */ "./resources/js/src/MedicamentosComponents/VerMedicamento.js");
-/* harmony import */ var _ExamenesComponents_ConsultarExamen__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./ExamenesComponents/ConsultarExamen */ "./resources/js/src/ExamenesComponents/ConsultarExamen.js");
-/* harmony import */ var _ExamenesComponents_AgregarExamen__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./ExamenesComponents/AgregarExamen */ "./resources/js/src/ExamenesComponents/AgregarExamen.js");
-/* harmony import */ var _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./ExamenesComponents/EditarExamen */ "./resources/js/src/ExamenesComponents/EditarExamen.js");
-/* harmony import */ var _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./ExamenesComponents/BuscarExamen */ "./resources/js/src/ExamenesComponents/BuscarExamen.js");
-/* harmony import */ var _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./ExamenesComponents/VerExamen */ "./resources/js/src/ExamenesComponents/VerExamen.js");
-/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+/* harmony import */ var _AuthComponents_LogIn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AuthComponents/LogIn */ "./resources/js/src/AuthComponents/LogIn.js");
+/* harmony import */ var _AuthComponents_SignUp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AuthComponents/SignUp */ "./resources/js/src/AuthComponents/SignUp.js");
+/* harmony import */ var _UsuariosComponents_AgregarUsuario__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./UsuariosComponents/AgregarUsuario */ "./resources/js/src/UsuariosComponents/AgregarUsuario.js");
+/* harmony import */ var _ExpedientesComponents_ConsultarExpediente__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ExpedientesComponents/ConsultarExpediente */ "./resources/js/src/ExpedientesComponents/ConsultarExpediente.js");
+/* harmony import */ var _ExpedientesComponents_AgregarExpediente__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ExpedientesComponents/AgregarExpediente */ "./resources/js/src/ExpedientesComponents/AgregarExpediente.js");
+/* harmony import */ var _ExpedientesComponents_EditarExpediente__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ExpedientesComponents/EditarExpediente */ "./resources/js/src/ExpedientesComponents/EditarExpediente.js");
+/* harmony import */ var _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ExpedientesComponents/BuscarExpediente */ "./resources/js/src/ExpedientesComponents/BuscarExpediente.js");
+/* harmony import */ var _ExpedientesComponents_VerExpediente__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ExpedientesComponents/VerExpediente */ "./resources/js/src/ExpedientesComponents/VerExpediente.js");
+/* harmony import */ var _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AntecedentesComponents/AgregarAntecedente */ "./resources/js/src/AntecedentesComponents/AgregarAntecedente.js");
+/* harmony import */ var _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AntecedentesComponents/EditarAntecedente */ "./resources/js/src/AntecedentesComponents/EditarAntecedente.js");
+/* harmony import */ var _HospitalizacionesComponents_AgregarHospitalizacion__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./HospitalizacionesComponents/AgregarHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/AgregarHospitalizacion.js");
+/* harmony import */ var _HospitalizacionesComponents_EditarHospitalizacion__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./HospitalizacionesComponents/EditarHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/EditarHospitalizacion.js");
+/* harmony import */ var _HospitalizacionesComponents_VerHospitalizacion__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! .//HospitalizacionesComponents/VerHospitalizacion */ "./resources/js/src/HospitalizacionesComponents/VerHospitalizacion.js");
+/* harmony import */ var _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DiagnosticosComponents/ConsultarDiagnostico */ "./resources/js/src/DiagnosticosComponents/ConsultarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DiagnosticosComponents/AgregarDiagnostico */ "./resources/js/src/DiagnosticosComponents/AgregarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./DiagnosticosComponents/EditarDiagnostico */ "./resources/js/src/DiagnosticosComponents/EditarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./DiagnosticosComponents/BuscarDiagnostico */ "./resources/js/src/DiagnosticosComponents/BuscarDiagnostico.js");
+/* harmony import */ var _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./DiagnosticosComponents/VerDiagnostico */ "./resources/js/src/DiagnosticosComponents/VerDiagnostico.js");
+/* harmony import */ var _CentrosMedicosComponents_ConsultarCentroMedico__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./CentrosMedicosComponents/ConsultarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/ConsultarCentroMedico.js");
+/* harmony import */ var _CentrosMedicosComponents_AgregarCentroMedico__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./CentrosMedicosComponents/AgregarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/AgregarCentroMedico.js");
+/* harmony import */ var _CentrosMedicosComponents_EditarCentroMedico__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./CentrosMedicosComponents/EditarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/EditarCentroMedico.js");
+/* harmony import */ var _CentrosMedicosComponents_BuscarCentroMedico__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./CentrosMedicosComponents/BuscarCentroMedico */ "./resources/js/src/CentrosMedicosComponents/BuscarCentroMedico.js");
+/* harmony import */ var _CentrosMedicosComponents_VerCentroMedico__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./CentrosMedicosComponents/VerCentroMedico */ "./resources/js/src/CentrosMedicosComponents/VerCentroMedico.js");
+/* harmony import */ var _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./TratamientosComponents/ConsultarTratamiento */ "./resources/js/src/TratamientosComponents/ConsultarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./TratamientosComponents/AgregarTratamiento */ "./resources/js/src/TratamientosComponents/AgregarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./TratamientosComponents/EditarTratamiento */ "./resources/js/src/TratamientosComponents/EditarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./TratamientosComponents/BuscarTratamiento */ "./resources/js/src/TratamientosComponents/BuscarTratamiento.js");
+/* harmony import */ var _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./TratamientosComponents/VerTratamiento */ "./resources/js/src/TratamientosComponents/VerTratamiento.js");
+/* harmony import */ var _MedicamentosComponents_ConsultarMedicamento__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./MedicamentosComponents/ConsultarMedicamento */ "./resources/js/src/MedicamentosComponents/ConsultarMedicamento.js");
+/* harmony import */ var _MedicamentosComponents_AgregarMedicamento__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./MedicamentosComponents/AgregarMedicamento */ "./resources/js/src/MedicamentosComponents/AgregarMedicamento.js");
+/* harmony import */ var _MedicamentosComponents_EditarMedicamento__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./MedicamentosComponents/EditarMedicamento */ "./resources/js/src/MedicamentosComponents/EditarMedicamento.js");
+/* harmony import */ var _MedicamentosComponents_BuscarMedicamento__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./MedicamentosComponents/BuscarMedicamento */ "./resources/js/src/MedicamentosComponents/BuscarMedicamento.js");
+/* harmony import */ var _MedicamentosComponents_VerMedicamento__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./MedicamentosComponents/VerMedicamento */ "./resources/js/src/MedicamentosComponents/VerMedicamento.js");
+/* harmony import */ var _ExamenesComponents_ConsultarExamen__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./ExamenesComponents/ConsultarExamen */ "./resources/js/src/ExamenesComponents/ConsultarExamen.js");
+/* harmony import */ var _ExamenesComponents_AgregarExamen__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./ExamenesComponents/AgregarExamen */ "./resources/js/src/ExamenesComponents/AgregarExamen.js");
+/* harmony import */ var _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./ExamenesComponents/EditarExamen */ "./resources/js/src/ExamenesComponents/EditarExamen.js");
+/* harmony import */ var _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./ExamenesComponents/BuscarExamen */ "./resources/js/src/ExamenesComponents/BuscarExamen.js");
+/* harmony import */ var _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./ExamenesComponents/VerExamen */ "./resources/js/src/ExamenesComponents/VerExamen.js");
+/* harmony import */ var _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./LayoutComponents/NotFound */ "./resources/js/src/LayoutComponents/NotFound.js");
+
+
+
 
 
 
@@ -82705,150 +82760,526 @@ var App = function App() {
     component: _src_LayoutComponents_Home__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
+    path: "/login",
+    component: _AuthComponents_LogIn__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/register",
+    component: _AuthComponents_SignUp__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/usuarios/:id_empleado/crear",
+    component: _UsuariosComponents_AgregarUsuario__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
     path: "/expedientes",
-    component: _ExpedientesComponents_ConsultarExpediente__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _ExpedientesComponents_ConsultarExpediente__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/crear",
-    component: _ExpedientesComponents_AgregarExpediente__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _ExpedientesComponents_AgregarExpediente__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/editar",
-    component: _ExpedientesComponents_EditarExpediente__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _ExpedientesComponents_EditarExpediente__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/ver",
-    component: _ExpedientesComponents_VerExpediente__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _ExpedientesComponents_VerExpediente__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:param_busqueda/buscar",
-    component: _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _ExpedientesComponents_BuscarExpediente__WEBPACK_IMPORTED_MODULE_10__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/antecedentes/crear",
-    component: _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _AntecedentesComponents_AgregarAntecedente__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/antecedentes/editar",
-    component: _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _AntecedentesComponents_EditarAntecedente__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/hospitalizaciones/crear",
-    component: _HospitalizacionesComponents_AgregarHospitalizacion__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _HospitalizacionesComponents_AgregarHospitalizacion__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/editar",
-    component: _HospitalizacionesComponents_EditarHospitalizacion__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _HospitalizacionesComponents_EditarHospitalizacion__WEBPACK_IMPORTED_MODULE_15__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/expedientes/:codigo/hospitalizaciones/:id_hospitalizacion/ver",
-    component: _HospitalizacionesComponents_VerHospitalizacion__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _HospitalizacionesComponents_VerHospitalizacion__WEBPACK_IMPORTED_MODULE_16__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos",
-    component: _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _DiagnosticosComponents_ConsultarDiagnostico__WEBPACK_IMPORTED_MODULE_17__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/crear",
-    component: _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _DiagnosticosComponents_AgregarDiagnostico__WEBPACK_IMPORTED_MODULE_18__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:codigo/editar",
-    component: _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _DiagnosticosComponents_EditarDiagnostico__WEBPACK_IMPORTED_MODULE_19__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:codigo/ver",
-    component: _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _DiagnosticosComponents_VerDiagnostico__WEBPACK_IMPORTED_MODULE_21__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/diagnosticos/:param_busqueda/buscar",
-    component: _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_17__["default"]
+    component: _DiagnosticosComponents_BuscarDiagnostico__WEBPACK_IMPORTED_MODULE_20__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/examenes",
-    component: _ExamenesComponents_ConsultarExamen__WEBPACK_IMPORTED_MODULE_34__["default"]
+    component: _ExamenesComponents_ConsultarExamen__WEBPACK_IMPORTED_MODULE_37__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/examenes/crear",
-    component: _ExamenesComponents_AgregarExamen__WEBPACK_IMPORTED_MODULE_35__["default"]
+    component: _ExamenesComponents_AgregarExamen__WEBPACK_IMPORTED_MODULE_38__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/examenes/:codigo/editar",
-    component: _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_36__["default"]
+    component: _ExamenesComponents_EditarExamen__WEBPACK_IMPORTED_MODULE_39__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/examenes/:codigo/ver",
-    component: _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_38__["default"]
+    component: _ExamenesComponents_VerExamen__WEBPACK_IMPORTED_MODULE_41__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/examenes/:param_busqueda/buscar",
-    component: _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_37__["default"]
+    component: _ExamenesComponents_BuscarExamen__WEBPACK_IMPORTED_MODULE_40__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/centros_medicos",
-    component: _CentrosMedicosComponents_ConsultarCentroMedico__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _CentrosMedicosComponents_ConsultarCentroMedico__WEBPACK_IMPORTED_MODULE_22__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/centros_medicos/crear",
-    component: _CentrosMedicosComponents_AgregarCentroMedico__WEBPACK_IMPORTED_MODULE_20__["default"]
+    component: _CentrosMedicosComponents_AgregarCentroMedico__WEBPACK_IMPORTED_MODULE_23__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/centros_medicos/:id_centro_medico/editar",
-    component: _CentrosMedicosComponents_EditarCentroMedico__WEBPACK_IMPORTED_MODULE_21__["default"]
+    component: _CentrosMedicosComponents_EditarCentroMedico__WEBPACK_IMPORTED_MODULE_24__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/centros_medicos/:id_centro_medico/ver",
-    component: _CentrosMedicosComponents_VerCentroMedico__WEBPACK_IMPORTED_MODULE_23__["default"]
+    component: _CentrosMedicosComponents_VerCentroMedico__WEBPACK_IMPORTED_MODULE_26__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/centros_medicos/:param_busqueda/buscar",
-    component: _CentrosMedicosComponents_BuscarCentroMedico__WEBPACK_IMPORTED_MODULE_22__["default"]
+    component: _CentrosMedicosComponents_BuscarCentroMedico__WEBPACK_IMPORTED_MODULE_25__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/tratamientos_medicos",
-    component: _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _TratamientosComponents_ConsultarTratamiento__WEBPACK_IMPORTED_MODULE_27__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/tratamientos_medicos/crear",
-    component: _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_25__["default"]
+    component: _TratamientosComponents_AgregarTratamiento__WEBPACK_IMPORTED_MODULE_28__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/tratamientos_medicos/:codigo/editar",
-    component: _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_26__["default"]
+    component: _TratamientosComponents_EditarTratamiento__WEBPACK_IMPORTED_MODULE_29__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/tratamientos_medicos/:codigo/ver",
-    component: _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_28__["default"]
+    component: _TratamientosComponents_VerTratamiento__WEBPACK_IMPORTED_MODULE_31__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/tratamientos_medicos/:param_busqueda/buscar",
-    component: _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_27__["default"]
+    component: _TratamientosComponents_BuscarTratamiento__WEBPACK_IMPORTED_MODULE_30__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/medicamentos",
-    component: _MedicamentosComponents_ConsultarMedicamento__WEBPACK_IMPORTED_MODULE_29__["default"]
+    component: _MedicamentosComponents_ConsultarMedicamento__WEBPACK_IMPORTED_MODULE_32__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/medicamentos/crear",
-    component: _MedicamentosComponents_AgregarMedicamento__WEBPACK_IMPORTED_MODULE_30__["default"]
+    component: _MedicamentosComponents_AgregarMedicamento__WEBPACK_IMPORTED_MODULE_33__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/medicamentos/:codigo/editar",
-    component: _MedicamentosComponents_EditarMedicamento__WEBPACK_IMPORTED_MODULE_31__["default"]
+    component: _MedicamentosComponents_EditarMedicamento__WEBPACK_IMPORTED_MODULE_34__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/medicamentos/:codigo/ver",
-    component: _MedicamentosComponents_VerMedicamento__WEBPACK_IMPORTED_MODULE_33__["default"]
+    component: _MedicamentosComponents_VerMedicamento__WEBPACK_IMPORTED_MODULE_36__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/medicamentos/:param_busqueda/buscar",
-    component: _MedicamentosComponents_BuscarMedicamento__WEBPACK_IMPORTED_MODULE_32__["default"]
+    component: _MedicamentosComponents_BuscarMedicamento__WEBPACK_IMPORTED_MODULE_35__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_39__["default"]
+    component: _LayoutComponents_NotFound__WEBPACK_IMPORTED_MODULE_42__["default"]
   })));
 };
 
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app'));
+
+/***/ }),
+
+/***/ "./resources/js/src/AuthComponents/LogIn.js":
+/*!**************************************************!*\
+  !*** ./resources/js/src/AuthComponents/LogIn.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LogIn; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var LogIn = /*#__PURE__*/function (_Component) {
+  _inherits(LogIn, _Component);
+
+  var _super = _createSuper(LogIn);
+
+  function LogIn(props) {
+    var _this;
+
+    _classCallCheck(this, LogIn);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      email: '',
+      password: ''
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    _this.onSignIn = _this.onSignIn.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(LogIn, [{
+    key: "handleInputChange",
+    value: function handleInputChange(event) {
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSignIn",
+    value: function onSignIn(event) {
+      event.preventDefault();
+      var body = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      var response = fetch("./api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      }).then(function (response) {
+        response.json().then(function (json) {
+          window.localStorage.setItem('token', json.token);
+          var permissions = JSON.parse(atob(json.token.split('.')[1])).permission;
+          window.localStorage.setItem("permission", JSON.stringify(permissions));
+        });
+        window.location = "/";
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row h-100"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-5 col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "auth-title"
+      }, "Iniciar sesi\xF3n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "auth-subtitle mb-5"
+      }, "Accesa con tus datos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        action: "index.html"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        name: "email",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Correo electr\xF3nico"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-person"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        name: "password",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Contrase\xF1a"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-shield-lock"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-check form-check-lg d-flex align-items-end"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-check-input me-2",
+        type: "checkbox",
+        value: "",
+        id: "flexCheckDefault"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "form-check-label text-gray-600",
+        "for": "flexCheckDefault"
+      }, "Recordar mis credenciales")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary btn-block btn-lg shadow-lg mt-5",
+        onClick: this.onSignIn
+      }, "Acceder")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center mt-5 text-lg fs-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "text-gray-600"
+      }, "\xBFNo tienes una cuenta? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "auth-register.html",
+        className: "font-bold"
+      }, "Registrarse"), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "font-bold",
+        href: "auth-forgot-password.html"
+      }, "\xBFOlvidaste tu contrase\xF1a?"), ".")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-7 d-none d-lg-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth-right"
+      }))));
+    }
+  }]);
+
+  return LogIn;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/AuthComponents/SignUp.js":
+/*!***************************************************!*\
+  !*** ./resources/js/src/AuthComponents/SignUp.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SignUp; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var SignUp = /*#__PURE__*/function (_Component) {
+  _inherits(SignUp, _Component);
+
+  var _super = _createSuper(SignUp);
+
+  function SignUp(props) {
+    var _this;
+
+    _classCallCheck(this, SignUp);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: ''
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    _this.onSignIn = _this.onSignIn.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(SignUp, [{
+    key: "handleInputChange",
+    value: function handleInputChange(event) {
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSignIn",
+    value: function onSignIn(event) {
+      event.preventDefault();
+      var body = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation
+      };
+      var response = fetch("./api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      }).then(function (response) {
+        response.json().then(function (json) {
+          this.saveToken(json.token);
+        });
+        window.location = "/";
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "saveToken",
+    value: function saveToken(token) {
+      if (window.localStorage.getItem('token') != null) {
+        window.localStorage.setItem('token', token);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row h-100"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-5 col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "auth-title"
+      }, "Registrarse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "auth-subtitle mb-5"
+      }, "Ingresa tus datos para registrarte"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.name,
+        name: "name",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Nombre"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-person"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        name: "email",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Correo electr\xF3nico"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-envelope"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        name: "password",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Contrase\xF1a"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-shield-lock"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password_confirmation,
+        name: "password_confirmation",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Confirmar contrase\xF1a"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-shield-lock"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary btn-block btn-lg shadow-lg mt-5",
+        onClick: this.onSignIn
+      }, "Reg\xEDstrate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center mt-5 text-lg fs-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "text-gray-600"
+      }, "\xBFYa tienes una cuenta? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "auth-login.html",
+        className: "font-bold"
+      }, "Iniciar sesi\xF3n"), ".")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-7 d-none d-lg-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "auth-right"
+      }))));
+    }
+  }]);
+
+  return SignUp;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 
@@ -83064,7 +83495,8 @@ var AgregarCentroMedico = function AgregarCentroMedico() {
               return fetch("".concat(API_URL, "/centros_medicos/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -84035,7 +84467,8 @@ var EditarCentroMedico = function EditarCentroMedico() {
               return fetch("".concat(API_URL, "/centros_medicos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -85495,7 +85928,8 @@ var AgregarDiagnostico = function AgregarDiagnostico() {
               return fetch("".concat(API_URL, "/diagnosticos/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -86117,7 +86551,8 @@ var EditarDiagnostico = function EditarDiagnostico() {
               return fetch("".concat(API_URL, "/diagnosticos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -86628,7 +87063,8 @@ var AgregarExamen = function AgregarExamen() {
               return fetch("".concat(API_URL, "/examenes/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -87280,7 +87716,8 @@ var AgregarExamen = function AgregarExamen() {
               return fetch("".concat(API_URL, "/examenes/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -87996,7 +88433,8 @@ var AgregarExpediente = function AgregarExpediente() {
               return fetch("".concat(API_URL, "/expedientes/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -88683,6 +89121,8 @@ var ConsultarExpediente = function ConsultarExpediente() {
     _api__WEBPACK_IMPORTED_MODULE_5__["default"].pacientes().then(function (res) {
       var result = res.data;
       setPacientes(result.data);
+    })["catch"](function (error) {
+      window.location = '/login';
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -88731,7 +89171,7 @@ var ConsultarExpediente = function ConsultarExpediente() {
     className: "btn btn-success"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-plus"
-  }), " Agregar ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), pacientes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), " Agregar "), " : ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), pacientes.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Buscar expediente"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ingrese cualquiera de los par\xE1metros solicitados"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form"
@@ -89029,7 +89469,8 @@ var EditarExpediente = function EditarExpediente() {
               return fetch("".concat(API_URL, "/expedientes/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -90176,7 +90617,8 @@ var AgregarHospitalizacion = function AgregarHospitalizacion() {
               return fetch("".concat(API_URL, "/hospitalizaciones/").concat(codigo, "/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -90638,7 +91080,8 @@ var EditarHospitalizacion = function EditarHospitalizacion() {
               return fetch("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -91509,7 +91952,24 @@ var Menu = function Menu() {
     className: "submenu-item "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/examenes/crear"
-  }, "Agregar ex\xE1menes")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Agregar ex\xE1menes")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "sidebar-item has-sub"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "",
+    className: "sidebar-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "bi bi-grid-1x2-fill"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Usuarios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "submenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/usuarios"
+  }, "Consultar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "submenu-item "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/usuarios/crear"
+  }, "Agregar usuarios")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "sidebar-toggler btn x"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     "data-feather": "x"
@@ -91692,7 +92152,8 @@ var AgregarMedicamento = function AgregarMedicamento() {
               return fetch("".concat(API_URL, "/medicamentos/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -92449,7 +92910,8 @@ var EditarMedicamento = function EditarMedicamento() {
               return fetch("".concat(API_URL, "/medicamentos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -93160,7 +93622,8 @@ var AgregarTratamiento = function AgregarTratamiento() {
               return fetch("".concat(API_URL, "/tratamientos_medicos/guardar"), {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -93811,7 +94274,8 @@ var AgregarTratamiento = function AgregarTratamiento() {
               return fetch("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/actualizar"), {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': "Bearer " + window.localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
               });
@@ -94235,6 +94699,248 @@ var VerTratamiento = function VerTratamiento() {
 
 /***/ }),
 
+/***/ "./resources/js/src/UsuariosComponents/AgregarUsuario.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/src/UsuariosComponents/AgregarUsuario.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AgregarUsuario; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../LayoutComponents/Menu */ "./resources/js/src/LayoutComponents/Menu.js");
+/* harmony import */ var _LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LayoutComponents/Header */ "./resources/js/src/LayoutComponents/Header.js");
+/* harmony import */ var _LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LayoutComponents/Footer */ "./resources/js/src/LayoutComponents/Footer.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var AgregarUsuario = /*#__PURE__*/function (_Component) {
+  _inherits(AgregarUsuario, _Component);
+
+  var _super = _createSuper(AgregarUsuario);
+
+  function AgregarUsuario(props) {
+    var _this;
+
+    _classCallCheck(this, AgregarUsuario);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      name: '',
+      email: '',
+      id_rol: '',
+      password: '',
+      password_confirmation: ''
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    _this.onSignIn = _this.onSignIn.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AgregarUsuario, [{
+    key: "handleInputChange",
+    value: function handleInputChange(event) {
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "onSignIn",
+    value: function onSignIn(event) {
+      event.preventDefault();
+      var body = {
+        name: this.state.name,
+        email: this.state.email,
+        id_rol: this.state.id_rol,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation
+      };
+      var response = fetch("./api/usuarios/guardar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': "Bearer " + window.localStorage.getItem('token')
+        },
+        body: JSON.stringify(body)
+      }).then(function (response) {
+        response.json().then(function (json) {
+          this.saveToken(json.token);
+        });
+        window.location = "/";
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "saveToken",
+    value: function saveToken(token) {
+      if (window.localStorage.getItem('token') != null) {
+        window.localStorage.setItem('token', token);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "app"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "main",
+        className: "layout-navbar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "main-content"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, "Usuarios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group has-icon-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "first-name-icon"
+      }, "Nombre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "position-relative"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.name,
+        name: "name",
+        onChange: this.handleInputChange,
+        className: "form-control",
+        placeholder: "Nombre",
+        id: "first-name-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-person"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group has-icon-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "email-id-icon"
+      }, "Correo electr\xF3nico"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "position-relative"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        name: "email",
+        onChange: this.handleInputChange,
+        className: "form-control",
+        placeholder: "Correo electr\xF3nico",
+        id: "email-id-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-envelope"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group has-icon-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "password-id-icon"
+      }, "Contrase\xF1a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "position-relative"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        name: "password",
+        onChange: this.handleInputChange,
+        className: "form-control",
+        placeholder: "Contrase\xF1a",
+        id: "password-id-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-lock"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group position-relative has-icon-left mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        value: this.state.password_confirmation,
+        name: "password_confirmation",
+        onChange: this.handleInputChange,
+        className: "form-control form-control-xl",
+        placeholder: "Confirmar contrase\xF1a"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-control-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "bi bi-shield-lock"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-check"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "checkbox mt-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        id: "remember-me-v",
+        className: "form-check-input",
+        checked: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "remember-me-v"
+      }, "Remember Me")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 d-flex justify-content-end"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary me-1 mb-1"
+      }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "reset",
+        className: "btn btn-light-secondary me-1 mb-1"
+      }, "Reset")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LayoutComponents_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+    }
+  }]);
+
+  return AgregarUsuario;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/src/Validaciones/AntecedenteValidacion.js":
 /*!****************************************************************!*\
   !*** ./resources/js/src/Validaciones/AntecedenteValidacion.js ***!
@@ -94479,126 +95185,289 @@ __webpack_require__.r(__webpack_exports__);
 var axios = window.axios;
 var API_URL = 'http://localhost:8000/api';
 /* harmony default export */ __webpack_exports__["default"] = ({
+  //usuarios
+  usuarios: function usuarios() {
+    return axios.get("".concat(API_URL, "/usuarios"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
+  },
+  datos_formulario_usuarios: function datos_formulario_usuarios() {
+    return axios.get("".concat(API_URL, "/usuarios/").concat(id_empleado, "/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
+  },
   //Expedientes
   pacientes: function pacientes() {
-    return axios.get("".concat(API_URL, "/expedientes"));
+    return axios.get("".concat(API_URL, "/expedientes"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_paciente: function datos_formulario_paciente() {
-    return axios.get("".concat(API_URL, "/expedientes/crear"));
+    return axios.get("".concat(API_URL, "/expedientes/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   paciente_editar: function paciente_editar(codigo) {
-    return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   paciente_ver: function paciente_ver(codigo) {
-    return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/expedientes/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   paciente_buscar: function paciente_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/expedientes/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/expedientes/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Antecedentes
   antecedente_editar: function antecedente_editar(codigo) {
-    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   antecedente_ver: function antecedente_ver(codigo) {
-    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/antecedentes/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Hospitalizacion
   hospitalizaciones: function hospitalizaciones() {
-    return axios.get("".concat(API_URL, "/hospitalizaciones"));
+    return axios.get("".concat(API_URL, "/hospitalizaciones"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   hospitalizacion_editar: function hospitalizacion_editar(id_hospitalizacion) {
-    return axios.get("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/editar"));
+    return axios.get("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   hospitalizacion_ver: function hospitalizacion_ver(id_hospitalizacion) {
-    return axios.get("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver"));
+    return axios.get("".concat(API_URL, "/hospitalizaciones/").concat(id_hospitalizacion, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Chequeos - Hospitalizacion
   chequeos_hospitalizacion: function chequeos_hospitalizacion(id_hospitalizacion) {
-    return axios.get("".concat(API_URL, "/chequeos_hospitalizaciones/").concat(id_hospitalizacion));
+    return axios.get("".concat(API_URL, "/chequeos_hospitalizaciones/").concat(id_hospitalizacion), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Diagnósticos
   diagnosticos: function diagnosticos() {
-    return axios.get("".concat(API_URL, "/diagnosticos"));
+    return axios.get("".concat(API_URL, "/diagnosticos"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_diagnostico: function datos_formulario_diagnostico() {
-    return axios.get("".concat(API_URL, "/diagnosticos/crear"));
+    return axios.get("".concat(API_URL, "/diagnosticos/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   diagnostico_editar: function diagnostico_editar(codigo) {
-    return axios.get("".concat(API_URL, "/diagnosticos/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/diagnosticos/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   diagnostico_ver: function diagnostico_ver(codigo) {
-    return axios.get("".concat(API_URL, "/diagnosticos/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/diagnosticos/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   diagnostico_buscar: function diagnostico_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/diagnosticos/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/diagnosticos/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Centros Médicos
   centros_medicos: function centros_medicos() {
-    return axios.get("".concat(API_URL, "/centros_medicos"));
+    return axios.get("".concat(API_URL, "/centros_medicos"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_centro_medico: function datos_formulario_centro_medico() {
-    return axios.get("".concat(API_URL, "/centros_medicos/crear"));
+    return axios.get("".concat(API_URL, "/centros_medicos/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   centro_medico_editar: function centro_medico_editar(id_centro_medico) {
-    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/editar"));
+    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   centro_medico_buscar: function centro_medico_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/centros_medicos/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/centros_medicos/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   centro_medico_ver: function centro_medico_ver(id_centro_medico) {
-    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/ver"));
+    return axios.get("".concat(API_URL, "/centros_medicos/").concat(id_centro_medico, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Tratamientos
   tratamientos_medicos: function tratamientos_medicos() {
-    return axios.get("".concat(API_URL, "/tratamientos_medicos"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_tratamiento: function datos_formulario_tratamiento() {
-    return axios.get("".concat(API_URL, "/tratamientos_medicos/crear"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   tratamiento_editar: function tratamiento_editar(codigo) {
-    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   tratamiento_ver: function tratamiento_ver(codigo) {
-    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   tratamiento_buscar: function tratamiento_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/tratamientos_medicos/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Medicamentos
   medicamentos: function medicamentos() {
-    return axios.get("".concat(API_URL, "/medicamentos"));
+    return axios.get("".concat(API_URL, "/medicamentos"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_medicamento: function datos_formulario_medicamento() {
-    return axios.get("".concat(API_URL, "/medicamentos/crear"));
+    return axios.get("".concat(API_URL, "/medicamentos/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   medicamento_editar: function medicamento_editar(codigo) {
-    return axios.get("".concat(API_URL, "/medicamentos/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/medicamentos/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   medicamento_ver: function medicamento_ver(codigo) {
-    return axios.get("".concat(API_URL, "/medicamentos/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/medicamentos/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   medicamento_buscar: function medicamento_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/medicamentos/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/medicamentos/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Exámenes
   examenes: function examenes() {
-    return axios.get("".concat(API_URL, "/examenes"));
+    return axios.get("".concat(API_URL, "/examenes"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   datos_formulario_examen: function datos_formulario_examen() {
-    return axios.get("".concat(API_URL, "/examenes/crear"));
+    return axios.get("".concat(API_URL, "/examenes/crear"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   examen_editar: function examen_editar(codigo) {
-    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/editar"));
+    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/editar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   examen_ver: function examen_ver(codigo) {
-    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/ver"));
+    return axios.get("".concat(API_URL, "/examenes/").concat(codigo, "/ver"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   examen_buscar: function examen_buscar(param_busqueda) {
-    return axios.get("".concat(API_URL, "/examenes/").concat(param_busqueda, "/buscar"));
+    return axios.get("".concat(API_URL, "/examenes/").concat(param_busqueda, "/buscar"), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   //Consultorios - centro medico
   consultorios: function consultorios(id_centro_medico) {
-    return axios.get("".concat(API_URL, "/consultorios/").concat(id_centro_medico));
+    return axios.get("".concat(API_URL, "/consultorios/").concat(id_centro_medico), {
+      headers: {
+        'Authorization': "Bearer " + window.localStorage.getItem('token')
+      }
+    });
   },
   API_URL: API_URL
 });
@@ -94623,8 +95492,8 @@ var API_URL = 'http://localhost:8000/api';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Arleny\Desktop\expediente-clinico\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Arleny\Desktop\expediente-clinico\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

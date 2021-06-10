@@ -353,5 +353,52 @@ insert into tipo_medicamento (id_tipo_medicamento, tipo_medicamento) values
 (12, 'Antipirético'),
 (13, 'Antifúngico');
 
+INSERT INTO permisos(
+	id_permiso, nombre_permiso, descripcion_permiso, created_at, updated_at, uri)
+	VALUES (1, 'Crear expediente', 'Acceso a crear un expediente', null, null, null),
+			(2, 'Editar expediente', 'Acceso a editar expediente', null, null, null),
+		    (3, 'Consultar expediente', 'Acceso a consultar expediente', null, null, null),
+			(4, 'Ver expediente', 'Acceso a ver los expedientes', null, null, null),
+		   	(5, 'Crear centros medicos', 'Acceso a la creación de centros medicos', null, null, null),
+		    (6, 'Editar centros medicos', 'Acceso a editar centros medicos', null, null, null),
+		    (7, 'Consultar centros medicos', 'Acceso a consultar centros medicos', null, null, null),
+			(8, 'Ver centros medicos', 'Acceso a ver los centros medicos', null, null, null),
+		    (9, 'Crear diagnosticos', 'Acceso a la creación de diagnosticos', null, null, null),
+		    (10, 'Editar diagnosticos', 'Acceso a editar diagnosticos', null, null, null),
+		    (11, 'Consultar diagnosticos', 'Acceso a consultar diagnosticos', null, null, null),
+			(12, 'Ver diagnosticos', 'Acceso a ver los diagnosticos', null, null, null),
+		    (13, 'Crear medicamentos', 'Acceso a la creación de medicamentos', null, null, null),
+		    (14, 'Editar medicamentos', 'Acceso a editar medicamentos', null, null, null),
+		    (15, 'Consultar medicamentos', 'Acceso a consultar medicamentos', null, null, null),
+			(16, 'Ver medicamentos', 'Acceso a ver los medicamentos', null, null, null),
+		    (17, 'Crear tratamientos', 'Acceso a la creación de tratamientos', null, null, null),
+		    (18, 'Editar tratamientos', 'Acceso a editar tratamientos', null, null, null),
+		    (19, 'Consultar tratamientos', 'Acceso a consultar tratamientos', null, null, null),
+			(20, 'Ver tratamientos', 'Acceso a ver los tratamientos', null, null, null),
+		    (17, 'Crear examenes', 'Acceso a la creación de examenes', null, null, null),
+		    (18, 'Editar examenes', 'Acceso a editar examenes', null, null, null),
+		    (19, 'Consultar examenes', 'Acceso a consultar examenes', null, null, null),
+			(20, 'Ver examenes', 'Acceso a ver los examenes', null, null, null),
+		    (17, 'Crear usuarios', 'Acceso a la creación de usuarios', null, null, null),
+		    (18, 'Editar usuarios', 'Acceso a editar usuarios', null, null, null),
+		    (19, 'Consultar usuarios', 'Acceso a consultar usuarios', null, null, null),
+			(20, 'Ver usuarios', 'Acceso a ver los usuarios', null, null, null),
+			(21, 'Crear empleados', 'Acceso a la creación de empleados', null, null, null),
+		    (22, 'Editar empleados', 'Acceso a editar empleados', null, null, null),
+		    (23, 'Consultar empleados', 'Acceso a consultar empleados', null, null, null),
+			(25, 'Ver empleados', 'Acceso a ver los empleados', null, null, null),
+			(26, 'Crear cita', 'Acceso a la creación de cita', null, null, null),
+		    (27, 'Editar cita', 'Acceso a editar cita', null, null, null),
+		    (28, 'Consultar cita', 'Acceso a consultar cita', null, null, null),
+			(29, 'Ver cita', 'Acceso a ver los cita', null, null, null);
 
+	INSERT INTO roles(
+	id_rol, nombre_rol, descripcion_rol, created_at, updated_at)
+	VALUES (1, 'Administrador', 'Administra todas las funciones del sistema', null, null),
+			(2, 'Medico', 'Puede acceder a ciertas funcionalidades del sistema', null, null),
+			(3, 'Enfermera', 'Puede acceder a ciertas funcionalidades del sistema', null, null),
+			(4, 'Laboratorista', 'Puede acceder a ciertas funcionalidades del sistema', null, null),
+			(5, 'Anestesiólogo', 'Puede acceder a ciertas funcionalidades del sistema', null, null);
+
+	
 

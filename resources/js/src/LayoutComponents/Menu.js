@@ -115,6 +115,21 @@ const Menu = () => {
                         </ul>
                     </li>
                     
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                        <i className="bi bi-grid-1x2-fill"></i>
+                            <span>Usuarios</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/usuarios">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/usuarios/crear">Agregar usuarios</Link>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <button className="sidebar-toggler btn x"><i data-feather="x"></i></button>

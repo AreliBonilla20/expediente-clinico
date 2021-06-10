@@ -19,8 +19,8 @@ class CreateUsuariosRolesTable extends Migration
             $table->string('id_rol');
             $table->foreign('id_rol')->references('id_rol')->on('roles');
             
-            $table->string('id_usuario');
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
+            $table->bigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }
