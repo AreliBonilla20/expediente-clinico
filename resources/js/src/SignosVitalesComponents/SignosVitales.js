@@ -41,7 +41,7 @@ const SignosVitales = () => {
                         presion_arterial_diastolica, peso_paciente, estatura_paciente, temperatura_paciente, ritmo_cardiaco_paciente, respiracion_paciente };
           const response = await fetch(`${API_URL}/signos_vitales/${id_hospitalizacion}/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"  },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

@@ -62,7 +62,7 @@ function AsignarHorarios() {
       const body = { input_list };
       const response = await fetch(`${API_URL}/doctores/horarios/asignar`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
         body: JSON.stringify(body)
         
       });

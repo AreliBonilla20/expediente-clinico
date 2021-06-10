@@ -65,7 +65,7 @@ function AsignarMedicamento() {
       const body = { input_list };
       const response = await fetch(`${API_URL}/recetas_medicas/${id_hospitalizacion}/guardar`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
         body: JSON.stringify(body)
         
       });

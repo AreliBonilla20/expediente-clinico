@@ -45,7 +45,7 @@ const AgregarCita = () => {
           const body = { codigo, id_consultorio, id_doctor, fecha_cita, hora_cita };
           const response = await fetch(`${API_URL}/citas/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

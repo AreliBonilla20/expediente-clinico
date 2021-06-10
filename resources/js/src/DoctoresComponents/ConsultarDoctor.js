@@ -45,7 +45,7 @@ const ConsultarDoctor = () => {
           const body = { id_horario, id_doctor };
           const response = await fetch(`${API_URL}/doctores/horarios/asignar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

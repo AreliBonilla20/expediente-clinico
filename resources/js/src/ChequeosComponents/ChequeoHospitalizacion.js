@@ -36,7 +36,7 @@ const ChequeoHospitalizacion = () => {
           const body = { observacion_chequeo, sintomas_chequeo };
           const response = await fetch(`${API_URL}/chequeos_hospitalizaciones/${id_hospitalizacion}/guardar`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });

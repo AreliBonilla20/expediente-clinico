@@ -59,7 +59,7 @@ const EditarCita = () => {
           const body = { id_consultorio, id_doctor, fecha_cita, hora_cita };
           const response = await fetch(`${API_URL}/citas/${id_cita}/actualizar`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization':"Bearer " + window.localStorage.getItem('token') },
             body: JSON.stringify(body)
             
           });
