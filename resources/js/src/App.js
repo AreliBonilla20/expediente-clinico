@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -84,13 +84,17 @@ import NotFound from './LayoutComponents/NotFound';
 
 
 const App = () => {
+
+    
     return(
         <Router className="container">
             <Switch>
 
                 <Route exact path="/" component={Home}/>
 
+               
                 <Route exact path="/expedientes" component={ConsultarExpediente} />
+                
                 <Route exact path="/expedientes/crear" component={AgregarExpediente} />
                 <Route exact path="/expedientes/:codigo/editar" component={EditarExpediente} />
                 <Route exact path="/expedientes/:codigo/ver" component={VerExpediente} />

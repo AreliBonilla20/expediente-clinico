@@ -32,16 +32,10 @@ class ExamenesResultadoController extends Controller
         ]);
         }
 
-
-        DB::update('update historial_examenes set archivo_resultado = ?
-        where id_atencion_medica = ?', 
-        [   
-            $request->archivo_resultado->store('public'),
-            $id_atencion_medica
-        ]);
-
         return response()->json("Resultados registrados");    
    }
+
+  
 
    
    public function examen_resultado($id_atencion_medica)

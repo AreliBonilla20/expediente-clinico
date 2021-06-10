@@ -62,6 +62,7 @@ Route::post('/historial_tratamientos/{id_consulta}/{id_hospitalizacion}/guardar'
 //Rutas para el historial de examenes del paciente
 Route::get('/historial_examenes/{id_consulta}/{id_hospitalizacion}', 'HistorialExamenesController@index');
 Route::post('/historial_examenes/{id_consulta}/{id_hospitalizacion}/guardar', 'HistorialExamenesController@store');
+Route::put('/historial_examenes/{id_atencion_medica}/archivo_resultado', 'HistorialExamenesController@archivo_resultado');
 
 //Rutas para los resultados de examenes del paciente
 Route::get('/examenes_resultado/{id_atencion_medica}/crear', 'ExamenesResultadoController@create');

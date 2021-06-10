@@ -76,4 +76,18 @@ class HistorialExamenesController extends Controller
 
         return response()->json('Examenes asignados!');   
     }
+
+    public function archivo_resultado(Request $request, $id_atencion_medica)
+    {
+     
+        //$url         = $request->file->
+      
+         $url = $request->file('file')->store('public');
+      DB::update('update historial_examenes set archivo_resultado = ?
+         where id_atencion_medica = ?', 
+         [   
+          $url,
+             $id_atencion_medica
+         ]);
+    }
 }
