@@ -48,6 +48,11 @@ import BuscarMedicamento from './MedicamentosComponents/BuscarMedicamento';
 import VerMedicamento from './MedicamentosComponents/VerMedicamento';
 import AsignarRecetaMedica from './MedicamentosComponents/AsignarRecetaMedica';
 
+import ConsultarCirugia from './CirugiasComponents/ConsultarCirugias';
+import AgregarCirugia from './CirugiasComponents/AgregarCiugia';
+import EditarCirugia from './CirugiasComponents/EditarCirugia';
+import VerCirugia from './CirugiasComponents/VerCirugias';
+
 import ConsultarExamen from './ExamenesComponents/ConsultarExamen';
 import AgregarExamen from './ExamenesComponents/AgregarExamen';
 import EditarExamen from './ExamenesComponents/EditarExamen';
@@ -75,6 +80,8 @@ import VerCita from './CitasComponents/VerCita';
 
 import AgregarConsulta from './ConsultasComponents/AgregarConsulta';
 import VerDetallesConsulta from './ConsultasComponents/VerDetallesConsulta';
+
+import AsignarUsuario from './UsuariosComponents/AsignarUsuario';
 
 import Prueba from './Prueba/PruebaMostrar';
 
@@ -154,6 +161,11 @@ const App = () => {
                 <Route exact path="/medicamentos/:codigo/ver" component={VerMedicamento} />
                 <Route exact path="/medicamentos/:param_busqueda/buscar" component={BuscarMedicamento} />
 
+                <Route exact path="/cirugias" component={ConsultarCirugia} />
+                <Route exact path="/cirugias/crear" component={AgregarCirugia} />
+                <Route exact path="/cirugias/:codigo/editar" component={EditarCirugia} />
+                <Route exact path="/cirugias/:codigo/ver" component={VerCirugia} />
+               
                 <Route exact path="/empleados" component={ConsultarEmpleado} />
                 <Route exact path="/empleados/crear" component={AgregarEmpleado} />
                 <Route exact path="/empleados/:id_empleado/editar" component={EditarEmpleado} />
@@ -167,6 +179,8 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/agregar_cita" component={AgregarCita} />
                 <Route exact path="/citas/:id_cita/editar" component={EditarCita} />
                 <Route exact path="/citas/:id_cita/ver" component={VerCita} />
+
+                <Route exact path="/usuarios/:id_empleado/asignar_usuario" component={AsignarUsuario} />
 
                 <Route exact path="/consultas/:codigo_paciente/:id_cita/crear" component={AgregarConsulta} />
 

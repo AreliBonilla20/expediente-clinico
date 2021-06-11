@@ -163,6 +163,20 @@ export default {
     ver_parametros_examen: (codigo) =>
     axios.get(`${API_URL}/examenes/${codigo}/ver_parametros_examen`),
 
+    //Exámenes
+    cirugias: () =>
+    axios.get(`${API_URL}/cirugias`),
+
+    cirugia_editar: (codigo) =>
+    axios.get(`${API_URL}/cirugias/${codigo}/editar`),
+
+    cirugia_ver: (codigo) =>
+    axios.get(`${API_URL}/cirugias/${codigo}/ver`),
+
+    /*cirugia_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/cirugias/${param_busqueda}/buscar`),*/
+
+
 
     //Empleados
     empleados: () =>

@@ -118,6 +118,21 @@ const Menu = () => {
                     <li className="sidebar-item has-sub">
                         <a href="" className='sidebar-link'>
                         <i className="bi bi-grid-1x2-fill"></i>
+                            <span>Cirugías</span>
+                        </a>
+                        <ul className="submenu">
+                            <li className="submenu-item ">
+                                <Link to="/cirugias">Consultar</Link>
+                            </li>
+                            <li className="submenu-item ">
+                                <Link to="/cirugias/crear">Agregar exámenes</Link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li className="sidebar-item has-sub">
+                        <a href="" className='sidebar-link'>
+                        <i className="bi bi-grid-1x2-fill"></i>
                             <span>Empleados</span>
                         </a>
                         <ul className="submenu">

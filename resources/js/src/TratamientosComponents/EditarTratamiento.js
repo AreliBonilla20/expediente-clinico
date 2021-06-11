@@ -14,7 +14,7 @@ import API from '../api';
 import schema from '../Validaciones/TratamientoValidacion';
 import {ClickLabel} from '../Funciones/FuncionesAuxiliares';
 
-const AgregarTratamiento = () => {
+const EditarTratamiento = () => {
 
     //Aqui se guardar el codigo de diganostico que viene como parámetro 
     const { codigo } = useParams();
@@ -276,4 +276,4 @@ const AgregarTratamiento = () => {
     );
 }
 
-export default AgregarTratamiento;
+export default EditarTratamiento;

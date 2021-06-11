@@ -141,6 +141,14 @@ Route::get('/examenes_hemogramas/{codigo}/ver', 'ExamenHemogramaController@show'
 Route::get('/examenes_hemogramas/{codigo}/editar', 'ExamenHemogramaController@edit');
 Route::put('/examenes_hemogramas/{codigo}/actualizar', 'ExamenHemogramaController@update');
 
+//Rutas para cirugías
+Route::get('/cirugias', 'CirugiaController@index');
+Route::get('/cirugias/crear', 'CirugiaController@create');
+Route::post('/cirugias/guardar', 'CirugiaController@store');
+Route::get('/cirugias/{codigo}/ver', 'CirugiaController@show');
+Route::get('/cirugias/{codigo}/editar', 'CirugiaController@edit');
+Route::put('/cirugias/{codigo}/actualizar', 'CirugiaController@update');
+
 //Rutas para quirofanos
 Route::get('/quirofanos/{id_centro_medico}', 'QuirofanoController@index');
 Route::post('/quirofanos/{id_centro_medico}/guardar', 'QuirofanoController@store');

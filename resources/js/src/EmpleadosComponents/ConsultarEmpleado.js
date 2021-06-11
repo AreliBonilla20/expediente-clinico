@@ -95,6 +95,7 @@ const ConsultarEmpleado = () => {
                                             <th>Apellidos</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
+                                            <th>Asignar usuario</th>
                                         
                                         </tr>
                                     </thead>
@@ -109,6 +110,9 @@ const ConsultarEmpleado = () => {
                                             </td>
                                             <td>
                                             <Link to={`empleados/${empleado.id_empleado}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>
+                                            </td>
+                                            <td>
+                                            <Link to={`usuarios/${empleado.id_empleado}/asignar_usuario`} className="btn btn-sm btn-success"><i className="bi bi-person"></i> Asignar usuario</Link>
                                             </td>
                                              
                                           </tr>

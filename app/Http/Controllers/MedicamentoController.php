@@ -81,7 +81,7 @@ class MedicamentoController extends Controller
                     "existencia_medicamento" => $request->existencia_medicamento
                     ]);
                     
-        return response()->json('Medicamento  actualizado!');    
+        return response()->json('Medicamento actualizado!');    
     }
 
     public function buscar($param_busqueda)
