@@ -8,6 +8,9 @@ import ReactDOM from 'react-dom';
 
 import Home from '../src/LayoutComponents/Home';
 
+import LogIn from './AuthComponents/LogIn';
+import SignUp from './AuthComponents/SignUp';
+
 import ConsultarExpediente from './ExpedientesComponents/ConsultarExpediente';
 import AgregarExpediente from './ExpedientesComponents/AgregarExpediente';
 import EditarExpediente from './ExpedientesComponents/EditarExpediente';
@@ -100,6 +103,9 @@ const App = () => {
                 <Route exact path="/" component={Home}/>
 
                
+                <Route exact path="/login" component={LogIn}/>
+                <Route exact path="/register" component={SignUp}/>
+                
                 <Route exact path="/expedientes" component={ConsultarExpediente} />
                 
                 <Route exact path="/expedientes/crear" component={AgregarExpediente} />

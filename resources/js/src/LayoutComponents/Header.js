@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import usuario from '../../../../public/assets/images/faces/1.jpg'; 
 
@@ -22,11 +23,11 @@ const Header = () => {
                        
                     </ul>
                     <div className="dropdown">
-                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a data-bs-toggle="dropdown" aria-expanded="false">
                             <div className="user-menu d-flex">
                                 <div className="user-name text-end me-3">
-                                    <h6 className="mb-0 text-gray-600">Usuario</h6>
-                                    <p className="mb-0 text-sm text-gray-600">Administrator</p>
+                                    <h6 className="mb-0 text-gray-600">{window.localStorage.getItem('name')}</h6>
+                                    <Link to="/logout" className="mb-0 text-sm text-gray-600">Cerrar sesión</Link>
                                 </div>
                                 <div className="user-img d-flex align-items-center">
                                     <div className="avatar avatar-md">
