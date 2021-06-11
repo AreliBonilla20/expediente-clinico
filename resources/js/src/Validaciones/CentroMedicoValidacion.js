@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+const phoneRegExp = /^(\d{4}[-]\d{4})$/;
+
 const schema = yup.object().shape({
 
     id_centro_medico: yup
@@ -25,7 +27,7 @@ const schema = yup.object().shape({
     .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo director solo debe contener letras'),
 
     telefono_director: yup
-    .string()
+    .string().matches(phoneRegExp, 'El formato debe ser: 7777-7777')
     .max(25, "El máximo de caracteres es 25")
     .required("El campo teléfono es obligatorio"),
 
@@ -42,12 +44,12 @@ const schema = yup.object().shape({
     .required("El campo correo eléctronico es obligatorio"),
     
     telefono1_centro_medico: yup
-    .string()
+    .string().matches(phoneRegExp, 'El formato debe ser: 7777-7777')
     .max(25, "El máximo de caracteres es 25")
     .required("El campo teléfono es obligatorio"),
 
     telefono2_centro_medico: yup
-    .string()
+    .string().matches(phoneRegExp, 'El formato debe ser: 7777-7777')
     .nullable()
     .max(25, "El máximo de caracteres es 25"),
 

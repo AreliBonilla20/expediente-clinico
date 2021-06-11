@@ -180,7 +180,7 @@ const SignosVitales = () => {
                             <div className="form-group has-icon-left">
                                 <label htmlFor="presion_arterial_diastolica">Presión arterial diastólica (mmHg)</label>
                                 <div className="position-relative">
-                                    <input type="number" className="form-control"
+                                    <input type="number" className="form-control" step="0.01" min="0"
                                         name="presion_arterial_diastolica"
                                         id="presion_arterial_diastolica"
                                         value={presion_arterial_diastolica}
@@ -198,7 +198,7 @@ const SignosVitales = () => {
                             <div className="form-group has-icon-left">
                                 <label htmlFor="ritmo_cardiaco_paciente">Ritmo cardíaco (x min)</label>
                                 <div className="position-relative">
-                                    <input type="number" className="form-control"
+                                    <input type="number" className="form-control" step="0.01" min="0"
                                         name="ritmo_cardiaco_paciente"
                                         id="ritmo_cardiaco_paciente"
                                         value={ritmo_cardiaco_paciente}
@@ -216,7 +216,7 @@ const SignosVitales = () => {
                             <div className="form-group has-icon-left">
                                 <label htmlFor="respiracion_paciente">Respiración (x min)</label>
                                 <div className="position-relative">
-                                    <input type="number" className="form-control"
+                                    <input type="number" className="form-control" step="0.01" min="0"
                                         name="respiracion_paciente"
                                         id="respiracion_paciente"
                                         value={respiracion_paciente}
