@@ -125,7 +125,7 @@ const Menu = () => {
                                 <Link to="/cirugias">Consultar</Link>
                             </li>
                             <li className="submenu-item ">
-                                <Link to="/cirugias/crear">Agregar exámenes</Link>
+                                <Link to="/cirugias/crear">Agregar cirugías</Link>
                             </li>
                         </ul>
                     </li>

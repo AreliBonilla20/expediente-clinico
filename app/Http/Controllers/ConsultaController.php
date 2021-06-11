@@ -49,7 +49,7 @@ class ConsultaController extends Controller
             $costo_consulta,
             $costo_consulta
             ]);
-        
+     
         return response()->json('Consulta iniciada');    
     }
 

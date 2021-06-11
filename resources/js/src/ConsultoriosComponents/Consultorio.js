@@ -158,17 +158,17 @@ const Consultorio = () => {
                 <table className="table lg">
                     <thead>
                         <tr>                     
-			             <th>ID quirófano</th>
-                         <th>Quirófano</th>
+			             <th>ID consultorio</th>
+                         <th>Consultorio</th>
                          <th>Área</th>
                         </tr>
                     </thead>
                     <tbody>
                     {consultorios.map((consultorio)=>(
                         <tr>                  
-                            <td>{consultorio.id_consultorio}</td>
-                            <td>{consultorio.consultorio}</td>
-                            <td>{consultorio.area}</td>
+                            <td>{consultorio.v_codigo}</td>
+                            <td>{consultorio.v_nombre}</td>
+                            <td>{consultorio.v_area}</td>
                         </tr>
                         ))}
                     </tbody>
