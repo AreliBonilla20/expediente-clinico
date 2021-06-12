@@ -157,15 +157,17 @@ const Consultorio = () => {
                  <div className="table-responsive">
                 <table className="table lg">
                     <thead>
-                        <tr>                     
+                        <tr>
+                         <th>No.</th>                 
 			             <th>ID consultorio</th>
                          <th>Consultorio</th>
                          <th>Área</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {consultorios.map((consultorio)=>(
-                        <tr>                  
+                    {consultorios.map((consultorio, i)=>(
+                        <tr>      
+                            <td>{i + 1}</td>            
                             <td>{consultorio.v_codigo}</td>
                             <td>{consultorio.v_nombre}</td>
                             <td>{consultorio.v_area}</td>

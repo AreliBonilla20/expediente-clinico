@@ -16,6 +16,7 @@ import RecetaMedica from '../MedicamentosComponents/RecetaMedica';
 import HistorialTratamientos from '../TratamientosComponents/HistorialTratamientos';
 import FacturacionHospitalizacion  from './FacturacionHospitalizacion';
 import HistorialExamen from '../ExamenesComponents/HistorialExamenes';
+import HistorialCirugias from '../CirugiasComponents/HistorialCirugias';
 
 
 import API from '../api';
@@ -97,7 +98,7 @@ const VerExpediente = () => {
                                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link active" id="datos_ingreso-tab" data-bs-toggle="tab" href="#datos_ingreso"
-                                                role="tab" aria-controls="datos_ingreso" aria-selected="true">Datos de ingreso</a>
+                                                role="tab" aria-controls="datos_ingreso" aria-selected="true">Ingreso</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="chequeos-tab" data-bs-toggle="tab" href="#chequeos"
@@ -113,7 +114,7 @@ const VerExpediente = () => {
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="receta_medica-tab" data-bs-toggle="tab" href="#receta_medica"
-                                                role="tab" aria-controls="receta_medica" aria-selected="false">Recetas médicas</a>
+                                                role="tab" aria-controls="receta_medica" aria-selected="false">Medicamentos</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="tratamientos-tab" data-bs-toggle="tab" href="#tratamientos"
@@ -124,9 +125,14 @@ const VerExpediente = () => {
                                                 role="tab" aria-controls="examenes" aria-selected="false">Examenes</a>
                                         </li>
                                         <li className="nav-item" role="presentation">
+                                            <a className="nav-link" id="cirugias-tab" data-bs-toggle="tab" href="#cirugias"
+                                                role="tab" aria-controls="cirugias" aria-selected="false">Cirugías</a>
+                                        </li>
+                                        <li className="nav-item" role="presentation">
                                             <a className="nav-link" id="facturacion-tab" data-bs-toggle="tab" href="#facturacion"
                                                 role="tab" aria-controls="facturacion" aria-selected="false">Facturación</a>
                                         </li>
+                                       
                                        
                                     </ul>
 
@@ -337,6 +343,16 @@ const VerExpediente = () => {
                                                     <section className="section">
                                                         <div className="card">
                                                             <HistorialExamen/>
+                                                        </div>
+                                                    </section>
+                                            </div>
+
+                                            <div className="tab-pane fade" id="cirugias" role="tabpanel"
+                                                aria-labelledby="cirugias-tab">
+                                                    
+                                                    <section className="section">
+                                                        <div className="card">
+                                                            <HistorialCirugias/>
                                                         </div>
                                                     </section>
                                             </div>

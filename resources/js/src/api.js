@@ -70,6 +70,14 @@ export default {
     historial_examenes: (id_consulta, id_hospitalizacion) =>
     axios.get(`${API_URL}/historial_examenes/${id_consulta}/${id_hospitalizacion}`),
 
+     //Historial cirugias
+
+    historial_cirugias: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/historial_cirugias/${id_consulta}/${id_hospitalizacion}`),
+
+    asignar_cirugia_datos_formulario: (id_consulta, id_hospitalizacion) =>
+    axios.get(`${API_URL}/historial_cirugias/${id_consulta}/${id_hospitalizacion}/crear`),
+
     //Examen parámetros
     examen_parametros: (id_atencion_medica) =>
     axios.get(`${API_URL}/examenes_resultado/${id_atencion_medica}/crear`),
@@ -163,7 +171,7 @@ export default {
     ver_parametros_examen: (codigo) =>
     axios.get(`${API_URL}/examenes/${codigo}/ver_parametros_examen`),
 
-    //Exámenes
+    //Cirugías
     cirugias: () =>
     axios.get(`${API_URL}/cirugias`),
 
@@ -173,8 +181,8 @@ export default {
     cirugia_ver: (codigo) =>
     axios.get(`${API_URL}/cirugias/${codigo}/ver`),
 
-    /*cirugia_buscar: (param_busqueda) =>
-    axios.get(`${API_URL}/cirugias/${param_busqueda}/buscar`),*/
+    cirugias_buscar: (param_busqueda) =>
+    axios.get(`${API_URL}/cirugias/${param_busqueda}/buscar`),
 
 
 
@@ -241,6 +249,9 @@ export default {
 
     citas_paciente: (codigo_paciente) => 
     axios.get(`${API_URL}/citas/${codigo_paciente}/citas_paciente`),
+
+    citas_buscar: (param_busqueda) => 
+    axios.get(`${API_URL}/citas/${param_busqueda}/buscar`),
 
     //Consultas
     consulta_ver: (id_consulta) =>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import usuario from '../../../../public/assets/images/faces/1.jpg'; 
+import FechaHora from './FechaHora';
 
 const Header = () => {
     return(
@@ -17,7 +18,10 @@ const Header = () => {
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-              
+                <div className="user-img d-flex align-items-center">
+                    <FechaHora />
+                </div>
+                
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                        

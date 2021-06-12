@@ -58,16 +58,16 @@ class CirugiaController extends Controller
         return response()->json('Cirugía actualizada!');    
     }
 
-    /*public function buscar($param_busqueda)
+    public function buscar($param_busqueda)
     {
         $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
 
-        $codigo_diagnostico = '%'.$param_busqueda.'%';
-        $nombre_diagnostico = '%'.$param_busqueda.'%';
+        $codigo_cirugia = '%'.$param_busqueda.'%';
+        $nombre_cirugia = '%'.$param_busqueda.'%';
         
-        $diagnosticos = DB::select('select * from diagnosticos where UNACCENT(lower(codigo_diagnostico)) LIKE ? or UNACCENT(lower(nombre_diagnostico)) LIKE ?', 
-        [strtolower($codigo_diagnostico), strtolower($nombre_diagnostico)]);
+        $cirugias = DB::select('select * from cirugias where UNACCENT(lower(codigo_cirugia)) LIKE ? or UNACCENT(lower(nombre_cirugia)) LIKE ?', 
+        [strtolower($codigo_cirugia), strtolower($nombre_cirugia)]);
 
-        return DiagnosticoResource::collection($diagnosticos);
-    }*/
+        return CirugiaResource::collection($cirugias);
+    }
 }

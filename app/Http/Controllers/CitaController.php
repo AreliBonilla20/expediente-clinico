@@ -10,7 +10,8 @@ class CitaController extends Controller
 {
     public function index()
     {  
-       $citas_hoy = DB::select('select id_cita, fecha_cita, hora_cita, id_doctor, codigo_paciente, nombres, apellidos from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente');
+       $citas_hoy = DB::select('select * from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente
+       where fecha_cita = current_date and id_cita not in (select id_cita from consultas)');
        return response()->json($citas_hoy);   
       
     }

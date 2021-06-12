@@ -9,17 +9,14 @@ class SignosVitalesController extends Controller
 {   
     public function index($id_consulta, $id_hospitalizacion)
     {  
+    
       $signos_vitales = DB::select('select * from signos_vitales inner join atenciones_medicas 
       on atenciones_medicas.id_atencion_medica = signos_vitales.id_atencion_medica
       where id_consulta = ? or id_hospitalizacion = ?', [$id_consulta, $id_hospitalizacion]);
 
-      $alta = DB::select('select fecha_alta from hospitalizaciones where id_hospitalizacion = ?', [$id_hospitalizacion]);
-
       $data = [
         "signos_vitales" => $signos_vitales,
-        "alta" => $alta[0]
-    ];
-    
+      ];
     
     return response()->json($data);    
     }

@@ -77,7 +77,7 @@ const ConsultarCirugia = () => {
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />
-                                            <Link to={`tratamientos_medicos/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
+                                            <Link to={`cirugias/${param_busqueda}/buscar`} className="btn btn-secondary"> Buscar</Link>
                                         </div>
                                     </div>
                                 </div>

@@ -19,9 +19,11 @@ class DiagnosticoController extends Controller
     public function create()
     {
         $tipos_diagnosticos = DB::select('select * from create_diagnostico');
+        $diagnosticos = DB::select('select * from diagnosticos order by nombre_diagnostico');
         
         $data = [
             "tipos_diagnosticos" => $tipos_diagnosticos,
+            "diagnosticos" => $diagnosticos
         ];
 
         return response()->json($data);    
