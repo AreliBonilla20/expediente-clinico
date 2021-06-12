@@ -137,12 +137,7 @@ function AsignarDiagnosticos() {
     API.datos_formulario_diagnostico().then(res => {
         const result = res.data;
         set_tipos_diagnosticos(result.tipos_diagnosticos);
-   })
-
-   API.diagnosticos().then( res => {
-       const result = res.data;
-       set_diagnosticos(result.data);
-      
+        set_diagnosticos(result.diagnosticos);
    })
 },[]);
 

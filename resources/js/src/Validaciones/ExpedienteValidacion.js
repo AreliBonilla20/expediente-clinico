@@ -1,10 +1,15 @@
 import * as yup from "yup";
 
+const today = new Date(Date.now());
+today.setHours(0, 0, 0, 0)
+
+const phoneRegExp = /^(\d{4}[-]\d{4})$/;
+
 const schema = yup.object().shape({
 
     identificacion: yup
     .string()
-    .max(30, "El máximo de caracteres es 30")
+    .max(17, "El máximo de caracteres es 17")
     .nullable(),
 
     nombres: yup
@@ -20,7 +25,8 @@ const schema = yup.object().shape({
     .matches('^[ñíóáéú a-zA-Z ]+$', 'El campo apellidos solo debe contener letras'),
     
     fecha_nacimiento: yup
-    .string()
+    .date()
+    .max(today, 'La fecha no puede sobrepasar el día de hoy')
     .required("El campo fecha de nacimiento es obligatorio"),
 
     estado_paciente: yup
@@ -35,7 +41,7 @@ const schema = yup.object().shape({
     .required("El campo direccion es obligatorio"),
 
     telefono: yup
-    .string()
+    .string().matches(phoneRegExp, 'El formato debe ser: 7777-7777')
     .max(25, "El máximo de caracteres es 25")
     .required("El campo telefono es obligatorio"),
 
@@ -67,7 +73,7 @@ const schema = yup.object().shape({
     .max(150, "El máximo de caracteres es 150"),
     
     telefono_contacto_emergencia: yup
-    .string()
+    .string().matches(phoneRegExp, 'El formato debe ser: 7777-7777')
     .required("El campo teléfono del contacto de emergencia es obligatorio")
     .max(25, "El máximo de caracteres es 25"),
 

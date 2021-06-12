@@ -59,7 +59,7 @@ const AgregarCita = () => {
             
           });
           
-          window.location = "/citas";
+          window.location = `expedientes/${codigo}/ver`;
           if(response.status === 200){
             swal({
                 title: "Éxito",
@@ -230,7 +230,7 @@ const AgregarCita = () => {
 
                                                     <div className="col-4">
                                                         <div className="form-group has-icon-left">
-                                                            <label htmlFor="hora_cita">Fecha (*)</label>
+                                                            <label htmlFor="hora_cita">Hora (*)</label>
                                                             <div className="position-relative">
                                                                 <input type="time" className="form-control"
                                                                     name="hora_cita"

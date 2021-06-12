@@ -1,5 +1,8 @@
 import * as yup from "yup";
 
+const today = new Date(Date.now());
+today.setHours(0, 0, 0, 0)
+
 const schema = yup.object().shape({
 
     historial_enfermedades: yup
@@ -18,7 +21,8 @@ const schema = yup.object().shape({
     .nullable(),
 
     fecha_nacimiento_padre: yup
-    .string()
+    .date()
+    .max(today, 'La fecha no puede sobrepasar el día de hoy')
     .nullable(),
 
     direccion_padre: yup
@@ -42,7 +46,8 @@ const schema = yup.object().shape({
     .nullable(),
 
     fecha_nacimiento_madre: yup
-    .string()
+    .date()
+    .max(today, 'La fecha no puede sobrepasar el día de hoy')
     .nullable(),
 
     direccion_madre: yup

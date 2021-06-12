@@ -135,14 +135,16 @@ const AgregarQuirofano = () => {
                  <div className="table-responsive">
                 <table className="table lg">
                     <thead>
-                        <tr>                     
+                        <tr>   
+                         <th>No.</th>                        
 			             <th>ID quirófano</th>
                          <th>Quirófano</th>
                         </tr>
                     </thead>
                     <tbody>
                     {quirofanos.map((quirofano)=>(
-                        <tr>                  
+                        <tr>     
+                            <td>{i + 1}</td>             
                             <td>{quirofano.v_codigo}</td>
                             <td>{quirofano.v_nombre}</td>
                         </tr>

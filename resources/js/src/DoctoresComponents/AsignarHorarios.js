@@ -120,7 +120,7 @@ function AsignarHorarios() {
                                                 <h6>Doctor {i + 1 }</h6>
                                             </div>
 
-                                            <div className="col-8">
+                                            <div className="col-6">
                                             <label htmlFor="id_doctor">Doctor (*)</label>
                                                 <div className="form-group">
                                                     <select className="form-select"
@@ -138,7 +138,7 @@ function AsignarHorarios() {
                                                 </div>
                                             </div>
 
-                                            <div className="col-4">
+                                            <div className="col-5">
                                             <label htmlFor="id_horario">Horario (*)</label>
                                                 <div className="form-group">
                                                     <select className="form-select"
@@ -157,12 +157,14 @@ function AsignarHorarios() {
                                             </div>
 
                                             
-
+                                            <div className="col-1">
+                                                <br />
                                             <div className="btn-box">
                                             {input_list.length !== 1 && <button
                                                 className="btn btn-sm btn-danger rounded-pill"
                                                 onClick={() => handleRemoveClick(i)}> <i className="bi bi-dash"></i>  </button>}
                                             {input_list.length - 1 === i && <button className="btn btn-sm btn-primary rounded-pill" onClick={handleAddClick}><i className="bi bi-plus"></i></button>}
+                                            </div>
                                             </div>
                                         
                                         </div>

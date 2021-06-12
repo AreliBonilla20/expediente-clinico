@@ -1,5 +1,8 @@
 import * as yup from "yup";
 
+const today = new Date(Date.now());
+today.setHours(0, 0, 0, 0)
+
 const schema = yup.object().shape({
 
     id_doctor: yup
@@ -11,7 +14,8 @@ const schema = yup.object().shape({
     .required("El campo consultorio es obligatorio"),
 
     fecha_cita: yup
-    .string()
+    .date()
+    .min(today, 'La fecha no puede ser anterior al día de hoy')
     .required("El campo fecha es obligatorio"),
 
     hora_cita: yup

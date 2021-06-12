@@ -25,6 +25,7 @@ class CreateHistorialCirugiasTable extends Migration
             $table->string('id_quirofano');
             $table->foreign('id_quirofano')->references('id_quirofano')->on('quirofanos');
 
+           
             $table->time('hora_cirugia');
             $table->string('estado_cirugia', 50);
             $table->timestamps();
