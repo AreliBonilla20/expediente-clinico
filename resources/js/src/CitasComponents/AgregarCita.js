@@ -59,7 +59,7 @@ const AgregarCita = () => {
             
           });
           
-          window.location = `expedientes/${codigo}/ver`;
+          window.location = `/citas`;
           if(response.status === 200){
             swal({
                 title: "Éxito",
