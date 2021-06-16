@@ -10,6 +10,7 @@ import {fecha, hora } from '../Funciones/FuncionesAuxiliares';
 const FacturacionConsulta = () => {
     
     const API_URL = API.API_URL;
+    
 
     const container = React.useRef(null);
     const pdfExportComponent = React.useRef(null);
@@ -31,11 +32,13 @@ const FacturacionConsulta = () => {
     const [hora_cita, set_hora_cita] = useState('');
     const [costo_medicamentos, set_costo_medicamentos] = useState('');
     const [costo_tatamientos, set_costo_tatamientos] = useState('');
+    const [costo_examenes, set_costo_examenes] = useState('');
     const [costo_total, set_costo_total] = useState('');
    
 
     const [receta_medica, set_receta_medica] = useState([]);
     const [tratamientos, set_tratamientos] = useState([]);
+    const [examenes, set_examenes] = useState([]);
 
    
 
@@ -46,6 +49,7 @@ const FacturacionConsulta = () => {
             const costo = result.costo_de_consulta;
             set_receta_medica(result.medicamentos);
             set_tratamientos(result.tratamientos);
+            set_examenes(result.examenes);
 
             set_costo_por_consulta(costo.costo_consulta);
             set_codigo_paciente(costo.codigo_paciente);
@@ -58,6 +62,7 @@ const FacturacionConsulta = () => {
             set_hora_cita(costo.hora_cita);
             set_costo_medicamentos(costo.costo_medicamentos);
             set_costo_tatamientos(costo.costo_tratamientos);
+            set_costo_examenes(costo.costo_examenes);
             set_costo_total(costo.costo_total);
         })
 
@@ -152,7 +157,7 @@ const FacturacionConsulta = () => {
 
                <hr />
                
-                <h6>Costo por servicios médicos</h6>
+                <h6>Costo por servicios medicos</h6>
 
                 <div class="table-responsive">
                     <table class="table table-borderless mb-0">
@@ -231,6 +236,33 @@ const FacturacionConsulta = () => {
                             <td></td>
                             <td></td>
                             <td> <h6> <b>$ {costo_tatamientos}</b> </h6></td>
+                        </tr>
+                        }
+                       
+
+                        {examenes.length > 0 &&
+                        <tr><b>examenes</b></tr>
+                        
+                        }
+                        {examenes.length > 0 && examenes.map((examen) => 
+                            <tr>
+                            <td>{examen.codigo_examen}</td>
+                            <td>{examen.nombre_examen}</td>
+                            <td>$ {examen.costo}</td>
+                            <td>1</td>
+                            <td>$ {examen.costo}</td>
+                           
+                            </tr>
+                        )}
+                        
+                        {examenes.length > 0 &&
+
+                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <h6> <b>$ {costo_examenes}</b> </h6></td>
                         </tr>
                         }
                         <hr />

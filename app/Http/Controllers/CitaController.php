@@ -10,7 +10,9 @@ class CitaController extends Controller
 {
     public function index()
     {  
-       $citas_hoy = DB::select('select * from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente');
+        $estado_cita = 'Pendiente';
+        $citas_hoy = DB::select('select * from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente where estado_cita = ?',
+        [$estado_cita]);
        return response()->json($citas_hoy);   
       
     }
@@ -90,6 +92,13 @@ class CitaController extends Controller
         return response()->json('Cita actualizada!');    
     }
 
+    public function delete($id_cita)
+    {
+        DB::delete('delete from citas where id_cita = ?', [$id_cita]);
+
+        return response()->json('Cita eliminada');
+    }
+
     public function citas_paciente($codigo_paciente)
     {
         $citas_paciente = DB::select('select * from citas where codigo_paciente = ?', [$codigo_paciente]);
@@ -97,16 +106,20 @@ class CitaController extends Controller
         return response()->json($citas_paciente);
     }
 
-    /*public function buscar($param_busqueda)
+    
+
+    public function buscar($param_busqueda)
     {
         $param_busqueda = app('App\Http\Controllers\FuncionesController')->acentos($param_busqueda);
-
-        $codigo_diagnostico = '%'.$param_busqueda.'%';
-        $nombre_diagnostico = '%'.$param_busqueda.'%';
+        $fecha_cita = $param_busqueda;
+        $codigo_paciente = '%'.$param_busqueda.'%';
+        $nombres = '%'.$param_busqueda.'%';
+        $apellidos = '%'.$param_busqueda.'%';
         
-        $diagnosticos = DB::select('select * from diagnosticos where UNACCENT(lower(codigo_diagnostico)) LIKE ? or UNACCENT(lower(nombre_diagnostico)) LIKE ?', 
-        [strtolower($codigo_diagnostico), strtolower($nombre_diagnostico)]);
+        $citas = DB::select('select * from citas inner join pacientes on pacientes.codigo = citas.codigo_paciente
+        where UNACCENT(lower(codigo_paciente)) LIKE ? or UNACCENT(lower(nombres)) LIKE ? or UNACCENT(lower(apellidos)) LIKE ?', 
+        [strtolower($codigo_paciente), strtolower($nombres), strtolower($apellidos)]);
 
-        return DiagnosticoResource::collection($diagnosticos);
-    }*/
+        return response()->json($citas);    
+    }
 }

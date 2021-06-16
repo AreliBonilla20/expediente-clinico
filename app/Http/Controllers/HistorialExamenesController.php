@@ -59,17 +59,17 @@ class HistorialExamenesController extends Controller
                 $request->input_list[$i]['codigo_examen']
             ]);
 
-           /* $codigo_examen = $request->input_list[$i]['codigo_examen'];
+            $codigo_examen = $request->input_list[$i]['codigo_examen'];
             $examen = DB::select('select * from examenes where codigo_examen = ?', [$codigo_examen]);
             $costo_examen = $examen[0]->costo;
 
           if($id_consulta !== 'null'){
-            DB::update('update costo_servicios set costo_examenes = costo_examenes + ?, costo_total = costo_total + ? where id_consulta = ?', [$costo_medicamentos, $costo_medicamentos, $id_consulta]);
+            DB::update('update costo_servicios set costo_examenes = costo_examenes + ?, costo_total = costo_total + ? where id_consulta = ?', [$costo_examen, $costo_examen, $id_consulta]);
           }
 
           if($id_hospitalizacion !== 'null'){
-            DB::update('update costo_servicios set costo_examenes = costo_examenes + ?, costo_total = costo_total + ? where id_hospitalizacion = ?', [$costo_medicamentos, $costo_medicamentos, $id_hospitalizacion]);
-          } */
+            DB::update('update costo_servicios set costo_examenes = costo_examenes + ?, costo_total = costo_total + ? where id_hospitalizacion = ?', [$costo_examen, $costo_examen, $id_hospitalizacion]);
+          } 
       
           }
       

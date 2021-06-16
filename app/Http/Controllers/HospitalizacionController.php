@@ -141,10 +141,14 @@ class HospitalizacionController extends Controller
         $tratamientos = DB::select('select * from historial_tratamientos_medicos inner join tratamientos_medicos on tratamientos_medicos.codigo_tratamiento = historial_tratamientos_medicos.codigo_tratamiento 
                                     where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_hospitalizacion = ?)', [$id_hospitalizacion]);
 
+        $examenes = DB::select('select * from historial_examenes inner join examenes on historial_examenes.codigo_examen = examenes.codigo_examen 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_hospitalizacion = ?)', [$id_hospitalizacion]);
+
         $data = [
             "costo_hospitalizacion" => $costo_hospitalizacion[0],
             "medicamentos" => $medicamentos,
-            "tratamientos" => $tratamientos
+            "tratamientos" => $tratamientos,
+            "examenes" => $examenes
         ];
         
         return response()->json($data);    

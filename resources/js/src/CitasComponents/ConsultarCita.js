@@ -14,7 +14,7 @@ const ConsultarDiagnostico = () => {
 
     const [citas, set_citas] =useState([]);
     const [param_busqueda, setParam_busqueda] = useState('');
-   
+
     useEffect(() => {
          API.citas().then(res => {
             const result = res.data;
@@ -70,7 +70,7 @@ const ConsultarDiagnostico = () => {
                                             <span className="input-group-text" id="basic-addon1"><i
                                                     className="bi bi-search"></i></span>
                                         <input type="text" id="last-name-column" className="form-control"
-                                                    placeholder="Código, nombre del diagnóstico" name="lname-column" 
+                                                    placeholder="Código del paciente, nombre del paciente, fecha de cita [dd-mm-aaaa]" name="lname-column" 
                                                     id="codigo_busqueda"
                                                     value={param_busqueda}
                                                     onChange={e => setParam_busqueda(e.target.value)} />
@@ -81,7 +81,7 @@ const ConsultarDiagnostico = () => {
                             </form>
 
                             <br />
-                            <h6>Citas de este día</h6>
+                           
                             <br />
                                 <table className="table table-striped" id="table1">
                                     
@@ -94,6 +94,8 @@ const ConsultarDiagnostico = () => {
                                             <th>Hora</th>
                                             <th>Editar</th>
                                             <th>Consultar</th>
+                                            <th>Eliminar</th>
+                                            <th>Iniciar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,7 +108,7 @@ const ConsultarDiagnostico = () => {
                                             <td>{cita.hora_cita}</td>
                                            
                                             <td>
-                                            <Link to={`citas/${cita.id_cita}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar</Link>
+                                            <Link to={`citas/${cita.id_cita}/editar`} className="btn btn-sm btn-primary"><i className="bi bi-pencil"></i> Editar/eliminar</Link>
                                             </td>
                                             <td>
                                             <Link to={`citas/${cita.id_cita}/ver`} className="btn btn-sm btn-info"><i className="bi bi-table"></i> Consultar</Link>

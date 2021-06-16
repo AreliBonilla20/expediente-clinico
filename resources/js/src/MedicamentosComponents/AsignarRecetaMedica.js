@@ -273,7 +273,7 @@ function AsignarMedicamento() {
                                             <div className="form-group has-icon-left">
                                                 <label htmlFor="cantidad_medicamento">Cantidad</label>
                                                 <div className="position-relative">
-                                                <input type="number" className="form-control" min="1"
+                                                <input type="number" className="form-control" 
                                                 name="cantidad_medicamento"
                                                 value={x.cantidad_medicamento}
                                                 />

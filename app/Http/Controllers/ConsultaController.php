@@ -12,10 +12,12 @@ class ConsultaController extends Controller
         $consultas_paciente = DB::select('select * from consultas inner join citas on citas.id_cita = consultas.id_cita where citas.codigo_paciente = ?', [$codigo]);
         return response()->json($consultas_paciente);
     }
+
     public function store(Request $request)
     {   
         $id_cita = $request->id_cita;
         $codigo_paciente = $request->codigo_paciente;
+        $estado_cita = 'Terminada';
 
         $cita = DB::select('select * from citas inner join centros_medicos on citas.id_centro_medico = centros_medicos.id_centro_medico 
                             inner join especialidades on especialidades.id_especialidad = citas.id_especialidad
@@ -39,6 +41,12 @@ class ConsultaController extends Controller
                      $request->observaciones 
                      
                     ]);
+        
+        DB::update('update citas set estado_cita = ? where id_cita = ?', 
+        [
+            $estado_cita,
+            $id_cita
+        ]);
 
 
         DB::insert('insert into costo_servicios (codigo_paciente, id_centro_medico, id_consulta, costo_consulta, costo_total, created_at)
@@ -78,10 +86,14 @@ class ConsultaController extends Controller
         $tratamientos = DB::select('select * from historial_tratamientos_medicos inner join tratamientos_medicos on tratamientos_medicos.codigo_tratamiento = historial_tratamientos_medicos.codigo_tratamiento 
                                     where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_consulta = ?)', [$id_consulta]);
 
+        $examenes = DB::select('select * from historial_examenes inner join examenes on historial_examenes.codigo_examen = examenes.codigo_examen 
+                                    where id_atencion_medica in (select id_atencion_medica from atenciones_medicas where id_consulta = ?)', [$id_consulta]);
+
         $data = [
             "costo_de_consulta" => $costo_de_consulta[0],
             "medicamentos" => $medicamentos,
-            "tratamientos" => $tratamientos
+            "tratamientos" => $tratamientos,
+            "examenes" => $examenes,
         ];
         
         return response()->json($data);    

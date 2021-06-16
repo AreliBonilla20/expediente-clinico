@@ -82,6 +82,7 @@ import ConsultarCita from './CitasComponents/ConsultarCita';
 import AgregarCita from './CitasComponents/AgregarCita';
 import EditarCita from './CitasComponents/EditarCita';
 import VerCita from './CitasComponents/VerCita';
+import BuscarCita from './CitasComponents/BuscarCita';
 
 import AgregarConsulta from './ConsultasComponents/AgregarConsulta';
 import VerDetallesConsulta from './ConsultasComponents/VerDetallesConsulta';
@@ -192,6 +193,7 @@ const App = () => {
                 <Route exact path="/expedientes/:codigo/agregar_cita" component={AgregarCita} />
                 <Route exact path="/citas/:id_cita/editar" component={EditarCita} />
                 <Route exact path="/citas/:id_cita/ver" component={VerCita} />
+                <Route exact path="/citas/:param_busqueda/buscar" component={BuscarCita} />
 
                 <Route exact path="/usuarios/:id_empleado/asignar_usuario" component={AsignarUsuario} />
 

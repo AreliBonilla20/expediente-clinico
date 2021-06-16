@@ -64,11 +64,11 @@ class RecetaMedicaController extends Controller
               $costo_medicamentos = $medicamento[0]->costo_medicamento * $cantidad_medicamento;
 
             if($id_consulta !== 'null'){
-              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + costo_medicamentos where id_consulta = ?', [$costo_medicamentos, $id_consulta]);
+              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + ? where id_consulta = ?', [$costo_medicamentos, $costo_medicamentos, $id_consulta]);
             }
 
             if($id_hospitalizacion !== 'null'){
-              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + costo_medicamentos where id_hospitalizacion = ?', [$costo_medicamentos, $id_hospitalizacion]);
+              DB::update('update costo_servicios set costo_medicamentos = costo_medicamentos + ?, costo_total = costo_total + ? where id_hospitalizacion = ?', [$costo_medicamentos, $costo_medicamentos, $id_hospitalizacion]);
             } 
 
         }
