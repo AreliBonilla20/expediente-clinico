@@ -35,7 +35,7 @@ const AgregarConsulta = () => {
             
           });
           
-          window.location = "/citas";
+          window.location = `/expedientes/${codigo_paciente}/ver`;
         } catch (err) {
           console.error(err.message);
         }

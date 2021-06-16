@@ -63,11 +63,11 @@ class HistorialTratamientosController extends Controller
               $costo_tratamientos = $tratamiento[0]->costo_tratamiento * $cantidad_tratamiento;
 
             if($id_consulta !== 'null'){
-              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + costo_tratamientos where id_consulta = ?', [$costo_tratamientos, $id_consulta]);
+              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + ? where id_consulta = ?', [$costo_tratamientos, $costo_tratamientos, $id_consulta]);
             }
 
             if($id_hospitalizacion !== 'null'){
-              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + costo_tratamientos where id_hospitalizacion = ?', [$costo_tratamientos, $id_hospitalizacion]);
+              DB::update('update costo_servicios set costo_tratamientos = costo_tratamientos + ?, costo_total = costo_total + ? where id_hospitalizacion = ?', [$costo_tratamientos, $costo_tratamientos, $id_hospitalizacion]);
             } 
         }
 

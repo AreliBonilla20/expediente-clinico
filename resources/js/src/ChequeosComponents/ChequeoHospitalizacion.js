@@ -164,7 +164,7 @@ const ChequeoHospitalizacion = () => {
                     <p>Observaciones: {chequeo.observacion_chequeo}</p>
                 </p>
         
-                <p className="card-footer" style={{fontWeight: "bold"}}>Realizado por: </p>
+            
             </div>
         )}
 
