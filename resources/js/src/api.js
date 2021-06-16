@@ -1,6 +1,6 @@
 const axios = window.axios;
 
-const API_URL = 'https://expediente-clinico-ec.herokuapp.com/api';
+const API_URL = 'https://exp-clinico.herokuapp.com/api';
 
 export default {
 
