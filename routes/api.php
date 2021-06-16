@@ -185,6 +185,7 @@ use Illuminate\Http\Request;
         Route::get('/citas/{id_cita}/ver', 'CitaController@show');
         Route::get('/citas/{id_cita}/editar', 'CitaController@edit');
         Route::put('/citas/{id_cita}/actualizar', 'CitaController@update');
+        Route::post('/citas/{id_cita}/eliminar', 'CitaController@delete');
         Route::get('/citas/{param_busqueda}/buscar', 'CitaController@buscar');
         Route::get('/citas/{codigo_paciente}/citas_paciente', 'CitaController@citas_paciente');
 

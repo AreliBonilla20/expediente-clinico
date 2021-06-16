@@ -34,10 +34,12 @@ const FacturacionHospitalizacion = () => {
     const [costo_hospitalizacion, set_costo_hospitalizacion] = useState('');
     const [costo_medicamentos, set_costo_medicamentos] = useState('');
     const [costo_tatamientos, set_costo_tatamientos] = useState('');
+    const [costo_examenes, set_costo_examenes] = useState('');
     const [costo_total, set_costo_total] = useState('');
 
     const [receta_medica, set_receta_medica] = useState([]);
     const [tratamientos, set_tratamientos] = useState([]);
+    const [examenes, set_examenes] = useState([]);
 
    
 
@@ -48,6 +50,7 @@ const FacturacionHospitalizacion = () => {
             const costo = result.costo_hospitalizacion;
             set_receta_medica(result.medicamentos);
             set_tratamientos(result.tratamientos);
+            set_examenes(result.examenes);
 
             set_codigo_paciente(costo.codigo_paciente);
             set_centro_medico(costo.nombre_centro_medico);
@@ -62,6 +65,7 @@ const FacturacionHospitalizacion = () => {
             set_costo_hospitalizacion(costo.costo_hospitalizacion);
             set_costo_medicamentos(costo.costo_medicamentos);
             set_costo_tatamientos(costo.costo_tratamientos);
+            set_costo_examenes(costo.costo_examenes);
             set_costo_total(costo.costo_total);
         })
 
@@ -248,6 +252,40 @@ const FacturacionHospitalizacion = () => {
                             <td> <h6> <b>$ {costo_tatamientos}</b> </h6></td>
                         </tr>
                         }
+
+                        {examenes.length > 0 &&
+                        <tr><b>examenes</b></tr>
+                        
+                        }
+                        {examenes.length > 0 && examenes.map((examen) => 
+                            <tr>
+                            <td>{examen.codigo_examen}</td>
+                            <td>{examen.nombre_examen}</td>
+                            <td>$ {examen.costo}</td>
+                            <td>1</td>
+                            <td>$ {examen.costo}</td>
+                           
+                            </tr>
+                        )}
+                        
+                        {examenes.length > 0 &&
+
+                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <h6> <b>$ {costo_examenes}</b> </h6></td>
+                        </tr>
+                        }
+                        <hr />
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h5><b>Total a pagar</b></h5></td>
+                            <td><h5><b>$ {costo_total}</b></h5></td>
+                        </tr>
                         <hr />
                         <tr>
                             <td></td>

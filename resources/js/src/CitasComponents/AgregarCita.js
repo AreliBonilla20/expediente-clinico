@@ -59,7 +59,7 @@ const AgregarCita = () => {
             
           });
           
-          window.location = `citas`;
+          window.location = `/citas`;
           if(response.status === 200){
             swal({
                 title: "Éxito",

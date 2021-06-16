@@ -59,7 +59,7 @@ class HistorialExamenesController extends Controller
                 $request->input_list[$i]['codigo_examen']
             ]);
 
-           $codigo_examen = $request->input_list[$i]['codigo_examen'];
+            $codigo_examen = $request->input_list[$i]['codigo_examen'];
             $examen = DB::select('select * from examenes where codigo_examen = ?', [$codigo_examen]);
             $costo_examen = $examen[0]->costo;
 

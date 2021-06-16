@@ -867,7 +867,7 @@ var _Symbol = __webpack_require__(/*! @babel/runtime-corejs3/core-js/symbol */ "
 var _getIteratorMethod = __webpack_require__(/*! @babel/runtime-corejs3/core-js/get-iterator-method */ "./node_modules/@babel/runtime-corejs3/core-js/get-iterator-method.js");
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = arr && (typeof _Symbol !== "undefined" && _getIteratorMethod(arr) || arr["@@iterator"]);
+  var _i = arr == null ? null : typeof _Symbol !== "undefined" && _getIteratorMethod(arr) || arr["@@iterator"];
 
   if (_i == null) return;
   var _arr = [];
